@@ -1,4 +1,7 @@
 import React from 'react';
+import {Route, Switch} from 'react-router-dom';
+import { withRouter } from 'react-router';
+import { MobileAndTablet, Desktop } from 'react-responsive-simple';
 import logo from './logo.svg';
 import './App.css';
 
