@@ -1,9 +1,19 @@
 import React from 'react';
-import './faqbox.css';
+import styled from 'styled-components'
+;
+const Box = styled.div`
+    background-color: white;
+    box-shadow: 2px 10px 30px rgba(0, 0, 0, 0.25);
+    border-radius: 7px;
+    text-align: left;
+    width: 20rem;
+    margin: 5rem;
+    padding: 2rem;
+`;
 
 export const FaqBox = ({ title, text, buttonText, buttonLink }) => {
   return (
-    <div className="faqbox">
+    <Box>
         <h3>{title}</h3>
         <p>{text}</p>
         <a href={buttonLink}>
@@ -11,6 +21,6 @@ export const FaqBox = ({ title, text, buttonText, buttonLink }) => {
                 {buttonText}
             </button>
         </a>
-    </div>
+    </Box>
   )
 }

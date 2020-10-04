@@ -1,11 +1,32 @@
 import React from 'react';
-import './Navbar.css';
+import styled from 'styled-components';
+
+const NavWrapper = styled.header`
+  background-color: lightpink;
+  padding: 10px;
+  color: black;
+
+  nav {
+    height: 100%;
+  }
+`;
+
+const NavLinksContainer = styled.ul`
+  display: inline-block;
+  padding: 0;
+  margin-top: 20px;
+
+  li {
+    display: inline;
+    margin-right: 30px;
+  }
+`;
 
 export const Navbar = () => {
   return (
-    <header>
+    <NavWrapper>
       <nav>
-        <ul className="topicNav">
+        <NavLinksContainer>
         <li>
             <a href="/">Home</a>
           </li>
@@ -15,8 +36,8 @@ export const Navbar = () => {
           <li>
             <a href="/faq">FAQ Page</a>
           </li>
-        </ul>
+        </NavLinksContainer>
       </nav>
-    </header>
+    </NavWrapper>
   )
 }

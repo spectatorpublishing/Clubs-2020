@@ -3,7 +3,7 @@ import { FaqBox } from '../components/faqbox';
 
 export const FAQ = () => {
     return(
-        <div>
+        <>
             <h1>FAQ</h1>
             <FaqBox 
                 title="What is Clubs@CU?" 
@@ -18,6 +18,6 @@ export const FAQ = () => {
                 buttonText="Explore Clubs"
                 buttonLink="/"
             />
-        </div>
+        </>
     )
 }
