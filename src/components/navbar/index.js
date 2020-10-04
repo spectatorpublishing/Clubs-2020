@@ -27,7 +27,7 @@ export const Navbar = () => {
     <NavWrapper>
       <nav>
         <NavLinksContainer>
-        <li>
+          <li>
             <a href="/">Home</a>
           </li>
           <li>
