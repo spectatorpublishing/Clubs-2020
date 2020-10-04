@@ -1,26 +1,22 @@
 import React from 'react';
-import {Route, Switch} from 'react-router-dom';
-import { withRouter } from 'react-router';
-import { MobileAndTablet, Desktop } from 'react-responsive-simple';
+import './App.css';
 
-import { useRoutes } from 'hookrouter';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
-import { Navbar } from './components/Navbar';
+import { Navbar } from './components/navbar';
 import { Explore } from './containers/Explore';
 import { FAQ } from './containers/FAQ';
 
-
-const routes = {
-  '/explore': () => <Explore />,
-  '/faq': () => <FAQ />,
-}
-
-function App() {
-  const match = useRoutes(routes);
+const App = () => {
   return (
-    <div>
-      <Navbar />
-      {match}
+    <div className="App">
+      <Navbar/>
+      <Router>
+        <Switch>
+          <Route path='/explore' component={Explore}/>
+          <Route path='/faq' component={FAQ}/>
+        </Switch>
+      </Router>
     </div>
   );
 }

@@ -1,0 +1,20 @@
+header {
+  background-color: lightpink;
+  padding: 10px;
+  color: black;
+}
+
+nav {
+  height: 100%;
+}
+
+.topicNav {
+    display: inline-block;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.topicNav li {
+    display: inline;
+    margin-right: 30px;
+}
