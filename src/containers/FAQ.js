@@ -18,6 +18,6 @@ export const FAQ = () => {
                 buttonText="Explore Clubs"
                 buttonLink="/"
             />
-        <main/>
+        </main>
     )
 }
