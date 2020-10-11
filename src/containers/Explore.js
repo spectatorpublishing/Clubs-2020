@@ -2,8 +2,8 @@ import React from 'react';
 
 export const Explore = () => {
     return(
-        <div>
+        <main>
             <h1>Explore</h1>
-        </div>
+        </main>
     )
 }
