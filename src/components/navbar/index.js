@@ -5,7 +5,6 @@ const NavWrapper = styled.header`
   background-color: lightpink;
   padding: 10px;
   color: black;
-
   nav {
     height: 100%;
   }
