@@ -1,15 +1,60 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import { spring } from 'popmotion';
 
 const Dropdown = ({ items }) => {
   const [clicked, setClicked] = useState(false);
   const [title, setTitle] = useState('');
+  const [titleHovered, setTitleHovered] = useState(false);
+  const [curIndex, setCurIndex] = useState(-1);
+
+  useEffect(() => {
+    document.addEventListener('keypress', onKeypress);
+    document.addEventListener('keydown', onKeydown);
+    return () => {
+      document.removeEventListener('keypress', onKeypress);
+      document.removeEventListener('keydown', onKeydown);
+    };
+  }, [curIndex, titleHovered, clicked]);
+
+  const onKeypress = e => {
+    if (e.keyCode === 13) {
+      if (clicked) {
+        setTitle(items[curIndex]);
+        setClicked(false);
+      }
+      if (titleHovered) {
+        setClicked(!clicked);
+      }
+    }
+  };
+
+  const onKeydown = e => {
+    if (e.keyCode === 40) {
+      if (curIndex + 1 < items.length) setCurIndex(curIndex + 1);
+      else setCurIndex(0);
+    } else if (e.keyCode === 38) {
+      if (curIndex - 1 > -1) setCurIndex(curIndex - 1);
+      else setCurIndex(items.length - 1);
+    }
+  };
+
   const options = items.map((item, index) => {
     return (
       <Option
-        whileHover={{ backgroundColor: '#f7f5f5' }}
+        animate={
+          curIndex === index
+            ? { backgroundColor: '#f7f5f5' }
+            : { backgroundColor: '#ffffff' }
+        }
         whileTap={{ backgroundColor: '#e7e7e7' }}
+        onHoverStart={() => {
+          setCurIndex(index);
+        }}
+        onHoverEnd={() => {
+          setCurIndex(-1);
+        }}
         noBorder={index === items.length - 1}
         onClick={() => {
           setClicked(false);
@@ -27,17 +72,23 @@ const Dropdown = ({ items }) => {
         onClick={() => {
           setClicked(!clicked);
         }}
+        onHoverStart={() => {
+          console.log('set to true');
+          setTitleHovered(true);
+        }}
+        onHoverEnd={() => {
+          console.log('set to false');
+          setTitleHovered(false);
+        }}
       >
-        <div>{title}</div>
-        <motion.div
-          initial={{y: -2}}
-          animate={clicked ? { rotateZ: 180, y: 1.25 } : { rotateZ: 0, y: -2 }}
+        <Title>{title}</Title>
+        <ArrowSvgContainer
+          initial={{ backgroundColor: '#ffffff' }}
+          whileHover={{ backgroundColor: '#f0f0f0' }}
         >
-          <svg
-            width='13'
-            height='7'
+          <ArrowSvg
+            animate={clicked ? { rotateZ: 180 } : { rotateZ: 0 }}
             viewBox='0 0 13 7'
-            fill='none'
             xmlns='http://www.w3.org/2000/svg'
           >
             <path
@@ -45,12 +96,20 @@ const Dropdown = ({ items }) => {
               fill='black'
               fill-opacity='0.54'
             />
-          </svg>
-        </motion.div>
+          </ArrowSvg>
+        </ArrowSvgContainer>
       </TitleContainer>
       <OptionsContainer
         initial={{ height: 0 }}
-        animate={clicked ? { height: 'auto' } : { height: 0 }}
+        animate={
+          clicked
+            ? { height: 'auto', boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.25)' }
+            : {
+                height: 0,
+                boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
+                transition: { type: spring }
+              }
+        }
       >
         {options}
       </OptionsContainer>
@@ -67,7 +126,11 @@ const DropdownContainer = styled.div`
   min-height: 27px;
 `;
 
-const TitleContainer = styled.div`
+const Title = styled.div`
+  overflow-wrap: break-word;
+`;
+
+const TitleContainer = styled(motion.div)`
   width: 100%;
   min-height: 20px;
   height: auto;
@@ -79,6 +142,23 @@ const TitleContainer = styled.div`
   align-items: center;
   justify-content: space-between;
   font-family: 'Roboto', 'Arial', 'Helvetica';
+`;
+
+const ArrowSvgContainer = styled(motion.div)`
+  padding: 0.25rem;
+  border-radius: 5rem;
+  width: 13px;
+  height: 13px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const ArrowSvg = styled(motion.svg)`
+  width: 13px;
+  height: 7px;
+  fill: none;
+  background-color: transparent;
 `;
 
 const OptionsContainer = styled(motion.div)`
@@ -99,6 +179,7 @@ const Option = styled(motion.div)`
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
+  overflow-wrap: break-word;
   font-family: 'Roboto', 'Arial', 'Helvetica';
   user-select: none;
 `;
