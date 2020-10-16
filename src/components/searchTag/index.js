@@ -9,27 +9,27 @@ const SearchTag = ({ text }) => {
   };
   const [clicked, setClicked] = useState(false);
   return (
-    <Tag
-      clicked={clicked}
-      onClick={() => {
-        setClicked(!clicked);
-      }}
-      variants={tagVariants}
-      whileTap={{ scale: 0.95 }}
-      initial='inactive'
-      animate={clicked ? 'active' : 'inactive'}
-    >
-      {text}
-    </Tag>
+    <div>
+      <Tag
+        clicked={clicked}
+        onClick={() => {
+          setClicked(!clicked);
+        }}
+        variants={tagVariants}
+        whileTap={{ scale: 0.95 }}
+        initial='inactive'
+        animate={clicked ? 'active' : 'inactive'}
+      >
+        {text}
+      </Tag>
+    </div>
   );
 };
 
 const Tag = styled(motion.div)`
-  width: auto;
-  height: auto;
   display: inline-block;
   padding: 0.4rem 1rem;
-  font-family: 'Roboto';
+  font-family: 'Roboto', 'Arial', 'Helvetica';
   font-size: 16px;
   line-height: 16.41px;
   border-radius: 1rem;
