@@ -31,7 +31,7 @@ const Dropdown = ({ items }) => {
   };
 
   const onKeydown = e => {
-    if (e.keyCode === 40) {
+    if (e.keyCode === 40 || e.keyCode === 9) {
       if (curIndex + 1 < items.length) setCurIndex(curIndex + 1);
       else setCurIndex(0);
     } else if (e.keyCode === 38) {
@@ -43,9 +43,10 @@ const Dropdown = ({ items }) => {
   const options = items.map((item, index) => {
     return (
       <Option
+        key={`option-${index+1}`}
         animate={
           curIndex === index
-            ? { backgroundColor: '#f7f5f5' }
+            ? { backgroundColor: '#f0f0f0' }
             : { backgroundColor: '#ffffff' }
         }
         whileTap={{ backgroundColor: '#e7e7e7' }}
@@ -66,7 +67,6 @@ const Dropdown = ({ items }) => {
     );
   });
 
-  
   return (
     <DropdownContainer>
       <TitleContainer
@@ -74,16 +74,15 @@ const Dropdown = ({ items }) => {
           setClicked(!clicked);
         }}
         onHoverStart={() => {
-          console.log('set to true');
           setTitleHovered(true);
         }}
         onHoverEnd={() => {
-          console.log('set to false');
           setTitleHovered(false);
         }}
       >
         <Title>{title}</Title>
         <ArrowSvgContainer
+          aria
           initial={{ backgroundColor: '#ffffff' }}
           whileHover={{ backgroundColor: '#f0f0f0' }}
         >
@@ -95,7 +94,7 @@ const Dropdown = ({ items }) => {
             <path
               d='M0.86543 0.373845C0.55918 0.680095 0.55918 1.17385 0.86543 1.4801L6.05918 6.67385C6.30293 6.9176 6.69668 6.9176 6.94043 6.67385L12.1342 1.4801C12.4404 1.17385 12.4404 0.680095 12.1342 0.373845C11.8279 0.067595 11.3342 0.067595 11.0279 0.373845L6.49668 4.89885L1.96543 0.367595C1.66543 0.0675955 1.16543 0.067595 0.86543 0.373845Z'
               fill='black'
-              fill-opacity='0.54'
+              fillOpacity='0.54'
             />
           </ArrowSvg>
         </ArrowSvgContainer>
@@ -131,7 +130,7 @@ const Title = styled.div`
   overflow-wrap: break-word;
 `;
 
-const TitleContainer = styled(motion.div)`
+const TitleContainer = styled(motion.button)`
   width: 100%;
   min-height: 20px;
   height: auto;
@@ -142,6 +141,8 @@ const TitleContainer = styled(motion.div)`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin: 0;
+  font-size: 1rem;
   font-family: 'Roboto', 'Arial', 'Helvetica';
 `;
 
@@ -162,17 +163,19 @@ const ArrowSvg = styled(motion.svg)`
   background-color: transparent;
 `;
 
-const OptionsContainer = styled(motion.div)`
+const OptionsContainer = styled(motion.ol)`
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
   display: flex;
   width: 115px;
-  width: 112.5%;
+  width: 100%;
   flex-direction: column;
   border-radius: 7px;
   overflow: hidden;
+  padding: 0;
+  margin: 0;
 `;
 
-const Option = styled(motion.div)`
+const Option = styled(motion.li)`
   height: auto;
   background-color: #ffffff;
   padding: 0.5rem 0.5rem;
