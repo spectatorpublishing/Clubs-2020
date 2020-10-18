@@ -3,11 +3,12 @@ This is the repository for Spectator's new Clubs experience for Columbia student
 
 Please refer to this document for information regarding the development of the web app.
 
+Example of using themeing with styled-components:
+```css
+background-color: ${props=>props.theme.colors.white};
+```
+
 The app was boostrapped with create-react-app, and you can see the boilerplate info in the bottom section of the README.
-
-
-
-
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
