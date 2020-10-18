@@ -9,9 +9,13 @@ const PageWrapper = styled.main`
   align-items: center;
 `;
 
-const Title = styled.h1`
-    margin-top: 100px;
-    size: 36px;
+const Title = styled.div`
+    margin-top: 4rem;
+    font-size: 1.5rem;
+    text-align:center;
+    display: inline;
+    width: 100vw;
+    font-family: 'Roboto', sans-serif;
 `;
 
 
