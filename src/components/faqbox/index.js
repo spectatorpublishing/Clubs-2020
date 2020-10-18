@@ -1,15 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+
 const Box = styled.div`
-  background-color: white;
+  background-color: ${props => props.theme.colors.white};
   box-shadow: 2px 10px 30px rgba(0, 0, 0, 0.25);
   border-radius: 7px;
   text-align: left;
   width: 20rem;
-  margin: 5rem;
-  padding: 2rem;
-  font: Roboto;
-  font-style: normal;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -25,9 +22,10 @@ const Title = styled.div`
 
 const Button = styled.div`
   display: inline;
-  color: #ec6c52;
+  color: ${props=>props.theme.colors.red};
   text-align: center;
-  border: 2px solid #ec6c52;
+  border: 2px solid;
+  border-color: ${props=>props.theme.colors.red};
   border-radius: 5px;
   padding-top: 0.3rem;
   padding-bottom: 0.3rem;
@@ -49,6 +47,10 @@ export const FaqBox = ({ title, text, buttonText, buttonLink }) => {
       <BoxText>{text}</BoxText>
       <a href={buttonLink}>
         <Button>{buttonText}</Button>
+      <h3>{title}</h3>
+      <p>{text}</p>
+      <a href={buttonLink}>
+        <button>{buttonText}</button>
       </a>
     </Box>
   );
