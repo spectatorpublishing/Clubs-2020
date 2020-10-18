@@ -1,45 +1,50 @@
 import React from "react";
 import styled from "styled-components";
 const Box = styled.div`
-  background-color: white;
+  background-color: ${props=>props.theme.colors.white};
   box-shadow: 2px 10px 30px rgba(0, 0, 0, 0.25);
   border-radius: 7px;
-  text-align: left;
-  width: 20rem;
+  /* text-align: left; */
+  width: 30rem; /* 20 => 30 */
   margin: 5rem;
   padding: 2rem;
   font: Roboto;
-  font-style: normal;
+  /* font-style: normal; */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-end;
+
+  a {
+    text-decoration: none;
+  }
 `;
 
-const Title = styled.div`
+const Title = styled.h2` /* div => h2, remove padding bottom  */
   font-weight: 500;
-  color: black;
-  padding-bottom: 1rem;
+  margin-bottom: .5rem;
+  /* color: black; */
   align-self: flex-start;
 `;
 
-const Button = styled.div`
-  display: inline;
-  color: #ec6c52;
-  text-align: center;
-  border: 2px solid #ec6c52;
+const Button = styled.button` /* div => button */
+  /* display: inline; */
+  color: ${props=>props.theme.colors.red};
+  background-color: white;
+  /* text-align: center; */
+  border: 2px solid ${props=>props.theme.colors.red};
   border-radius: 5px;
-  padding-top: 0.3rem;
+  padding: .3rem 2rem;
+  /* padding-top: 0.3rem;
   padding-bottom: 0.3rem;
   padding-left: 2rem;
-  padding-right: 2rem;
+  padding-right: 2rem; */
 `;
 
-const BoxText = styled.div`
-  font-style: normal;
-  color: #9a9a9a;
-  align-self: left;
-  padding-bottom: 0.8rem;
+const BoxText = styled.p` /* div => p */
+  /* font-style: normal; */
+  color: ${props=>props.theme.colors.gray};
+  /* align-self: left; */
 `;
 
 export const FaqBox = ({ title, text, buttonText, buttonLink }) => {
