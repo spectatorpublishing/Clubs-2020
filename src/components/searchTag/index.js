@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled, {withTheme} from 'styled-components';
 import { motion } from 'framer-motion';
 
-const SearchTag = ({ text }) => {
+const SearchTag = ({ text, theme }) => {
   const tagVariants = {
-    active: { color: 'white', backgroundColor: '#ec6c52' },
-    inactive: { color: '#ec6c52', backgroundColor: 'rgba(236, 108, 82, 0.08)' }
+    active: { color: theme.colors.white, backgroundColor: theme.colors.red },
+    inactive: { color: theme.colors.red, backgroundColor: 'rgba(236, 108, 82, 0.08)' }
   };
   const [clicked, setClicked] = useState(false);
   return (
-    <div>
       <Tag
         clicked={clicked}
         onClick={() => {
@@ -22,22 +21,20 @@ const SearchTag = ({ text }) => {
       >
         {text}
       </Tag>
-    </div>
   );
 };
 
-const Tag = styled(motion.div)`
+const Tag = styled(motion.button)`
   display: inline-block;
   padding: 0.4rem 1rem;
   font-family: 'Roboto', 'Arial', 'Helvetica';
-  font-size: 16px;
-  line-height: 16.41px;
+  font-size: 1rem;
   border-radius: 1rem;
-  border: 2px #ec6c52 solid;
+  border: 0.125rem ${props=>props.theme.colors.red} solid;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
 `;
 
-export default SearchTag;
+export default withTheme(SearchTag);

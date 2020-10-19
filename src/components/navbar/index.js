@@ -2,9 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 
 const NavWrapper = styled.header`
-  background-color: lightpink;
+  /* Example of using theme colors */
+  background-color: ${props=>props.theme.colors.white};
   padding: 10px;
-  color: black;
+  color: ${props=>props.theme.colors.black};
   nav {
     height: 100%;
   }

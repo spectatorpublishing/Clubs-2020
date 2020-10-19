@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled, { withTheme } from 'styled-components';
 import { motion } from 'framer-motion';
 
-const Checkbox = () => {
+const Checkbox = ({ theme }) => {
   const [clicked, setClicked] = useState(false);
   return (
     <CheckboxContainer
@@ -22,7 +22,7 @@ const Checkbox = () => {
           >
             <path
               d='M13 1.5L4.75 9.75L1 6'
-              stroke='white'
+              stroke={theme.colors.white}
               stroke-width='2'
               stroke-linecap='round'
               stroke-linejoin='round'
@@ -44,9 +44,16 @@ const CheckboxContainer = styled.div`
 const StyledCheckbox = styled(motion.div)`
   width: 1.25rem;
   height: 1.25rem;
-  border-radius: 5px;
-  background-color: ${props => (props.clicked ? '#696969' : '#FFFFFF')};
-  border: 0.5px solid ${props => (props.clicked ? '#696969' : '#c4c4c4')};
+  border-radius: 0.3125rem;
+  background-color: ${props =>
+    props.clicked
+      ? props.theme.colors.checkboxGray
+      : props.theme.colors.fullWhite};
+  border: .03125rem solid
+    ${props =>
+      props.clicked
+        ? props.theme.colors.checkboxGray
+        : props.theme.colors.gray};
   display: flex;
   justify-content: center;
   align-items: center;
@@ -55,13 +62,13 @@ const StyledCheckbox = styled(motion.div)`
 const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
   border: 0;
   clip: rect(0 0 0 0);
-  height: 1px;
-  margin: -1px;
+  height: 0.0625rem;
+  margin: -0.0625rem;
   overflow: hidden;
   padding: 0;
   position: absolute;
   white-space: nowrap;
-  width: 1px;
+  width: 0.0625rem;
 `;
 
-export default Checkbox;
+export default withTheme(Checkbox);

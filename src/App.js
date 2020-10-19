@@ -3,11 +3,13 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Navbar } from './components/navbar';
 import { Explore } from './containers/Explore';
 import { FAQ } from './containers/FAQ';
-import ProfileCreation from './containers/ProfileCreation';
+import { ThemeProvider } from 'styled-components';
+import ProfileCreation from './containers/ProfileCreation'
+import theme from './theme';
 
 const App = () => {
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <Navbar />
       <Router>
         <Switch>
@@ -16,7 +18,7 @@ const App = () => {
           <Route path='/profile-creation' component={ProfileCreation} />
         </Switch>
       </Router>
-    </>
+    </ThemeProvider>
   );
 };
 

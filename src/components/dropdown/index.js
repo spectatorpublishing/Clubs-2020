@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import styled, { withTheme } from 'styled-components';
 import { motion } from 'framer-motion';
 import { spring } from 'popmotion';
 
-const Dropdown = ({ items }) => {
+const Dropdown = ({ items, theme }) => {
   const [clicked, setClicked] = useState(false);
   const [title, setTitle] = useState('');
   const [titleHovered, setTitleHovered] = useState(false);
@@ -43,13 +43,13 @@ const Dropdown = ({ items }) => {
   const options = items.map((item, index) => {
     return (
       <Option
-        key={`option-${index+1}`}
+        key={`option-${index + 1}`}
         animate={
           curIndex === index
             ? { backgroundColor: '#f0f0f0' }
-            : { backgroundColor: '#ffffff' }
+            : { backgroundColor: theme.colors.fullWhite }
         }
-        whileTap={{ backgroundColor: '#e7e7e7' }}
+        whileTap={{ backgroundColor: theme.colors.lightGray }}
         onHoverStart={() => {
           setCurIndex(index);
         }}
@@ -70,6 +70,7 @@ const Dropdown = ({ items }) => {
   return (
     <DropdownContainer>
       <TitleContainer
+        type='button'
         onClick={() => {
           setClicked(!clicked);
         }}
@@ -83,7 +84,7 @@ const Dropdown = ({ items }) => {
         <Title>{title}</Title>
         <ArrowSvgContainer
           aria
-          initial={{ backgroundColor: '#ffffff' }}
+          initial={{ backgroundColor: theme.colors.fullWhite }}
           whileHover={{ backgroundColor: '#f0f0f0' }}
         >
           <ArrowSvg
@@ -118,12 +119,12 @@ const Dropdown = ({ items }) => {
 };
 
 const DropdownContainer = styled.div`
-  width: 115px;
+  width: 7.1875rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 27px;
+  min-height: 1.6875rem;
 `;
 
 const Title = styled.div`
@@ -132,44 +133,44 @@ const Title = styled.div`
 
 const TitleContainer = styled(motion.button)`
   width: 100%;
-  min-height: 20px;
+  min-height: 1.25rem;
   height: auto;
   padding: 0.335rem 0.5rem;
-  background-color: #ffffff;
-  border: 0.5px solid #c4c4c4;
-  border-radius: 7px;
+  background-color: ${props => props.theme.colors.fullWhite};
+  border: 0.03125rem solid ${props => props.theme.colors.gray};
+  border-radius: 0.4375rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin: 0;
   font-size: 1rem;
   font-family: 'Roboto', 'Arial', 'Helvetica';
+  cursor: pointer;
 `;
 
-const ArrowSvgContainer = styled(motion.div)`
+const ArrowSvgContainer = styled(motion.span)`
   padding: 0.25rem;
   border-radius: 5rem;
-  width: 13px;
-  height: 13px;
+  width: 0.8125rem;
+  height: 0.8125rem;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
 const ArrowSvg = styled(motion.svg)`
-  width: 13px;
-  height: 7px;
+  width: 0.8125rem;
+  height: 0.4375rem;
   fill: none;
   background-color: transparent;
 `;
 
-const OptionsContainer = styled(motion.ol)`
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+const OptionsContainer = styled(motion.ul)`
+  box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.25);
   display: flex;
-  width: 115px;
   width: 100%;
   flex-direction: column;
-  border-radius: 7px;
+  border-radius: 0.8125rem;
   overflow: hidden;
   padding: 0;
   margin: 0;
@@ -177,15 +178,19 @@ const OptionsContainer = styled(motion.ol)`
 
 const Option = styled(motion.li)`
   height: auto;
-  background-color: #ffffff;
+  background-color: ${props => props.theme.colors.fullWhite};
   padding: 0.5rem 0.5rem;
-  border-bottom: ${props => (props.noBorder ? '0px' : '1px solid #e7e7e7')};
+  border-bottom-width: ${props => (props.noBorder ? '0px' : '1px')};
+  border-bottom-style: solid;
+  border-bottom-color: ${props =>
+    props.noBorder ? 'none' : props.theme.colors.lightGray};
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   overflow-wrap: break-word;
   font-family: 'Roboto', 'Arial', 'Helvetica';
   user-select: none;
+  cursor: pointer;
 `;
 
-export default Dropdown;
+export default withTheme(Dropdown);
