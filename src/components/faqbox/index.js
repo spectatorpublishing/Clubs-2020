@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faEdit } from '@fortawesome/free-solid-svg-icons'
 
 const Box = styled.div`
     background-color: white;
@@ -19,6 +21,7 @@ export const FaqBox = ({ title, text, buttonText, buttonLink }) => {
       <a href={buttonLink}>
         <button>{buttonText}</button>
       </a>
+      <FontAwesomeIcon icon={faEdit} />
     </Box>
   );
 };
