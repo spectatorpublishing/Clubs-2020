@@ -35,6 +35,8 @@ const Tag = styled(motion.button)`
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  outline: none;
+  cursor: pointer;
 `;
 
 export default withTheme(SearchTag);

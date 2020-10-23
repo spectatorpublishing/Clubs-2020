@@ -140,6 +140,7 @@ const TitleContainer = styled(motion.button)`
   border: 0.03125rem solid ${props => props.theme.colors.gray};
   border-radius: 0.4375rem;
   display: flex;
+  outline: none;
   align-items: center;
   justify-content: space-between;
   margin: 0;
