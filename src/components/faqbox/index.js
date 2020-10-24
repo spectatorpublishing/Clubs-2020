@@ -23,6 +23,10 @@ const Box = styled.div`
   a {
     text-decoration: none;
   }
+
+  @media screen and (max-width: 767px) {
+    width: 15rem;
+  }
 `;
 
 const Title = styled.h2`
