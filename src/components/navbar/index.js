@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 const NavWrapper = styled.header`
   /* Example of using theme colors */
-  background-color: ${props=>props.theme.colors.white};
+  background-color: ${props=>props.theme.colors.offWhite};
   padding: 10px;
   color: ${props=>props.theme.colors.black};
   nav {
