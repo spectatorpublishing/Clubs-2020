@@ -1,18 +1,23 @@
 import React from "react";
 import styled from "styled-components";
+
 const Box = styled.div`
-  background-color: ${props=>props.theme.colors.white};
-  box-shadow: 2px 10px 30px rgba(0, 0, 0, 0.25);
-  border-radius: 7px;
-  /* text-align: left; */
-  width: 30rem; /* 20 => 30 */
-  margin: 5rem;
-  padding: 2rem;
-  font: Roboto;
-  /* font-style: normal; */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
+  width: 30rem;
+  border-radius: 7px;
+  box-shadow: 2px 10px 30px rgba(0, 0, 0, 0.25);
+  background-color: ${(props) => props.theme.colors.white};
+  padding: 0.5rem 1rem 1rem 1.5rem;
+
+  margin: 2rem;
+
+  a {
+    text-decoration: none;
+  }
+
   align-items: flex-end;
 
   a {
@@ -20,31 +25,44 @@ const Box = styled.div`
   }
 `;
 
-const Title = styled.h2` /* div => h2, remove padding bottom  */
-  font-weight: 500;
-  margin-bottom: .5rem;
-  /* color: black; */
+const Title = styled.h2`
+  margin-bottom: 0.5rem;
   align-self: flex-start;
 `;
 
-const Button = styled.button` /* div => button */
-  /* display: inline; */
-  color: ${props=>props.theme.colors.red};
-  background-color: white;
-  /* text-align: center; */
-  border: 2px solid ${props=>props.theme.colors.red};
-  border-radius: 5px;
-  padding: .3rem 2rem;
-  /* padding-top: 0.3rem;
-  padding-bottom: 0.3rem;
-  padding-left: 2rem;
-  padding-right: 2rem; */
+const BoxWrapper = styled.div`
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    align-content: stretch;
+  }
 `;
 
-const BoxText = styled.p` /* div => p */
-  /* font-style: normal; */
-  color: ${props=>props.theme.colors.gray};
-  /* align-self: left; */
+const Button = styled.button`
+  cursor: pointer;
+  background-color: ${(props) => props.theme.colors.white};
+  color: ${(props) => props.theme.colors.red};
+  border: 2px solid;
+  border-color: ${(props) => props.theme.colors.red};
+  border-radius: 5px;
+  padding: 0.3rem 2rem;
+  font-weight: 600;
+
+  :hover {
+    box-shadow: 2px 7px 7px rgba(0, 0, 0, 0.2);
+  }
+  @media screen and (max-width: 768px) {
+    flex-grow: 2;
+    align-self: center;
+    display: block;
+    width: 100%;
+  }
+`;
+
+const BoxText = styled.p`
+  color: ${(props) => props.theme.colors.gray};
+  padding-bottom: 0.8rem;
+  display: block;
+  font-weight: 500;
 `;
 
 export const FaqBox = ({ title, text, buttonText, buttonLink }) => {
@@ -52,9 +70,11 @@ export const FaqBox = ({ title, text, buttonText, buttonLink }) => {
     <Box>
       <Title>{title}</Title>
       <BoxText>{text}</BoxText>
-      <a href={buttonLink}>
-        <Button>{buttonText}</Button>
-      </a>
+      <BoxWrapper>
+        <a href={buttonLink}>
+          <Button>{buttonText}</Button>
+        </a>
+      </BoxWrapper>
     </Box>
   );
 };
