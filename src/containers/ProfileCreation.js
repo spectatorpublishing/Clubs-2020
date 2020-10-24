@@ -25,7 +25,15 @@ const ProfileCreation = () => {
           <Dropdown items={['1x', '2x', '3x', '4x or more']} />
         </TempItem>
         <TempItem>
-          <TextInput compulsory placeholder='Write your description here' labelHeader='Short Description:' labelDesc='300 characters max' />
+          <TextInput
+            compulsory
+            multiline
+            characterMax={20}
+            placeholder='Write your description here'
+            height='9rem'
+            labelHeader='Short Description:'
+            labelDesc='20 characters max'
+          />
         </TempItem>
       </TempContainer>
     </Container>
@@ -35,8 +43,7 @@ const ProfileCreation = () => {
 const Container = styled.div`
   padding-left: 2rem;
   height: 100vh;
-  width: 100vw;
-  background: #F4F6F8;
+  background: #f4f6f8;
 `;
 
 const TempContainer = styled.div`

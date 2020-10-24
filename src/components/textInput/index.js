@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import { getErrorMessage, getLabel, limitSize } from './helper';
 
 const TextInput = ({
   height,
@@ -9,10 +10,12 @@ const TextInput = ({
   labelHeader,
   labelDesc,
   compulsory,
-  placeholder
+  placeholder,
+  characterMax
 }) => {
   const [focused, setFocused] = useState(false);
-
+  const [showErrorMessage, setShowErrorMessage] = useState(false);
+  const [excessCharacters, setExcessCharacters] = useState(0);
   const inputVariants = {
     init: {
       boxShadow: '2px 10px 30px rgba(0, 0, 0, 0.05)',
@@ -28,51 +31,65 @@ const TextInput = ({
     <>
       {multiline ? (
         <TextContainer>
-          <TextLabel htmlFor='textArea'>
-            {compulsory ? <RedAsterisk>*</RedAsterisk> : <div />}
-            <LabelHeader>{labelHeader}</LabelHeader>
-            <LabelDesc>{labelDesc}</LabelDesc>
-          </TextLabel>
-          <StyledTextArea
-            id='textArea'
-            variants={inputVariants}
-            focused={focused}
-            height={height}
-            width={width}
-            placeholder={placeholder}
-            onFocus={() => {
-              setFocused(true);
-            }}
-            onBlur={() => {
-              setFocused(false);
-            }}
-            initial='init'
-            animate={focused ? 'anim' : 'init'}
-          />
+          {getLabel(compulsory, labelHeader, labelDesc, 'textArea')}
+          <FlexCol>
+            <StyledTextArea
+              id='textArea'
+              variants={inputVariants}
+              focused={focused}
+              height={height}
+              width={width}
+              placeholder={placeholder}
+              onFocus={() => {
+                setFocused(true);
+              }}
+              onBlur={() => {
+                setFocused(false);
+              }}
+              onChange={e => {
+                limitSize(
+                  e,
+                  characterMax,
+                  setShowErrorMessage,
+                  setExcessCharacters
+                );
+              }}
+              initial='init'
+              animate={focused ? 'anim' : 'init'}
+            />
+            {getErrorMessage(showErrorMessage, excessCharacters)}
+          </FlexCol>
         </TextContainer>
       ) : (
         <TextContainer>
-          <TextLabel htmlFor='textInput'>
-            {compulsory ? <RedAsterisk>*</RedAsterisk> : <div />}
-            <LabelHeader>{labelHeader}</LabelHeader>
-            <LabelDesc>{labelDesc}</LabelDesc>
-          </TextLabel>
-          <StyledInput
-            id='textInput'
-            variants={inputVariants}
-            focused={focused}
-            height={height}
-            width={width}
-            placeholder={placeholder}
-            onFocus={() => {
-              setFocused(true);
-            }}
-            onBlur={() => {
-              setFocused(false);
-            }}
-            initial='init'
-            animate={focused ? 'anim' : 'init'}
-          />
+          {getLabel(compulsory, labelHeader, labelDesc, 'textInput')}
+          <FlexCol>
+            <StyledInput
+              id='textInput'
+              variants={inputVariants}
+              focused={focused}
+              height={height}
+              width={width}
+              placeholder={placeholder}
+              onFocus={() => {
+                setFocused(true);
+              }}
+              onBlur={() => {
+                setFocused(false);
+              }}
+              onChange={e => {
+                limitSize(
+                  e,
+                  characterMax,
+                  setShowErrorMessage,
+                  setExcessCharacters
+                );
+              }}
+              initial='init'
+              animate={focused ? 'anim' : 'init'}
+            />
+            {getErrorMessage(showErrorMessage, excessCharacters)}
+          </FlexCol>
         </TextContainer>
       )}
     </>
@@ -83,6 +100,14 @@ const TextContainer = styled.div`
   flex-direction: row;
   @media only screen and (max-width: 768px) {
     flex-direction: column !important;
+  }
+`;
+
+const FlexCol = styled.div`
+  display: flex;
+  flex-direction: column;
+  @media only screen and (max-width: 768px) {
+    width: 80% !important;
   }
 `;
 
@@ -100,9 +125,6 @@ const StyledTextArea = styled(motion.textarea)`
   resize: none;
   overflow-y: scroll;
   cursor: pointer;
-  @media only screen and (max-width: 768px) {
-    width: 80% !important;
-  }
 `;
 
 const StyledInput = styled(motion.input)`
@@ -117,40 +139,6 @@ const StyledInput = styled(motion.input)`
   font-family: 'Roboto', 'Helvetica', 'Arial';
   outline: none;
   cursor: pointer;
-  @media only screen and (max-width: 768px) {
-    width: 80% !important;
-  }
-`;
-
-const TextLabel = styled.label`
-  margin-right: 0.5rem;
-  max-width: 10.1875rem;
-  display: inline-block;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  font-size: 1.125rem;
-  font-family: 'Roboto', 'Helvetica', 'Arial';
-  display: flex;
-  flex-direction: column;
-  padding: 0.3rem 0;
-  @media only screen and (max-width: 768px) {
-    padding: 0 0.35rem 0.3rem;
-    max-width: 70%;
-  }
-`;
-
-const LabelHeader = styled.div`
-  font-size: 1.125rem;
-`;
-const LabelDesc = styled.div`
-  font-size: 0.875rem;
-`;
-const RedAsterisk = styled.span`
-  position: absolute;
-  margin: -0.9rem 0 0 -0.575rem;
-  font-size: 1.5625rem;
-  color: ${props => props.theme.colors.red};
 `;
 
 export default TextInput;
