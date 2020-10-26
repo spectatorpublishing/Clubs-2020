@@ -1,7 +1,5 @@
-import { createContext } from "react";
 import * as firebase from "firebase/app";
 import "firebase/auth";
-import "firebase/firestore";
 
 var firebaseConfig = {
     apiKey: "AIzaSyBpwMaEBw6fEuazbzVF0LV7waig2UZ8Ku4",
@@ -14,7 +12,10 @@ var firebaseConfig = {
     measurementId: "G-RLXNF5EWFE"
 };
 
-export firebase.initializeApp(firebaseConfig);
+firebase.initializeApp(firebaseConfig);
 
-// use firebase as the defaultValue for testing purposes
-export const Firebase = createContext(firebase);
+/* re-exporting all non-default exports of firebase/app
+ * To use firebase APIs, import the firebase namespace as follows:
+ *      import * as firebase from <relative-path>
+ */
+export * from 'firebase/app';
