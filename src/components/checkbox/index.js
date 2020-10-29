@@ -1,16 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styled, { withTheme } from 'styled-components';
 import { motion } from 'framer-motion';
+import { useFocused } from '../customHooks/index';
 
 const Checkbox = ({ theme }) => {
   const [clicked, setClicked] = useState(false);
+  const checkbox = useRef(null);
+  const checkboxFocused = useFocused(checkbox);
+
+  const onKeypress = e => {
+    if (e.keyCode === 13) {
+      setClicked(!clicked);
+    }
+  };
+
+  useEffect(() => {
+    if (checkboxFocused) {
+      document.addEventListener('keypress', onKeypress);
+    }
+    return () => {
+      document.removeEventListener('keypress', onKeypress);
+    };
+  }, [checkboxFocused]);
+
   return (
     <CheckboxContainer
+      tabIndex={0}
+      ref={checkbox}
       onClick={() => {
         setClicked(!clicked);
       }}
     >
-      <HiddenCheckbox />
       <StyledCheckbox clicked={clicked}>
         {clicked ? (
           <svg
@@ -23,9 +43,6 @@ const Checkbox = ({ theme }) => {
             <path
               d='M13 1.5L4.75 9.75L1 6'
               stroke={theme.colors.white}
-              stroke-width='2'
-              stroke-linecap='round'
-              stroke-linejoin='round'
             />
           </svg>
         ) : (
@@ -39,6 +56,7 @@ const Checkbox = ({ theme }) => {
 const CheckboxContainer = styled.div`
   display: inline-block;
   vertical-align: middle;
+  outline-color: ${props => props.theme.colors.blue};
 `;
 
 const StyledCheckbox = styled(motion.div)`
@@ -49,7 +67,7 @@ const StyledCheckbox = styled(motion.div)`
     props.clicked
       ? props.theme.colors.checkboxGray
       : props.theme.colors.fullWhite};
-  border: .03125rem solid
+  border: 0.03125rem solid
     ${props =>
       props.clicked
         ? props.theme.colors.checkboxGray
@@ -58,18 +76,6 @@ const StyledCheckbox = styled(motion.div)`
   justify-content: center;
   align-items: center;
   cursor: pointer;
-`;
-
-const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
-  border: 0;
-  clip: rect(0 0 0 0);
-  height: 0.0625rem;
-  margin: -0.0625rem;
-  overflow: hidden;
-  padding: 0;
-  position: absolute;
-  white-space: nowrap;
-  width: 0.0625rem;
 `;
 
 export default withTheme(Checkbox);

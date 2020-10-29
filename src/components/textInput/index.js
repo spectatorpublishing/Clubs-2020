@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
 import { getErrorMessage, getLabel, limitSize } from './helper';
 
@@ -22,7 +22,7 @@ const TextInput = ({
       transition: { duration: 0.3 }
     },
     anim: {
-      boxShadow: '2px 10px 30px rgba(120, 192, 245, 0.35)',
+      boxShadow: '2px 10px 30px rgba(120, 192, 245, 0.5)',
       transition: { duration: 0.3 }
     }
   };
@@ -111,7 +111,7 @@ const FlexCol = styled.div`
   }
 `;
 
-const StyledTextArea = styled(motion.textarea)`
+const InputStyles = css`
   background: ${props => props.theme.colors.fullWhite};
   border: none;
   border-radius: 7px;
@@ -120,25 +120,22 @@ const StyledTextArea = styled(motion.textarea)`
   height: ${props => (props.height ? props.height : 'auto')};
   font-size: 1.5rem;
   color: ${props => props.theme.colors.checkboxGray};
-  outline: none;
   font-family: 'Roboto', 'Helvetica', 'Arial';
   resize: none;
-  overflow-y: scroll;
+  outline-color: ${props => props.theme.colors.blue};
+  overflow-y: auto;
   cursor: pointer;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+`;
+
+const StyledTextArea = styled(motion.textarea)`
+  ${InputStyles}
 `;
 
 const StyledInput = styled(motion.input)`
-  background: ${props => props.theme.colors.fullWhite};
-  border: none;
-  border-radius: 7px;
-  padding: 0.5rem;
-  width: ${props => (props.width ? props.width : 'auto')};
-  height: ${props => (props.height ? props.height : '2rem')};
-  font-size: 1.5rem;
-  color: ${props => props.theme.colors.checkboxGray};
-  font-family: 'Roboto', 'Helvetica', 'Arial';
-  outline: none;
-  cursor: pointer;
+  ${InputStyles}
 `;
 
 export default TextInput;

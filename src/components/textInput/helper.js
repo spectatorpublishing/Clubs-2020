@@ -46,6 +46,9 @@ export const limitSize = (
 const ErrorMessage = styled(motion.div)`
   color: ${props => props.theme.colors.red};
   margin-top: 0.2rem;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 `;
 
 const TextLabel = styled.label`
@@ -57,8 +60,7 @@ const TextLabel = styled.label`
   -ms-user-select: none;
   font-size: 1.125rem;
   font-family: 'Roboto', 'Helvetica', 'Arial';
-  display: flex;
-  flex-direction: column;
+  height: fit-content;
   padding: 0.3rem 0;
   @media only screen and (max-width: 768px) {
     padding: 0 0.35rem 0.3rem;

@@ -27,10 +27,11 @@ const ProfileCreation = () => {
         <TempItem>
           <TextInput
             compulsory
+            width='25rem'
+            height='7.5rem'
             multiline
             characterMax={20}
             placeholder='Write your description here'
-            height='9rem'
             labelHeader='Short Description:'
             labelDesc='20 characters max'
           />
