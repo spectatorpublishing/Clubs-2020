@@ -10,7 +10,7 @@ const Checkbox = ({ theme }) => {
 
   const onKeypress = e => {
     if (e.keyCode === 13) {
-      setClicked(!clicked);
+      checkbox.current.click()
     }
   };
 

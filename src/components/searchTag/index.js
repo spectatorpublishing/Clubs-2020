@@ -17,7 +17,7 @@ const SearchTag = ({ text, theme }) => {
 
   const onKeypress = e => {
     if (e.keyCode === 13) {
-      setClicked(!clicked);
+      searchTag.current.click()
     }
   };
 
