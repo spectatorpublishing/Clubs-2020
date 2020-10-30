@@ -1,5 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-regular-svg-icons";
+import { faCheckCircle } from "@fortawesome/free-regular-svg-icons";
+import { faEdit } from "@fortawesome/free-regular-svg-icons";
 
 const Box = styled.div`
     background-color: color: ${(props) => props.theme.colors.white};
@@ -24,7 +28,7 @@ const Box = styled.div`
         font-weight: 500;
         color: ${(props) => props.theme.colors.black};
         @media only screen 
-        and (max-width : 900px) {
+        and (max-width : 768px) {
             padding-left: 1.5rem;
             padding-right: 0.5rem;
         }
@@ -35,7 +39,7 @@ const Box = styled.div`
         color: ${(props) => props.theme.colors.gray};
         padding-right: 0.9rem;
         @media only screen 
-        and (max-width : 900px) {
+        and (max-width : 768px) {
             padding-left: 1.5rem;
             padding-right: 0rem;
         }
@@ -58,7 +62,7 @@ const Row = styled.div`
     margin-right: 1.5rem;
 
     @media only screen 
-    and (max-width : 900px) {
+    and (max-width : 768px) {
         margin: 0rem auto 0rem auto;
     }
 `;
@@ -77,8 +81,8 @@ const Icon = styled.div`
     
     @media only screen 
     and (max-width : 768px) {
+        margin-right: 0.5rem;
         width: 8rem;
-        margin-right:0.5rem;
         height: 2rem;
     }
 `;
@@ -97,6 +101,26 @@ const Item = styled.div`
     font-size: 0.8rem;
     text-align: center;
     min-width: 2rem;
+    display: flex;
+    flex-direction: row;
+
+    div {
+        //display:inline-block;
+        padding-right: 0.5rem;
+        position: relative;
+    }
+
+    p {
+        position: relative;
+        margin: 0;
+        padding: 0;
+        display:inline-block
+    }
+
+    @media only screen 
+    and (max-width : 768px) {
+        font-size: 0.5rem;
+    }
 `;
 
 
@@ -107,8 +131,8 @@ export default class ExploreBox extends React.Component{
         const clubSize = this.props.clubSize;
         const tags = this.props.tags;
         const imageURL = this.props.imageURL;
-        const acceptingMembers = this.props.acceptingMembers ? <span>Accepting Members</span> : <span>Closed</span>;
-        const applicationRequired = this.props.applicationRequired ? <span>Application Required</span> : <span>No Application</span>;
+        const acceptingMembers = this.props.acceptingMembers ? <p>Accepting Members</p> : <p>Closed</p>;
+        const applicationRequired = this.props.applicationRequired ? <p>Application Required</p> : <p>No Application</p>;
         const cardLink = this.props.cardLink;  
     
         return (
@@ -124,9 +148,18 @@ export default class ExploreBox extends React.Component{
                     <Tags>{tags}</Tags>
                     <hr/>
                     <Row>
-                        <i class="fas fa-edit"></i><Item>{clubSize}</Item>
-                        <Item>{acceptingMembers}</Item>
-                        <Item>{applicationRequired}</Item>
+                        <Item>
+                            <div><FontAwesomeIcon icon={faUser}></FontAwesomeIcon></div>
+                            {clubSize}
+                        </Item>
+                        <Item>
+                            <div><FontAwesomeIcon icon={faCheckCircle}></FontAwesomeIcon></div>
+                            {acceptingMembers}
+                        </Item>
+                        <Item>
+                            <div><FontAwesomeIcon icon={faEdit}></FontAwesomeIcon></div>
+                            {applicationRequired}
+                        </Item>
                     </Row>
                 </a>
             </Box>
