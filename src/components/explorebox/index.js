@@ -46,14 +46,13 @@ const Box = styled.div`
         @media only screen 
         and (max-width : 768px) {
             padding-left: 1.5rem;
-            padding-right: 0rem;
-            width: 110%;
+            width: 100%;
         }
 
         @media only screen 
         and (max-width : 320px) {
             padding-left: 1rem;
-            width: 110%;
+            width: 105%;
         }
         
     }
