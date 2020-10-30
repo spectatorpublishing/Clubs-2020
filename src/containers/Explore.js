@@ -70,7 +70,7 @@ export const Explore = () => {
                         tags = {[' Music ', ' Performing Arts ', ' Community Service ', ' Global Affairs ', ' Pre-professional ']}
                         clubSize = "20-50"
                         acceptingMembers = {true}
-                        applicationRequired = {false}
+                        applicationRequired = {true}
                         cardLink="/home"
                     />
                 </Row>

@@ -32,6 +32,11 @@ const Box = styled.div`
             padding-left: 1.5rem;
             padding-right: 0.5rem;
         }
+
+        @media only screen 
+        and (max-width : 320px) {
+            padding-left: 1rem;
+        }
     }
 
     p{
@@ -42,7 +47,15 @@ const Box = styled.div`
         and (max-width : 768px) {
             padding-left: 1.5rem;
             padding-right: 0rem;
+            width: 110%;
         }
+
+        @media only screen 
+        and (max-width : 320px) {
+            padding-left: 1rem;
+            width: 110%;
+        }
+        
     }
 
     hr{
@@ -92,6 +105,12 @@ const Tags = styled.div`
     margin: 0.2rem 1.5rem 0.2rem 1.5rem;
     font-size: 0.9rem;
     color: ${(props) => props.theme.colors.red};
+
+    @media only screen 
+    and (max-width : 320px) {
+        margin: 0.2rem 1rem 0.2rem 1rem;
+    }
+
 `;
 
 const Item = styled.div`
@@ -105,22 +124,24 @@ const Item = styled.div`
     flex-direction: row;
 
     div {
-        //display:inline-block;
         padding-right: 0.5rem;
         position: relative;
+        font-size: 0.8rem;
+        
+        @media only screen 
+        and (max-width : 320px) {
+            padding-right: 0.3rem;
+        }
     }
 
     p {
         position: relative;
         margin: 0;
         padding: 0;
-        display:inline-block
+        display:inline-block;
+        font-size: 0.8rem;
     }
 
-    @media only screen 
-    and (max-width : 768px) {
-        font-size: 0.5rem;
-    }
 `;
 
 
@@ -131,8 +152,8 @@ export default class ExploreBox extends React.Component{
         const clubSize = this.props.clubSize;
         const tags = this.props.tags;
         const imageURL = this.props.imageURL;
-        const acceptingMembers = this.props.acceptingMembers ? <p>Accepting Members</p> : <p>Closed</p>;
-        const applicationRequired = this.props.applicationRequired ? <p>Application Required</p> : <p>No Application</p>;
+        const acceptingMembers = this.props.acceptingMembers ? <p>Open</p> : <p>Closed</p>;
+        const applicationRequired = this.props.applicationRequired ? <p>Application</p> : <p>No Application</p>;
         const cardLink = this.props.cardLink;  
     
         return (
