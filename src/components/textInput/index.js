@@ -107,7 +107,7 @@ const FlexCol = styled.div`
   display: flex;
   flex-direction: column;
   @media only screen and (max-width: 768px) {
-    width: 80% !important;
+    width: 95% !important;
   }
 `;
 
@@ -128,6 +128,9 @@ const InputStyles = css`
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+  @media only screen and (max-width: 768px) {
+    width: 100% !important;
+  }
 `;
 
 const StyledTextArea = styled(motion.textarea)`
