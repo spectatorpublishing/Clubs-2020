@@ -29,5 +29,9 @@ const StyledButton = styled(motion.button)`
   padding: 0.3rem;
   font-size: 1rem;
   font-family: 'Roboto', 'Arial', 'Helvetica';
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 `;
 export default withTheme(FilledButton);
