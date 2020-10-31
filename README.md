@@ -1,4 +1,4 @@
 # Clubs at CU
 
-### Frontend
+## Frontend
 Navigate into the client directory and run `npm i && npm start` to run locally
