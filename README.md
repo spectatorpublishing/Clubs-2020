@@ -1,53 +1,12 @@
-# Clubs
-This is the repository for Spectator's new Clubs experience for Columbia students!
+# Clubs at CU
 
-Please refer to this document for information regarding the development of the web app.
+## Frontend
 
-Example of using themeing with styled-components:
-```css
-background-color: ${props=>props.theme.colors.white};
-```
+Navigate into the client directory and run `npm i && npm start` to run the React app locally.
 
-The app was boostrapped with create-react-app, and you can see the boilerplate info in the bottom section of the README.
+## Backend 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-## Available Scripts
-
-#### Frontend
-
-In the ./client directory, you can run:
-
-##### `yarn start`
-
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
-##### `yarn test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-##### `yarn build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-#### Backend 
-
-In the ./server directory, you can run:
-
-##### `yarn server`
-
-Initializes the express server, which will begin its connection to our remote mongoDB server and start to listen to requests on port 8080.
+Navigate into the server directory and run `npm run server`. This initializes the express server, which will begin its connection to our remote mongoDB server and start to listen to requests on port 8080 of localhost.
 
 ## DB credentials
 
