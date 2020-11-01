@@ -1,11 +1,35 @@
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import styled, { withTheme } from 'styled-components';
 import { motion } from 'framer-motion';
+import { withRouter } from 'react-router-dom';
 
-const FilledButton = ({ theme, text, stateFunc, stateVal }) => {
+const FilledButton = ({
+  theme,
+  text,
+  stateFunc,
+  stateVal,
+  onClick,
+  path,
+  history
+}) => {
+
   const handleClick = () => {
-    if (stateFunc) stateFunc(!stateVal);
-    else console.error(`state func not defined for button with text "${text}"`);
+    // For updating path
+    if (path) {
+      setTimeout(function() {
+        history.push('/profile-creation/2');
+      }, 200);
+    }
+    // For state change
+    else if (!onClick) {
+      if (stateFunc) stateFunc(!stateVal);
+      else
+        console.error(`state func not defined for button with text "${text}"`);
+    }
+    // For custom function
+    else {
+      onClick();
+    }
   };
   return (
     <StyledButton
@@ -19,10 +43,11 @@ const FilledButton = ({ theme, text, stateFunc, stateVal }) => {
 };
 
 const StyledButton = styled(motion.button)`
-  min-width: 9.4375rem;
+  min-width: 6.4375rem;
   max-width: 13rem;
   min-height: 2.225rem;
-  background: ${props => props.theme.colors.red};
+  width: auto;
+  background-color: ${props => props.theme.colors.red};
   color: ${props => props.theme.colors.fullWhite};
   border-radius: 0.4375rem;
   border: none;
@@ -33,5 +58,6 @@ const StyledButton = styled(motion.button)`
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  cursor: pointer;
 `;
-export default withTheme(FilledButton);
+export default withRouter(withTheme(FilledButton));

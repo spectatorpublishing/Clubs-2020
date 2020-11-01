@@ -4,7 +4,7 @@ import { Navbar } from './components/navbar';
 import { Explore } from './containers/Explore';
 import { FAQ } from './containers/FAQ';
 import { ThemeProvider } from 'styled-components';
-import ProfileCreation1 from './containers/ProfileCreation/ProfileCreation1'
+import {ProfileCreationMaster} from './containers/ProfileCreation/ProfileCreationMaster'
 import theme from './theme';
 
 const App = () => {
@@ -15,7 +15,7 @@ const App = () => {
         <Switch>
           <Route path='/explore' component={Explore} />
           <Route path='/faq' component={FAQ} />
-          <Route path='/profile-creation/1' component={ProfileCreation1} />
+          <Route path='/profile-creation' component={ProfileCreationMaster} />
         </Switch>
       </Router>
     </ThemeProvider>
