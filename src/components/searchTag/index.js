@@ -19,7 +19,7 @@ const SearchTag = ({ text, theme }) => {
         initial='inactive'
         animate={clicked ? 'active' : 'inactive'}
       >
-        {text}
+        {text ? text : 'no text passed in'}
       </Tag>
   );
 };
