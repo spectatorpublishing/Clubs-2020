@@ -11,7 +11,8 @@ const TextInput = ({
   labelDesc,
   compulsory,
   placeholder,
-  characterMax
+  characterMax,
+  identifier
 }) => {
   const [focused, setFocused] = useState(false);
   const [showErrorMessage, setShowErrorMessage] = useState(false);
@@ -31,63 +32,63 @@ const TextInput = ({
     <>
       {multiline ? (
         <TextContainer>
-          {getLabel(compulsory, labelHeader, labelDesc, 'textArea')}
-          <FlexCol>
-            <StyledTextArea
-              id='textArea'
-              variants={inputVariants}
-              focused={focused}
-              height={height}
-              width={width}
-              placeholder={placeholder}
-              onFocus={() => {
-                setFocused(true);
-              }}
-              onBlur={() => {
-                setFocused(false);
-              }}
-              onChange={e => {
-                limitSize(
-                  e,
-                  characterMax,
-                  setShowErrorMessage,
-                  setExcessCharacters
-                );
-              }}
-              initial='init'
-              animate={focused ? 'anim' : 'init'}
-            />
+          {getLabel(compulsory, labelHeader, labelDesc, identifier)}
+          <FlexCol width={width}>
+            <FlexCol height={height} width={width} multiline={multiline}>
+              <StyledTextArea
+                id={identifier}
+                variants={inputVariants}
+                focused={focused}
+                placeholder={placeholder}
+                onFocus={() => {
+                  setFocused(true);
+                }}
+                onBlur={() => {
+                  setFocused(false);
+                }}
+                onChange={e => {
+                  limitSize(
+                    e,
+                    characterMax,
+                    setShowErrorMessage,
+                    setExcessCharacters
+                  );
+                }}
+                initial='init'
+                animate={focused ? 'anim' : 'init'}
+              />
+            </FlexCol>
             {getErrorMessage(showErrorMessage, excessCharacters)}
           </FlexCol>
         </TextContainer>
       ) : (
         <TextContainer>
-          {getLabel(compulsory, labelHeader, labelDesc, 'textInput')}
-          <FlexCol>
-            <StyledInput
-              id='textInput'
-              variants={inputVariants}
-              focused={focused}
-              height={height}
-              width={width}
-              placeholder={placeholder}
-              onFocus={() => {
-                setFocused(true);
-              }}
-              onBlur={() => {
-                setFocused(false);
-              }}
-              onChange={e => {
-                limitSize(
-                  e,
-                  characterMax,
-                  setShowErrorMessage,
-                  setExcessCharacters
-                );
-              }}
-              initial='init'
-              animate={focused ? 'anim' : 'init'}
-            />
+          {getLabel(compulsory, labelHeader, labelDesc, identifier)}
+          <FlexCol width={width}>
+            <FlexCol height={height} width={width}>
+              <StyledInput
+                id={identifier}
+                variants={inputVariants}
+                focused={focused}
+                placeholder={placeholder}
+                onFocus={() => {
+                  setFocused(true);
+                }}
+                onBlur={() => {
+                  setFocused(false);
+                }}
+                onChange={e => {
+                  limitSize(
+                    e,
+                    characterMax,
+                    setShowErrorMessage,
+                    setExcessCharacters
+                  );
+                }}
+                initial='init'
+                animate={focused ? 'anim' : 'init'}
+              />
+            </FlexCol>
             {getErrorMessage(showErrorMessage, excessCharacters)}
           </FlexCol>
         </TextContainer>
@@ -103,11 +104,18 @@ const TextContainer = styled.div`
   }
 `;
 
-const FlexCol = styled.div`
+const FlexCol = styled(motion.div)`
   display: flex;
   flex-direction: column;
+  width: ${props => (props.width ? props.width : 'auto')};
+  height: ${props => (props.height ? props.height : 'auto')};
   @media only screen and (max-width: 768px) {
     width: 95% !important;
+    ${props =>
+      props.multiline &&
+      css`
+        height: calc(${props => props.height} + 5rem) !important;
+      `}
   }
 `;
 
@@ -116,9 +124,9 @@ const InputStyles = css`
   border: none;
   border-radius: 7px;
   padding: 0.5rem;
-  width: ${props => (props.width ? props.width : 'auto')};
-  height: ${props => (props.height ? props.height : 'auto')};
-  font-size: 1.5rem;
+  height: 100%;
+  width: 100%;
+  font-size: 1.125rem;
   color: ${props => props.theme.colors.checkboxGray};
   font-family: 'Roboto', 'Helvetica', 'Arial';
   resize: none;
@@ -128,9 +136,6 @@ const InputStyles = css`
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
-  @media only screen and (max-width: 768px) {
-    width: 100% !important;
-  }
 `;
 
 const StyledTextArea = styled(motion.textarea)`

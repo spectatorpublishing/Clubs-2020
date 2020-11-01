@@ -17,7 +17,11 @@ export const ProfileCreationMaster = () => {
       <Router>
         <Switch>
           <Route path='/profile-creation' exact component={ProfileCreation1} />
-          <Route path='/profile-creation/2' exact component={ProfileCreation2} />
+          <Route
+            path='/profile-creation/2'
+            exact
+            component={ProfileCreation2}
+          />
         </Switch>
       </Router>
     </PageContainer>

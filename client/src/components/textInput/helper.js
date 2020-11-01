@@ -4,17 +4,16 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 export const getErrorMessage = (showErrorMessage, excessCharacters) => {
   return (
-    <AnimatePresence>
-      {showErrorMessage && (
-        <ErrorMessage
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-        >
-          Your message is {excessCharacters} characters too long
-        </ErrorMessage>
-      )}
-    </AnimatePresence>
+    <ErrorMessage
+      initial={{ opacity: 0, height: 0 }}
+      animate={
+        showErrorMessage
+          ? { opacity: 1, height: 'auto' }
+          : { opacity: 0, height: 0, transition: { height: { delay: 0.5 } } }
+      }
+    >
+      Your message is {excessCharacters} characters too long
+    </ErrorMessage>
   );
 };
 
@@ -34,10 +33,10 @@ export const limitSize = (
   setShowErrorMessage,
   setExcessCharacters
 ) => {
-  if (e.target.value.length > characterMax) {
+  if (characterMax !== null && e.target.value.length > characterMax) {
     setShowErrorMessage(true);
     setExcessCharacters(e.target.value.length - characterMax);
-  } else if (e.target.value.length <= characterMax) {
+  } else if (characterMax !== null && e.target.value.length <= characterMax) {
     setShowErrorMessage(false);
     setExcessCharacters(0);
   }
@@ -53,7 +52,7 @@ const ErrorMessage = styled(motion.div)`
 
 const TextLabel = styled.label`
   margin-right: 0.5rem;
-  max-width: 10.1875rem;
+  width: 15rem;
   display: inline-block;
   -webkit-user-select: none;
   -moz-user-select: none;
