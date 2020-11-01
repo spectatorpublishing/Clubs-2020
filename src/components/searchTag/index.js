@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import styled, {withTheme} from 'styled-components';
+import styled, { withTheme } from 'styled-components';
 import { motion } from 'framer-motion';
 
 const SearchTag = ({ text, theme }) => {
@@ -9,18 +9,18 @@ const SearchTag = ({ text, theme }) => {
   };
   const [clicked, setClicked] = useState(false);
   return (
-      <Tag
-        clicked={clicked}
-        onClick={() => {
-          setClicked(!clicked);
-        }}
-        variants={tagVariants}
-        whileTap={{ scale: 0.95 }}
-        initial='inactive'
-        animate={clicked ? 'active' : 'inactive'}
-      >
-        {text ? text : 'no text passed in'}
-      </Tag>
+    <Tag
+      clicked={clicked}
+      onClick={() => {
+        setClicked(!clicked);
+      }}
+      variants={tagVariants}
+      whileTap={{ scale: 0.95 }}
+      initial='inactive'
+      animate={clicked ? 'active' : 'inactive'}
+    >
+      {text ? text : 'no text passed in'}
+    </Tag>
   );
 };
 
@@ -30,7 +30,7 @@ const Tag = styled(motion.button)`
   font-family: 'Roboto', 'Arial', 'Helvetica';
   font-size: 1rem;
   border-radius: 1rem;
-  border: 0.125rem ${props=>props.theme.colors.red} solid;
+  border: 0.125rem ${props => props.theme.colors.red} solid;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;

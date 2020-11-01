@@ -1,87 +1,45 @@
-import React, { useState } from 'react';
-import styled, { withTheme } from 'styled-components';
-import SearchTag from '../components/searchTag/index';
-import Checkbox from '../components/checkbox/index';
-import Dropdown from '../components/dropdown/index';
-import FilledButton from '../components/filledButton/index';
-import { motion } from 'framer-motion';
-import TextInput from '../components/textInput/index';
+import React from 'react';
+import styled from 'styled-components';
+import SearchTag from '../../components/searchTag/index';
+import Checkbox from '../../components/checkbox/index';
+import Dropdown from '../../components/dropdown/index';
+import WebsiteTitle from '../../components/websiteTitle/index'
+import Logout from '../../components/logout/index'
 
-const ProfileCreation = ({ theme }) => {
-  const [buttonState, setButtonState] = useState(false);
+const ProfileCreation1 = () => {
   return (
-    <Container>
-      <TempContainer>
-        <TempItem>
-          <SearchTag text='Academic' />
-        </TempItem>
-        <TempItem>
-          <SearchTag text='Advising' />
-        </TempItem>
-        <TempItem>
-          <SearchTag text='Global Affairs' />
-        </TempItem>
-        <TempItem>
-          <Checkbox />
-        </TempItem>
-        <TempItem>
-          <Dropdown items={['1x', '2x', '3x', '4x or more']} />
-        </TempItem>
-      </TempContainer>
-      <TempContainer>
-        <TextInput
-            compulsory
-            width='25rem'
-            height='7.5rem'
-            multiline
-            characterMax={20}
-            placeholder='Write your description here'
-            labelHeader='Short Description:'
-            labelDesc='20 characters max'
-          />
-      </TempContainer>
-      <TempItem>
-          <FilledButton
-          text='Etesam was here'
-          stateFunc={setButtonState}
-          stateVal={buttonState}
-          />
-          <ButtonTestText>
-            button state is currently{' '}
-            <motion.b
-              initial={{ color: theme.colors.red }}
-              animate={
-                buttonState
-                  ? { color: theme.colors.blue }
-                  : { color: theme.colors.red }
-              }
-            >
-              {buttonState + ''}
-            </motion.b>
-          </ButtonTestText>
-        </TempItem>
-    </Container>
+    <PageContainer>
+      <StyledHeader>
+        <WebsiteTitle />
+        <Logout />
+      </StyledHeader>
+      <section>
+        test
+      </section>
+      <StyledBody>
+        <div>test1</div>
+        <div>test2</div>
+      </StyledBody>
+    </PageContainer>
   );
 };
 
-const Container = styled.div`
-  padding-left: 2rem;
-  height: 100vh;
-  background: #f4f6f8;
+const PageContainer = styled.div`
+  display: grid;
+  grid-template-rows: auto auto auto;
+  padding: 0 4.375rem;
 `;
 
-const TempContainer = styled.div`
+const StyledBody = styled.main`
+  display: grid;
+  grid-template-columns: 50% 50%;
+  padding-top: 3rem;
+`
+
+const StyledHeader = styled.header`
   display: flex;
-  flex-direction: row;
-  margin: 2rem;
+  justify-content: space-between;
 `;
 
-const ButtonTestText = styled.span`
-  margin-left: 0.75rem;
-`;
 
-const TempItem = styled.div`
-  margin: 0.25rem;
-`;
-
-export default withTheme(ProfileCreation);
+export default ProfileCreation1;
