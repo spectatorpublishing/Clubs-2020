@@ -10,10 +10,6 @@ Navigate into the server directory and run `npm run server`. This initializes th
 
 ## DB credentials
 
-Please create an `.env` file *at the root of the ./server directory*, and attach the following content in the file:
-```
-DBUSER=clubs-cu-db-user
-DBNAME=clubs-CU
-DBPASSWORD=w1pWkoB4OW9mqUIh
-```
+Please create an `.env` file *at the root of the ./server directory*, and attach the db credentials (can be found in the pinned message of #databases-team channel in Spec Product Slack workspace) in this file.
+
 Note that the backend server won't be able to establish a connection with our db server until you made this configuration. In addition, although this file is already included in `.gitignore`, please still make sure that you **not push this data to our remote branches under any circumstances**.
