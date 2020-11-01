@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import SearchTag from '../components/searchTag/index';
 import Checkbox from '../components/checkbox/index';
 import Dropdown from '../components/dropdown/index';
+import TextInput from '../components/textInput/index';
 
 const ProfileCreation = () => {
   return (
@@ -23,18 +24,32 @@ const ProfileCreation = () => {
         <TempItem>
           <Dropdown items={['1x', '2x', '3x', '4x or more']} />
         </TempItem>
+        <TempItem>
+          <TextInput
+            compulsory
+            width='25rem'
+            height='7.5rem'
+            multiline
+            characterMax={20}
+            placeholder='Write your description here'
+            labelHeader='Short Description:'
+            labelDesc='20 characters max'
+          />
+        </TempItem>
       </TempContainer>
     </Container>
   );
 };
 
 const Container = styled.div`
-  margin-left: 2rem;
+  padding-left: 2rem;
+  height: 100vh;
+  background: #f4f6f8;
 `;
 
 const TempContainer = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 `;
 
 const TempItem = styled.div`
