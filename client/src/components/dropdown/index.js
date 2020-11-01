@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled, { withTheme } from 'styled-components';
 import { motion } from 'framer-motion';
 import { spring } from 'popmotion';
+import { useFocused } from '../customHooks/index';
 
 const Dropdown = ({ items, theme }) => {
   const [clicked, setClicked] = useState(false);
   const [title, setTitle] = useState('');
   const [titleHovered, setTitleHovered] = useState(false);
   const [curIndex, setCurIndex] = useState(-1);
+  const dropdown = useRef(null);
+  const dropdownFocused = useFocused(dropdown);
 
   useEffect(() => {
     document.addEventListener('keypress', onKeypress);
@@ -16,24 +19,27 @@ const Dropdown = ({ items, theme }) => {
       document.removeEventListener('keypress', onKeypress);
       document.removeEventListener('keydown', onKeydown);
     };
-  }, [curIndex, titleHovered, clicked]);
+  }, [curIndex, titleHovered, clicked, dropdownFocused]);
 
   const onKeypress = e => {
     if (e.keyCode === 13) {
+      e.preventDefault();
+      if (dropdownFocused) setClicked(!clicked);
       if (clicked) {
         setTitle(items[curIndex]);
         setClicked(false);
-      }
-      if (titleHovered) {
+      } else if (titleHovered) {
         setClicked(!clicked);
       }
     }
   };
 
   const onKeydown = e => {
+    // Down arrowkey or tab is pressed
     if (e.keyCode === 40 || e.keyCode === 9) {
       if (curIndex + 1 < items.length) setCurIndex(curIndex + 1);
       else setCurIndex(0);
+      // Up arrowkey is pressed
     } else if (e.keyCode === 38) {
       if (curIndex - 1 > -1) setCurIndex(curIndex - 1);
       else setCurIndex(items.length - 1);
@@ -70,6 +76,7 @@ const Dropdown = ({ items, theme }) => {
   return (
     <DropdownContainer>
       <TitleContainer
+        ref={dropdown}
         type='button'
         onClick={() => {
           setClicked(!clicked);
@@ -146,6 +153,7 @@ const TitleContainer = styled(motion.button)`
   font-size: 1rem;
   font-family: 'Roboto', 'Arial', 'Helvetica';
   cursor: pointer;
+  outline-color: ${props => props.theme.colors.blue};
 `;
 
 const ArrowSvgContainer = styled(motion.span)`
