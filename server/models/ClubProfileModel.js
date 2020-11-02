@@ -7,17 +7,14 @@ const clubProfileSchema = new Schema({
     lastUpdated: { type: Date, default: Date.now() },
     imageUrl: { type: String, default: '' },
     memberRange: { type: String, required: true },
-    acceptingMembers: { type: Boolean, required: true },
+    acceptingMembers: { type: String, required: true },
     applicationRequired: { type: Boolean, required: true },
     meetingFrequency: { type: String, required: true },
     socialLinks: {
-        type: Map,
-        of: String,
-        default: {
-            facebook: '',
-            email: '',
-            website: '',
-        }
+        facebook: { type: String, default: '' },
+        email: { type: String, default: '' },
+        website: { type: String, default: '' },
+        instagram: { type: String, default: '' },
     },
     tags: {
         type: [String],
@@ -33,6 +30,7 @@ const clubProfileSchema = new Schema({
         type: [mongoose.Types.ObjectId],
         default: []
     },
+    showInstagramFeed: { type: Boolean, required: true },
 
 });
 
