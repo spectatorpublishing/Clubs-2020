@@ -4,7 +4,7 @@ import { Navbar } from './components/navbar';
 import { Explore } from './containers/Explore';
 import { FAQ } from './containers/FAQ';
 import { ThemeProvider } from 'styled-components';
-import {ProfileCreationMaster} from './containers/ProfileCreation/ProfileCreationMaster'
+import ProfileCreationMaster from './containers/ProfileCreation/ProfileCreationMaster'
 import theme from './theme';
 
 const App = () => {

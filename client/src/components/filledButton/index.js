@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import styled, { withTheme } from 'styled-components';
 import { motion } from 'framer-motion';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 const FilledButton = ({
   theme,
@@ -12,19 +12,11 @@ const FilledButton = ({
   path,
   history
 }) => {
-
   const handleClick = () => {
-    // For updating path
-    if (path) {
-      setTimeout(function() {
-        history.push('/profile-creation/2');
-      }, 200);
-    }
     // For state change
-    else if (!onClick) {
+    if (!onClick ) {
       if (stateFunc) stateFunc(!stateVal);
-      else
-        console.error(`state func not defined for button with text "${text}"`);
+      
     }
     // For custom function
     else {
@@ -51,7 +43,7 @@ const StyledButton = styled(motion.button)`
   color: ${props => props.theme.colors.fullWhite};
   border-radius: 0.4375rem;
   border: none;
-  padding: 0.3rem;
+  padding: 0.5rem;
   font-size: 1rem;
   font-family: 'Roboto', 'Arial', 'Helvetica';
   -webkit-user-select: none;

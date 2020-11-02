@@ -32,18 +32,19 @@ const Logout = () => {
   );
 };
 
-const Text = styled.h3`
-  font-family: 'Roboto', 'Arial', 'Helvetica';
-  font-size: 1.25rem;
-  margin-left: 0.65rem;
-  font-weight: 500;
-`;
-
 const LogoutButton = styled(motion.button)`
   display: flex;
   border: none;
   align-items: center;
   background-color: transparent;
+  cursor: pointer;
+`;
+
+const Text = styled.h3`
+  font-family: 'Manrope', 'Roboto', 'Arial', 'Helvetica';
+  font-size: 1.25rem;
+  margin-left: 0.65rem;
+  font-weight: 500;
 `;
 
 const LogoutPath = styled(motion.path)`

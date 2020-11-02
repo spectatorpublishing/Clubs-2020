@@ -110,7 +110,6 @@ const FlexCol = styled(motion.div)`
   width: ${props => (props.width ? props.width : 'auto')};
   height: ${props => (props.height ? props.height : 'auto')};
   @media only screen and (max-width: 768px) {
-    width: 95% !important;
     ${props =>
       props.multiline &&
       css`

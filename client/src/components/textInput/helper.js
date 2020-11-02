@@ -38,7 +38,6 @@ export const limitSize = (
     setExcessCharacters(e.target.value.length - characterMax);
   } else if (characterMax !== null && e.target.value.length <= characterMax) {
     setShowErrorMessage(false);
-    setExcessCharacters(0);
   }
 };
 
