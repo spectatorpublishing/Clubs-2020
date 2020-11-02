@@ -16,7 +16,6 @@ const FilledButton = ({
     // For state change
     if (!onClick ) {
       if (stateFunc) stateFunc(!stateVal);
-      
     }
     // For custom function
     else {

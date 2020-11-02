@@ -36,10 +36,10 @@ const ProfileCreation1 = () => {
 
   return (
     <StyledBody>
-      <Column>
+      <Column left>
         <TagsContainer>{tags}</TagsContainer>
       </Column>
-      <Column left>
+      <Column right>
         {inputs}
       </Column>
     </StyledBody>
@@ -60,10 +60,12 @@ const StyledBody = styled.main`
 
 const Column = styled.div`
   width: 100%;
-  padding-left: ${props => (props.left ? '2.5rem' : '0rem')};
+  max-height: 60vh;
+  overflow-y: auto;
+  padding-left: ${props => (props.right ? '2.5rem' : '0rem')};
   @media only screen and (max-width: 768px) {
     padding-left: 0;
-    order: ${props => (props.left ? '-1' : '1')};
+    order: ${props => (props.right ? '-1' : '1')};
   }
 `;
 const TagsContainer = styled.div`
