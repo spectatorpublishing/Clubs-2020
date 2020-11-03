@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser } from "@fortawesome/free-regular-svg-icons";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+import { faTimesCircle } from "@fortawesome/free-regular-svg-icons";
 import { faCheckCircle } from "@fortawesome/free-regular-svg-icons";
 import { faEdit } from "@fortawesome/free-regular-svg-icons";
 
@@ -14,6 +15,7 @@ const Box = styled.div`
     border-radius: 7px;
     border: none;
     font-weight: 500;
+    font-family: 'Roboto', 'Helvetica', 'Arial';
 
     a{
         text-decoration: none;
@@ -116,7 +118,7 @@ const Item = styled.div`
     margin: 0.3rem auto 0.3rem auto;
     padding: 0.2rem;
     color: ${(props) => props.theme.colors.gray};
-    font-size: 0.8rem;
+    font-size: 1rem;
     text-align: center;
     min-width: 2rem;
     display: flex;
@@ -125,6 +127,7 @@ const Item = styled.div`
     div {
         padding-right: 0.5rem;
         position: relative;
+        top: 12%;
         font-size: 0.8rem;
         
         @media only screen 
@@ -138,7 +141,7 @@ const Item = styled.div`
         margin: 0;
         padding: 0;
         display:inline-block;
-        font-size: 0.8rem;
+        font-size: 1rem;
     }
 
 `;
@@ -151,7 +154,7 @@ export default class ExploreBox extends React.Component{
         const clubSize = this.props.clubSize;
         const tags = this.props.tags;
         const imageURL = this.props.imageURL;
-        const acceptingMembers = this.props.acceptingMembers ? <p>Open</p> : <p>Closed</p>;
+        const acceptingMembers = this.props.acceptingMembers ? <><div><FontAwesomeIcon icon={faCheckCircle}></FontAwesomeIcon></div><p>Open</p></> : <><div><FontAwesomeIcon icon={faTimesCircle}></FontAwesomeIcon></div><p>Closed</p></>;
         const applicationRequired = this.props.applicationRequired ? <p>Application</p> : <p>No Application</p>;
         const cardLink = this.props.cardLink;  
     
@@ -173,7 +176,6 @@ export default class ExploreBox extends React.Component{
                             {clubSize}
                         </Item>
                         <Item>
-                            <div><FontAwesomeIcon icon={faCheckCircle}></FontAwesomeIcon></div>
                             {acceptingMembers}
                         </Item>
                         <Item>
