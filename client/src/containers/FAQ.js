@@ -3,19 +3,18 @@ import { FaqBox } from '../components/faqbox';
 import styled from 'styled-components';
 
 const PageWrapper = styled.main`
-  background-color: #E5E5E5;
+  background-color: ${props=>props.theme.colors.lightGray};
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
 
 const Title = styled.div`
-    margin-top: 4rem;
-    font-size: 1.5rem;
-    text-align:center;
-    display: inline;
-    width: 100vw;
-    font-family: 'Roboto', sans-serif;
+  margin-top: 4rem;
+  font-size: 1.5rem;
+  text-align:center;
+  width: 100vw;
+  font-family: 'Roboto', sans-serif;
 `;
 
 
