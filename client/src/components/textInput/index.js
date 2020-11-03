@@ -33,31 +33,31 @@ const TextInput = ({
       {multiline ? (
         <TextContainer>
           {getLabel(compulsory, labelHeader, labelDesc, identifier)}
-          <FlexCol width={width}>
-            <FlexCol height={height} width={width} multiline={multiline}>
-              <StyledTextArea
-                id={identifier}
-                variants={inputVariants}
-                focused={focused}
-                placeholder={placeholder}
-                onFocus={() => {
-                  setFocused(true);
-                }}
-                onBlur={() => {
-                  setFocused(false);
-                }}
-                onChange={e => {
-                  limitSize(
-                    e,
-                    characterMax,
-                    setShowErrorMessage,
-                    setExcessCharacters
-                  );
-                }}
-                initial='init'
-                animate={focused ? 'anim' : 'init'}
-              />
-            </FlexCol>
+
+          <FlexCol width={width} multiline={multiline}>
+            <StyledTextArea
+              id={identifier}
+              height={height}
+              variants={inputVariants}
+              focused={focused}
+              placeholder={placeholder}
+              onFocus={() => {
+                setFocused(true);
+              }}
+              onBlur={() => {
+                setFocused(false);
+              }}
+              onChange={e => {
+                limitSize(
+                  e,
+                  characterMax,
+                  setShowErrorMessage,
+                  setExcessCharacters
+                );
+              }}
+              initial='init'
+              animate={focused ? 'anim' : 'init'}
+            />
             {getErrorMessage(showErrorMessage, excessCharacters)}
           </FlexCol>
         </TextContainer>
@@ -65,30 +65,29 @@ const TextInput = ({
         <TextContainer>
           {getLabel(compulsory, labelHeader, labelDesc, identifier)}
           <FlexCol width={width}>
-            <FlexCol height={height} width={width}>
-              <StyledInput
-                id={identifier}
-                variants={inputVariants}
-                focused={focused}
-                placeholder={placeholder}
-                onFocus={() => {
-                  setFocused(true);
-                }}
-                onBlur={() => {
-                  setFocused(false);
-                }}
-                onChange={e => {
-                  limitSize(
-                    e,
-                    characterMax,
-                    setShowErrorMessage,
-                    setExcessCharacters
-                  );
-                }}
-                initial='init'
-                animate={focused ? 'anim' : 'init'}
-              />
-            </FlexCol>
+            <StyledInput
+              id={identifier}
+              height={height}
+              variants={inputVariants}
+              focused={focused}
+              placeholder={placeholder}
+              onFocus={() => {
+                setFocused(true);
+              }}
+              onBlur={() => {
+                setFocused(false);
+              }}
+              onChange={e => {
+                limitSize(
+                  e,
+                  characterMax,
+                  setShowErrorMessage,
+                  setExcessCharacters
+                );
+              }}
+              initial='init'
+              animate={focused ? 'anim' : 'init'}
+            />
             {getErrorMessage(showErrorMessage, excessCharacters)}
           </FlexCol>
         </TextContainer>
@@ -99,6 +98,7 @@ const TextInput = ({
 const TextContainer = styled.div`
   display: flex;
   flex-direction: row;
+  padding: 1rem 0 0 0.3rem;
   @media only screen and (max-width: 768px) {
     flex-direction: column !important;
   }
@@ -108,7 +108,7 @@ const FlexCol = styled(motion.div)`
   display: flex;
   flex-direction: column;
   width: ${props => (props.width ? props.width : 'auto')};
-  height: ${props => (props.height ? props.height : 'auto')};
+
   @media only screen and (max-width: 768px) {
     ${props =>
       props.multiline &&
@@ -123,8 +123,8 @@ const InputStyles = css`
   border: none;
   border-radius: 7px;
   padding: 0.5rem;
-  height: 100%;
-  width: 100%;
+  height: ${props => (props.height ? props.height : 'auto')};
+  width: 95%;
   font-size: 1.125rem;
   color: ${props => props.theme.colors.checkboxGray};
   font-family: 'Roboto', 'Helvetica', 'Arial';

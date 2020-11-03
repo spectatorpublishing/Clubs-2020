@@ -19,8 +19,8 @@ const ProfileCreation1 = () => {
   const inputs = inputData.map((item, index) => {
     const key = Object.keys(item)[0];
     return (
-      <InputContainer key={`input-${index}`}>
-        <TextInput
+      <InputContainer>
+        <TextInput  key={`input-${index}`}
           compulsory
           width='100%'
           multiline={item[key].multiline}
@@ -71,7 +71,6 @@ const Column = styled.div`
 const TagsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  max-height: inherit;
   overflow-y: auto;
 `;
 
@@ -81,6 +80,7 @@ const TagContainer = styled.div`
 
 const InputContainer = styled.div`
   margin-bottom: 1.65rem;
+  overflow: visible;
 `;
 
 
