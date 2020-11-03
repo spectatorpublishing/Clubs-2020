@@ -1,5 +1,6 @@
 import React from 'react';
-import ExploreBox from '../components/explorebox/index.js';
+import ExploreBox from '../components/explorebox/index';
+import SearchTag from '../components/searchTag/index';
 import styled from 'styled-components';
 
 const Row = styled.div`
@@ -34,8 +35,8 @@ export const Explore = () => {
                     <ExploreBox 
                         name = "Columbia University Jazz Ensemble" 
                         description = "A small advanced jazz band covering 1950's hard bop to more adventurous contemporary Avant Garde styles."
-                        imageURL = {<img src='https://testbucket102920.s3.amazonaws.com/Ellipse+5+(2).png'/>}
-                        tags = {[' Music ', ' Performing Arts ', ' Community Service ', ' Global Affairs ', ' Pre-professional ']}
+                        imageURL = 'https://testbucket102920.s3.amazonaws.com/Ellipse+5+(2).png'
+                        tags = {[<SearchTag text='Music'/>, <SearchTag text='Performing Arts'/>, <SearchTag text='Community Service'/>, <SearchTag text='Global Affairs'/>, <SearchTag text='Pre-professional'/>]}
                         clubSize = "20-50"
                         acceptingMembers = {false}
                         applicationRequired = {true}
@@ -44,8 +45,8 @@ export const Explore = () => {
                     <ExploreBox 
                         name = "Columbia University Jazz Ensemble" 
                         description = "A small advanced jazz band covering 1950's hard bop to more adventurous contemporary Avant Garde styles."
-                        imageURL = {<img src='https://testbucket102920.s3.amazonaws.com/Ellipse+5+(2).png'/>}
-                        tags = {[' Music ', ' Performing Arts ', ' Community Service ', ' Global Affairs ', ' Pre-professional ']}
+                        imageURL = 'https://testbucket102920.s3.amazonaws.com/Ellipse+5+(2).png'
+                        tags = {[<SearchTag text='Music'/>, <SearchTag text='Performing Arts'/>, <SearchTag text='Community Service'/>, <SearchTag text='Global Affairs'/>, <SearchTag text='Pre-professional'/>]}
                         clubSize = "20-50"
                         acceptingMembers = {false}
                         applicationRequired = {false}
@@ -56,8 +57,8 @@ export const Explore = () => {
                     <ExploreBox 
                         name = "Columbia University Jazz Ensemble" 
                         description = "A small advanced jazz band covering 1950's hard bop to more adventurous contemporary Avant Garde styles."
-                        imageURL = {<img src='https://testbucket102920.s3.amazonaws.com/Ellipse+5+(2).png'/>}
-                        tags = {[' Music ', ' Performing Arts ', ' Community Service ', ' Global Affairs ', ' Pre-professional ']}
+                        imageURL = 'https://testbucket102920.s3.amazonaws.com/Ellipse+5+(2).png'
+                        tags = {[<SearchTag text='Music'/>, <SearchTag text='Performing Arts'/>, <SearchTag text='Community Service'/>, <SearchTag text='Global Affairs'/>, <SearchTag text='Pre-professional'/>]}
                         clubSize = "20-50"
                         acceptingMembers = {true}
                         applicationRequired = {false}
@@ -66,8 +67,8 @@ export const Explore = () => {
                     <ExploreBox 
                         name = "Columbia University Jazz Ensemble" 
                         description = "A small advanced jazz band covering 1950's hard bop to more adventurous contemporary Avant Garde styles."
-                        imageURL = {<img src='https://testbucket102920.s3.amazonaws.com/Ellipse+5+(2).png'/>}
-                        tags = {[' Music ', ' Performing Arts ', ' Community Service ', ' Global Affairs ', ' Pre-professional ']}
+                        imageURL = 'https://testbucket102920.s3.amazonaws.com/Ellipse+5+(2).png'
+                        tags = {[<SearchTag text='Music'/>, <SearchTag text='Performing Arts'/>, <SearchTag text='Community Service'/>, <SearchTag text='Global Affairs'/>, <SearchTag text='Pre-professional'/>]}
                         clubSize = "20-50"
                         acceptingMembers = {true}
                         applicationRequired = {true}
@@ -78,8 +79,8 @@ export const Explore = () => {
                     <ExploreBox 
                         name = "Columbia University Jazz Ensemble" 
                         description = "A small advanced jazz band covering 1950's hard bop to more adventurous contemporary Avant Garde styles."
-                        imageURL = {<img src='https://testbucket102920.s3.amazonaws.com/Ellipse+5+(2).png'/>}
-                        tags = {[' Music ', ' Performing Arts ', ' Community Service ', ' Global Affairs ', ' Pre-professional ']}
+                        imageURL = 'https://testbucket102920.s3.amazonaws.com/Ellipse+5+(2).png'
+                        tags = {[<SearchTag text='Music'/>, <SearchTag text='Performing Arts'/>, <SearchTag text='Community Service'/>, <SearchTag text='Global Affairs'/>, <SearchTag text='Pre-professional'/>]}
                         clubSize = "20-50"
                         acceptingMembers = {true}
                         applicationRequired = {false}
@@ -88,30 +89,8 @@ export const Explore = () => {
                     <ExploreBox 
                         name = "Columbia University Jazz Ensemble" 
                         description = "A small advanced jazz band covering 1950's hard bop to more adventurous contemporary Avant Garde styles."
-                        imageURL = {<img src='https://testbucket102920.s3.amazonaws.com/Ellipse+5+(2).png'/>}
-                        tags = {[' Music ', ' Performing Arts ', ' Community Service ', ' Global Affairs ', ' Pre-professional ']}
-                        clubSize = "20-50"
-                        acceptingMembers = {true}
-                        applicationRequired = {false}
-                        cardLink="/home"
-                    />
-                </Row>
-                <Row>
-                    <ExploreBox 
-                        name = "Columbia University Jazz Ensemble" 
-                        description = "A small advanced jazz band covering 1950's hard bop to more adventurous contemporary Avant Garde styles."
-                        imageURL = {<img src='https://testbucket102920.s3.amazonaws.com/Ellipse+5+(2).png'/>}
-                        tags = {[' Music ', ' Performing Arts ', ' Community Service ', ' Global Affairs ', ' Pre-professional ']}
-                        clubSize = "20-50"
-                        acceptingMembers = {true}
-                        applicationRequired = {false}
-                        cardLink="/home"
-                    />
-                    <ExploreBox 
-                        name = "Columbia University Jazz Ensemble" 
-                        description = "A small advanced jazz band covering 1950's hard bop to more adventurous contemporary Avant Garde styles."
-                        imageURL = {<img src='https://testbucket102920.s3.amazonaws.com/Ellipse+5+(2).png'/>}
-                        tags = {[' Music ', ' Performing Arts ', ' Community Service ', ' Global Affairs ', ' Pre-professional ']}
+                        imageURL = 'https://testbucket102920.s3.amazonaws.com/Ellipse+5+(2).png'
+                        tags = {[<SearchTag text='Music'/>, <SearchTag text='Performing Arts'/>, <SearchTag text='Community Service'/>, <SearchTag text='Global Affairs'/>, <SearchTag text='Pre-professional'/>]}
                         clubSize = "20-50"
                         acceptingMembers = {true}
                         applicationRequired = {false}

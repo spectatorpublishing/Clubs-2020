@@ -26,8 +26,8 @@ const Box = styled.div`
     }
 
     h2{
-        font-size: 1.3rem;
-        font-weight: 500;
+        font-size: 1.6rem;
+        font-weight: 600;
         color: ${(props) => props.theme.colors.black};
         @media only screen 
         and (max-width : 768px) {
@@ -42,7 +42,8 @@ const Box = styled.div`
     }
 
     p{
-        font-size: 0.9rem;
+        font-size: 1.2rem;
+        font-weight: 500;
         color: ${(props) => props.theme.colors.gray};
         padding-right: 0.9rem;
         @media only screen 
@@ -82,7 +83,7 @@ const Row = styled.div`
 `;
 
 const Icon = styled.div`
-    width: 6rem;
+    width: 10rem;
     margin: 0.5rem 0rem 0.5rem 0.5rem;
     position:relative; 
     display:block;
@@ -102,8 +103,8 @@ const Icon = styled.div`
 `;
 
 const Tags = styled.div`
-    padding: 0.5rem 0rem 0.8rem 0rem;
-    margin: 0.2rem 1.5rem 0.2rem 1.5rem;
+    padding: 0rem 0rem 0.5rem 0rem;
+    margin: 0rem 1.5rem 0rem 1.2rem;
     font-size: 0.9rem;
     color: ${(props) => props.theme.colors.red};
 
@@ -124,11 +125,11 @@ const Item = styled.div`
     display: flex;
     flex-direction: row;
 
-    div {
+    svg {
         padding-right: 0.5rem;
         position: relative;
-        top: 12%;
-        font-size: 0.8rem;
+        top: 10%;
+        font-size: 0.9rem;
         
         @media only screen 
         and (max-width : 320px) {
@@ -147,46 +148,39 @@ const Item = styled.div`
 `;
 
 
-export default class ExploreBox extends React.Component{
-    render() {
-        const name = this.props.name;
-        const description = this.props.description;
-        const clubSize = this.props.clubSize;
-        const tags = this.props.tags;
-        const imageURL = this.props.imageURL;
-        const acceptingMembers = this.props.acceptingMembers ? <><div><FontAwesomeIcon icon={faCheckCircle}></FontAwesomeIcon></div><p>Open</p></> : <><div><FontAwesomeIcon icon={faTimesCircle}></FontAwesomeIcon></div><p>Closed</p></>;
-        const applicationRequired = this.props.applicationRequired ? <p>Application</p> : <p>No Application</p>;
-        const cardLink = this.props.cardLink;  
-    
-        return (
-            <Box>  
-                <a href={cardLink}>
-                    <Row>
-                        <div>
-                            <h2>{name}</h2>
-                            <p>{description}</p>
-                        </div>
-                        <Icon>{imageURL}</Icon>
-                    </Row>
-                    <Tags>{tags}</Tags>
-                    <hr/>
-                    <Row>
-                        <Item>
-                            <div><FontAwesomeIcon icon={faUser}></FontAwesomeIcon></div>
-                            {clubSize}
-                        </Item>
-                        <Item>
-                            {acceptingMembers}
-                        </Item>
-                        <Item>
-                            <div><FontAwesomeIcon icon={faEdit}></FontAwesomeIcon></div>
-                            {applicationRequired}
-                        </Item>
-                    </Row>
-                </a>
-            </Box>
-            
-        );
-    }
-}
+export const ExploreBox = ({name, description, clubSize, tags, imageURL, acceptingMembers, applicationRequired, cardLink}) => {
+    const Members = acceptingMembers ? <><FontAwesomeIcon icon={faCheckCircle}></FontAwesomeIcon><p>Open</p></> : <><FontAwesomeIcon icon={faTimesCircle}></FontAwesomeIcon><p>Closed</p></>;
+    const Application = applicationRequired ? <p>Application</p> : <p>No Application</p>;
+        
+    return (
+        <Box>  
+            <a href={cardLink}>
+                <Row>
+                    <div>
+                        <h2>{name}</h2>
+                        <p>{description}</p>
+                    </div>
+                    <Icon><img alt='club picture' src={imageURL} /></Icon>
+                </Row>
+                <Tags>{tags}</Tags>
+                <hr/>
+                <Row>
+                    <Item>
+                        <FontAwesomeIcon icon={faUser}></FontAwesomeIcon>
+                        {clubSize}
+                    </Item>
+                    <Item>
+                        {Members}
+                    </Item>
+                    <Item>
+                        <FontAwesomeIcon icon={faEdit}></FontAwesomeIcon>
+                        {Application}
+                    </Item>
+                </Row>
+            </a>
+        </Box>   
+    );
+};
+
+export default ExploreBox;
   

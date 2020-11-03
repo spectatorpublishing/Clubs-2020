@@ -49,7 +49,9 @@ const SearchTag = ({ text, theme }) => {
 
 const Tag = styled(motion.button)`
   display: inline-block;
+  margin: 5px 5px 5px 5px;
   padding: 0.4rem 1rem;
+  outline: none;
   font-family: 'Roboto', 'Arial', 'Helvetica';
   font-size: 1rem;
   border-radius: 1rem;
