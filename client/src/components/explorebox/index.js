@@ -5,6 +5,7 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { faTimesCircle } from "@fortawesome/free-regular-svg-icons";
 import { faCheckCircle } from "@fortawesome/free-regular-svg-icons";
 import { faEdit } from "@fortawesome/free-regular-svg-icons";
+import SearchTag from '../searchTag/index';
 
 const Box = styled.div`
     background-color: color: ${(props) => props.theme.colors.white};
@@ -162,7 +163,7 @@ export const ExploreBox = ({name, description, clubSize, tags, imageURL, accepti
                     </div>
                     <Icon><img alt='club picture' src={imageURL} /></Icon>
                 </Row>
-                <Tags>{tags}</Tags>
+                <Tags>{tags.map(tag => <SearchTag text={tag}/>)}</Tags>
                 <hr/>
                 <Row>
                     <Item>
