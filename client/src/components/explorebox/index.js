@@ -109,6 +109,10 @@ const Tags = styled.div`
     font-size: 0.9rem;
     color: ${(props) => props.theme.colors.red};
 
+    button {
+        margin: 5px;
+    }
+
     @media only screen 
     and (max-width : 320px) {
         margin: 0.2rem 1rem 0.2rem 1rem;
