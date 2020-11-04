@@ -7,6 +7,7 @@ import { ThemeProvider } from "styled-components";
 import ProfileCreation from "./containers/ProfileCreation";
 import theme from "./theme";
 import { ProfileBoxTester } from "./containers/ProfileBoxTester";
+import { ClubProfile } from "./containers/ClubProfile";
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
           <Route path="/faq" component={FAQ} />
           <Route path="/profile-creation" component={ProfileCreation} />
           <Route path="/profile-test" component={ProfileBoxTester} />
+          <Route path="/club-profile" component={ClubProfile} />
         </Switch>
       </Router>
     </ThemeProvider>
