@@ -9,7 +9,7 @@ module.exports = {
     },
     getById: function(req, res) {
         // TODO; req.params.id
-        clubProfile.findById(req.params.id)
+        clubProfile.findById( {_id: req.params.id} )
                 .then(clubprofile => res.json(clubprofile))
                 .catch(err => res.status(422).json(err));
 
