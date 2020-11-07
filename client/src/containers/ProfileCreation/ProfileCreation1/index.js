@@ -70,7 +70,7 @@ const NewMembers = () => {
           <Checkbox orderNum={1} labelText='Spring' />
         </CheckboxContainer>
         <CheckboxContainer>
-          <Checkbox orderNum={2} labelText='Not currently taking new members' />
+          <Checkbox orderNum={2} labelText='Not taking members' />
         </CheckboxContainer>
       </FlexRow>
     </QuestionContainer>
@@ -103,6 +103,7 @@ const MeetFrequency = () => {
         <DropdownContainer>
           <Dropdown items={['1x', '2x', '3x', '4x or more']} />
         </DropdownContainer>
+        <QuestionBody>per</QuestionBody>
         <DropdownContainer>
           <Dropdown items={['week', 'month']} />
         </DropdownContainer>
@@ -138,6 +139,15 @@ const TagsContainer = styled.div`
   max-height: 60vh;
 `;
 
+const QuestionBody = styled.span`
+  font-size: 1.125rem;
+  color: ${(props) => props.theme.colors.checkboxGray};
+  font-family: 'Roboto', 'Arial', 'Helvetica';
+  @media screen and (max-width: 600px) {
+    margin: 0 0.75rem;
+  }
+`;
+
 const TagHeader = styled.h3`
   font-family: 'Roboto', 'Arial', 'Helvetica';
   font-weight: 400;
@@ -156,6 +166,10 @@ const InputContainer = styled.div`
 const FlexRow = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
+  @media screen and (max-width: 600px) {
+    margin-top: 0.75rem; 
+  }
 `;
 
 const QuestionContainer = styled(InputContainer)`
@@ -163,6 +177,7 @@ const QuestionContainer = styled(InputContainer)`
   flex-direction: row;
   @media screen and (max-width: 600px) {
     flex-direction: column;
+    
   }
 `;
 
@@ -181,8 +196,4 @@ const CheckboxContainer = styled.div`
   }
 `;
 
-const DropdownContainer = styled(CheckboxContainer)`
-  @media screen and (max-width: 600px) {
-    margin: 0 0.75rem 0 0;
-  }
-`;
+const DropdownContainer = styled(CheckboxContainer)``;

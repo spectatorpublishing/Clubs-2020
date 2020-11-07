@@ -10,8 +10,9 @@ const Dropdown = ({ items, theme }) => {
   const [titleHovered, setTitleHovered] = useState(false);
   const [curIndex, setCurIndex] = useState(-1);
   const dropdown = useRef(null);
+  const dropdownContainer = useRef(null);
   const dropdownFocused = useFocused(dropdown);
-  useOnClickOutside(dropdown, () => {
+  useOnClickOutside(dropdownContainer, () => {
     setClicked(false);
   });
 
@@ -27,7 +28,10 @@ const Dropdown = ({ items, theme }) => {
   const onKeypress = (e) => {
     if (e.keyCode === 13) {
       e.preventDefault();
-      if (dropdownFocused) setClicked(!clicked);
+      if (dropdownFocused) {
+        console.log('good');
+        setClicked(!clicked);
+      }
       if (clicked) {
         setTitle(items[curIndex]);
         setClicked(false);
@@ -77,8 +81,9 @@ const Dropdown = ({ items, theme }) => {
   });
 
   return (
-    <DropdownContainer ref={dropdown}>
+    <DropdownContainer ref={dropdownContainer}>
       <TitleContainer
+        ref={dropdown}
         type='button'
         onClick={() => {
           setClicked(!clicked);
@@ -139,6 +144,7 @@ const DropdownContainer = styled.div`
   justify-content: center;
   align-items: center;
   min-height: 1.6875rem;
+  margin-bottom: 0.4rem;
 `;
 
 const Title = styled.div`
@@ -185,12 +191,11 @@ const OptionsContainer = styled(motion.ul)`
   display: flex;
   width: 7.1875rem;
   flex-direction: column;
-
   border-radius: 0.8125rem;
   justify-content: center;
   overflow: hidden;
   padding: 0;
-  margin: 0;
+  margin: 0 0 0.8rem 0;
   position: absolute;
   left: -3.59rem;
   z-index: 2;

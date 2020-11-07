@@ -23,24 +23,26 @@ const ProfileCreationMaster = () => {
         <Logout />
       </StyledHeader>
       <SetUpClubProfile />
-      {currentPath === '/profile-creation/2' ? (
+      {currentPath === '/profile-creation/1' && (
         <PageDesc>Get-to-Know-You's: Why Students Should Join</PageDesc>
-      ) : (
+      )}
+      {currentPath === '/profile-creation' && (
         <PageDesc>Opening Statement: Provide Basic Info</PageDesc>
       )}
+
       <Router>
         <Switch>
           <Route path='/profile-creation' exact component={ProfileCreation1} />
-          <Route path='/profile-creation/2' component={ProfileCreation2} />
+          <Route path='/profile-creation/1' component={ProfileCreation2} />
         </Switch>
 
         <ButtonContainer>
           <NavLink
             style={{ textDecoration: 'none' }}
-            to='/profile-creation/2'
+            to='/profile-creation/1'
             isActive={(match) => {
               if (match) {
-                setCurrentPath('/profile-creation/2');
+                setCurrentPath('/profile-creation/1');
               } else {
                 setCurrentPath('/profile-creation');
               }
@@ -48,11 +50,11 @@ const ProfileCreationMaster = () => {
           >
             <FilledButton
               text={
-                currentPath === '/profile-creation/2'
+                currentPath === '/profile-creation/1'
                   ? 'Make my club profile'
                   : 'Next'
               }
-              path='/profile-creation/2'
+              path='/profile-creation/1'
             />
           </NavLink>
         </ButtonContainer>
@@ -123,5 +125,5 @@ const ButtonContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: flex-end;
-  margin-top: 1.5rem;
+  margin: 1.5rem 0;
 `;

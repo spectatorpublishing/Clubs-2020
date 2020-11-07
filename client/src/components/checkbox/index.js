@@ -59,7 +59,7 @@ const Checkbox = ({ theme, labelText, orderNum }) => {
           onClick={() => setClicked(!clicked)}
         >
           {width <= breakpoint ? (
-            <MobileLabel clicked={clicked}>{labelText}</MobileLabel>
+            <MobileLabel>{labelText}</MobileLabel>
           ) : (
             <svg
               xmlns='http://www.w3.org/2000/svg'
@@ -113,10 +113,6 @@ const MobileLabel = styled.h3`
   font-size: 0.8125rem;
   font-weight: 400;
   text-align: center;
-  color: ${(props) =>
-    props.clicked
-      ? props.theme.colors.fullWhite
-      : props.theme.colors.checkboxGray};
 `;
 
 const StyledCheckbox = styled(motion.div)`
@@ -133,9 +129,15 @@ const StyledCheckbox = styled(motion.div)`
   align-items: center;
   cursor: pointer;
   @media screen and (max-width: 600px) {
-    width: 6.6rem;
-    height: 2rem;
+    min-width: 5rem;
+    width: auto;
+    height: 1.25rem;
+    padding: 0.5rem 0.5rem;
     border-radius: 0;
+    color: ${(props) =>
+      props.clicked
+        ? props.theme.colors.fullWhite
+        : props.theme.colors.checkboxGray};
     ${(props) =>
       props.orderNum === 0 &&
       css`
@@ -164,10 +166,5 @@ const CheckboxLabel = styled.label`
   cursor: pointer;
 `;
 
-const Check = styled.svg`
-  width: 14px;
-  height: 11px;
-  fill: none;
-`;
 
 export default withTheme(Checkbox);
