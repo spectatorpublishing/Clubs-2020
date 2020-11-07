@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  useHistory,
   NavLink,
 } from 'react-router-dom';
 import ProfileCreation1 from './ProfileCreation1/index';
@@ -13,7 +12,6 @@ import WebsiteTitle from '../../components/websiteTitle/index';
 import Logout from '../../components/logout/index';
 import FilledButton from '../../components/filledButton/index';
 const ProfileCreationMaster = () => {
-  const history = useHistory();
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
 
   return (

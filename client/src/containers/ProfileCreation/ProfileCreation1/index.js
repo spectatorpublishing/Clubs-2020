@@ -58,50 +58,56 @@ export default ProfileCreation1;
 
 const NewMembers = () => {
   return (
-    <FlexRow>
+    <QuestionContainer>
       <RowHeader>
         <RedAsterisk>*</RedAsterisk> When do you take new members?
       </RowHeader>
-      <CheckboxContainer>
-        <Checkbox labelText='Fall' />
-      </CheckboxContainer>
-      <CheckboxContainer>
-        <Checkbox labelText='Spring' />
-      </CheckboxContainer>
-      <CheckboxContainer>
-        <Checkbox labelText='Not currently taking new members' />
-      </CheckboxContainer>
-    </FlexRow>
+      <FlexRow>
+        <CheckboxContainer>
+          <Checkbox orderNum={0} labelText='Fall' />
+        </CheckboxContainer>
+        <CheckboxContainer>
+          <Checkbox orderNum={1} labelText='Spring' />
+        </CheckboxContainer>
+        <CheckboxContainer>
+          <Checkbox orderNum={2} labelText='Not currently taking new members' />
+        </CheckboxContainer>
+      </FlexRow>
+    </QuestionContainer>
   );
 };
 
 const RequireApplication = () => {
   return (
-    <FlexRow>
+    <QuestionContainer>
       <RowHeader>
         <RedAsterisk>*</RedAsterisk> Do you require an application?
       </RowHeader>
-      <CheckboxContainer>
-        <Checkbox labelText='Yes' />
-      </CheckboxContainer>
-      <CheckboxContainer>
-        <Checkbox labelText='No' />
-      </CheckboxContainer>
-    </FlexRow>
+      <FlexRow>
+        <CheckboxContainer>
+          <Checkbox labelText='Yes' orderNum={0} />
+        </CheckboxContainer>
+        <CheckboxContainer>
+          <Checkbox labelText='No' orderNum={2} />
+        </CheckboxContainer>
+      </FlexRow>
+    </QuestionContainer>
   );
 };
 
 const MeetFrequency = () => {
   return (
-    <FlexRow>
+    <QuestionContainer>
       <RowHeader>How often do you meet?</RowHeader>
-      <DropdownContainer>
-        <Dropdown items={['1x', '2x', '3x', '4x or more']} />
-      </DropdownContainer>
-      <DropdownContainer>
-        <Dropdown items={['week', 'month']} />
-      </DropdownContainer>
-    </FlexRow>
+      <FlexRow>
+        <DropdownContainer>
+          <Dropdown items={['1x', '2x', '3x', '4x or more']} />
+        </DropdownContainer>
+        <DropdownContainer>
+          <Dropdown items={['week', 'month']} />
+        </DropdownContainer>
+      </FlexRow>
+    </QuestionContainer>
   );
 };
 
@@ -147,18 +153,36 @@ const InputContainer = styled.div`
   margin-bottom: 1.65rem;
 `;
 
-const FlexRow = styled(InputContainer)`
+const FlexRow = styled.div`
   display: flex;
-  
+  flex-direction: row;
+`;
+
+const QuestionContainer = styled(InputContainer)`
+  display: flex;
+  flex-direction: row;
+  @media screen and (max-width: 600px) {
+    flex-direction: column;
+  }
 `;
 
 const RowHeader = styled(TagHeader)`
   margin: 0;
   max-width: 12.5rem;
+  @media screen and (max-width: 600px) {
+    max-width: 85%;
+  }
 `;
 
 const CheckboxContainer = styled.div`
   margin: 0 0.75rem;
+  @media screen and (max-width: 600px) {
+    margin: 0;
+  }
 `;
 
-const DropdownContainer = styled(CheckboxContainer)``;
+const DropdownContainer = styled(CheckboxContainer)`
+  @media screen and (max-width: 600px) {
+    margin: 0 0.75rem 0 0;
+  }
+`;
