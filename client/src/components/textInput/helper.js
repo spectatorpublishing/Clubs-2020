@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
+import RedAsterisk from '../redAsterisk/index'
 
 export const getErrorMessage = (showErrorMessage, excessCharacters) => {
   return (
@@ -72,9 +73,4 @@ const LabelHeader = styled.div`
 const LabelDesc = styled.div`
   font-size: 0.875rem;
 `;
-const RedAsterisk = styled.span`
-  position: absolute;
-  margin: -0.9rem 0 0 -0.575rem;
-  font-size: 1.5625rem;
-  color: ${props => props.theme.colors.red};
-`;
+

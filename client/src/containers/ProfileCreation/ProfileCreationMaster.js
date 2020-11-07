@@ -5,7 +5,7 @@ import {
   Switch,
   Route,
   useHistory,
-  NavLink
+  NavLink,
 } from 'react-router-dom';
 import ProfileCreation1 from './ProfileCreation1/index';
 import ProfileCreation2 from './ProfileCreation2';
@@ -40,7 +40,7 @@ const ProfileCreationMaster = () => {
           <NavLink
             style={{ textDecoration: 'none' }}
             to='/profile-creation/2'
-            isActive={match => {
+            isActive={(match) => {
               if (match) {
                 setCurrentPath('/profile-creation/2');
               } else {
@@ -87,11 +87,15 @@ const PageContainer = styled.div`
   display: grid;
   grid-template-rows: auto auto auto;
   padding: 0 4.375rem;
+  @media only screen and (max-width: 600px) {
+    padding: 0 2.375rem !important;
+  }
 `;
 
 const StyledHeader = styled.header`
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `;
 
 const LogoContainer = styled.div`
@@ -108,7 +112,7 @@ const PageDesc = styled.h2`
 `;
 
 const Subtext = styled.h3`
-  color: ${props => props.theme.colors.gray};
+  color: ${(props) => props.theme.colors.gray};
   font-family: 'Roboto', 'Arial', 'Helvetica';
   margin-top: 0.5rem;
   font-weight: 500;
@@ -121,4 +125,5 @@ const ButtonContainer = styled.div`
   width: 100%;
   display: flex;
   justify-content: flex-end;
+  margin-top: 1.5rem;
 `;

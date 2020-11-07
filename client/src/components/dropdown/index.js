@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import styled, { withTheme } from 'styled-components';
 import { motion } from 'framer-motion';
 import { spring } from 'popmotion';
-import { useFocused } from '../customHooks/index';
+import { useFocused, useOnClickOutside } from '../customHooks/index';
 
 const Dropdown = ({ items, theme }) => {
   const [clicked, setClicked] = useState(false);
@@ -11,6 +11,9 @@ const Dropdown = ({ items, theme }) => {
   const [curIndex, setCurIndex] = useState(-1);
   const dropdown = useRef(null);
   const dropdownFocused = useFocused(dropdown);
+  useOnClickOutside(dropdown, () => {
+    setClicked(false);
+  });
 
   useEffect(() => {
     document.addEventListener('keypress', onKeypress);
@@ -21,7 +24,7 @@ const Dropdown = ({ items, theme }) => {
     };
   }, [curIndex, titleHovered, clicked, dropdownFocused]);
 
-  const onKeypress = e => {
+  const onKeypress = (e) => {
     if (e.keyCode === 13) {
       e.preventDefault();
       if (dropdownFocused) setClicked(!clicked);
@@ -34,7 +37,7 @@ const Dropdown = ({ items, theme }) => {
     }
   };
 
-  const onKeydown = e => {
+  const onKeydown = (e) => {
     // Down arrowkey or tab is pressed
     if (e.keyCode === 40 || e.keyCode === 9) {
       if (curIndex + 1 < items.length) setCurIndex(curIndex + 1);
@@ -74,9 +77,8 @@ const Dropdown = ({ items, theme }) => {
   });
 
   return (
-    <DropdownContainer>
+    <DropdownContainer ref={dropdown}>
       <TitleContainer
-        ref={dropdown}
         type='button'
         onClick={() => {
           setClicked(!clicked);
@@ -107,20 +109,25 @@ const Dropdown = ({ items, theme }) => {
           </ArrowSvg>
         </ArrowSvgContainer>
       </TitleContainer>
-      <OptionsContainer
-        initial={{ height: 0 }}
-        animate={
-          clicked
-            ? { height: 'auto', boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.25)' }
-            : {
-                height: 0,
-                boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
-                transition: { type: spring }
-              }
-        }
-      >
-        {options}
-      </OptionsContainer>
+      <div style={{ position: 'relative' }}>
+        <OptionsContainer
+          initial={{ height: 0 }}
+          animate={
+            clicked
+              ? {
+                  height: 'auto',
+                  boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.25)',
+                }
+              : {
+                  height: 0,
+                  boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
+                  transition: { type: spring },
+                }
+          }
+        >
+          {options}
+        </OptionsContainer>
+      </div>
     </DropdownContainer>
   );
 };
@@ -143,8 +150,8 @@ const TitleContainer = styled(motion.button)`
   min-height: 1.25rem;
   height: auto;
   padding: 0.335rem 0.5rem;
-  background-color: ${props => props.theme.colors.fullWhite};
-  border: 0.03125rem solid ${props => props.theme.colors.gray};
+  background-color: ${(props) => props.theme.colors.fullWhite};
+  border: 0.03125rem solid ${(props) => props.theme.colors.gray};
   border-radius: 0.4375rem;
   display: flex;
   align-items: center;
@@ -153,7 +160,7 @@ const TitleContainer = styled(motion.button)`
   font-size: 1rem;
   font-family: 'Roboto', 'Arial', 'Helvetica';
   cursor: pointer;
-  outline-color: ${props => props.theme.colors.blue};
+  outline-color: ${(props) => props.theme.colors.blue};
 `;
 
 const ArrowSvgContainer = styled(motion.span)`
@@ -176,21 +183,26 @@ const ArrowSvg = styled(motion.svg)`
 const OptionsContainer = styled(motion.ul)`
   box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.25);
   display: flex;
-  width: 100%;
+  width: 7.1875rem;
   flex-direction: column;
+
   border-radius: 0.8125rem;
+  justify-content: center;
   overflow: hidden;
   padding: 0;
   margin: 0;
+  position: absolute;
+  left: -3.59rem;
+  z-index: 2;
 `;
 
 const Option = styled(motion.li)`
   height: auto;
-  background-color: ${props => props.theme.colors.fullWhite};
+  background-color: ${(props) => props.theme.colors.fullWhite};
   padding: 0.5rem 0.5rem;
-  border-bottom-width: ${props => (props.noBorder ? '0px' : '1px')};
+  border-bottom-width: ${(props) => (props.noBorder ? '0px' : '1px')};
   border-bottom-style: solid;
-  border-bottom-color: ${props =>
+  border-bottom-color: ${(props) =>
     props.noBorder ? 'none' : props.theme.colors.lightGray};
   -webkit-user-select: none;
   -moz-user-select: none;
