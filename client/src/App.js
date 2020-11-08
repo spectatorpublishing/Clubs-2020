@@ -7,20 +7,24 @@ import { FAQ } from './containers/FAQ';
 import { ThemeProvider } from 'styled-components';
 import ProfileCreationMaster from './containers/ProfileCreation/ProfileCreationMaster';
 import theme from './theme';
+import { ProfileBoxTester } from './containers/ProfileBoxTester';
 
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
-      <ViewportProvider>
-        <Navbar />
-        <Router>
-          <Switch>
+      <Navbar />
+      <Router>
+        <Switch>
+          <ViewportProvider>
             <Route path='/explore' component={Explore} />
             <Route path='/faq' component={FAQ} />
             <Route path='/profile-creation' component={ProfileCreationMaster} />
-          </Switch>
-        </Router>
-      </ViewportProvider>
+            <Route path='/profile-test' component={ProfileBoxTester} />
+          </ViewportProvider>
+        </Switch>
+      </Router>
+
+      <Navbar />
     </ThemeProvider>
   );
 };

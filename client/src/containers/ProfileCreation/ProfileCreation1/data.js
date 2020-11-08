@@ -43,7 +43,7 @@ export const tagData = [
 
 export const inputData = [
   {
-    header: {
+    clubName: {
       labelHeader: 'Club Name:',
       labelDesc: null,
       height: '2.635rem',

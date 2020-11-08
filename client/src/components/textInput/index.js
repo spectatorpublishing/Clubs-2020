@@ -12,7 +12,7 @@ const TextInput = ({
   compulsory,
   placeholder,
   characterMax,
-  identifier
+  identifier,
 }) => {
   const [focused, setFocused] = useState(false);
   const [showErrorMessage, setShowErrorMessage] = useState(false);
@@ -20,12 +20,16 @@ const TextInput = ({
   const inputVariants = {
     init: {
       boxShadow: '2px 10px 30px rgba(0, 0, 0, 0.05)',
-      transition: { duration: 0.3 }
+      transition: { duration: 0.3 },
     },
     anim: {
       boxShadow: '2px 10px 30px rgba(120, 192, 245, 0.5)',
-      transition: { duration: 0.3 }
-    }
+      transition: { duration: 0.3 },
+    },
+  };
+
+  const whenChange = (e) => {
+    limitSize(e, characterMax, setShowErrorMessage, setExcessCharacters);
   };
 
   return (
@@ -37,6 +41,8 @@ const TextInput = ({
           <FlexCol width={width} multiline={multiline}>
             <StyledTextArea
               id={identifier}
+              key={identifier}
+              name={identifier}
               height={height}
               variants={inputVariants}
               focused={focused}
@@ -47,14 +53,7 @@ const TextInput = ({
               onBlur={() => {
                 setFocused(false);
               }}
-              onChange={e => {
-                limitSize(
-                  e,
-                  characterMax,
-                  setShowErrorMessage,
-                  setExcessCharacters
-                );
-              }}
+              onChange={whenChange}
               initial='init'
               animate={focused ? 'anim' : 'init'}
             />
@@ -67,6 +66,8 @@ const TextInput = ({
           <FlexCol width={width}>
             <StyledInput
               id={identifier}
+              name={identifier}
+              key={identifier}
               height={height}
               variants={inputVariants}
               focused={focused}
@@ -77,14 +78,7 @@ const TextInput = ({
               onBlur={() => {
                 setFocused(false);
               }}
-              onChange={e => {
-                limitSize(
-                  e,
-                  characterMax,
-                  setShowErrorMessage,
-                  setExcessCharacters
-                );
-              }}
+              onChange={whenChange}
               initial='init'
               animate={focused ? 'anim' : 'init'}
             />
@@ -107,29 +101,29 @@ const TextContainer = styled.div`
 const FlexCol = styled(motion.div)`
   display: flex;
   flex-direction: column;
-  width: ${props => (props.width ? props.width : 'auto')};
+  width: ${(props) => (props.width ? props.width : 'auto')};
 
   @media only screen and (max-width: 768px) {
-    ${props =>
+    ${(props) =>
       props.multiline &&
       css`
-        height: calc(${props => props.height} + 5rem) !important;
+        height: calc(${(props) => props.height} + 5rem) !important;
       `}
   }
 `;
 
 const InputStyles = css`
-  background: ${props => props.theme.colors.fullWhite};
+  background: ${(props) => props.theme.colors.fullWhite};
   border: none;
   border-radius: 7px;
   padding: 0.5rem;
-  height: ${props => (props.height ? props.height : 'auto')};
+  height: ${(props) => (props.height ? props.height : 'auto')};
   width: 95%;
   font-size: 1.125rem;
-  color: ${props => props.theme.colors.checkboxGray};
+  color: ${(props) => props.theme.colors.checkboxGray};
   font-family: 'Roboto', 'Helvetica', 'Arial';
   resize: none;
-  outline-color: ${props => props.theme.colors.blue};
+  outline-color: ${(props) => props.theme.colors.blue};
   overflow-y: auto;
   cursor: pointer;
   -webkit-box-sizing: border-box;

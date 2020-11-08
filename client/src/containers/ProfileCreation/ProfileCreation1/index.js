@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled, { css } from 'styled-components';
 import RedAsterisk from '../../../components/redAsterisk/index';
 import SearchTag from '../../../components/searchTag/index';
@@ -7,11 +7,17 @@ import Dropdown from '../../../components/dropdown/index';
 import TextInput from '../../../components/textInput/index';
 import FilledButton from '../../../components/filledButton/index';
 import { inputData, tagData } from './data';
-const ProfileCreation1 = () => {
-  const tags = tagData.map((tagName, index) => {
+const ProfileCreation1 = ({ tags, setTags, handleChange }) => {
+  const [test, setTest] = useState([])
+  const tagComponents = tagData.map((tagName, index) => {
     return (
       <TagContainer>
-        <SearchTag text={tagName} key={`tag-${index}`} />
+        <SearchTag
+          text={tagName}
+          key={`tag-${index}`}
+          data={tags}
+          setData={setTags}
+        />
       </TagContainer>
     );
   });
@@ -42,7 +48,7 @@ const ProfileCreation1 = () => {
           <RedAsterisk>*</RedAsterisk>
           Select up to 5 tags that describe your club:
         </TagHeader>
-        <TagsContainer>{tags}</TagsContainer>
+        <TagsContainer>{tagComponents}</TagsContainer>
       </Column>
       <Column right>
         {inputs}
@@ -136,7 +142,7 @@ const TagsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   overflow-y: auto;
-  max-height: 60vh;
+  max-height: 40vh;
 `;
 
 const QuestionBody = styled.span`
@@ -168,7 +174,7 @@ const FlexRow = styled.div`
   flex-direction: row;
   align-items: center;
   @media screen and (max-width: 600px) {
-    margin-top: 0.75rem; 
+    margin-top: 0.75rem;
   }
 `;
 
@@ -177,7 +183,6 @@ const QuestionContainer = styled(InputContainer)`
   flex-direction: row;
   @media screen and (max-width: 600px) {
     flex-direction: column;
-    
   }
 `;
 

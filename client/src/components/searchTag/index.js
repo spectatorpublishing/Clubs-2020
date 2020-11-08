@@ -2,8 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import styled, { withTheme } from 'styled-components';
 import { motion } from 'framer-motion';
 import { useFocused } from '../customHooks/index';
-
-const SearchTag = ({ text, theme }) => {
+const SearchTag = ({ text, theme, data, setData }) => {
   const tagVariants = {
     active: { color: theme.colors.white, backgroundColor: theme.colors.red },
     inactive: {
@@ -14,13 +13,11 @@ const SearchTag = ({ text, theme }) => {
   const [clicked, setClicked] = useState(false);
   const searchTag = useRef(null);
   const searchTagFocused = useFocused(searchTag);
-
   const onKeypress = (e) => {
     if (e.keyCode === 13) {
       searchTag.current.click();
     }
   };
-
   useEffect(() => {
     if (searchTagFocused) {
       document.addEventListener('keypress', onKeypress);
@@ -29,14 +26,24 @@ const SearchTag = ({ text, theme }) => {
       document.removeEventListener('keypress', onKeypress);
     };
   }, [searchTagFocused]);
-
+  function handleClick() {
+    setClicked(!clicked);
+    if (data && setData) {
+      let tempData = [...data];
+      // Removes Element
+      if (clicked) {
+        const index = tempData.indexOf(text);
+        if (index >= -1) tempData.splice(index, 1);
+        // Adds Element
+      } else tempData.push(text);
+      setData(tempData);
+    }
+  }
   return (
     <Tag
       ref={searchTag}
       clicked={clicked}
-      onClick={() => {
-        setClicked(!clicked);
-      }}
+      onClick={handleClick}
       variants={tagVariants}
       whileTap={{ scale: 0.95 }}
       initial='inactive'

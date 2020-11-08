@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styled, { withTheme, css } from 'styled-components';
-import { useMotionValue, motion, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useFocused, useViewport } from '../customHooks/index';
 
 // orderNum is for when you want border radius on sides of mobile version
@@ -9,8 +9,6 @@ const Checkbox = ({ theme, labelText, orderNum }) => {
   const [clicked, setClicked] = useState(false);
   const checkbox = useRef(null);
   const checkboxFocused = useFocused(checkbox);
-  const pathLength = useMotionValue(0);
-  const opacity = useTransform(pathLength, [0.05, 0.15], [0, 1]);
   const { width } = useViewport();
   const breakpoint = 600;
   const boxVariants = {
@@ -74,7 +72,7 @@ const Checkbox = ({ theme, labelText, orderNum }) => {
                 stroke='white'
                 strokeLinecap='round'
                 variants={checkVariants}
-                style={{ pathLength: pathLength, opacity: opacity }}
+                animate={clicked ? 'checked' : 'unchecked'}
               />
             </svg>
           )}
@@ -161,10 +159,10 @@ const CheckboxLabel = styled.label`
   -webkit-user-select: none;
   -moz-user-select: none;
   height: auto;
+
   width: auto;
   -ms-user-select: none;
   cursor: pointer;
 `;
-
 
 export default withTheme(Checkbox);

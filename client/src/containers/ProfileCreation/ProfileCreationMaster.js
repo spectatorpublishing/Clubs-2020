@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import {
   BrowserRouter as Router,
@@ -11,9 +11,33 @@ import ProfileCreation2 from './ProfileCreation2';
 import WebsiteTitle from '../../components/websiteTitle/index';
 import Logout from '../../components/logout/index';
 import FilledButton from '../../components/filledButton/index';
+import { ProfileCreationContext } from '../../components/contexts/index';
 const ProfileCreationMaster = () => {
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
+  const [tags, setTags] = useState([]);
+  const [clubName, setClubName] = useState('');
+  const [shortDesc, setShortDesc] = useState('');
+  const [longDesc, setLongDesc] = useState('');
+  const [size, setSize] = useState('');
+  const [memberPeriod, setMemberPeriod] = useState('');
+  const [requireApp, setRequireApp] = useState(false);
+  const [meetTime, setMeetTime] = useState(['', '']);
+  const [clubProfile, setClubProfile] = useState({
+    tags: [],
+    clubName: '',
+    shortDesc: '',
+    longDesc: '',
+    size: '',
+    memberPeriod: '',
+    requireApplication: true,
+    meetTime: ['', ''],
+  });
 
+  useEffect(() => {
+    console.log(tags);
+  }, [tags]);
+
+  // Updates state based on input text
   return (
     <PageContainer>
       <StyledHeader>
@@ -29,10 +53,15 @@ const ProfileCreationMaster = () => {
       {currentPath === '/profile-creation' && (
         <PageDesc>Opening Statement: Provide Basic Info</PageDesc>
       )}
-
       <Router>
         <Switch>
-          <Route path='/profile-creation' exact component={ProfileCreation1} />
+          <Route
+            path='/profile-creation'
+            exact
+            render={(props) => (
+              <ProfileCreation1 {...props} tags={tags} setTags={setTags} />
+            )}
+          />
           <Route path='/profile-creation/1' component={ProfileCreation2} />
         </Switch>
 
