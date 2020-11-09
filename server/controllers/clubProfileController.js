@@ -2,8 +2,9 @@ const db = require('../models/')
 
 module.exports = {
     getAll: function(req, res) {
-	 var query = db.find({}).select({name: 1, description: 1, imageUrl: 1, tags: 1, memberRange: 1, acceptingMembers: 1, applicationRequired: 1});
-	 res.send(query);
+	 db.find({}).select({name: 1, description: 1, imageUrl: 1, tags: 1, memberRange: 1, acceptingMembers: 1, applicationRequired: 1})
+	    .then(query => res.json(query))
+	    .catch(err => res.status(422).json(err));
     },
     getById: function(req, res) {
         // TODO; req.params.id
