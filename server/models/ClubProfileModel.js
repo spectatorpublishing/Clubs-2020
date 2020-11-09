@@ -3,11 +3,13 @@ const Schema = mongoose.Schema;
 
 const clubProfileSchema = new Schema({
     name: { type: String, required: true },
-    description: { type: String, required: true },
+    longDescription: { type: String, required: true },
+    shortDescription: { type: String, required: true },
     lastUpdated: { type: Date, default: Date.now() },
     imageUrl: { type: String, default: '' },
     memberRange: { type: String, required: true },
-    acceptingMembers: { type: String, required: true },
+    springRecruiting: { type: Boolean, required: true },
+    fallRecruiting: { type: Boolean, required: true },
     applicationRequired: { type: Boolean, required: true },
     meetingFrequency: { type: String, required: true },
     socialLinks: {
@@ -26,10 +28,6 @@ const clubProfileSchema = new Schema({
     },
     howToJoin: { type: String, default: '' },
     applicationLink: { type: String, default: '' },
-    similarClubs: {
-        type: [mongoose.Types.ObjectId],
-        default: []
-    },
     showInstagramFeed: { type: Boolean, required: true },
 
 });
