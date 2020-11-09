@@ -8,6 +8,7 @@ const clubProfileSchema = new Schema({
     lastUpdated: { type: Date, default: Date.now() },
     imageUrl: { type: String, default: '' },
     memberRange: { type: String, required: true },
+    acceptingMembers: { type: Boolean, required: true },
     springRecruiting: { type: Boolean, required: true },
     fallRecruiting: { type: Boolean, required: true },
     applicationRequired: { type: Boolean, required: true },
