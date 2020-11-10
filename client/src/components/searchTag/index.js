@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import styled, { withTheme } from 'styled-components';
 import { motion } from 'framer-motion';
 import { useFocused } from '../customHooks/index';
-const SearchTag = ({ text, theme, data, setData }) => {
+const SearchTag = ({ text, theme, data, setData, objId }) => {
   const tagVariants = {
     active: { color: theme.colors.white, backgroundColor: theme.colors.red },
     inactive: {
@@ -26,19 +26,24 @@ const SearchTag = ({ text, theme, data, setData }) => {
       document.removeEventListener('keypress', onKeypress);
     };
   }, [searchTagFocused]);
-  function handleClick() {
+
+  const handleClick = () => {
     setClicked(!clicked);
     if (data && setData) {
-      let tempData = [...data];
-      // Removes Element
-      if (clicked) {
-        const index = tempData.indexOf(text);
-        if (index >= -1) tempData.splice(index, 1);
-        // Adds Element
-      } else tempData.push(text);
-      setData(tempData);
+      let tempData = { ...data };
+      if (objId in tempData) {
+        if (clicked) {
+          // Removes Element
+          const index = tempData[objId].indexOf(text);
+          if (index >= -1) tempData[objId].splice(index, 1);
+          // Adds Element
+        } else tempData[objId].push(text);
+        setData(tempData);
+      } else {
+        console.error('objId not in the obj');
+      }
     }
-  }
+  };
   return (
     <Tag
       ref={searchTag}

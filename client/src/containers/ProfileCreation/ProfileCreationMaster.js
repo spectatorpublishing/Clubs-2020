@@ -14,28 +14,20 @@ import FilledButton from '../../components/filledButton/index';
 import { ProfileCreationContext } from '../../components/contexts/index';
 const ProfileCreationMaster = () => {
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
-  const [tags, setTags] = useState([]);
-  const [clubName, setClubName] = useState('');
-  const [shortDesc, setShortDesc] = useState('');
-  const [longDesc, setLongDesc] = useState('');
-  const [size, setSize] = useState('');
-  const [memberPeriod, setMemberPeriod] = useState('');
-  const [requireApp, setRequireApp] = useState(false);
-  const [meetTime, setMeetTime] = useState(['', '']);
   const [clubProfile, setClubProfile] = useState({
     tags: [],
     clubName: '',
     shortDesc: '',
     longDesc: '',
     size: '',
-    memberPeriod: '',
+    memberPeriod: [],
     requireApplication: true,
-    meetTime: ['', ''],
+    meetTime: [],
   });
 
   useEffect(() => {
-    console.log(tags);
-  }, [tags]);
+    console.log(clubProfile);
+  }, [clubProfile]);
 
   // Updates state based on input text
   return (
@@ -59,7 +51,11 @@ const ProfileCreationMaster = () => {
             path='/profile-creation'
             exact
             render={(props) => (
-              <ProfileCreation1 {...props} tags={tags} setTags={setTags} />
+              <ProfileCreation1
+                {...props}
+                clubProfile={clubProfile}
+                setClubProfile={setClubProfile}
+              />
             )}
           />
           <Route path='/profile-creation/1' component={ProfileCreation2} />

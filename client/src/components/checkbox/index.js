@@ -1,11 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
-import styled, { withTheme, css } from 'styled-components';
+import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
 import { useFocused, useViewport } from '../customHooks/index';
 
-// orderNum is for when you want border radius on sides of mobile version
+// order is for when you want border radius on sides of mobile version
 
-const Checkbox = ({ theme, labelText, orderNum }) => {
+const Checkbox = ({ labelText, order, data, setData, objId }) => {
   const [clicked, setClicked] = useState(false);
   const checkbox = useRef(null);
   const checkboxFocused = useFocused(checkbox);
@@ -38,23 +38,35 @@ const Checkbox = ({ theme, labelText, orderNum }) => {
     };
   }, [checkboxFocused]);
 
+  const handleClick = () => {
+    setClicked(!clicked);
+    if (data && setData) {
+      let tempData = { ...data };
+      if (objId in tempData) {
+        if (clicked) {
+          // Removes Element
+          const index = tempData[objId].indexOf(labelText);
+          if (index >= -1) tempData[objId].splice(index, 1);
+          // Adds Element
+        } else tempData[objId].push(labelText);
+        setData(tempData);
+      } else {
+        console.error('objId not in the obj');
+      }
+    }
+  };
+
   return (
     <LabelContainer>
-      <CheckboxContainer
-        tabIndex={0}
-        ref={checkbox}
-        onClick={() => {
-          setClicked(!clicked);
-        }}
-      >
+      <CheckboxContainer tabIndex={0} ref={checkbox}>
         <StyledCheckbox
-          orderNum={orderNum}
+          order={order}
           variants={boxVariants}
           clicked={clicked}
           initial={'unchecked'}
           animate={clicked ? 'checked' : 'unchecked'}
           transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-          onClick={() => setClicked(!clicked)}
+          onClick={handleClick}
         >
           {width <= breakpoint ? (
             <MobileLabel>{labelText}</MobileLabel>
@@ -81,13 +93,7 @@ const Checkbox = ({ theme, labelText, orderNum }) => {
       {width <= breakpoint ? (
         <></>
       ) : (
-        <CheckboxLabel
-          onClick={() => {
-            setClicked(!clicked);
-          }}
-        >
-          {labelText}
-        </CheckboxLabel>
+        <CheckboxLabel onClick={handleClick}>{labelText}</CheckboxLabel>
       )}
     </LabelContainer>
   );
@@ -137,13 +143,13 @@ const StyledCheckbox = styled(motion.div)`
         ? props.theme.colors.fullWhite
         : props.theme.colors.checkboxGray};
     ${(props) =>
-      props.orderNum === 0 &&
+      props.order === 'left' &&
       css`
         border-top-left-radius: 2rem;
         border-bottom-left-radius: 2rem;
       `}
     ${(props) =>
-      props.orderNum === 2 &&
+      props.order === 'right' &&
       css`
         border-top-right-radius: 2rem;
         border-bottom-right-radius: 2rem;
@@ -159,10 +165,9 @@ const CheckboxLabel = styled.label`
   -webkit-user-select: none;
   -moz-user-select: none;
   height: auto;
-
   width: auto;
   -ms-user-select: none;
   cursor: pointer;
 `;
 
-export default withTheme(Checkbox);
+export default Checkbox;

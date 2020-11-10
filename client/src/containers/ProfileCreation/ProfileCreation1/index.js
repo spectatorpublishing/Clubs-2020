@@ -1,22 +1,23 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
 import RedAsterisk from '../../../components/redAsterisk/index';
 import SearchTag from '../../../components/searchTag/index';
 import Checkbox from '../../../components/checkbox/index';
 import Dropdown from '../../../components/dropdown/index';
 import TextInput from '../../../components/textInput/index';
+import GrayTag from '../../../components/grayTag/index';
 import FilledButton from '../../../components/filledButton/index';
 import { inputData, tagData } from './data';
-const ProfileCreation1 = ({ tags, setTags, handleChange }) => {
-  const [test, setTest] = useState([])
+const ProfileCreation1 = ({ clubProfile, setClubProfile }) => {
   const tagComponents = tagData.map((tagName, index) => {
     return (
       <TagContainer>
         <SearchTag
           text={tagName}
           key={`tag-${index}`}
-          data={tags}
-          setData={setTags}
+          data={clubProfile}
+          setData={setClubProfile}
+          objId='tags'
         />
       </TagContainer>
     );
@@ -52,7 +53,8 @@ const ProfileCreation1 = ({ tags, setTags, handleChange }) => {
       </Column>
       <Column right>
         {inputs}
-        <NewMembers />
+        <ClubSize />
+        <NewMembers clubProfile={clubProfile} setClubProfile={setClubProfile} />
         <RequireApplication />
         <MeetFrequency />
       </Column>
@@ -62,23 +64,50 @@ const ProfileCreation1 = ({ tags, setTags, handleChange }) => {
 
 export default ProfileCreation1;
 
-const NewMembers = () => {
+const ClubSize = ({ clubProfile, setClubProfile }) => {
+  const sizes = ['0-10', '10-20', '20-50', '50-100', '100+'];
+  const sizeTags = sizes.map(() => {
+    return (
+      <SizeContainer>
+        <GrayTag />
+      </SizeContainer>
+    );
+  });
+  return (
+    <QuestionContainer>
+      <RowHeader>
+        <RedAsterisk>*</RedAsterisk> Size:
+      </RowHeader>
+      <FlexRow>{sizeTags}</FlexRow>
+    </QuestionContainer>
+  );
+};
+
+const NewMembers = ({ clubProfile, setClubProfile }) => {
+  const checkboxData = [
+    ['left', 'Fall'],
+    ['mid', 'Spring'],
+    ['right', 'Not taking members'],
+  ];
+  const checkboxes = checkboxData.map((item) => {
+    return (
+      <CheckboxContainer>
+        <Checkbox
+          order={item[0]}
+          labelText={item[1]}
+          objId='memberPeriod'
+          data={clubProfile}
+          setData={setClubProfile}
+        />
+      </CheckboxContainer>
+    );
+  });
   return (
     <QuestionContainer>
       <RowHeader>
         <RedAsterisk>*</RedAsterisk> When do you take new members?
       </RowHeader>
-      <FlexRow>
-        <CheckboxContainer>
-          <Checkbox orderNum={0} labelText='Fall' />
-        </CheckboxContainer>
-        <CheckboxContainer>
-          <Checkbox orderNum={1} labelText='Spring' />
-        </CheckboxContainer>
-        <CheckboxContainer>
-          <Checkbox orderNum={2} labelText='Not taking members' />
-        </CheckboxContainer>
-      </FlexRow>
+      <FlexRow>{checkboxes}</FlexRow>
     </QuestionContainer>
   );
 };
@@ -91,10 +120,10 @@ const RequireApplication = () => {
       </RowHeader>
       <FlexRow>
         <CheckboxContainer>
-          <Checkbox labelText='Yes' orderNum={0} />
+          <Checkbox labelText='Yes' order='left' />
         </CheckboxContainer>
         <CheckboxContainer>
-          <Checkbox labelText='No' orderNum={2} />
+          <Checkbox labelText='No' order='right' />
         </CheckboxContainer>
       </FlexRow>
     </QuestionContainer>
@@ -202,3 +231,4 @@ const CheckboxContainer = styled.div`
 `;
 
 const DropdownContainer = styled(CheckboxContainer)``;
+const SizeContainer = styled(CheckboxContainer)``;
