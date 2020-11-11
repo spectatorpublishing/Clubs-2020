@@ -11,7 +11,7 @@ import ProfileCreation2 from './ProfileCreation2';
 import WebsiteTitle from '../../components/websiteTitle/index';
 import Logout from '../../components/logout/index';
 import FilledButton from '../../components/filledButton/index';
-import { ProfileCreationContext } from '../../components/contexts/index';
+
 const ProfileCreationMaster = () => {
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
   const [clubProfile, setClubProfile] = useState({
@@ -128,7 +128,7 @@ const LogoContainer = styled.div`
 `;
 
 const PageDesc = styled.h2`
-  font-family: 'Roboto', 'Arial', 'Helvetica';
+  font-family: 'Manrope', 'Roboto', 'Arial', 'Helvetica';
   font-weight: 400;
   padding-left: 0.3rem;
   @media only screen and (max-width: 600px) {
@@ -138,7 +138,7 @@ const PageDesc = styled.h2`
 
 const Subtext = styled.h3`
   color: ${(props) => props.theme.colors.gray};
-  font-family: 'Roboto', 'Arial', 'Helvetica';
+  font-family: 'Manrope', 'Roboto', 'Arial', 'Helvetica';
   margin-top: 0.5rem;
   font-weight: 500;
   @media only screen and (max-width: 600px) {

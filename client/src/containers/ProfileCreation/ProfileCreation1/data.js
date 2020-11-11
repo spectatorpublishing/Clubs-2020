@@ -54,19 +54,19 @@ export const inputData = [
   {
     shortDesc: {
       labelHeader: 'Short Description:',
-      labelDesc: '200 characters max',
+      labelDesc: '150 characters max',
       height: '6.135rem',
       multiline: true,
-      characterMax: 200
+      characterMax: 150
     }
   },
   {
     longDesc: {
       labelHeader: 'Long Description:',
-      labelDesc: '400 characters max',
+      labelDesc: '500 characters max',
       height: '10.125rem',
       multiline: true,
-      characterMax: 400
+      characterMax: 500
     }
   }
 ];

@@ -4,9 +4,9 @@ import { motion } from 'framer-motion';
 import { spring } from 'popmotion';
 import { useFocused, useOnClickOutside } from '../customHooks/index';
 
-const Dropdown = ({ items, theme }) => {
+const Dropdown = ({ items, theme, placeholder }) => {
   const [clicked, setClicked] = useState(false);
-  const [title, setTitle] = useState('');
+  const [title, setTitle] = useState(placeholder);
   const [titleHovered, setTitleHovered] = useState(false);
   const [curIndex, setCurIndex] = useState(-1);
   const dropdown = useRef(null);
@@ -138,7 +138,7 @@ const Dropdown = ({ items, theme }) => {
 };
 
 const DropdownContainer = styled.div`
-  width: 7.1875rem;
+  width: 7.4rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -164,7 +164,7 @@ const TitleContainer = styled(motion.button)`
   justify-content: space-between;
   margin: 0;
   font-size: 1rem;
-  font-family: 'Roboto', 'Arial', 'Helvetica';
+  font-family: 'Manrope', 'Roboto', 'Arial', 'Helvetica';
   cursor: pointer;
   outline-color: ${(props) => props.theme.colors.blue};
 `;
@@ -189,7 +189,7 @@ const ArrowSvg = styled(motion.svg)`
 const OptionsContainer = styled(motion.ul)`
   box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.25);
   display: flex;
-  width: 7.1875rem;
+  width: 7.4rem;
   flex-direction: column;
   border-radius: 0.8125rem;
   justify-content: center;
@@ -197,7 +197,7 @@ const OptionsContainer = styled(motion.ul)`
   padding: 0;
   margin: 0 0 0.8rem 0;
   position: absolute;
-  left: -3.59rem;
+  left: -3.9rem;
   z-index: 2;
 `;
 
@@ -213,7 +213,7 @@ const Option = styled(motion.li)`
   -moz-user-select: none;
   -ms-user-select: none;
   overflow-wrap: break-word;
-  font-family: 'Roboto', 'Arial', 'Helvetica';
+  font-family: 'Manrope', 'Roboto', 'Arial', 'Helvetica';
   user-select: none;
   cursor: pointer;
 `;

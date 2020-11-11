@@ -93,7 +93,7 @@ const TextContainer = styled.div`
   display: flex;
   flex-direction: row;
   padding: 1rem 0 0 0.3rem;
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 801px) {
     flex-direction: column !important;
   }
 `;
@@ -103,7 +103,7 @@ const FlexCol = styled(motion.div)`
   flex-direction: column;
   width: ${(props) => (props.width ? props.width : 'auto')};
 
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 801px) {
     ${(props) =>
       props.multiline &&
       css`
@@ -121,7 +121,7 @@ const InputStyles = css`
   width: 95%;
   font-size: 1.125rem;
   color: ${(props) => props.theme.colors.checkboxGray};
-  font-family: 'Roboto', 'Helvetica', 'Arial';
+  font-family: 'Manrope', 'Roboto', 'Helvetica', 'Arial';
   resize: none;
   outline-color: ${(props) => props.theme.colors.blue};
   overflow-y: auto;

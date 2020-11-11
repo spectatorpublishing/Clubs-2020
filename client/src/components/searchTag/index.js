@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import styled, { withTheme } from 'styled-components';
 import { motion } from 'framer-motion';
 import { useFocused } from '../customHooks/index';
+
 const SearchTag = ({ text, theme, data, setData, objId }) => {
   const tagVariants = {
     active: { color: theme.colors.white, backgroundColor: theme.colors.red },
@@ -54,7 +55,7 @@ const SearchTag = ({ text, theme, data, setData, objId }) => {
       initial='inactive'
       animate={clicked ? 'active' : 'inactive'}
     >
-      {text}
+      {text ? text : 'no text entered'}
     </Tag>
   );
 };
@@ -62,8 +63,8 @@ const SearchTag = ({ text, theme, data, setData, objId }) => {
 const Tag = styled(motion.button)`
   display: inline-block;
   padding: 0.4rem 1rem;
-  font-family: 'Roboto', 'Arial', 'Helvetica';
-  font-size: 1rem;
+  font-family: 'Manrope', 'Roboto', 'Arial', 'Helvetica';
+  font-size: 0.9rem;
   border-radius: 1rem;
   border: 0.125rem ${(props) => props.theme.colors.red} solid;
   outline-color: ${(props) => props.theme.colors.blue};
@@ -73,7 +74,7 @@ const Tag = styled(motion.button)`
   user-select: none;
   cursor: pointer;
   @media only screen and (max-width: 600px) {
-    font-size: 0.85rem;
+    font-size: 0.75rem;
   }
 `;
 

@@ -113,7 +113,7 @@ const CheckboxContainer = styled.div`
 `;
 
 const MobileLabel = styled.h3`
-  font-family: 'Roboto', 'Helvetica', 'Arial';
+  font-family: 'Manrope', 'Roboto', 'Arial', 'Helvetica';
   font-size: 0.8125rem;
   font-weight: 400;
   text-align: center;
@@ -160,7 +160,7 @@ const StyledCheckbox = styled(motion.div)`
 const CheckboxLabel = styled.label`
   color: ${(props) => props.theme.colors.checkboxGray};
   font-size: 1.125rem;
-  font-family: 'Roboto', 'Arial', 'Helvetica';
+  font-family: 'Manrope', 'Roboto', 'Arial', 'Helvetica';
   margin-left: 0.65rem;
   -webkit-user-select: none;
   -moz-user-select: none;

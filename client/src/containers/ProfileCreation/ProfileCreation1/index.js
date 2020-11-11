@@ -53,6 +53,7 @@ const ProfileCreation1 = ({ clubProfile, setClubProfile }) => {
       </Column>
       <Column right>
         {inputs}
+
         <ClubSize />
         <NewMembers clubProfile={clubProfile} setClubProfile={setClubProfile} />
         <RequireApplication />
@@ -66,11 +67,11 @@ export default ProfileCreation1;
 
 const ClubSize = ({ clubProfile, setClubProfile }) => {
   const sizes = ['0-10', '10-20', '20-50', '50-100', '100+'];
-  const sizeTags = sizes.map(() => {
+  const sizeTags = sizes.map((size) => {
     return (
-      <SizeContainer>
-        <GrayTag />
-      </SizeContainer>
+      <GrayTagContainer>
+        <GrayTag text={size} />
+      </GrayTagContainer>
     );
   });
   return (
@@ -119,12 +120,12 @@ const RequireApplication = () => {
         <RedAsterisk>*</RedAsterisk> Do you require an application?
       </RowHeader>
       <FlexRow>
-        <CheckboxContainer>
-          <Checkbox labelText='Yes' order='left' />
-        </CheckboxContainer>
-        <CheckboxContainer>
-          <Checkbox labelText='No' order='right' />
-        </CheckboxContainer>
+        <GrayTagContainer>
+          <GrayTag text={'Yes'} />
+        </GrayTagContainer>
+        <GrayTagContainer>
+          <GrayTag text={'No'} />
+        </GrayTagContainer>
       </FlexRow>
     </QuestionContainer>
   );
@@ -151,7 +152,7 @@ const StyledBody = styled.main`
   display: grid;
   grid-template-columns: 30% 70%;
   padding-top: 1rem;
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 801px) {
     grid-template-rows: auto auto !important;
     grid-template-columns: none;
     padding-top: 0.5rem;
@@ -162,7 +163,7 @@ const StyledBody = styled.main`
 const Column = styled.div`
   width: 100%;
   padding-left: ${(props) => (props.right ? '2.5rem' : '0rem')};
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 801px) {
     padding-left: 0;
     order: ${(props) => (props.right ? '-1' : '1')};
   }
@@ -171,20 +172,21 @@ const TagsContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   overflow-y: auto;
-  max-height: 40vh;
+  max-height: 45rem;
 `;
 
 const QuestionBody = styled.span`
-  font-size: 1.125rem;
+  font-size: 1rem;
+  margin-bottom: 1.1rem;
   color: ${(props) => props.theme.colors.checkboxGray};
-  font-family: 'Roboto', 'Arial', 'Helvetica';
+  font-family: 'Manrope', 'Roboto', 'Arial', 'Helvetica';
   @media screen and (max-width: 600px) {
     margin: 0 0.75rem;
   }
 `;
 
 const TagHeader = styled.h3`
-  font-family: 'Roboto', 'Arial', 'Helvetica';
+  font-family: 'Manrope', 'Roboto', 'Arial', 'Helvetica';
   font-weight: 400;
   margin-left: 0.3rem;
   font-size: 1.125rem;
@@ -201,8 +203,10 @@ const InputContainer = styled.div`
 const FlexRow = styled.div`
   display: flex;
   flex-direction: row;
+  width: 100%;
+  flex-wrap: wrap;
   align-items: center;
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 801px) {
     margin-top: 0.75rem;
   }
 `;
@@ -210,25 +214,32 @@ const FlexRow = styled.div`
 const QuestionContainer = styled(InputContainer)`
   display: flex;
   flex-direction: row;
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 801px) {
     flex-direction: column;
   }
 `;
 
 const RowHeader = styled(TagHeader)`
   margin: 0;
-  max-width: 12.5rem;
-  @media screen and (max-width: 600px) {
+  width: 15rem;
+  @media screen and (max-width: 801px) {
+    width: auto;
     max-width: 85%;
   }
 `;
 
 const CheckboxContainer = styled.div`
-  margin: 0 0.75rem;
+  margin: 0 0.75rem 0.5rem;
   @media screen and (max-width: 600px) {
     margin: 0;
   }
 `;
 
 const DropdownContainer = styled(CheckboxContainer)``;
-const SizeContainer = styled(CheckboxContainer)``;
+
+const GrayTagContainer = styled(CheckboxContainer)`
+  margin: 0 0 0.3rem 0.5rem;
+  @media screen and (max-width: 801px) {
+    margin: 0 0.5rem 0.3rem 0;
+  }
+`;
