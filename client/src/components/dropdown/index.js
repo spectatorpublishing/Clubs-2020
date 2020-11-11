@@ -122,6 +122,7 @@ const Dropdown = ({ items, theme, placeholder }) => {
               ? {
                   height: 'auto',
                   boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.25)',
+                  transition: {},
                 }
               : {
                   height: 0,
@@ -163,7 +164,7 @@ const TitleContainer = styled(motion.button)`
   align-items: center;
   justify-content: space-between;
   margin: 0;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-family: 'Manrope', 'Roboto', 'Arial', 'Helvetica';
   cursor: pointer;
   outline-color: ${(props) => props.theme.colors.blue};
@@ -197,8 +198,10 @@ const OptionsContainer = styled(motion.ul)`
   padding: 0;
   margin: 0 0 0.8rem 0;
   position: absolute;
-  left: -3.9rem;
+  left: -3.78rem;
   z-index: 2;
+  background: ${(props) => props.theme.colors.fullWhite};
+  font-size: 0.9rem;
 `;
 
 const Option = styled(motion.li)`

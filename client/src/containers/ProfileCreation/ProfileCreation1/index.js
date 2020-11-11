@@ -180,8 +180,8 @@ const QuestionBody = styled.span`
   margin-bottom: 1.1rem;
   color: ${(props) => props.theme.colors.checkboxGray};
   font-family: 'Manrope', 'Roboto', 'Arial', 'Helvetica';
-  @media screen and (max-width: 600px) {
-    margin: 0 0.75rem;
+  @media screen and (max-width: 801px) {
+    margin: 0 0.75rem 0.7rem;
   }
 `;
 
@@ -230,15 +230,22 @@ const RowHeader = styled(TagHeader)`
 
 const CheckboxContainer = styled.div`
   margin: 0 0.75rem 0.5rem;
+  @media screen and (max-width: 800px) {
+    margin: 0 1.5rem 0.5rem 0;
+  }
   @media screen and (max-width: 600px) {
     margin: 0;
   }
 `;
 
-const DropdownContainer = styled(CheckboxContainer)``;
+const DropdownContainer = styled(CheckboxContainer)`
+  @media screen and (max-width: 800px) {
+    margin: 0;
+  }
+`;
 
 const GrayTagContainer = styled(CheckboxContainer)`
-  margin: 0 0 0.3rem 0.5rem;
+  margin: 0 0.75rem 0.6rem;
   @media screen and (max-width: 801px) {
     margin: 0 0.5rem 0.3rem 0;
   }
