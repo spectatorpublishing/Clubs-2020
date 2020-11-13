@@ -9,7 +9,7 @@ export const ClubProfile = () => {
     return(
         <PageWrapper>
             <Content>
-                <MainContent
+                <MainContent // Very repetitive but left like this to visualize what props are needed for which component
                     name= 'Columbia University Jazz Ensemble'
                     description= "A small advanced jazz band covering 1950's hard bop to more adventurous contemporary Avant Garde styles."
                     // preferably a data object or date-formatted string
