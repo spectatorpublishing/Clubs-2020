@@ -1,16 +1,29 @@
 import React from 'react';
+import { Navbar } from "../components/navbar";
 import { FaqBox } from '../components/faqbox';
 import styled from 'styled-components';
 
+const Wrapper = styled.div`
+  background-color: #F4F6F8;
+  background-image: url(https://clubs-cu.s3.amazonaws.com/FAQ+Waves.svg);
+  background-repeat: no-repeat;
+  background-position: top;
+  background-attachment: fixed;
+`;
+
+const NavWrap = styled.div`
+    /* position: fixed;
+    top: 0%; */
+`;
+
 const PageWrapper = styled.main`
-  background-color: ${props=>props.theme.colors.lightGray};
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
 
-const Title = styled.div`
-  margin-top: 4rem;
+const Title = styled.h1`
+  margin-top: 6rem;
   font-size: 1.5rem;
   text-align:center;
   width: 100vw;
@@ -20,6 +33,8 @@ const Title = styled.div`
 
 export const FAQ = () => {
     return(
+        <Wrapper>
+        <Navbar />
         <PageWrapper>
             <Title>Frequently Asked Questions</Title>
             <FaqBox 
@@ -59,5 +74,6 @@ export const FAQ = () => {
                 buttonLink="/"
             />
         </PageWrapper>
+        </Wrapper>
     )
 }

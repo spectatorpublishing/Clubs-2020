@@ -1,6 +1,14 @@
 import React from 'react';
-import ExploreBox from '../components/explorebox/index';
+import { Navbar } from "../components/navbar";
+import ExploreBox from '../components/explorebox';
 import styled from 'styled-components';
+
+const Wrapper = styled.div`
+  background-color: #F4F6F8;
+  background-image: url(https://clubs-cu.s3.amazonaws.com/columbia-wave.svg);
+  background-repeat: no-repeat;
+  background-position: top right;
+`;
 
 const Row = styled.div`
     display: flex;
@@ -27,6 +35,8 @@ const PageWrapper = styled.div`
 
 export const Explore = () => {
     return(
+        <Wrapper>
+        <Navbar />
         <main>
             <PageWrapper>
                 <h1>Explore Clubs</h1>
@@ -98,5 +108,6 @@ export const Explore = () => {
                 </Row>
             </PageWrapper>
         </main>
+        </Wrapper>
     )
 }

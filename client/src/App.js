@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { Navbar } from "./components/navbar";
 import { Explore } from "./containers/Explore";
 import { FAQ } from "./containers/FAQ";
 import { ThemeProvider } from "styled-components";
@@ -12,7 +11,6 @@ import { ClubProfile } from "./containers/ClubProfile";
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
-      <Navbar />
       <Router>
         <Switch>
           {/* <Route path="/explore" component={Explore} />
@@ -20,9 +18,6 @@ const App = () => {
           <Route path="/profile-creation" component={ProfileCreation} />
           <Route path="/profile-test" component={ProfileBoxTester} /> */}
 
-          <Route path="/club-profile">
-            <ClubProfile />
-          </Route>
           <Route path="/profile-test">
             <ProfileBoxTester />
           </Route>

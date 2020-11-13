@@ -8,7 +8,7 @@ import { faEdit } from "@fortawesome/free-regular-svg-icons";
 import SearchTag from '../searchTag/index';
 
 const Box = styled.div`
-    background-color: color: ${(props) => props.theme.colors.white};
+    background-color: ${(props) => props.theme.colors.white};
     text-align: left;
     width: auto;
     margin: 1rem;
