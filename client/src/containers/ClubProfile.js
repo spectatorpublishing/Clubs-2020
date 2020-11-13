@@ -3,10 +3,13 @@ import styled from 'styled-components';
 import ExploreBox from '../components/explorebox/index';
 import MainContent from '../components/profileMainContent/index';
 import { ProfilePageBox } from "../components/profilePageBox";
+import { Navbar } from "../components/navbar";
 
 export const ClubProfile = () => {
 
     return(
+        <Wrapper>
+            <Navbar/>
         <PageWrapper>
             <Content>
                 <MainContent // Very repetitive but left like this to visualize what props are needed for which component
@@ -50,8 +53,17 @@ export const ClubProfile = () => {
                 />
             </Cards>
         </PageWrapper>
+        </Wrapper>
     )
 }
+
+const Wrapper = styled.div`
+  background-color: #F4F6F8;
+  background-image: url(https://clubs-cu.s3.amazonaws.com/columbia-wave.svg);
+  background-repeat: no-repeat;
+  background-position: top right;
+`;
+
 
 const PageWrapper = styled.main`
     padding: 3rem;
