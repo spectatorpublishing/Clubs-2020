@@ -23,7 +23,7 @@ const PageWrapper = styled.main`
 `;
 
 const Title = styled.h1`
-  margin-top: 9rem;
+  margin-top: 6rem;
   font-size: 1.5rem;
   text-align:center;
   width: 100vw;
