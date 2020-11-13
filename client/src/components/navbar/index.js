@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { FaBars } from 'react-icons/fa'
 
 const NavWrapper = styled.nav`
-  background: ${(props) => props.theme.colors.turquoise};
+  /*background: ${(props) => props.theme.colors.turquoise};*/
   color: ${(props) => props.theme.colors.white};
   font-weight: 500;
   height: 100%;
@@ -38,14 +38,14 @@ const Logo = styled.div`
 
   a {
     text-decoration: none;
-    color: ${(props) => props.theme.colors.white};
+    color: ${(props) => props.theme.colors.black};
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 769px) {
     margin-left: 1rem;
 
     a {
-      color: ${(props) => props.theme.colors.black};
+      /*color: ${(props) => props.theme.colors.black};*/
       }
   }
 `;
@@ -59,9 +59,8 @@ const NavToggle = styled.div`
   transition: all 0.3s linear;
   cursor: pointer;
 
-  &:hover {
-      color: ${(props) => props.theme.colors.lightGray};
-      transform: rotate(90deg);
+  &.show-container {
+    transform: rotate(90deg);
   }
 
   @media screen and (min-width: 769px) {
@@ -81,7 +80,7 @@ const LinksContainer = styled.div`
 
   @media screen and (min-width: 769px) {
     height: auto !important;
-    background-color: ${(props) => props.theme.colors.turquoise};
+    background-color: transparent;
   }
 `;
 
@@ -103,16 +102,16 @@ const MenuLinks = styled.ul`
     transition: color 0.2s linear;
 
     &:hover {
-      color: ${(props) => props.theme.colors.black};
+      color: ${(props) => props.theme.colors.gray};
     }
   }
 
   @media (min-width: 769px) {
     display: flex;
     margin: 0;
-    padding 0;
+    padding: 0;
     margin-left: auto;
-    color: ${(props) => props.theme.colors.white};
+    color: ${(props) => props.theme.colors.black};
 
     li {
       display: inline;
@@ -135,7 +134,7 @@ const RegisterButton = styled.button`
   border-radius: 7px;
   padding: 0.3rem 1rem;
   font-size: 1rem;
-  color: inherit;
+  color: ${(props) => props.theme.colors.white};
   cursor: pointer;
   transition: all 0.2s linear;
 
@@ -166,7 +165,7 @@ export const Navbar = () => {
         <NavCenter>
             <NavHeader>
                 <Logo><a href="/">Clubs@CU</a></Logo>
-                <NavToggle onClick={() => setShowLinks(!showLinks)}>
+                <NavToggle onClick={() => setShowLinks(!showLinks)} className={`${showLinks? 'show-container' :  null}`}>
                     <FaBars />
                 </NavToggle>
             </NavHeader>
