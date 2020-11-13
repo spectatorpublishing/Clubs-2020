@@ -14,7 +14,7 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <Navbar />
       <Router>
-      <Switch>
+        <Switch>
           {/* <Route path="/explore" component={Explore} />
           <Route path="/faq" component={FAQ} />
           <Route path="/profile-creation" component={ProfileCreation} />
@@ -35,6 +35,7 @@ const App = () => {
           <Route path="/">
             <Explore />
           </Route>
+
         </Switch>
       </Router>
     </ThemeProvider>
