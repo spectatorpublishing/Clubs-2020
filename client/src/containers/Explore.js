@@ -49,7 +49,7 @@ export const Explore = () => {
                         clubSize = "20-50"
                         acceptingMembers = {false}
                         applicationRequired = {true}
-                        cardLink="/home"
+                        cardLink="/club-profile"
                     />
                     <ExploreBox 
                         name = "Columbia University Jazz Ensemble" 
@@ -59,7 +59,7 @@ export const Explore = () => {
                         clubSize = "20-50"
                         acceptingMembers = {false}
                         applicationRequired = {false}
-                        cardLink="/home"
+                        cardLink="/club-profile"
                     />
                 </Row>
                 <Row>
@@ -71,7 +71,7 @@ export const Explore = () => {
                         clubSize = "20-50"
                         acceptingMembers = {true}
                         applicationRequired = {false}
-                        cardLink="/home"
+                        cardLink="/club-profile"
                     />
                     <ExploreBox 
                         name = "Columbia University Jazz Ensemble" 
@@ -81,7 +81,7 @@ export const Explore = () => {
                         clubSize = "20-50"
                         acceptingMembers = {true}
                         applicationRequired = {true}
-                        cardLink="/home"
+                        cardLink="/club-profile"
                     />
                 </Row>
                 <Row>
@@ -93,7 +93,7 @@ export const Explore = () => {
                         clubSize = "20-50"
                         acceptingMembers = {true}
                         applicationRequired = {false}
-                        cardLink="/home"
+                        cardLink="/club-profile"
                     />
                     <ExploreBox 
                         name = "Columbia University Jazz Ensemble" 
@@ -103,7 +103,7 @@ export const Explore = () => {
                         clubSize = "20-50"
                         acceptingMembers = {true}
                         applicationRequired = {false}
-                        cardLink="/home"
+                        cardLink="/club-profile"
                     />
                 </Row>
             </PageWrapper>
