@@ -12,10 +12,24 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <Router>
         <Switch>
-          <Route path="/explore" component={Explore} />
+          {/* <Route path="/explore" component={Explore} />
           <Route path="/faq" component={FAQ} />
           <Route path="/profile-creation" component={ProfileCreation} />
-          <Route path="/profile-test" component={ProfileBoxTester} />
+          <Route path="/profile-test" component={ProfileBoxTester} /> */}
+
+          <Route path="/profile-test">
+            <ProfileBoxTester />
+          </Route>
+          <Route path="/profile-creation">
+            <ProfileCreation />
+          </Route>
+          <Route path="/faq">
+            <FAQ />
+          </Route>
+          <Route path="/">
+            <Explore />
+          </Route>
+
         </Switch>
       </Router>
     </ThemeProvider>
