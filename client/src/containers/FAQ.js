@@ -23,7 +23,7 @@ const PageWrapper = styled.main`
 `;
 
 const Title = styled.h1`
-  margin-top: 6rem;
+  margin-top: 9rem;
   font-size: 1.5rem;
   text-align:center;
   width: 100vw;
@@ -34,9 +34,7 @@ const Title = styled.h1`
 export const FAQ = () => {
     return(
         <Wrapper>
-        {/* <NavWrap> */}
-            <Navbar />
-        {/* </NavWrap> */}
+        <Navbar />
         <PageWrapper>
             <Title>Frequently Asked Questions</Title>
             <FaqBox 
