@@ -12,19 +12,30 @@ import { ProfileBoxTester } from './containers/ProfileBoxTester';
 const App = () => {
   return (
     <ThemeProvider theme={theme}>
-      <Navbar />
       <Router>
         <Switch>
+          {/* <Route path="/explore" component={Explore} />
+          <Route path="/faq" component={FAQ} />
+          <Route path="/profile-creation" component={ProfileCreation} />
+          <Route path="/profile-test" component={ProfileBoxTester} /> */}
           <ViewportProvider>
-            <Route path='/explore' component={Explore} />
-            <Route path='/faq' component={FAQ} />
-            <Route path='/profile-creation' component={ProfileCreationMaster} />
-            <Route path='/profile-test' component={ProfileBoxTester} />
+            <Route path='/profile-test' exact>
+              <ProfileBoxTester />
+            </Route>
+            <Route path='/profile-creation' exact>
+              <ProfileCreationMaster />
+            </Route>
+            <Route path='/faq' exact>
+              <FAQ />
+            </Route>
+            <Route path='/' exact>
+              <Explore />
+            </Route>
           </ViewportProvider>
         </Switch>
       </Router>
 
-      <Navbar />
+      
     </ThemeProvider>
   );
 };

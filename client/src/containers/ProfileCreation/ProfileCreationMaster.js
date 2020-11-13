@@ -11,6 +11,7 @@ import ProfileCreation2 from './ProfileCreation2';
 import WebsiteTitle from '../../components/websiteTitle/index';
 import Logout from '../../components/logout/index';
 import FilledButton from '../../components/filledButton/index';
+import Navbar from '../../components/navbar/index';
 
 const ProfileCreationMaster = () => {
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
@@ -31,60 +32,63 @@ const ProfileCreationMaster = () => {
 
   // Updates state based on input text
   return (
-    <PageContainer>
-      <StyledHeader>
+    <>
+      <Navbar />
+      <PageContainer>
+        {/*<StyledHeader>
         <LogoContainer>
           <WebsiteTitle />
         </LogoContainer>
         <Logout />
-      </StyledHeader>
-      <SetUpClubProfile />
-      {currentPath === '/profile-creation/1' && (
-        <PageDesc>Get-to-Know-You's: Why Students Should Join</PageDesc>
-      )}
-      {currentPath === '/profile-creation' && (
-        <PageDesc>Opening Statement: Provide Basic Info</PageDesc>
-      )}
-      <Router>
-        <Switch>
-          <Route
-            path='/profile-creation'
-            exact
-            render={(props) => (
-              <ProfileCreation1
-                {...props}
-                clubProfile={clubProfile}
-                setClubProfile={setClubProfile}
-              />
-            )}
-          />
-          <Route path='/profile-creation/1' component={ProfileCreation2} />
-        </Switch>
-
-        <ButtonContainer>
-          <NavLink
-            style={{ textDecoration: 'none' }}
-            to='/profile-creation/1'
-            isActive={(match) => {
-              if (match) {
-                setCurrentPath('/profile-creation/1');
-              } else {
-                setCurrentPath('/profile-creation');
-              }
-            }}
-          >
-            <FilledButton
-              text={
-                currentPath === '/profile-creation/1'
-                  ? 'Make my club profile'
-                  : 'Next'
-              }
-              path='/profile-creation/1'
+      </StyledHeader>*/}
+        <SetUpClubProfile />
+        {currentPath === '/profile-creation/1' && (
+          <PageDesc>Get-to-Know-You's: Why Students Should Join</PageDesc>
+        )}
+        {currentPath === '/profile-creation' && (
+          <PageDesc>Opening Statement: Provide Basic Info</PageDesc>
+        )}
+        <Router>
+          <Switch>
+            <Route
+              path='/profile-creation'
+              exact
+              render={(props) => (
+                <ProfileCreation1
+                  {...props}
+                  clubProfile={clubProfile}
+                  setClubProfile={setClubProfile}
+                />
+              )}
             />
-          </NavLink>
-        </ButtonContainer>
-      </Router>
-    </PageContainer>
+            <Route path='/profile-creation/1' component={ProfileCreation2} />
+          </Switch>
+
+          <ButtonContainer>
+            <NavLink
+              style={{ textDecoration: 'none' }}
+              to='/profile-creation/1'
+              isActive={(match) => {
+                if (match) {
+                  setCurrentPath('/profile-creation/1');
+                } else {
+                  setCurrentPath('/profile-creation');
+                }
+              }}
+            >
+              <FilledButton
+                text={
+                  currentPath === '/profile-creation/1'
+                    ? 'Make my club profile'
+                    : 'Next'
+                }
+                path='/profile-creation/1'
+              />
+            </NavLink>
+          </ButtonContainer>
+        </Router>
+      </PageContainer>
+    </>
   );
 };
 
@@ -92,7 +96,7 @@ export default ProfileCreationMaster;
 
 const SetUpClubProfile = () => {
   return (
-    <section style={{ paddingLeft: '0.3rem' }}>
+    <section>
       <ClubProfileTitle>Set Up Your Club Profile</ClubProfileTitle>
       <Subtext>Complete your profile for maximum outreach</Subtext>
     </section>
@@ -111,9 +115,9 @@ const ClubProfileTitle = styled.h1`
 const PageContainer = styled.div`
   display: grid;
   grid-template-rows: auto auto auto;
-  padding: 0 4.375rem;
+  padding: 0 3rem 0 4rem;
   @media only screen and (max-width: 600px) {
-    padding: 0 2.375rem !important;
+    padding: 0 1.375rem !important;
   }
 `;
 
@@ -130,7 +134,7 @@ const LogoContainer = styled.div`
 const PageDesc = styled.h2`
   font-family: 'Manrope', 'Roboto', 'Arial', 'Helvetica';
   font-weight: 400;
-  padding-left: 0.3rem;
+  padding-left: 0rem;
   @media only screen and (max-width: 600px) {
     font-size: 1rem !important;
   }

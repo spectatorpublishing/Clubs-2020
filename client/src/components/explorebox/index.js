@@ -8,31 +8,22 @@ import { faEdit } from '@fortawesome/free-regular-svg-icons';
 import SearchTag from '../searchTag/index';
 
 const Box = styled.div`
-  background-color: ${(props) => props.theme.colors.white};
-  text-align: left;
-  width: auto;
-  margin: 1rem;
-  box-shadow: 2px 5px 20px rgba(0, 0, 0, 0.1);
-  border-radius: 7px;
-  border: none;
-  font-weight: 500;
-  font-family: 'Roboto', 'Helvetica', 'Arial';
+    background-color: ${(props) => props.theme.colors.white};
+    text-align: left;
+    width: auto;
+    margin: 1rem;
+    box-shadow: 2px 5px 20px rgba(0, 0, 0, 0.10);
+    border-radius: 7px;
+    border: none;
+    font-weight: 500;
+    font-family: 'Roboto', 'Helvetica', 'Arial';
 
-  a {
-    text-decoration: none;
-  }
+    a{
+        text-decoration: none;
+    }
 
-  :hover {
-    box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.25);
-  }
-
-  h2 {
-    font-size: 1.6rem;
-    font-weight: 600;
-    color: ${(props) => props.theme.colors.black};
-    @media only screen and (max-width: 768px) {
-      padding-left: 1.5rem;
-      padding-right: 0.5rem;
+    :hover{
+        box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.25);
     }
 
     @media only screen and (max-width: 320px) {

@@ -1,6 +1,7 @@
 import React from "react";
 import { ProfilePageBox } from "../components/profilePageBox";
 import styled from "styled-components";
+import Navbar from "../components/navbar";
 
 const PageWrapper = styled.main`
   background-color: ${(props) => props.theme.colors.lightGray};
@@ -19,6 +20,8 @@ const Title = styled.div`
 
 export const ProfileBoxTester = () => {
   return (
+    <>
+    <Navbar />
     <PageWrapper>
       <Title>This is a Profile Page Box</Title>
       <ProfilePageBox
@@ -34,5 +37,6 @@ export const ProfileBoxTester = () => {
         ]}
       />
     </PageWrapper>
+    </>
   );
 };
