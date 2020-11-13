@@ -32,7 +32,6 @@ const NavHeader = styled.div`
 `;
 
 const Logo = styled.div`
-  margin-left: 2rem;
   height: 100%;
   font-size: 1.5rem;
 
@@ -41,12 +40,12 @@ const Logo = styled.div`
     color: ${(props) => props.theme.colors.black};
   }
 
+  @media (max-width: 1024px) {
+    margin-left: 1rem;
+  }
+
   @media (max-width: 769px) {
     margin-left: 1rem;
-
-    a {
-      /*color: ${(props) => props.theme.colors.black};*/
-      }
   }
 `;
 
@@ -75,7 +74,7 @@ const LinksContainer = styled.div`
   background-color: white;
 
   &.show-container {
-    height: 100vh;
+    height: fit-content;
   }
 
   @media screen and (min-width: 769px) {
