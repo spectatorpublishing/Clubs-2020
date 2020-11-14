@@ -44,6 +44,7 @@ const LogoutButton = styled(motion.button)`
 const Text = styled.h3`
   font-family: 'Manrope', 'Roboto', 'Arial', 'Helvetica';
   font-size: 1.25rem;
+  margin-left: .35rem;
   font-weight: 500;
   @media only screen and (max-width: 600px) {
     font-size: 1rem !important;

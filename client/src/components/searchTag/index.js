@@ -3,7 +3,7 @@ import styled, { withTheme } from 'styled-components';
 import { motion } from 'framer-motion';
 import { useFocused } from '../customHooks/index';
 
-const SearchTag = ({ text, theme, data, setData, objId }) => {
+const SearchTag = ({ text, theme, data, setData, objId, dataLimitSize }) => {
   const tagVariants = {
     active: { color: theme.colors.white, backgroundColor: theme.colors.red },
     inactive: {
@@ -29,7 +29,7 @@ const SearchTag = ({ text, theme, data, setData, objId }) => {
   }, [searchTagFocused]);
 
   const handleClick = () => {
-    setClicked(!clicked);
+    if (!data || !setData || !dataLimitSize) setClicked(!clicked);
     if (data && setData) {
       let tempData = { ...data };
       if (objId in tempData) {
@@ -37,8 +37,20 @@ const SearchTag = ({ text, theme, data, setData, objId }) => {
           // Removes Element
           const index = tempData[objId].indexOf(text);
           if (index >= -1) tempData[objId].splice(index, 1);
+          setClicked(false);
           // Adds Element
-        } else tempData[objId].push(text);
+        } else {
+          // Limit of number of tags
+          if (dataLimitSize && tempData[objId].length < dataLimitSize) {
+            tempData[objId].push(text);
+            setClicked(true);
+          }
+          // No limit on number of tags
+          else if (!dataLimitSize) {
+            tempData[objId].push(text);
+            setClicked(true);
+          }
+        }
         setData(tempData);
       } else {
         console.error('objId not in the obj');

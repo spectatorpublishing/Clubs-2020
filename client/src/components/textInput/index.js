@@ -13,6 +13,7 @@ const TextInput = ({
   placeholder,
   characterMax,
   identifier,
+  reference,
 }) => {
   const [focused, setFocused] = useState(false);
   const [showErrorMessage, setShowErrorMessage] = useState(false);
@@ -27,7 +28,6 @@ const TextInput = ({
       transition: { duration: 0.3 },
     },
   };
-
   const whenChange = (e) => {
     limitSize(e, characterMax, setShowErrorMessage, setExcessCharacters);
   };
@@ -41,7 +41,7 @@ const TextInput = ({
           <FlexCol width={width} multiline={multiline}>
             <StyledTextArea
               id={identifier}
-              key={identifier}
+              ref={reference}
               name={identifier}
               height={height}
               variants={inputVariants}
@@ -66,8 +66,8 @@ const TextInput = ({
           <FlexCol width={width}>
             <StyledInput
               id={identifier}
+              ref={reference}
               name={identifier}
-              key={identifier}
               height={height}
               variants={inputVariants}
               focused={focused}

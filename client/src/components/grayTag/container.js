@@ -1,18 +1,33 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { GrayTagContext } from '../contexts/index';
 
-const GrayTagContainer = ({ children }) => {
+const GrayTagContainer = ({ children, objId, data, setData }) => {
   const [selectedTag, setSelectedTag] = useState('');
-  useEffect(() => {
-    console.log(selectedTag);
-  }, [selectedTag]);
 
-  const handleClick = (identifier) => {
-    if (selectedTag === identifier) setSelectedTag('');
-    else setSelectedTag(identifier);
+  const handleClick = (identifier, data, setData, objId, text) => {
+    let tempData = { ...data };
+    if (selectedTag === identifier) {
+      if (objId in tempData) {
+        tempData[objId] = '';
+        setData(tempData);
+      } else {
+        console.error('objId not in the obj');
+      }
+      setSelectedTag('');
+    } else {
+      setSelectedTag(identifier);
+      if (objId in tempData) {
+        tempData[objId] = text;
+        setData(tempData);
+      } else {
+        console.error('objId not in the obj');
+      }
+    }
   };
   return (
-    <GrayTagContext.Provider value={{ handleClick, selectedTag }}>
+    <GrayTagContext.Provider
+      value={{ handleClick, selectedTag, data, setData, objId }}
+    >
       {children}
     </GrayTagContext.Provider>
   );

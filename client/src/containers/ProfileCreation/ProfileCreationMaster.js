@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import {
   BrowserRouter as Router,
@@ -13,6 +13,9 @@ import Navbar from '../../components/navbar/index';
 
 const ProfileCreationMaster = () => {
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
+  const clubNameInput = useRef(null);
+  const shortDescInput = useRef(null);
+  const longDescInput = useRef(null);
   const [clubProfile, setClubProfile] = useState({
     tags: [],
     clubName: '',
@@ -28,6 +31,13 @@ const ProfileCreationMaster = () => {
     console.log(clubProfile);
   }, [clubProfile]);
 
+  const nextPage1 = () => {
+    let tempProfile = { ...clubProfile };
+    tempProfile.clubName = clubNameInput.current.value;
+    tempProfile.shortDesc = shortDescInput.current.value;
+    tempProfile.longDesc = longDescInput.current.value;
+    setClubProfile(tempProfile);
+  };
   // Updates state based on input text
   return (
     <>
@@ -50,6 +60,9 @@ const ProfileCreationMaster = () => {
                   {...props}
                   clubProfile={clubProfile}
                   setClubProfile={setClubProfile}
+                  clubNameRef={clubNameInput}
+                  shortDescRef={shortDescInput}
+                  longDescRef={longDescInput}
                 />
               )}
             />
@@ -69,6 +82,7 @@ const ProfileCreationMaster = () => {
               }}
             >
               <FilledButton
+                onClick={nextPage1}
                 text={
                   currentPath === '/profile-creation/1'
                     ? 'Make my club profile'

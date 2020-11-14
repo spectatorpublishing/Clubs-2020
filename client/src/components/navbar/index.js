@@ -5,10 +5,11 @@ import FilledButton from '../filledButton/index';
 import { NavLink } from 'react-router-dom';
 import Logout from '../logout/index';
 import { useViewport } from '../customHooks';
+
 export const Navbar = () => {
   const [showLinks, setShowLinks] = useState(false);
   const [currentPath, setCurrentPath] = useState('/');
-  const {width} = useViewport()
+  const { width } = useViewport();
 
   return (
     <NavWrapper>
@@ -29,8 +30,13 @@ export const Navbar = () => {
               <FaBars />
             </NavToggle>
           )}
-          {currentPath.includes('/profile-creation') && width < 769 && <Logout />}
+          {currentPath.includes('/profile-creation') && width < 769 && (
+            <Logout />
+          )}
         </NavHeader>
+        {currentPath.includes('/profile-creation') && width >= 769 && (
+          <Logout />
+        )}
         {currentPath === '/' && (
           <LinksContainer className={`${showLinks ? 'show-container' : null}`}>
             <MenuLinks>
@@ -130,7 +136,6 @@ const LinksContainer = styled.div`
   height: 0;
   overflow: hidden;
   transition: all 0.3s linear;
-  
 
   &.show-container {
     height: fit-content;

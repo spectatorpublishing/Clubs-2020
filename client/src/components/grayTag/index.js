@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect, useContext } from 'react';
+import React, { useRef, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useFocused } from '../customHooks';
@@ -10,7 +10,9 @@ import { GrayTagContext } from '../contexts/index';
 
 const GrayTag = ({ text, identifier }) => {
   const grayTag = useRef(null);
-  const { handleClick, selectedTag } = useContext(GrayTagContext);
+  const { handleClick, selectedTag, data, setData, objId } = useContext(
+    GrayTagContext
+  );
   const grayTagFocused = useFocused(grayTag);
   const onKeypress = (e) => {
     if (e.keyCode === 13) {
@@ -39,7 +41,7 @@ const GrayTag = ({ text, identifier }) => {
     <Tag
       ref={grayTag}
       onClick={() => {
-        handleClick(identifier);
+        handleClick(identifier, data, setData, objId, text);
       }}
       variants={tagVariants}
       clicked={selectedTag === identifier}

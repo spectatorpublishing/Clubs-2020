@@ -9,16 +9,22 @@ import GrayTag from '../../../components/grayTag/index';
 import { inputData, tagData } from './data';
 import GrayTagContainer from '../../../components/grayTag/container';
 
-const ProfileCreation1 = ({ clubProfile, setClubProfile }) => {
+const ProfileCreation1 = ({
+  clubProfile,
+  setClubProfile,
+  clubNameRef,
+  shortDescRef,
+  longDescRef,
+}) => {
   const tagComponents = tagData.map((tagName, index) => {
     return (
-      <TagContainer>
+      <TagContainer key={`tag-${index}`}>
         <SearchTag
           text={tagName}
-          key={`tag-${index}`}
           data={clubProfile}
           setData={setClubProfile}
           objId='tags'
+          dataLimitSize={5}
         />
       </TagContainer>
     );
@@ -26,10 +32,16 @@ const ProfileCreation1 = ({ clubProfile, setClubProfile }) => {
 
   const inputs = inputData.map((item, index) => {
     const key = Object.keys(item)[0];
+    const getRef = () => {
+      if (key === 'clubName') {
+        console.log('clubName');
+        return clubNameRef;
+      } else if (key === 'shortDesc') return shortDescRef;
+      else if (key === 'longDesc') return longDescRef;
+    };
     return (
-      <InputContainer>
+      <InputContainer key={`input-${index}`}>
         <TextInput
-          key={`input-${index}`}
           compulsory
           width='100%'
           multiline={item[key].multiline}
@@ -38,6 +50,7 @@ const ProfileCreation1 = ({ clubProfile, setClubProfile }) => {
           labelHeader={item[key].labelHeader}
           labelDesc={item[key].labelDesc}
           identifier={key}
+          reference={getRef()}
         />
       </InputContainer>
     );
@@ -54,10 +67,12 @@ const ProfileCreation1 = ({ clubProfile, setClubProfile }) => {
       </Column>
       <Column right>
         {inputs}
-
-        <ClubSize />
+        <ClubSize clubProfile={clubProfile} setClubProfile={setClubProfile} />
         <NewMembers clubProfile={clubProfile} setClubProfile={setClubProfile} />
-        <RequireApplication />
+        <RequireApplication
+          clubProfile={clubProfile}
+          setClubProfile={setClubProfile}
+        />
         <MeetFrequency />
       </Column>
     </StyledBody>
@@ -70,12 +85,8 @@ const ClubSize = ({ clubProfile, setClubProfile }) => {
   const sizes = ['0-10', '10-20', '20-50', '50-100', '100+'];
   const sizeTags = sizes.map((size, index) => {
     return (
-      <GrayTagContainer1>
-        <GrayTag
-          text={size}
-          key={`size-${index + 1}`}
-          identifier={`size-${index + 1}`}
-        />
+      <GrayTagContainer1 key={`size-${index + 1}`}>
+        <GrayTag text={size} identifier={`size-${index + 1}`} />
       </GrayTagContainer1>
     );
   });
@@ -85,7 +96,13 @@ const ClubSize = ({ clubProfile, setClubProfile }) => {
         <RedAsterisk>*</RedAsterisk> Size:
       </RowHeader>
       <FlexRow>
-        <GrayTagContainer>{sizeTags}</GrayTagContainer>
+        <GrayTagContainer
+          data={clubProfile}
+          setData={setClubProfile}
+          objId='size'
+        >
+          {sizeTags}
+        </GrayTagContainer>
       </FlexRow>
     </QuestionContainer>
   );
@@ -97,9 +114,9 @@ const NewMembers = ({ clubProfile, setClubProfile }) => {
     ['mid', 'Spring'],
     ['right', 'Not taking members'],
   ];
-  const checkboxes = checkboxData.map((item) => {
+  const checkboxes = checkboxData.map((item, index) => {
     return (
-      <CheckboxContainer>
+      <CheckboxContainer key={`checkbox-${index + 1}`}>
         <Checkbox
           order={item[0]}
           labelText={item[1]}
@@ -120,14 +137,18 @@ const NewMembers = ({ clubProfile, setClubProfile }) => {
   );
 };
 
-const RequireApplication = () => {
+const RequireApplication = ({ clubProfile, setClubProfile }) => {
   return (
     <QuestionContainer>
       <RowHeader>
         <RedAsterisk>*</RedAsterisk> Do you require an application?
       </RowHeader>
       <FlexRow>
-        <GrayTagContainer>
+        <GrayTagContainer
+          data={clubProfile}
+          setData={setClubProfile}
+          objId='requireApplication'
+        >
           <GrayTagContainer1>
             <GrayTag text={'Yes'} identifier='app-1' />
           </GrayTagContainer1>
