@@ -1,40 +1,64 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FaBars } from 'react-icons/fa';
-
+import FilledButton from '../filledButton/index';
+import { NavLink } from 'react-router-dom';
+import Logout from '../logout/index';
+import { useViewport } from '../customHooks';
 export const Navbar = () => {
   const [showLinks, setShowLinks] = useState(false);
+  const [currentPath, setCurrentPath] = useState('/');
+  const {width} = useViewport()
 
   return (
     <NavWrapper>
       <NavCenter>
         <NavHeader>
-          <Logo>
+          <Logo
+            onClick={() => {
+              setCurrentPath('/');
+            }}
+          >
             <a href='/'>Clubs@CU</a>
           </Logo>
-          <NavToggle
-            onClick={() => setShowLinks(!showLinks)}
-            className={`${showLinks ? 'show-container' : null}`}
-          >
-            <FaBars />
-          </NavToggle>
+          {currentPath === '/' && (
+            <NavToggle
+              onClick={() => setShowLinks(!showLinks)}
+              className={`${showLinks ? 'show-container' : null}`}
+            >
+              <FaBars />
+            </NavToggle>
+          )}
+          {currentPath.includes('/profile-creation') && width < 769 && <Logout />}
         </NavHeader>
-        <LinksContainer className={`${showLinks ? 'show-container' : null}`}>
-          <MenuLinks>
-            <li>
-              <a href='/'>Home</a>
-            </li>
-            <li>
-              <a href='/explore'>Login</a>
-            </li>
-            <li>
-              <a href='/faq'>FAQ</a>
-            </li>
-            <li>
-              <RegisterButton>Register Club</RegisterButton>
-            </li>
-          </MenuLinks>
-        </LinksContainer>
+        {currentPath === '/' && (
+          <LinksContainer className={`${showLinks ? 'show-container' : null}`}>
+            <MenuLinks>
+              <StyledListItem>
+                <a href='/'>Home</a>
+              </StyledListItem>
+              <StyledListItem>
+                <a href='/explore'>Login</a>
+              </StyledListItem>
+              <StyledListItem>
+                <a href='/faq'>FAQ</a>
+              </StyledListItem>
+              <StyledListItem>
+                <NavLink
+                  style={{ textDecoration: 'none' }}
+                  to='/profile-creation'
+                  isActive={(match) => {
+                    if (match) {
+                      setCurrentPath('/profile-creation');
+                    }
+                  }}
+                >
+                  <FilledButton text='Register Club' />
+                </NavLink>
+              </StyledListItem>
+            </MenuLinks>
+          </LinksContainer>
+        )}
       </NavCenter>
     </NavWrapper>
   );
@@ -44,6 +68,11 @@ const NavWrapper = styled.nav`
   color: ${(props) => props.theme.colors.white};
   font-weight: 500;
   height: 100%;
+`;
+
+const StyledListItem = styled.li`
+  display: flex;
+  align-items: center;
 `;
 
 const NavCenter = styled.div`
@@ -74,7 +103,7 @@ const Logo = styled.div`
     text-decoration: none;
     color: ${(props) => props.theme.colors.black};
   }
-  @media (max-width: 769px) {
+  @media (max-width: 768px) {
     padding-left: 0.5rem;
   }
 `;
@@ -101,7 +130,7 @@ const LinksContainer = styled.div`
   height: 0;
   overflow: hidden;
   transition: all 0.3s linear;
-  background-color: white;
+  
 
   &.show-container {
     height: fit-content;
@@ -142,46 +171,9 @@ const MenuLinks = styled.ul`
     margin-left: auto;
     color: ${(props) => props.theme.colors.black};
 
-    li {
-      display: inline;
-      padding: 0 1rem;
-      color: inherit;
-    }
-
     a {
       font-size: 1rem;
       color: inherit;
-    }
-  }
-`;
-
-const RegisterButton = styled.button`
-  display: inline;
-  text-align: center;
-  background-color: ${(props) => props.theme.colors.red};
-  border: 2px solid ${(props) => props.theme.colors.red};
-  border-radius: 7px;
-  padding: 0.3rem 1rem;
-  font-size: 1rem;
-  color: ${(props) => props.theme.colors.white};
-  cursor: pointer;
-  transition: all 0.2s linear;
-
-  &:hover {
-    background-color: #c63416;
-    border: 2px solid #c63416;
-    color: ${(props) => props.theme.colors.lightGray};
-  }
-
-  @media (max-width: 769px) {
-    background-color: transparent;
-    border: 1.7px solid;
-    color: ${(props) => props.theme.colors.red};
-
-    &:hover {
-      background-color: #c63416;
-      border: 1.7px solid #c63416;
-      color: ${(props) => props.theme.colors.lightGray};
     }
   }
 `;

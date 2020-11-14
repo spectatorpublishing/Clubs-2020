@@ -1,13 +1,17 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import { useFocused } from '../customHooks';
+import { GrayTagContext } from '../contexts/index';
 
-const GrayTag = ({ text }) => {
-  const [clicked, setClicked] = useState(false);
+/* Component should only be used for situations for only one option can be selected
+   Use checkbox for many options to be selected
+   Must be enclosed by a GrayTagContainer component */
+
+const GrayTag = ({ text, identifier }) => {
   const grayTag = useRef(null);
+  const { handleClick, selectedTag } = useContext(GrayTagContext);
   const grayTagFocused = useFocused(grayTag);
-
   const onKeypress = (e) => {
     if (e.keyCode === 13) {
       grayTag.current.click();
@@ -32,14 +36,15 @@ const GrayTag = ({ text }) => {
   };
 
   return (
-    <Tag ref={grayTag}
+    <Tag
+      ref={grayTag}
       onClick={() => {
-        setClicked(!clicked);
+        handleClick(identifier);
       }}
       variants={tagVariants}
-      clicked={clicked}
+      clicked={selectedTag === identifier}
       initial='inactive'
-      animate={clicked ? 'active' : 'inactive'}
+      animate={selectedTag === identifier ? 'active' : 'inactive'}
     >
       {text ? text : 'no text entered'}
     </Tag>

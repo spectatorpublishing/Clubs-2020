@@ -38,14 +38,13 @@ const LogoutButton = styled(motion.button)`
   align-items: center;
   background-color: transparent;
   cursor: pointer;
+  padding: 0;
 `;
 
 const Text = styled.h3`
   font-family: 'Manrope', 'Roboto', 'Arial', 'Helvetica';
   font-size: 1.25rem;
-  margin: 0 0 0 0.65rem;
   font-weight: 500;
-
   @media only screen and (max-width: 600px) {
     font-size: 1rem !important;
   }
@@ -54,7 +53,6 @@ const Text = styled.h3`
 const LogoutPath = styled(motion.path)`
   stroke-width: 0.125rem;
   stroke-linecap: round;
-  stroke-line-join: round;
   stroke: black;
 `;
 

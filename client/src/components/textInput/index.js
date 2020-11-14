@@ -19,7 +19,7 @@ const TextInput = ({
   const [excessCharacters, setExcessCharacters] = useState(0);
   const inputVariants = {
     init: {
-      boxShadow: '2px 10px 30px rgba(0, 0, 0, 0.05)',
+      boxShadow: 'rgba(0, 0, 0, 0.09) 2px 10px 30px',
       transition: { duration: 0.3 },
     },
     anim: {
@@ -118,7 +118,7 @@ const InputStyles = css`
   border-radius: 7px;
   padding: 0.5rem;
   height: ${(props) => (props.height ? props.height : 'auto')};
-  width: 95%;
+  width: 97%;
   font-size: 1.125rem;
   color: ${(props) => props.theme.colors.checkboxGray};
   font-family: 'Manrope', 'Roboto', 'Helvetica', 'Arial';
@@ -129,6 +129,7 @@ const InputStyles = css`
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
+  box-shadow: rgba(0, 0, 0, 0.05) 2px 10px 30px;
 `;
 
 const StyledTextArea = styled(motion.textarea)`

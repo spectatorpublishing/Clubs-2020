@@ -1,7 +1,6 @@
 import React from 'react';
 import ViewportProvider from './components/viewportProvider/index';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { Navbar } from './components/navbar';
 import { Explore } from './containers/Explore';
 import { FAQ } from './containers/FAQ';
 import { ThemeProvider } from 'styled-components';
@@ -14,10 +13,6 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <Router>
         <Switch>
-          {/* <Route path="/explore" component={Explore} />
-          <Route path="/faq" component={FAQ} />
-          <Route path="/profile-creation" component={ProfileCreation} />
-          <Route path="/profile-test" component={ProfileBoxTester} /> */}
           <ViewportProvider>
             <Route path='/profile-test' exact>
               <ProfileBoxTester />
@@ -34,8 +29,6 @@ const App = () => {
           </ViewportProvider>
         </Switch>
       </Router>
-
-      
     </ThemeProvider>
   );
 };

@@ -8,8 +8,6 @@ import {
 } from 'react-router-dom';
 import ProfileCreation1 from './ProfileCreation1/index';
 import ProfileCreation2 from './ProfileCreation2';
-import WebsiteTitle from '../../components/websiteTitle/index';
-import Logout from '../../components/logout/index';
 import FilledButton from '../../components/filledButton/index';
 import Navbar from '../../components/navbar/index';
 
@@ -35,12 +33,6 @@ const ProfileCreationMaster = () => {
     <>
       <Navbar />
       <PageContainer>
-        {/*<StyledHeader>
-        <LogoContainer>
-          <WebsiteTitle />
-        </LogoContainer>
-        <Logout />
-      </StyledHeader>*/}
         <SetUpClubProfile />
         {currentPath === '/profile-creation/1' && (
           <PageDesc>Get-to-Know-You's: Why Students Should Join</PageDesc>
@@ -116,19 +108,9 @@ const PageContainer = styled.div`
   display: grid;
   grid-template-rows: auto auto auto;
   padding: 0 3rem 0 4rem;
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 768px) {
     padding: 0 1.375rem !important;
   }
-`;
-
-const StyledHeader = styled.header`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const LogoContainer = styled.div`
-  padding-left: 0.3rem;
 `;
 
 const PageDesc = styled.h2`

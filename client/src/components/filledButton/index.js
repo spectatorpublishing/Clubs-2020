@@ -1,20 +1,12 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React from 'react';
 import styled, { withTheme } from 'styled-components';
 import { motion } from 'framer-motion';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
-const FilledButton = ({
-  theme,
-  text,
-  stateFunc,
-  stateVal,
-  onClick,
-  path,
-  history
-}) => {
+const FilledButton = ({ theme, text, stateFunc, stateVal, onClick }) => {
   const handleClick = () => {
     // For state change
-    if (!onClick ) {
+    if (!onClick) {
       if (stateFunc) stateFunc(!stateVal);
     }
     // For custom function
@@ -25,7 +17,7 @@ const FilledButton = ({
   return (
     <StyledButton
       whileHover={{ backgroundColor: theme.colors.darkRed }}
-      whileTap={{ backgroundColor: '#C45B45', scale: 0.95 }}
+      whileTap={{ scale: 0.95 }}
       onClick={handleClick}
     >
       {text ? text : 'no text passed in'}
@@ -38,8 +30,8 @@ const StyledButton = styled(motion.button)`
   max-width: 13rem;
   min-height: 2.225rem;
   width: auto;
-  background-color: ${props => props.theme.colors.red};
-  color: ${props => props.theme.colors.fullWhite};
+  background-color: ${(props) => props.theme.colors.red};
+  color: ${(props) => props.theme.colors.fullWhite};
   border-radius: 0.4375rem;
   border: none;
   padding: 0.5rem;

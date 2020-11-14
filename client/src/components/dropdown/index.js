@@ -145,7 +145,6 @@ const DropdownContainer = styled.div`
   justify-content: center;
   align-items: center;
   min-height: 1.6875rem;
-  margin-bottom: 0.4rem;
 `;
 
 const Title = styled.div`

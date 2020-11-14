@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
-import styled, { css } from 'styled-components';
+import React from 'react';
+import styled from 'styled-components';
 import RedAsterisk from '../../../components/redAsterisk/index';
 import SearchTag from '../../../components/searchTag/index';
 import Checkbox from '../../../components/checkbox/index';
 import Dropdown from '../../../components/dropdown/index';
 import TextInput from '../../../components/textInput/index';
 import GrayTag from '../../../components/grayTag/index';
-import FilledButton from '../../../components/filledButton/index';
 import { inputData, tagData } from './data';
+import GrayTagContainer from '../../../components/grayTag/container';
+
 const ProfileCreation1 = ({ clubProfile, setClubProfile }) => {
   const tagComponents = tagData.map((tagName, index) => {
     return (
@@ -67,11 +68,15 @@ export default ProfileCreation1;
 
 const ClubSize = ({ clubProfile, setClubProfile }) => {
   const sizes = ['0-10', '10-20', '20-50', '50-100', '100+'];
-  const sizeTags = sizes.map((size) => {
+  const sizeTags = sizes.map((size, index) => {
     return (
-      <GrayTagContainer>
-        <GrayTag text={size} />
-      </GrayTagContainer>
+      <GrayTagContainer1>
+        <GrayTag
+          text={size}
+          key={`size-${index + 1}`}
+          identifier={`size-${index + 1}`}
+        />
+      </GrayTagContainer1>
     );
   });
   return (
@@ -79,7 +84,9 @@ const ClubSize = ({ clubProfile, setClubProfile }) => {
       <RowHeader>
         <RedAsterisk>*</RedAsterisk> Size:
       </RowHeader>
-      <FlexRow>{sizeTags}</FlexRow>
+      <FlexRow>
+        <GrayTagContainer>{sizeTags}</GrayTagContainer>
+      </FlexRow>
     </QuestionContainer>
   );
 };
@@ -121,10 +128,12 @@ const RequireApplication = () => {
       </RowHeader>
       <FlexRow>
         <GrayTagContainer>
-          <GrayTag text={'Yes'} />
-        </GrayTagContainer>
-        <GrayTagContainer>
-          <GrayTag text={'No'} />
+          <GrayTagContainer1>
+            <GrayTag text={'Yes'} identifier='app-1' />
+          </GrayTagContainer1>
+          <GrayTagContainer1>
+            <GrayTag text={'No'} identifier='app-2' />
+          </GrayTagContainer1>
         </GrayTagContainer>
       </FlexRow>
     </QuestionContainer>
@@ -244,7 +253,7 @@ const DropdownContainer = styled(CheckboxContainer)`
   }
 `;
 
-const GrayTagContainer = styled(CheckboxContainer)`
+const GrayTagContainer1 = styled(CheckboxContainer)`
   margin: 0 0.75rem 0.6rem;
   @media screen and (max-width: 801px) {
     margin: 0 0.5rem 0.3rem 0;
