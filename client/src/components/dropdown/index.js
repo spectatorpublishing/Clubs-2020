@@ -4,7 +4,15 @@ import { motion } from 'framer-motion';
 import { spring } from 'popmotion';
 import { useFocused, useOnClickOutside } from '../customHooks/index';
 
-const Dropdown = ({ items, theme, placeholder }) => {
+const Dropdown = ({
+  items,
+  theme,
+  placeholder,
+  data,
+  setData,
+  objId,
+  index,
+}) => {
   const [clicked, setClicked] = useState(false);
   const [title, setTitle] = useState(placeholder);
   const [titleHovered, setTitleHovered] = useState(false);
@@ -52,6 +60,18 @@ const Dropdown = ({ items, theme, placeholder }) => {
       else setCurIndex(items.length - 1);
     }
   };
+  const optionHandleClick = (item) => {
+    setClicked(false);
+    setTitle(item);
+
+    if (data && objId && setData && objId in data) {
+      let tempData = { ...data };
+      tempData[objId][index] = item;
+      setData(tempData);
+    } else if(objId){
+      console.error('objId not in data')
+    }
+  };
 
   const options = items.map((item, index) => {
     return (
@@ -71,8 +91,7 @@ const Dropdown = ({ items, theme, placeholder }) => {
         }}
         noBorder={index === items.length - 1}
         onClick={() => {
-          setClicked(false);
-          setTitle(item);
+          optionHandleClick(item);
         }}
       >
         {item}

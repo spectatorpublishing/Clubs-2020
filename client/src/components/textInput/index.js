@@ -125,7 +125,7 @@ const InputStyles = css`
   resize: none;
   outline-color: ${(props) => props.theme.colors.blue};
   overflow-y: auto;
-  cursor: pointer;
+  cursor: text;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;

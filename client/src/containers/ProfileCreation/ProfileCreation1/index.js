@@ -73,7 +73,10 @@ const ProfileCreation1 = ({
           clubProfile={clubProfile}
           setClubProfile={setClubProfile}
         />
-        <MeetFrequency />
+        <MeetFrequency
+          clubProfile={clubProfile}
+          setClubProfile={setClubProfile}
+        />
       </Column>
     </StyledBody>
   );
@@ -161,17 +164,29 @@ const RequireApplication = ({ clubProfile, setClubProfile }) => {
   );
 };
 
-const MeetFrequency = () => {
+const MeetFrequency = ({ clubProfile, setClubProfile }) => {
   return (
     <QuestionContainer>
       <RowHeader>How often do you meet?</RowHeader>
       <FlexRow>
         <DropdownContainer>
-          <Dropdown items={['1x', '2x', '3x', '4x or more']} />
+          <Dropdown
+            items={['1x', '2x', '3x', '4x or more']}
+            objId='meetTime'
+            index={0}
+            data={clubProfile}
+            setData={setClubProfile}
+          />
         </DropdownContainer>
         <QuestionBody>per</QuestionBody>
         <DropdownContainer>
-          <Dropdown items={['week', 'month']} />
+          <Dropdown
+            items={['week', 'month']}
+            objId='meetTime'
+            index={1}
+            data={clubProfile}
+            setData={setClubProfile}
+          />
         </DropdownContainer>
       </FlexRow>
     </QuestionContainer>
