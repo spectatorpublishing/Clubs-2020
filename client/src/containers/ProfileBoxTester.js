@@ -1,5 +1,6 @@
 import React from "react";
 import { ProfilePageBox } from "../components/profilePageBox";
+import { FrequencyTag } from "../components/frequencyTag";
 import styled from "styled-components";
 import Navbar from "../components/navbar";
 
@@ -35,6 +36,10 @@ export const ProfileBoxTester = () => {
           "Global Affairs",
           "Pre-professional",
         ]}
+      />
+      <FrequencyTag
+        frequency="3"
+        weekly="true"
       />
     </PageWrapper>
     </>
