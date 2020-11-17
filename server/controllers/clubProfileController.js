@@ -1,9 +1,26 @@
 const db = require('../models/')
 
+function shuffle(sourceArray) {
+    for (var i = 0; i < sourceArray.length - 1; i++) {
+        var j = i + Math.floor(Math.random() * (sourceArray.length - i));
+
+        var temp = sourceArray[j];
+        sourceArray[j] = sourceArray[i];
+        sourceArray[i] = temp;
+    }
+    return sourceArray;
+}
+
 module.exports = {
     getAll: function(req, res) {
 	 db.find({}).select({name: 1, description: 1, imageUrl: 1, tags: 1, memberRange: 1, acceptingMembers: 1, applicationRequired: 1})
-	    .then(query => res.json(query))
+	    .then(query => {
+
+            var data = query.toJSON();
+            var shuffledData = shuffle(data);
+
+            res.json(shuffledData)
+        })
 	    .catch(err => res.status(422).json(err));
     },
     getById: function(req, res) {
