@@ -1,22 +1,38 @@
-const db = require('../models/')
+const clubOverview = require("../models/ClubOverviewModel")
+const clubProfile = require("../models/ClubProfileModel")
 
 module.exports = {
     getAll: function(req, res) {
-	 db.find({}).select({name: 1, description: 1, imageUrl: 1, tags: 1, memberRange: 1, acceptingMembers: 1, applicationRequired: 1})
-	    .then(query => res.json(query))
-	    .catch(err => res.status(422).json(err));
+        // TODO
+        // support pagination with req.query 
+        // support shuffle (i.e. randomize entry order)?? 
     },
     getById: function(req, res) {
         // TODO; req.params.id
+        clubProfile.findById( {_id: req.params.id} )
+                .then(clubprofile => res.json(clubprofile))
+                .catch(err => res.status(422).json(err));
+
     },
     create: function(req, res) {
         // TODO; req.body contains profile information
+        clubProfile.create(req.body)
+                .then(newclubProfile => res.json(newclubProfile))
+                .catch(err => res.status(422).json(err))
     },
     update: function(req, res) {
         // TODO; req.body contains profile information and req.params.id
+        clubProfile.findOneAndUpdate({ _id: req.params.id}, req.body)
+                .then(clubprofile => res.json(clubprofile))
+                .catch(err => res.status(422).json(err))
     },
     delete: function(req, res) {
         // TODO: req.params.id
+        clubProfile.findById({ _id: req.params.id })
+                .then(clubprofile => clubprofile.remove())
+                .then(allprofiles => res.json(allprofiles))
+                .catch(err => res.status(422).json(err))
+                
     },
     filterAndSortBy: function(req, res) {
         // TODO; req.query contains filter and/or sort information
@@ -28,3 +44,4 @@ module.exports = {
         // support pagination with req.query 
     }
 }
+
