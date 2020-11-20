@@ -26,3 +26,44 @@ module.exports = {
         // support pagination with req.query 
     }
 }
+
+/*
+[
+  {
+    '$match': {
+      'tags': {
+        '$in': [
+          'Short', 'Fantasy'
+        ]
+      }
+    }
+  }, {
+    '$addFields': {
+      'intersection': {
+        '$setIntersection': [
+          '$tags', [
+            'Short', 'Fantasy'
+          ]
+        ]
+      }
+    }
+  }, {
+    '$addFields': {
+      'length': {
+        '$size': '$intersection'
+      }
+    }
+  }, {
+    '$sort': {
+      'length': -1
+    }
+  }, {
+    '$limit': 6
+  }, {
+    '$project': {
+      'length': 0, 
+      'intersection': 0
+    }
+  }
+]
+*/
