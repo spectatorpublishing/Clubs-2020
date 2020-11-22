@@ -1,11 +1,14 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const path = require("path")
+const path = require('path')
 
 const app = express()
 const PORT = process.env.PORT || 8080
 
 const clubProfileRoutes = require('./routes/clubProfileRoutes')
+
+// requiring db connection
+const db = require('./models')
 
 app.listen(PORT, () => {
     console.log(`Server listening on port ${PORT}.`);
