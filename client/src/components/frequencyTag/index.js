@@ -11,8 +11,9 @@ const Box = styled.div`
   box-shadow: 2px 10px 30px rgba(0, 0, 0, 0.05);
   align-items: center;
 
-  @media screen and(max-width: 769px) {
-      width: 85%;
+  @media screen and (max-width: 425px) {
+    margin: 0 2rem;
+    width: 70%;
   }
 `;
 
@@ -22,8 +23,8 @@ const Text = styled.p`
 `;
 
 const Tag = styled.p`
-  color: #42B7CB;
-  border: 0.15rem solid #42B7CB;
+  color: ${(props) => props.theme.colors.turquoise};
+  border: 0.15rem solid ${(props) => props.theme.colors.turquoise};
   border-radius: 1rem;
   padding: 0.2rem 1rem;
   margin: 0 1rem;
@@ -54,11 +55,11 @@ export const FrequencyTag = ({ frequency, weekly }) => {
         <Box>
             <Text>Meets</Text>
             {(() => {
-                if (frequency==1) {
+                if (frequency==="1") {
                     return <Tag className="once">1x</Tag>
-                } else if (frequency==2) {
+                } else if (frequency==="2") {
                     return <Tag className="twice">2x</Tag>
-                } else if (frequency==3) {
+                } else if (frequency==="3") {
                     return <Tag className="three-times">3x</Tag>
                 } else {
                     return <Tag className="greater-three">{'>'}3x</Tag>

@@ -38,8 +38,8 @@ export const ProfileBoxTester = () => {
         ]}
       />
       <FrequencyTag
-        frequency="3"
-        weekly="true"
+        frequency="4"
+        weekly={false}
       />
     </PageWrapper>
     </>
