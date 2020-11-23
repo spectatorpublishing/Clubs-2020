@@ -42,6 +42,9 @@ export const Navbar = () => {
           <li>
             <a href="/confirm">Confirmation Page</a>
           </li>
+          <li>
+            <a href="/clubprofile">Club Profile</a>
+          </li>
         </NavLinksContainer>
       </nav>
     </NavWrapper>
