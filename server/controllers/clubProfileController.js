@@ -1,11 +1,27 @@
-const clubOverview = require("../models/ClubOverviewModel")
 const clubProfile = require("../models/ClubProfileModel")
+
+function shuffle(sourceArray) {
+    for (var i = 0; i < sourceArray.length - 1; i++) {
+        var j = i + Math.floor(Math.random() * (sourceArray.length - i));
+
+        var temp = sourceArray[j];
+        sourceArray[j] = sourceArray[i];
+        sourceArray[i] = temp;
+    }
+    return sourceArray;
+}
 
 module.exports = {
     getAll: function(req, res) {
-        // TODO
-        // support pagination with req.query 
-        // support shuffle (i.e. randomize entry order)?? 
+        clubProfile.find({})
+            .select({_id: 1, name: 1, description: 1, imageUrl: 1, tags: 1, memberRange: 1, acceptingMembers: 1, applicationRequired: 1})
+            .then(rdata => {
+                var data = JSON.parse(JSON.stringify(rdata))
+                var shuffledData = shuffle(data);
+                
+                res.send(shuffledData)
+            })
+            .catch(err => res.status(422).json(err));
     },
     getById: function(req, res) {
         // TODO; req.params.id
