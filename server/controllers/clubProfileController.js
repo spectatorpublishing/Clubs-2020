@@ -1,4 +1,3 @@
-const clubOverview = require("../models/ClubOverviewModel")
 const clubProfile = require("../models/ClubProfileModel")
 
 module.exports = {
