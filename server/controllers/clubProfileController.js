@@ -13,13 +13,13 @@ function shuffle(sourceArray) {
 
 module.exports = {
     getAll: function(req, res) {
-        db.find({})
-            .select({name: 1, description: 1, imageUrl: 1, tags: 1, memberRange: 1, acceptingMembers: 1, applicationRequired: 1})
-            .then(query => {
-                var data = query.toJSON();
+        clubProfile.find({})
+            .select({_id: 1, name: 1, description: 1, imageUrl: 1, tags: 1, memberRange: 1, acceptingMembers: 1, applicationRequired: 1})
+            .then(rdata => {
+                var data = JSON.parse(JSON.stringify(rdata))
                 var shuffledData = shuffle(data);
-
-                res.json(shuffledData)
+                
+                res.send(shuffledData)
             })
             .catch(err => res.status(422).json(err));
     },
