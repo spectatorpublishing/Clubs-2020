@@ -1,6 +1,6 @@
 const clubProfile = require("../models/ClubProfileModel")
 
-function shuffle(sourceArray) {
+const shuffle = (sourceArray) => {
     for (var i = 0; i < sourceArray.length - 1; i++) {
         var j = i + Math.floor(Math.random() * (sourceArray.length - i));
 
@@ -9,6 +9,57 @@ function shuffle(sourceArray) {
         sourceArray[i] = temp;
     }
     return sourceArray;
+}
+
+const findSimilarClubs = (res, clubResult) => {
+    clubProfile.aggregate([
+      {
+        '$match': { '$and': [
+          {
+            'tags': {
+              '$in': clubResult.tags
+            }
+          },
+          {
+            '_id': { '$ne': clubResult._id }
+          }
+        ]
+        }
+      }, {
+        '$addFields': {
+          'intersection': {
+            '$setIntersection': [
+              '$tags', clubResult.tags
+            ]
+          }
+        }
+      }, {
+        '$addFields': {
+          'length': {
+            '$size': '$intersection'
+          }
+        }
+      }, {
+        '$sort': {
+          'length': -1
+        }
+      }, {
+        '$limit': 6
+      }, {
+        '$project': {
+          '_id': 1,
+          'name': 1,
+          'tags': 1,
+          'imageUrl': 1,
+          'description': 1
+        }
+      }
+    ]).exec()
+      .then(similarClubs => {
+        clubResult.set('similarClubs', similarClubs)
+        res.json(clubResult)
+      })
+      .catch(err => res.status(422).json(err));
 }
 
 module.exports = {
@@ -26,9 +77,8 @@ module.exports = {
     getById: function(req, res) {
         // TODO; req.params.id
         clubProfile.findById( {_id: req.params.id} )
-                .then(clubprofile => res.json(clubprofile))
+                .then(clubprofile => findSimilarClubs(res, clubprofile))
                 .catch(err => res.status(422).json(err));
-
     },
     create: function(req, res) {
         // TODO; req.body contains profile information
@@ -61,3 +111,43 @@ module.exports = {
     }
 }
 
+/*
+[
+  {
+    '$match': {
+      'tags': {
+        '$in': [
+          'Short', 'Fantasy'
+        ]
+      }
+    }
+  }, {
+    '$addFields': {
+      'intersection': {
+        '$setIntersection': [
+          '$tags', [
+            'Short', 'Fantasy'
+          ]
+        ]
+      }
+    }
+  }, {
+    '$addFields': {
+      'length': {
+        '$size': '$intersection'
+      }
+    }
+  }, {
+    '$sort': {
+      'length': -1
+    }
+  }, {
+    '$limit': 6
+  }, {
+    '$project': {
+      'length': 0, 
+      'intersection': 0
+    }
+  }
+]
+*/
