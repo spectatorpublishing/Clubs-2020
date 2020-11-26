@@ -37,6 +37,18 @@ const PageWrapper = styled.div`
     }
 `;
 
+const CardsWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    @media only screen 
+    and (max-width : 768px) {
+        justify-content: space-around;
+    }
+`;
+
 const FiltersBox = styled.div`
     display: flex;
     flex-direction: row;
@@ -89,37 +101,20 @@ export const Explore = () => {
                     <Filter><Join /></Filter>
                     <ShuffleBox><Shuffle /></ShuffleBox>
                 </FiltersBox>
-
-                {(clubProfiles.length === 0) ? (<h1>Loading</h1>) : (clubProfiles.reduce(
-                    function(accumulator, currentValue, currentIndex, array) {
-                        if (currentIndex % 2 === 0)
-                            accumulator.push(array.slice(currentIndex, currentIndex + 2));
-                        return accumulator;
-                        }, []).map(profile => (
-                            <Row>
-                                <ExploreBox 
-                                    name = {profile[0].name}
-                                    description = {profile[0].shortDescription}
-                                    imageURL = {profile[0].imageUrl}
-                                    tags = {profile[0].tags}
-                                    clubSize = {profile[0].memberRange}
-                                    acceptingMembers = {profile[0].acceptingMembers}
-                                    applicationRequired = {profile[0].applicationRequired}
-                                    cardLink="/home"
-                                />
-                                <ExploreBox 
-                                    name = {profile[1].name}
-                                    description = {profile[1].shortDescription}
-                                    imageURL = {profile[1].imageUrl}
-                                    tags = {profile[1].tags}
-                                    clubSize = {profile[1].memberRange}
-                                    acceptingMembers = {profile[1].acceptingMembers}
-                                    applicationRequired = {profile[1].applicationRequired}
-                                    cardLink="/home"
-                                />
-                            </Row>
-                        ))
-                )};       
+                <CardsWrapper>
+                    {(clubProfiles.length === 0) ? (<h1>Loading</h1>) : (clubProfiles.map(profile => (
+                        <ExploreBox 
+                            name = {profile.name}
+                            description = {profile.shortDescription}
+                            imageURL = {profile.imageUrl}
+                            tags = {profile.tags}
+                            clubSize = {profile.memberRange}
+                            acceptingMembers = {profile.acceptingMembers}
+                            applicationRequired = {profile.applicationRequired}
+                            cardLink="/home"
+                        />
+                    )))}; 
+                </CardsWrapper>    
             </PageWrapper>
         </main>
         </Wrapper>

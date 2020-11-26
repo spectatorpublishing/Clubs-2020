@@ -10,6 +10,7 @@ const Button = styled.button`
     width:130px;
     height:39px;
     border:0px;
+    cursor: pointer;
 `;
 
 const Word = styled.div`
