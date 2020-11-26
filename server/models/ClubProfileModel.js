@@ -30,7 +30,9 @@ const clubProfileSchema = new Schema({
     howToJoin: { type: String, default: '' },
     applicationLink: { type: String, default: '' },
     showInstagramFeed: { type: Boolean, required: true },
-
+    similarClubs: {
+        type: [Object], default: []
+    }
 });
 
 const clubProfile = mongoose.model('ClubProfile', clubProfileSchema);
