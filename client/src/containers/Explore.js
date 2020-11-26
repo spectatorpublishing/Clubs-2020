@@ -37,6 +37,20 @@ const PageWrapper = styled.div`
     }
 `;
 
+const FiltersBox = styled.div`
+    display: flex;
+    flex-direction: row;
+    margin: 0 1rem 2rem 1rem;
+`;
+
+const Filter = styled.div`
+    margin-right: 1.5rem;
+`;
+
+const ShuffleBox = styled.div`
+    margin-left: auto;
+`;
+
 export const Explore = () => {
     const [clubProfiles, setClubProfiles] = useState([]);
 
@@ -69,12 +83,14 @@ export const Explore = () => {
         <main>
             <PageWrapper>
                 <h1>Explore Clubs</h1>
-                <Join />
-                <Shuffle />
-                <Size />
-                <Type />
+                <FiltersBox>
+                    <Filter><Type /></Filter>
+                    <Filter><Size /></Filter>
+                    <Filter><Join /></Filter>
+                    <ShuffleBox><Shuffle /></ShuffleBox>
+                </FiltersBox>
 
-                {clubProfiles.reduce(
+                {(clubProfiles.length === 0) ? (<h1>Loading</h1>) : (clubProfiles.reduce(
                     function(accumulator, currentValue, currentIndex, array) {
                         if (currentIndex % 2 === 0)
                             accumulator.push(array.slice(currentIndex, currentIndex + 2));
@@ -102,7 +118,8 @@ export const Explore = () => {
                                     cardLink="/home"
                                 />
                             </Row>
-                        ))};      
+                        ))
+                )};       
             </PageWrapper>
         </main>
         </Wrapper>
