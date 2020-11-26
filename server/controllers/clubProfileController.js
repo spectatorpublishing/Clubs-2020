@@ -65,7 +65,7 @@ const findSimilarClubs = (res, clubResult) => {
 module.exports = {
     getAll: function(req, res) {
         clubProfile.find({})
-            .select({_id: 1, name: 1, description: 1, imageUrl: 1, tags: 1, memberRange: 1, acceptingMembers: 1, applicationRequired: 1})
+            .select({_id: 1, name: 1, shortDescription: 1, imageUrl: 1, tags: 1, memberRange: 1, acceptingMembers: 1, applicationRequired: 1})
             .then(rdata => {
                 var data = JSON.parse(JSON.stringify(rdata))
                 var shuffledData = shuffle(data);
