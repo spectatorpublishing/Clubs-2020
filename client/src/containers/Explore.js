@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Navbar } from "../components/navbar";
 import ExploreBox from '../components/explorebox';
 import styled from 'styled-components';
+import Join from '../components/filters/join';
+import Shuffle from '../components/filters/shuffle';
+import Size from '../components/filters/size';
+import Type from '../components/filters/type';
 
 const Wrapper = styled.div`
   background-color: #F4F6F8;
@@ -65,6 +69,10 @@ export const Explore = () => {
         <main>
             <PageWrapper>
                 <h1>Explore Clubs</h1>
+                <Join />
+                <Shuffle />
+                <Size />
+                <Type />
                 <Row>
                     {clubProfiles.length === 0 ? (<h1>Loading</h1>) : (
                         <ExploreBox 
