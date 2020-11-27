@@ -12,6 +12,10 @@ const Button = styled.button`
     height:39px;
     border:0px;
     cursor: pointer;
+
+    :hover{
+        box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.15);
+    }
 `;
 
 const Word = styled.div`

@@ -10,18 +10,13 @@ import SearchTag from '../searchTag/index';
 const Box = styled.div`
     background-color: ${(props) => props.theme.colors.white};
     text-align: left;
-    width: 45%;
+    width: auto;
     margin: 1rem;
     box-shadow: 2px 5px 20px rgba(0, 0, 0, 0.10);
     border-radius: 7px;
     border: none;
     font-weight: 500;
     font-family: 'Roboto', 'Helvetica', 'Arial';
-
-    @media only screen 
-    and (max-width : 768px) {
-        width: 80%;
-    }
 
     a{
         text-decoration: none;

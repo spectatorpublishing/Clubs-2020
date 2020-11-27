@@ -11,6 +11,10 @@ const Button = styled.button`
     height:39px;
     border:0px;
     cursor: pointer;
+
+    :hover{
+        box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.20);
+    }
 `;
 
 const Word = styled.div`
@@ -43,7 +47,7 @@ class Shuffle extends React.Component {
         return (
 
             <Button>
-                <Image><img src={Icon} width={12} height={12} alt="shuffle" /></Image>
+                <Image><img src={Icon} width={15} height={15} alt="shuffle" /></Image>
                 <Word>{text}</Word>
             </Button>
         )

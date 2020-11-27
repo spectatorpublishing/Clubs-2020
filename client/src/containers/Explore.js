@@ -14,22 +14,8 @@ const Wrapper = styled.div`
   background-position: top right;
 `;
 
-const Row = styled.div`
-    display: flex;
-    flex-direction: row;
-
-    @media only screen 
-    and (max-width : 768px) {
-        flex-direction: column;
-    }
-`;
-
 const PageWrapper = styled.div`
     padding: 3rem;
-
-    h1{
-        padding: 1rem;
-    }
 
     @media only screen 
     and (max-width : 768px) {
@@ -37,16 +23,47 @@ const PageWrapper = styled.div`
     }
 `;
 
-const CardsWrapper = styled.div`
+const TextWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+
+    h1{
+        padding: 1rem;
+        padding-bottom: 0;
+    }
+
+    p{
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 1.2rem;
+        color: #9A9A9A;
+        padding: 1rem;
+        padding-bottom: 0;
+    }
+`;
+
+const CardsContainer = styled.div`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
+    align-items: center;
 
     @media only screen 
     and (max-width : 768px) {
         justify-content: space-around;
     }
+`;
+
+const CardWrapper = styled.div`
+    width: 50%;
+    
+    @media only screen 
+        and (max-width : 768px) {
+            width: 80%;
+        }
 `;
 
 const FiltersBox = styled.div`
@@ -94,27 +111,32 @@ export const Explore = () => {
         <Navbar />
         <main>
             <PageWrapper>
-                <h1>Explore Clubs</h1>
+                <TextWrapper>
+                    <h1>Explore Clubs</h1>
+                    <p>Find your Columbia community</p>
+                </TextWrapper>
                 <FiltersBox>
                     <Filter><Type /></Filter>
                     <Filter><Size /></Filter>
                     <Filter><Join /></Filter>
                     <ShuffleBox><Shuffle /></ShuffleBox>
                 </FiltersBox>
-                <CardsWrapper>
+                <CardsContainer>
                     {(clubProfiles.length === 0) ? (<h1>Loading</h1>) : (clubProfiles.map(profile => (
-                        <ExploreBox 
-                            name = {profile.name}
-                            description = {profile.shortDescription}
-                            imageURL = {profile.imageUrl}
-                            tags = {profile.tags}
-                            clubSize = {profile.memberRange}
-                            acceptingMembers = {profile.acceptingMembers}
-                            applicationRequired = {profile.applicationRequired}
-                            cardLink="/home"
-                        />
-                    )))}; 
-                </CardsWrapper>    
+                        <CardWrapper>
+                            <ExploreBox 
+                                name = {profile.name}
+                                description = {profile.shortDescription}
+                                imageURL = {profile.imageUrl}
+                                tags = {profile.tags}
+                                clubSize = {profile.memberRange}
+                                acceptingMembers = {profile.acceptingMembers}
+                                applicationRequired = {profile.applicationRequired}
+                                cardLink="/home"
+                            />
+                        </CardWrapper>
+                    )))} 
+                </CardsContainer>    
             </PageWrapper>
         </main>
         </Wrapper>
