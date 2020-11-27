@@ -15,7 +15,7 @@ const Wrapper = styled.div`
 `;
 
 const PageWrapper = styled.div`
-    padding: 3rem;
+    padding: 0.5rem 3rem 3rem 3rem;
 
     @media only screen 
     and (max-width : 768px) {
