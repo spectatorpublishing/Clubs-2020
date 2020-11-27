@@ -38,12 +38,11 @@ class Shuffle extends React.Component {
     }
 
     render() {
-
         const { text } = this.state;
         return (
 
             <Button>
-                <Image><img src={Icon} width={12} height={12} /></Image>
+                <Image><img src={Icon} width={12} height={12} alt="shuffle" /></Image>
                 <Word>{text}</Word>
             </Button>
         )

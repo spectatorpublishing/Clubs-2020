@@ -29,6 +29,7 @@ const blue = '#78C0F5';
 const grey = "#9A9A9A";
 const Text = 'Joining +';
 const text = 'Joining x';
+
 export default class Join extends React.Component {
     constructor(props) {
         super(props);
@@ -36,20 +37,19 @@ export default class Join extends React.Component {
         this.changeColor = this.changeColor.bind(this);
     }
     changeColor() {
-        const newColor = this.state.color == white ? blue : white;
-        const newTextColor = this.state.textcolor == grey ? white : grey;
-        const newText = this.state.text == text ? Text : text;
+        const newColor = this.state.color === white ? blue : white;
+        const newTextColor = this.state.textcolor === grey ? white : grey;
+        const newText = this.state.text === text ? Text : text;
         this.setState({ color: newColor, textcolor: newTextColor, text: newText })
     }
 
     render() {
         return (
-
-            <Button style={{ backgroundColor: this.state.color, color: this.state.textcolor }} onClick={this.changeColor} ><Word>{this.state.text}</Word></Button>
+            <Button style={{ backgroundColor: this.state.color, color: this.state.textcolor }} onClick={this.changeColor} >
+                <Word>{this.state.text}</Word>
+            </Button>
 
         )
     }
 }
 ReactDOM.render(<Join />, document.getElementById('root'))
-
-

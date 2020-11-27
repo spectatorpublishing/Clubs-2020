@@ -8,7 +8,7 @@ import { faEdit } from "@fortawesome/free-regular-svg-icons";
 import SearchTag from '../searchTag/index';
 
 const Box = styled.div`
-    background-color: color: ${(props) => props.theme.colors.white};
+    background-color: ${(props) => props.theme.colors.white};
     text-align: left;
     width: auto;
     margin: 1rem;
@@ -167,7 +167,7 @@ export const ExploreBox = ({name, description, clubSize, tags, imageURL, accepti
                     </div>
                     <Icon><img alt='club picture' src={imageURL} /></Icon>
                 </Row>
-                <Tags>{tags.map(tag => <SearchTag text={tag}/>)}</Tags>
+                <Tags>{tags.map((tag, key) => <SearchTag key={key} text={tag}/>)}</Tags>
                 <hr/>
                 <Row>
                     <Item>
