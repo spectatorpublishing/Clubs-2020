@@ -66,9 +66,9 @@ const Wrapper = styled.div`
 
 
 const PageWrapper = styled.main`
-    padding: 2rem 4rem;
     display: flex;
     flex-direction: row;
+    padding: 4rem 6rem 0rem 6rem;
 
     h2{
         font-size: 20px;
@@ -76,9 +76,9 @@ const PageWrapper = styled.main`
 `;
 
 const Cards = styled.div`
-
+    
 `;
 
 const Content = styled.div`
-
+    
 `;
