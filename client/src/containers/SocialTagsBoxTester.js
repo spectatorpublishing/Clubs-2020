@@ -23,9 +23,47 @@ export const SocialTagsBoxTester = () => {
       <Title>These are some a Social Tag Boxes</Title>
       <SocialTagsBox
         socialLinks={[
-          { facebook: "https://www.facebook.com/CUBalletEnsemble/" },
-          { email: "cuballetensemble@gmail.com" },
-          { website: "http://www.columbia.edu/cu/cuballetensemble/dancers" },
+          {
+            key: "facebook",
+            link: "https://www.facebook.com/CUBalletEnsemble/",
+          },
+          {
+            key: "instagram",
+            link: "https://www.instagram.com/cuballetensemble/",
+          },
+          {
+            key: "email",
+            link: "cuballetensemble@gmail.com",
+          },
+          {
+            key: "website",
+            link: "http://www.columbia.edu/cu/cuballetensemble/dancers",
+          },
+        ]}
+      ></SocialTagsBox>
+
+      <SocialTagsBox
+        socialLinks={[
+          {
+            key: "facebook",
+            link: "https://www.facebook.com/ecorepscu",
+          },
+          {
+            key: "instagram",
+            link: "https://www.instagram.com/columbia.ecoreps/",
+          },
+          {
+            key: "twitter",
+            link: "https://twitter.com/ColumbiaEcoReps",
+          },
+          {
+            key: "email",
+            link: "ecorepscu@gmail.com",
+          },
+          {
+            key: "website",
+            link: "https://alexiaalejos84.wixsite.com/ecoreps",
+          },
         ]}
       ></SocialTagsBox>
     </PageWrapper>
