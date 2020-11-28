@@ -18,12 +18,12 @@ export const ClubProfile = ({ match }) => {
 
     useEffect(() => {
         window.addEventListener("resize", () => setWidth(window.innerWidth));
-        fetch(`https://swapi.dev/api/people/${clubId}`, {})
+        fetch(`api/clubProfiles/${clubId}`, {})
           .then((res) => res.json())
           .then((response) => {
             setClub(response);
             setLoading(false);
-            console.log(`https://swapi.dev/api/people/${clubId}`);
+            console.log(`api/clubProfiles/${clubId}`);
           })
           .catch((error) => console.log(error));
     }, [clubId]);
