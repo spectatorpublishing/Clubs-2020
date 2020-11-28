@@ -11,7 +11,7 @@ const Box = styled.div`
     background-color: ${(props) => props.theme.colors.white};
     text-align: left;
     width: auto;
-    margin: 1rem;
+    margin: 1rem 0;
     box-shadow: 2px 5px 20px rgba(0, 0, 0, 0.10);
     border-radius: 7px;
     border: none;
