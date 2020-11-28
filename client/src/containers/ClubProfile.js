@@ -105,10 +105,10 @@ export const ClubProfile = ({ match }) => {
                             </Content>
                             <Cards>
                                 <ProfilePageBox 
-                                    memberRange= '20-50'
-                                    acceptingMembers={true}
-                                    applicationRequired={false}
-                                    tags={['Music', 'Performing Arts', 'Community Service', 'Global Affairs', 'Pre-professional']}
+                                    memberRange= {club.member_range}
+                                    acceptingMembers= {club.accepting_members}
+                                    applicationRequired= {club.application}
+                                    tags= {club.tags}
                                 />
                             </Cards>
                         </PageWrapper>
