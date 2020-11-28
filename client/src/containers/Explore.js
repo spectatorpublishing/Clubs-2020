@@ -83,7 +83,7 @@ export const Explore = () => {
                             clubSize = {clubProfiles[0].memberRange}
                             acceptingMembers = {clubProfiles[0].acceptingMembers}
                             applicationRequired = {clubProfiles[0].applicationRequired}
-                            cardLink="/home"
+                            cardLink={`/club/${clubProfiles[0].name}`}
                         />
                     )}
                     <ExploreBox 
@@ -94,7 +94,7 @@ export const Explore = () => {
                         clubSize = "20-50"
                         acceptingMembers = {false}
                         applicationRequired = {false}
-                        cardLink="/club-profile"
+                        cardLink="/club/Columbia University Jazz Ensemble"
                     />
                 </Row>
                 <Row>
@@ -106,7 +106,7 @@ export const Explore = () => {
                         clubSize = "20-50"
                         acceptingMembers = {true}
                         applicationRequired = {false}
-                        cardLink="/club-profile"
+                        cardLink="/club/Columbia University Jazz Ensemble"
                     />
                     <ExploreBox 
                         name = "Columbia University Jazz Ensemble" 
@@ -116,7 +116,7 @@ export const Explore = () => {
                         clubSize = "20-50"
                         acceptingMembers = {true}
                         applicationRequired = {true}
-                        cardLink="/club-profile"
+                        cardLink="/club/Columbia University Jazz Ensemble"
                     />
                 </Row>
                 <Row>
@@ -128,7 +128,7 @@ export const Explore = () => {
                         clubSize = "20-50"
                         acceptingMembers = {true}
                         applicationRequired = {false}
-                        cardLink="/club-profile"
+                        cardLink="/club/Columbia University Jazz Ensemble"
                     />
                     <ExploreBox 
                         name = "Columbia University Jazz Ensemble" 
@@ -138,7 +138,7 @@ export const Explore = () => {
                         clubSize = "20-50"
                         acceptingMembers = {true}
                         applicationRequired = {false}
-                        cardLink="/club-profile"
+                        cardLink="/club/Columbia University Jazz Ensemble"
                     />
                 </Row>
             </PageWrapper>
