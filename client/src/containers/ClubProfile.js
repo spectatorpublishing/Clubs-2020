@@ -36,7 +36,7 @@ export const ClubProfile = ({ match }) => {
                     <Navbar/>
                     <PageWrapper>
                         <Content>
-                            <h1>Columbia University Jazz Ensemble</h1>
+                            <h1>{club.name}</h1>
                             <p>Last updated: {date.toLocaleDateString("en-US", options)}</p>
                             <ProfilePageBox 
                                 memberRange= {club.member_range}
@@ -45,9 +45,8 @@ export const ClubProfile = ({ match }) => {
                                 tags= {club.tags}
                             />
                             <MainContent
-                                name= {club.name}
                                 description= {club.description}
-                                lastUpdated= {new Date(club.last_updated)}
+                                //lastUpdated= {new Date(club.last_updated)}
                                 //meetingFrequency= {club.meeting_frequency}
                                 highlights= {club.highlights}
                                 howToJoin= {club.how_to_join}
@@ -79,12 +78,12 @@ export const ClubProfile = ({ match }) => {
                         <Navbar/>
                         <PageWrapper>
                             <Content>
-                                <h1>Columbia University Jazz Ensemble</h1>
+                                <h1>{club.name}</h1>
                                 <p>Last updated: {date.toLocaleDateString("en-US", options)}</p>
                                 <MainContent
                                     name= {club.name}
                                     description= {club.description}
-                                    lastUpdated= {new Date(club.last_updated)}
+                                    //lastUpdated= {new Date(club.last_updated)}
                                     //meetingFrequency= {club.meeting_frequency}
                                     highlights= {club.highlights}
                                     howToJoin= {club.how_to_join}
@@ -122,10 +121,11 @@ export const ClubProfile = ({ match }) => {
     const date = new Date(Date.UTC(2012, 11, 20, 0, 0, 0)); //unsure how to set this up with given date string
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     const [width, setWidth] = useState(window.innerWidth);
-    const [isLoading, setLoading] = useState(false);
+    const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
         window.addEventListener("resize", () => setWidth(window.innerWidth));
+        setLoading(false);
     },[]);
 
     if (width < 768){
