@@ -13,9 +13,8 @@ const Box = styled.div`
   box-shadow: 2px 10px 30px rgba(0, 0, 0, 0.05);
   border-radius: 7px;
   background-color: ${(props) => props.theme.colors.white};
-  width: 20rem;
-  margin: 2rem;
-  padding: 2rem;
+  width: auto;
+  padding: 1rem 2rem;
 `;
 
 const ProfileTags = styled.div`
