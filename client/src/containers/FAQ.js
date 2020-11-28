@@ -11,11 +11,6 @@ const Wrapper = styled.div`
   background-attachment: fixed;
 `;
 
-const NavWrap = styled.div`
-    /* position: fixed;
-    top: 0%; */
-`;
-
 const PageWrapper = styled.main`
   display: flex;
   flex-direction: column;

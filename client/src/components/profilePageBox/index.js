@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import SearchTag from "../searchTag";
-import theme from "../../theme";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEdit,
