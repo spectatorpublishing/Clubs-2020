@@ -3,18 +3,16 @@ import styled from 'styled-components';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle } from "@fortawesome/free-regular-svg-icons";
 
-export const ProfileMain = ({name, description, lastUpdated, highlights, howToJoin, applicationLink}) => {   
+export const ProfileMain = ({description, highlights, howToJoin, applicationLink}) => {   
     return (
         <Container>
-            <h1>{name}</h1>
-            <p>Last updated: {lastUpdated.toLocaleDateString("en-US")}</p>
             <h2>Description</h2>
             <p1>{description}</p1>
             <h2>Highlights</h2>
             <p2>{highlights.map(highlight => <Highlight text={highlight}/>)}</p2>
             <h2>How to Join</h2>
             <p2>{howToJoin}</p2>
-            <div><Button href={applicationLink}>Apply Here</Button></div>
+            <div><Button href={applicationLink}><p>Apply</p></Button></div>
         </Container>
     );
 };
@@ -55,15 +53,27 @@ const Container = styled.div`
 `;
 
 const Button = styled.a`
-    color: #EC6C52;
     text-decoration: none;
     border: 2px solid #EC6C52;
     display: inline-block;
-    padding: 10px;
-    margin: 1rem 0.5rem 1rem 0rem;
+    padding: 10px 20px;
+    margin: 1.5rem 0.5rem 1rem 0rem;
     border-radius: 5px;
+    
+    p{
+        text-align: center; 
+        margin: 0 auto;
+        color: #EC6C52;
+    }
+    
     :hover{
         box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    @media only screen 
+    and (max-width : 768px) {
+        display: flex;
+        font-size: 1.5rem;
     }
 `;
 
