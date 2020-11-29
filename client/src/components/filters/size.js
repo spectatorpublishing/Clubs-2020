@@ -11,6 +11,11 @@ const Button = styled.button`
     width:99px;
     height:39px;
     border:0px;
+    cursor: pointer;
+
+    :hover{
+        box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.15);
+    }
 `;
 
 const Word = styled.div`
@@ -38,16 +43,17 @@ export default class Size extends React.Component {
         this.changeColor = this.changeColor.bind(this);
     }
     changeColor() {
-        const newColor = this.state.color == white ? teal : white;
-        const newTextColor = this.state.textcolor == grey ? white : grey;
-        const newText = this.state.text == text ? Text : text;
+        const newColor = this.state.color === white ? teal : white;
+        const newTextColor = this.state.textcolor === grey ? white : grey;
+        const newText = this.state.text === text ? Text : text;
         this.setState({ color: newColor, textcolor: newTextColor, text: newText })
     }
 
     render() {
         return (
-
-            <Button style={{ backgroundColor: this.state.color, color: this.state.textcolor }} onClick={this.changeColor} ><Word>{this.state.text}</Word></Button>
+            <Button style={{ backgroundColor: this.state.color, color: this.state.textcolor }} onClick={this.changeColor} >
+                <Word>{this.state.text}</Word>
+            </Button>
 
         )
     }
