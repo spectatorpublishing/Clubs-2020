@@ -27,7 +27,20 @@ export const ClubProfile = () => {
           })
           .catch((error) => console.log(error));
     }, [id]);
-    
+
+    const SimilarClubs = () => { return (club.similarClubs.length === 0) ? (<h1>Loading</h1>) : 
+        (club.similarClubs.map(profile => (
+            <ExploreBox 
+                name = {profile.name}
+                description = {profile.shortDescription}
+                imageURL = {profile.imageUrl}
+                tags = {profile.tags}
+                clubSize = {profile.memberRange}
+                acceptingMembers = {profile.acceptingMembers}
+                applicationRequired = {profile.applicationRequired}
+                cardLink={`/clubs/${profile._id}`}
+            />
+    )))};
 
     if (width < 541){ // mobile view
         return (
@@ -57,18 +70,7 @@ export const ClubProfile = () => {
                                     howToJoin= {club.howToJoin}
                                 />
                                 <h2>Similar Clubs</h2>
-                                {(club.similarClubs.length === 0) ? (<h1>Loading</h1>) : (club.similarClubs.map(profile => (
-                                    <ExploreBox 
-                                        name = {profile.name}
-                                        description = {profile.shortDescription}
-                                        imageURL = {profile.imageUrl}
-                                        tags = {profile.tags}
-                                        clubSize = {profile.memberRange}
-                                        acceptingMembers = {profile.acceptingMembers}
-                                        applicationRequired = {profile.applicationRequired}
-                                        cardLink={`/clubs/${profile._id}`}
-                                    />
-                                )))}    
+                                <SimilarClubs/> 
                             </Content>
                         </PageWrapper>
                     </Wrapper>
@@ -107,18 +109,7 @@ export const ClubProfile = () => {
                                     howToJoin= {club.howToJoin}
                                 />
                                 <h2>Similar Clubs</h2>
-                                {(club.similarClubs.length === 0) ? (<h1>Loading</h1>) : (club.similarClubs.map(profile => (
-                                    <ExploreBox 
-                                        name = {profile.name}
-                                        description = {profile.shortDescription}
-                                        imageURL = {profile.imageUrl}
-                                        tags = {profile.tags}
-                                        clubSize = {profile.memberRange}
-                                        acceptingMembers = {profile.acceptingMembers}
-                                        applicationRequired = {profile.applicationRequired}
-                                        cardLink={`/clubs/${profile._id}`}
-                                    />
-                                )))} 
+                                <SimilarClubs/> 
                             </Content>
                         </PageWrapper>
                     </Wrapper>
@@ -141,18 +132,7 @@ export const ClubProfile = () => {
                                     howToJoin= {club.howToJoin}
                                 />
                                 <h2>Similar Clubs</h2>
-                                {(club.similarClubs.length === 0) ? (<h1>Loading</h1>) : (club.similarClubs.map(profile => (
-                                    <ExploreBox 
-                                        name = {profile.name}
-                                        description = {profile.shortDescription}
-                                        imageURL = {profile.imageUrl}
-                                        tags = {profile.tags}
-                                        clubSize = {profile.memberRange}
-                                        acceptingMembers = {profile.acceptingMembers}
-                                        applicationRequired = {profile.applicationRequired}
-                                        cardLink={`/clubs/${profile._id}`}
-                                    />
-                                )))} 
+                                <SimilarClubs/> 
                             </Content>
                             <Cards>
                                 <ProfilePageBox 
@@ -213,7 +193,6 @@ const Content = styled.div`
         width: 63%;
         padding-right: 6rem;
     }
-    
     
     h1{
         margin-bottom: 0px;
