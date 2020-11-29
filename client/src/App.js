@@ -17,7 +17,7 @@ const App = () => {
           <Route path="/faq" component={FAQ} />
           <Route path="/profile-creation" component={ProfileCreation} />
           <Route path="/profile-test" component={ProfileBoxTester} /> */}
-          <Route path="/club/:clubId">
+          <Route path="/clubs/:clubId">
             <ClubProfile />
           </Route>
           <Route path="/profile-test">

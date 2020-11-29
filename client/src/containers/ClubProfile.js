@@ -5,16 +5,17 @@ import ExploreBox from '../components/explorebox/index';
 import MainContent from '../components/profileMainContent/index';
 import { ProfilePageBox } from "../components/profilePageBox";
 import { Navbar } from "../components/navbar";
+import { FrequencyTag } from "../components/frequencyTag/index";
 
 export const ClubProfile = ({ match }) => {
-    /*const {
+    const {
         params: {clubId},
     } = match;
     const [club, setClub] = useState();
-    const date = new Date(Date.UTC(2012, 11, 20, 0, 0, 0));
+    const date = new Date(club.lastUpdated);
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     const [width, setWidth] = useState(window.innerWidth);
-    const [isLoading, setLoading] = useState(false);
+    const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
         window.addEventListener("resize", () => setWidth(window.innerWidth));
@@ -28,49 +29,7 @@ export const ClubProfile = ({ match }) => {
           .catch((error) => console.log(error));
     }, [clubId]);
 
-    if (width < 768){
-        return (
-            <>
-                {!isLoading && (
-                <Wrapper>
-                    <Navbar/>
-                    <PageWrapper>
-                        <Content>
-                            <h1>{club.name}</h1>
-                            <p>Last updated: {date.toLocaleDateString("en-US", options)}</p>
-                            <ProfilePageBox 
-                                memberRange= {club.member_range}
-                                acceptingMembers= {club.accepting_members}
-                                applicationRequired= {club.application}
-                                tags= {club.tags}
-                            />
-                            <MainContent
-                                description= {club.description}
-                                //lastUpdated= {new Date(club.last_updated)}
-                                //meetingFrequency= {club.meeting_frequency}
-                                highlights= {club.highlights}
-                                howToJoin= {club.how_to_join}
-                                applicationLink= {club.app_link}
-                                similarClubs= {club.similar}
-                            />
-                            <h2>Similar Clubs</h2>
-                            <ExploreBox 
-                                name = {club.name}
-                                description = {club.description}
-                                imageURL = {club.image_url}
-                                tags = {club.tags}
-                                clubSize = {club.member_range}
-                                acceptingMembers = {club.accepting_members}
-                                applicationRequired = {club.application}
-                                cardLink="/home"
-                            />
-                        </Content>
-                    </PageWrapper>
-                </Wrapper>
-           )}
-            </>
-        );
-    } else {
+    if (width < 541){ // mobile view
         return (
             <>
                 {!isLoading && (
@@ -80,92 +39,36 @@ export const ClubProfile = ({ match }) => {
                             <Content>
                                 <h1>{club.name}</h1>
                                 <p>Last updated: {date.toLocaleDateString("en-US", options)}</p>
-                                <MainContent
-                                    name= {club.name}
-                                    description= {club.description}
-                                    //lastUpdated= {new Date(club.last_updated)}
-                                    //meetingFrequency= {club.meeting_frequency}
-                                    highlights= {club.highlights}
-                                    howToJoin= {club.how_to_join}
-                                    applicationLink= {club.app_link}
-                                    similarClubs= {club.similar}
-                                /> 
-                                <h2>Similar Clubs</h2>
-                                <ExploreBox 
-                                    name = {club.name}
-                                    description = {club.description}
-                                    imageURL = {club.image_url}
-                                    tags = {club.tags}
-                                    clubSize = {club.member_range}
-                                    acceptingMembers = {club.accepting_members}
-                                    applicationRequired = {club.application}
-                                    cardLink="/home"
-                                /> 
-                            </Content>
-                            <Cards>
                                 <ProfilePageBox 
-                                    memberRange= {club.member_range}
-                                    acceptingMembers= {club.accepting_members}
-                                    applicationRequired= {club.application}
-                                    tags= {club.tags}
+                                    memberRange= {club.memberRange}
+                                    acceptingMembers={club.acceptingMembers}
+                                    applicationRequired={club.applicationRequired}
+                                    tags={club.tags}
                                 />
-                            </Cards>
-                        </PageWrapper>
-                    </Wrapper>
-                )}
-            </>
-        );  
-    }
-};*/
-
-    const date = new Date(Date.UTC(2012, 11, 20, 0, 0, 0)); //unsure how to set this up with given date string
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    const [width, setWidth] = useState(window.innerWidth);
-    const [isLoading, setLoading] = useState(true);
-
-    useEffect(() => {
-        window.addEventListener("resize", () => setWidth(window.innerWidth));
-        setLoading(false);
-    },[]);
-
-    if (width < 768){
-        return (
-            <>
-                {!isLoading && (
-                    <Wrapper>
-                        <Navbar/>
-                        <PageWrapper>
-                            <Content>
-                                <h1>Columbia University Jazz Ensemble</h1>
-                                <p>Last updated: {date.toLocaleDateString("en-US", options)}</p>
-                                <ProfilePageBox 
-                                    memberRange= '20-50'
-                                    acceptingMembers={true}
-                                    applicationRequired={false}
-                                    tags={['Music', 'Performing Arts', 'Community Service', 'Global Affairs', 'Pre-professional']}
+                                <FrequencyTag
+                                    frequency={club.meetingFrequency}
+                                    weekly= {club.weekly}
                                 />
+                                <div><Button href={club.mailingList}><p>Join our mailing list</p></Button></div>
+                                <div><Button className= "second" href={club.applicationLink}><p>Apply</p></Button></div>
                                 <MainContent 
-                                    description= "A small advanced jazz band covering 1950's hard bop to more adventurous contemporary Avant Garde styles."
-                                    meetingFrequency= 'Meets 2x a week'
-                                    highlights= {['A caring and loving community that adheres to these values', 
-                                        'Friends to study, eat, and hang out with', 
-                                        'Weekly get togethers at the Multicultural Affairs space with food']}
-                                    howToJoin= "As a political group that has well-defined values, we look for students who share our values and take our community and work seriously. For this reason, we require an application. To respect everyone’s time and capacity, our application is short. If your application does not have any major issues, you will be invited to interview with us! Afterwards, we will email you with a decision. We try to be as inclusive as possible; in fact, our club has nearly doubled in size in the last two years."
-                                    applicationLink= "https://googl.form.abcdef12345"
-                                    // array of clubProfile objects
-                                    similarClubs= {[]}
+                                    description= {club.longDescription}
+                                    highlights= {club.highlights}
+                                    howToJoin= {club.howToJoin}
                                 />
                                 <h2>Similar Clubs</h2>
-                                <ExploreBox 
-                                    name = "Columbia University Jazz Ensemble" 
-                                    description = "A small advanced jazz band covering 1950's hard bop to more adventurous contemporary Avant Garde styles."
-                                    imageURL = 'https://testbucket102920.s3.amazonaws.com/Ellipse+5+(2).png'
-                                    tags = {['Music', 'Performing Arts', 'Community Service', 'Global Affairs', 'Pre-professional']}
-                                    clubSize = "20-50"
-                                    acceptingMembers = {false}
-                                    applicationRequired = {true}
-                                    cardLink="/home"
-                                />
+                                {(club.similarClubs.length === 0) ? (<h1>Loading</h1>) : (club.similarClubs.map(profile => (
+                                    <ExploreBox 
+                                        name = {profile.name}
+                                        description = {profile.shortDescription}
+                                        imageURL = {profile.imageUrl}
+                                        tags = {profile.tags}
+                                        clubSize = {profile.memberRange}
+                                        acceptingMembers = {profile.acceptingMembers}
+                                        applicationRequired = {profile.applicationRequired}
+                                        cardLink={`/clubs/${profile._id}`}
+                                    />
+                                )))} 
                                 
                             </Content>
                         </PageWrapper>
@@ -173,7 +76,7 @@ export const ClubProfile = ({ match }) => {
                 )}
             </>
         );
-    } else {
+    } else if (width < 769 && width > 540){ // tablet view
         return (
             <>
                 {!isLoading && (
@@ -181,38 +84,90 @@ export const ClubProfile = ({ match }) => {
                         <Navbar/>
                         <PageWrapper>
                             <Content>
-                                <h1>Columbia University Jazz Ensemble</h1>
+                                <h1>{club.name}</h1>
                                 <p>Last updated: {date.toLocaleDateString("en-US", options)}</p>
+                                <Row>
+                                    <ProfilePageBox 
+                                        memberRange= {club.memberRange}
+                                        acceptingMembers={club.acceptingMembers}
+                                        applicationRequired={club.applicationRequired}
+                                        tags={club.tags}
+                                    />
+                                    <Column>
+                                        <FrequencyTag
+                                            frequency={club.meetingFrequency}
+                                            weekly= {club.weekly}
+                                        />
+                                        <div><Button href={club.mailingList}><p>Join our mailing list</p></Button></div>
+                                        <div><Button className= "second" href={club.applicationLink}><p>Apply</p></Button></div>
+                                    </Column>
+                                </Row>
                                 <MainContent 
-                                    description= "A small advanced jazz band covering 1950's hard bop to more adventurous contemporary Avant Garde styles."
-                                    meetingFrequency= 'Meets 2x a week'
-                                    highlights= {['A caring and loving community that adheres to these values', 
-                                        'Friends to study, eat, and hang out with', 
-                                        'Weekly get togethers at the Multicultural Affairs space with food']}
-                                    howToJoin= "As a political group that has well-defined values, we look for students who share our values and take our community and work seriously. For this reason, we require an application. To respect everyone’s time and capacity, our application is short. If your application does not have any major issues, you will be invited to interview with us! Afterwards, we will email you with a decision. We try to be as inclusive as possible; in fact, our club has nearly doubled in size in the last two years."
-                                    applicationLink= "https://googl.form.abcdef12345"
-                                    // array of clubProfile objects
-                                    similarClubs= {[]}
+                                    description= {club.longDescription}
+                                    highlights= {club.highlights}
+                                    howToJoin= {club.howToJoin}
                                 />
                                 <h2>Similar Clubs</h2>
-                                <ExploreBox 
-                                    name = "Columbia University Jazz Ensemble" 
-                                    description = "A small advanced jazz band covering 1950's hard bop to more adventurous contemporary Avant Garde styles."
-                                    imageURL = 'https://testbucket102920.s3.amazonaws.com/Ellipse+5+(2).png'
-                                    tags = {['Music', 'Performing Arts', 'Community Service', 'Global Affairs', 'Pre-professional']}
-                                    clubSize = "20-50"
-                                    acceptingMembers = {false}
-                                    applicationRequired = {true}
-                                    cardLink="/home"
-                                /> 
+                                {(club.similarClubs.length === 0) ? (<h1>Loading</h1>) : (club.similarClubs.map(profile => (
+                                    <ExploreBox 
+                                        name = {profile.name}
+                                        description = {profile.shortDescription}
+                                        imageURL = {profile.imageUrl}
+                                        tags = {profile.tags}
+                                        clubSize = {profile.memberRange}
+                                        acceptingMembers = {profile.acceptingMembers}
+                                        applicationRequired = {profile.applicationRequired}
+                                        cardLink={`/clubs/${profile._id}`}
+                                    />
+                                )))} 
+                            </Content>
+                        </PageWrapper>
+                    </Wrapper>
+                )}
+            </>
+        );
+    } else { // desktop view
+        return (
+            <>
+                {!isLoading && (
+                    <Wrapper>
+                        <Navbar/>
+                        <PageWrapper>
+                            <Content>
+                                <h1>{club.name}</h1>
+                                <p>Last updated: {date.toLocaleDateString("en-US", options)}</p>
+                                <MainContent 
+                                    description= {club.longDescription}
+                                    highlights= {club.highlights}
+                                    howToJoin= {club.howToJoin}
+                                />
+                                <h2>Similar Clubs</h2>
+                                {(club.similarClubs.length === 0) ? (<h1>Loading</h1>) : (club.similarClubs.map(profile => (
+                                    <ExploreBox 
+                                        name = {profile.name}
+                                        description = {profile.shortDescription}
+                                        imageURL = {profile.imageUrl}
+                                        tags = {profile.tags}
+                                        clubSize = {profile.memberRange}
+                                        acceptingMembers = {profile.acceptingMembers}
+                                        applicationRequired = {profile.applicationRequired}
+                                        cardLink={`/clubs/${profile._id}`}
+                                    />
+                                )))} 
                             </Content>
                             <Cards>
                                 <ProfilePageBox 
-                                    memberRange= '20-50'
-                                    acceptingMembers={true}
-                                    applicationRequired={false}
-                                    tags={['Music', 'Performing Arts', 'Community Service', 'Global Affairs', 'Pre-professional']}
+                                    memberRange= {club.memberRange}
+                                    acceptingMembers={club.acceptingMembers}
+                                    applicationRequired={club.applicationRequired}
+                                    tags={club.tags}
                                 />
+                                <FrequencyTag
+                                    frequency={club.meetingFrequency}
+                                    weekly= {club.weekly}
+                                />
+                                <div><Button href={club.mailingList}><p>Join our mailing list</p></Button></div>
+                                <div><Button className= "second" href={club.applicationLink}><p>Apply</p></Button></div>
                             </Cards>
                         </PageWrapper>
                     </Wrapper>
@@ -222,16 +177,17 @@ export const ClubProfile = ({ match }) => {
     }
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled.main`
   background-color: #F4F6F8;
   background-image: url(https://clubs-cu.s3.amazonaws.com/Profile+Wave.svg);
   background-repeat: no-repeat;
   background-position: top right;
   width: fit-content;
+  
 `;
 
 
-const PageWrapper = styled.main`
+const PageWrapper = styled.div`
     display: flex;
     flex-direction: row;
     padding: 4rem 5rem 0rem 5rem;
@@ -247,28 +203,64 @@ const PageWrapper = styled.main`
 `;
 
 const Cards = styled.div`
-    @media only screen 
-    and (min-width : 768px) {
-        width: 30%;
-        div{
-            position: -webkit-sticky;
-            position: sticky;
-            top: 15px;
-        }
-    }
+    width: 30%;
+    margin-top: 8rem;
 `;
 
 const Content = styled.div`
     display: flex;
     flex-direction: column;
     @media only screen 
-    and (min-width : 768px) {
-        width: 70%;
-        padding-right: 1.5rem;
+    and (min-width : 769px) {
+        width: 63%;
+        padding-right: 6rem;
     }
     
     
     h1{
         margin-bottom: 0px;
     }
+`;
+
+const Button = styled.a`
+    text-decoration: none;
+    background-color: #F4F6F8;
+    border: 2px solid #EC6C52;
+    display: flex;
+    padding: 10px 20px;
+    margin: 1rem 0rem;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    
+    p{
+        text-align: center; 
+        margin: 0 auto;
+        color: #EC6C52;
+    }
+    
+    :hover{
+        box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    &.second{
+        background-color: #EC6C52;
+        p{
+            color: white;
+        }
+    }
+
+    @media only screen 
+    and (max-width : 768px) {
+        margin: 0.5rem 0rem;
+    }
+`;
+
+const Row = styled.div`
+    display: flex;
+    flex-direction: row;
+`;
+
+const Column = styled.div`
+    width: 100%;
+    margin-left: 1rem;
 `;
