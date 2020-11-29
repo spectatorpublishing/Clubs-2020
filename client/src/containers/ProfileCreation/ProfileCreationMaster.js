@@ -193,5 +193,5 @@ const ButtonContainer = styled.div`
 const ErrorMessage = styled(motion.div)`
   font-family: 'Manrope', 'Roboto', 'Arial', 'Helvetica';
   color: ${(props) => props.theme.colors.red};
-  margin-top: 0.8rem;
+  margin: 0.8rem 0;
 `;

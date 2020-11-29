@@ -78,77 +78,64 @@ const ShuffleBox = styled.div`
 `;
 
 export const Explore = () => {
-  const [clubProfiles, setClubProfiles] = useState([]);
+    const [clubProfiles, setClubProfiles] = useState([]);
 
-  useEffect(() => {
-    fetch(`api/clubProfiles/`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((response) => {
-        if (response.status >= 200 && response.status < 300) {
-          return response;
-        }
-        const error = new Error(`HTTP Error ${response.statusText}`);
-        error.status = response.statusText;
-        error.response = response;
-        console.log(error);
-        throw error;
-      })
-      .then((response) => response.json())
-      .then((json) => {
-        console.log(json);
-        setClubProfiles(json);
-      });
-  }, []);
+    useEffect(() => {
+        fetch(`api/clubProfiles/`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }})
+            .then(response => {
+                if (response.status >= 200 && response.status < 300) {
+                    return response;
+                  }
+                  const error = new Error(`HTTP Error ${response.statusText}`);
+                  error.status = response.statusText;
+                  error.response = response;
+                  console.log(error);
+                  throw error;
+            })
+            .then(response => response.json())
+            .then(json => {
+                console.log(json);
+                setClubProfiles(json);
+            });    
+    }, []);
 
-  return (
-    <Wrapper>
-      <Navbar />
-      <main>
-        <PageWrapper>
-          <TextWrapper>
-            <h1>Explore Clubs</h1>
-            <p>Find your Columbia community</p>
-          </TextWrapper>
-          <FiltersBox>
-            <Filter>
-              <Type />
-            </Filter>
-            <Filter>
-              <Size />
-            </Filter>
-            <Filter>
-              <Join />
-            </Filter>
-            <ShuffleBox>
-              <Shuffle />
-            </ShuffleBox>
-          </FiltersBox>
-          <CardsContainer>
-            {clubProfiles.length === 0 ? (
-              <h1>Loading</h1>
-            ) : (
-              clubProfiles.map((profile) => (
-                <CardWrapper>
-                  <ExploreBox
-                    name={profile.name}
-                    description={profile.shortDescription}
-                    imageURL={profile.imageUrl}
-                    tags={profile.tags}
-                    clubSize={profile.memberRange}
-                    acceptingMembers={profile.acceptingMembers}
-                    applicationRequired={profile.applicationRequired}
-                    cardLink='/home'
-                  />
-                </CardWrapper>
-              ))
-            )}
-          </CardsContainer>
-        </PageWrapper>
-      </main>
-    </Wrapper>
-  );
-};
+    return(
+        <Wrapper>
+        <Navbar />
+        <main>
+            <PageWrapper>
+                <TextWrapper>
+                    <h1>Explore Clubs</h1>
+                    <p>Find your Columbia community</p>
+                </TextWrapper>
+                <FiltersBox>
+                    <Filter><Type /></Filter>
+                    <Filter><Size /></Filter>
+                    <Filter><Join /></Filter>
+                    <ShuffleBox><Shuffle /></ShuffleBox>
+                </FiltersBox>
+                <CardsContainer>
+                    {(clubProfiles.length === 0) ? (<h1>Loading</h1>) : (clubProfiles.map(profile => (
+                        <CardWrapper>
+                            <ExploreBox 
+                                name = {profile.name}
+                                description = {profile.shortDescription}
+                                imageURL = {profile.imageUrl}
+                                tags = {profile.tags}
+                                clubSize = {profile.memberRange}
+                                acceptingMembers = {profile.acceptingMembers}
+                                applicationRequired = {profile.applicationRequired}
+                                cardLink={`/${profile._id}`}
+                            />
+                        </CardWrapper>
+                    )))} 
+                </CardsContainer>    
+            </PageWrapper>
+        </main>
+        </Wrapper>
+    )
+}

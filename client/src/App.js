@@ -7,6 +7,7 @@ import { ThemeProvider } from 'styled-components';
 import ProfileCreationMaster from './containers/ProfileCreation/ProfileCreationMaster';
 import theme from './theme';
 import { ProfileBoxTester } from './containers/ProfileBoxTester';
+import { ClubProfile } from './containers/ClubProfile';
 
 const App = () => {
   return (
@@ -14,6 +15,9 @@ const App = () => {
       <Router>
         <Switch>
           <ViewportProvider>
+            <Route path='/:id'>
+              <ClubProfile />
+            </Route>
             <Route path='/profile-test' exact>
               <ProfileBoxTester />
             </Route>
