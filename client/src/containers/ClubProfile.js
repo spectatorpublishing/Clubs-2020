@@ -1,5 +1,5 @@
-import React, { useState, useEffect, isMobile } from "react";
-import { Link, BrowserRouter as Router, Route } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useParams } from 'react-router-dom';
 import styled from 'styled-components';
 import ExploreBox from '../components/explorebox/index';
 import MainContent from '../components/profileMainContent/index';
@@ -7,15 +7,12 @@ import { ProfilePageBox } from "../components/profilePageBox";
 import { Navbar } from "../components/navbar";
 import { FrequencyTag } from "../components/frequencyTag/index";
 
-export const ClubProfile = ({ match }) => {
-    const {
-        params: {clubId},
-    } = match;
+export const ClubProfile = () => {
+    const {clubId} = useParams();
     const [club, setClub] = useState();
-    const date = new Date(club.lastUpdated);
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
     const [width, setWidth] = useState(window.innerWidth);
-    const [isLoading, setLoading] = useState(true);
+    const [isLoading, setLoading] = useState(false);
+    const options = { year: 'numeric', month: 'long', day: 'numeric' };
 
     useEffect(() => {
         window.addEventListener("resize", () => setWidth(window.innerWidth));
@@ -38,7 +35,7 @@ export const ClubProfile = ({ match }) => {
                         <PageWrapper>
                             <Content>
                                 <h1>{club.name}</h1>
-                                <p>Last updated: {date.toLocaleDateString("en-US", options)}</p>
+                                <p>Last updated: {club.lastUpdated.toLocaleDateString("en-US", options)}</p>
                                 <ProfilePageBox 
                                     memberRange= {club.memberRange}
                                     acceptingMembers={club.acceptingMembers}
@@ -68,8 +65,7 @@ export const ClubProfile = ({ match }) => {
                                         applicationRequired = {profile.applicationRequired}
                                         cardLink={`/clubs/${profile._id}`}
                                     />
-                                )))} 
-                                
+                                )))}    
                             </Content>
                         </PageWrapper>
                     </Wrapper>
@@ -85,7 +81,7 @@ export const ClubProfile = ({ match }) => {
                         <PageWrapper>
                             <Content>
                                 <h1>{club.name}</h1>
-                                <p>Last updated: {date.toLocaleDateString("en-US", options)}</p>
+                                <p>Last updated: {club.lastUpdated.toLocaleDateString("en-US", options)}</p>
                                 <Row>
                                     <ProfilePageBox 
                                         memberRange= {club.memberRange}
@@ -135,7 +131,7 @@ export const ClubProfile = ({ match }) => {
                         <PageWrapper>
                             <Content>
                                 <h1>{club.name}</h1>
-                                <p>Last updated: {date.toLocaleDateString("en-US", options)}</p>
+                                <p>Last updated: {club.lastUpdated.toLocaleDateString("en-US", options)}</p>
                                 <MainContent 
                                     description= {club.longDescription}
                                     highlights= {club.highlights}
@@ -185,7 +181,6 @@ const Wrapper = styled.main`
   width: fit-content;
   
 `;
-
 
 const PageWrapper = styled.div`
     display: flex;
