@@ -132,7 +132,7 @@ export const Explore = () => {
                                 clubSize = {profile.memberRange}
                                 acceptingMembers = {profile.acceptingMembers}
                                 applicationRequired = {profile.applicationRequired}
-                                cardLink="/home"
+                                cardLink={`/${profile._id}`}
                             />
                         </CardWrapper>
                     )))} 
