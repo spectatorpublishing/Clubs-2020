@@ -8,23 +8,26 @@ import { Navbar } from "../components/navbar";
 import { FrequencyTag } from "../components/frequencyTag/index";
 
 export const ClubProfile = () => {
-    const {clubId} = useParams();
+    const { id } = useParams();
     const [club, setClub] = useState();
     const [width, setWidth] = useState(window.innerWidth);
-    const [isLoading, setLoading] = useState(false);
+    const [isLoading, setLoading] = useState(true);
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
 
     useEffect(() => {
         window.addEventListener("resize", () => setWidth(window.innerWidth));
-        fetch(`api/clubProfiles/${clubId}`, {})
+        fetch(`api/clubProfiles/${id}`, {
+            method: 'GET',
+            })
           .then((res) => res.json())
           .then((response) => {
             setClub(response);
             setLoading(false);
-            console.log(`api/clubProfiles/${clubId}`);
+            console.log(`api/clubProfiles/${id}`);
           })
           .catch((error) => console.log(error));
-    }, [clubId]);
+    }, [id]);
+    
 
     if (width < 541){ // mobile view
         return (
@@ -35,7 +38,7 @@ export const ClubProfile = () => {
                         <PageWrapper>
                             <Content>
                                 <h1>{club.name}</h1>
-                                <p>Last updated: {club.lastUpdated.toLocaleDateString("en-US", options)}</p>
+                                <p>Last updated: {new Date(club.lastUpdated.toString()).toLocaleDateString("en-US", options)}</p>
                                 <ProfilePageBox 
                                     memberRange= {club.memberRange}
                                     acceptingMembers={club.acceptingMembers}
@@ -81,7 +84,7 @@ export const ClubProfile = () => {
                         <PageWrapper>
                             <Content>
                                 <h1>{club.name}</h1>
-                                <p>Last updated: {club.lastUpdated.toLocaleDateString("en-US", options)}</p>
+                                <p>Last updated: {new Date(club.lastUpdated.toString()).toLocaleDateString("en-US", options)}</p>
                                 <Row>
                                     <ProfilePageBox 
                                         memberRange= {club.memberRange}
@@ -131,7 +134,7 @@ export const ClubProfile = () => {
                         <PageWrapper>
                             <Content>
                                 <h1>{club.name}</h1>
-                                <p>Last updated: {club.lastUpdated.toLocaleDateString("en-US", options)}</p>
+                                <p>Last updated: {new Date(club.lastUpdated.toString()).toLocaleDateString("en-US", options)}</p>
                                 <MainContent 
                                     description= {club.longDescription}
                                     highlights= {club.highlights}
@@ -169,7 +172,7 @@ export const ClubProfile = () => {
                     </Wrapper>
                 )}
             </>
-        );  
+        );
     }
 };
 
