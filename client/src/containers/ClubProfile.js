@@ -157,7 +157,7 @@ export const ClubProfile = () => {
 };
 
 const Wrapper = styled.main`
-  background-color: #F4F6F8;
+  background-color: ${(props) => props.theme.colors.white};
   background-image: url(https://clubs-cu.s3.amazonaws.com/Profile+Wave.svg);
   background-repeat: no-repeat;
   background-position: top right;
@@ -201,8 +201,8 @@ const Content = styled.div`
 
 const Button = styled.a`
     text-decoration: none;
-    background-color: #F4F6F8;
-    border: 2px solid #EC6C52;
+    background-color: ${(props) => props.theme.colors.white};
+    border: 2px solid ${(props) => props.theme.colors.red};
     display: flex;
     padding: 10px 20px;
     margin: 1rem 0rem;
@@ -212,7 +212,7 @@ const Button = styled.a`
     p{
         text-align: center; 
         margin: 0 auto;
-        color: #EC6C52;
+        color: ${(props) => props.theme.colors.red};
     }
     
     :hover{
@@ -220,9 +220,9 @@ const Button = styled.a`
     }
 
     &.second{
-        background-color: #EC6C52;
+        background-color: ${(props) => props.theme.colors.red};
         p{
-            color: white;
+            color: ${(props) => props.theme.colors.fullWhite};;
         }
     }
 
