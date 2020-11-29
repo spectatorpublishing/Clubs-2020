@@ -171,7 +171,7 @@ const PageWrapper = styled.div`
     padding: 4rem 5rem 0rem 5rem;
 
     h2{
-        font-size: 20px;
+        font-size: 1.3rem;
     }
 
     @media only screen 
@@ -195,7 +195,7 @@ const Content = styled.div`
     }
     
     h1{
-        margin-bottom: 0px;
+        margin-bottom: 0rem;
     }
 `;
 
@@ -204,7 +204,7 @@ const Button = styled.a`
     background-color: ${(props) => props.theme.colors.white};
     border: 2px solid ${(props) => props.theme.colors.red};
     display: flex;
-    padding: 10px 20px;
+    padding: 0.8rem 1.6rem;
     margin: 1rem 0rem;
     border-radius: 5px;
     font-size: 1.2rem;
