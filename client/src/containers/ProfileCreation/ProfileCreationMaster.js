@@ -61,7 +61,7 @@ const ProfileCreationMaster = () => {
     setClubProfile(tempProfile);
     setErrorMesssage('');
   };
-
+  
   // Updates state based on input text
   return (
     <>
@@ -92,7 +92,9 @@ const ProfileCreationMaster = () => {
             />
             <Route path='/profile-creation/1' component={ProfileCreation2} />
           </Switch>
-
+          {/* isActive is allowing for currentPath state to be set when page url changes.
+               We need this state to change certain content elements based off of url
+          */}
           <ButtonContainer>
             <NavLink
               onMouseDown={nextPage1}

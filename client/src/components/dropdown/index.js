@@ -37,7 +37,6 @@ const Dropdown = ({
     if (e.keyCode === 13) {
       e.preventDefault();
       if (dropdownFocused) {
-        console.log('good');
         setClicked(!clicked);
       }
       if (clicked) {
@@ -68,8 +67,8 @@ const Dropdown = ({
       let tempData = { ...data };
       tempData[objId][index] = item;
       setData(tempData);
-    } else if(objId){
-      console.error('objId not in data')
+    } else if (objId) {
+      console.error('objId not in data');
     }
   };
 

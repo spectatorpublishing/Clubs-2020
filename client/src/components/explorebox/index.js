@@ -131,67 +131,6 @@ const Item = styled.div`
   }
 `;
 
-<<<<<<< HEAD
-export const ExploreBox = ({
-  name,
-  description,
-  clubSize,
-  tags,
-  imageURL,
-  acceptingMembers,
-  applicationRequired,
-  cardLink,
-}) => {
-  const Members = acceptingMembers ? (
-    <>
-      <FontAwesomeIcon icon={faCheckCircle}></FontAwesomeIcon>
-      <p>Open</p>
-    </>
-  ) : (
-    <>
-      <FontAwesomeIcon icon={faTimesCircle}></FontAwesomeIcon>
-      <p>Closed</p>
-    </>
-  );
-  const Application = applicationRequired ? (
-    <p>Application</p>
-  ) : (
-    <p>No Application</p>
-  );
-
-  return (
-    <Box>
-      <a href={cardLink}>
-        <Row>
-          <div>
-            <h2>{name}</h2>
-            <p>{description}</p>
-          </div>
-          <Icon>
-            <img alt='club picture' src={imageURL} />
-          </Icon>
-        </Row>
-        <Tags>
-          {tags.map((tag) => (
-            <SearchTag text={tag} />
-          ))}
-        </Tags>
-        <hr />
-        <Row>
-          <Item>
-            <FontAwesomeIcon icon={faUser}></FontAwesomeIcon>
-            {clubSize}
-          </Item>
-          <Item>{Members}</Item>
-          <Item>
-            <FontAwesomeIcon icon={faEdit}></FontAwesomeIcon>
-            {Application}
-          </Item>
-        </Row>
-      </a>
-    </Box>
-  );
-=======
 
 export const ExploreBox = ({name, description, clubSize, tags, imageURL, acceptingMembers, applicationRequired, cardLink}) => {
     const Members = acceptingMembers ? <><FontAwesomeIcon icon={faCheckCircle}></FontAwesomeIcon><p>Open</p></> : <><FontAwesomeIcon icon={faTimesCircle}></FontAwesomeIcon><p>Closed</p></>;
@@ -225,7 +164,6 @@ export const ExploreBox = ({name, description, clubSize, tags, imageURL, accepti
             </a>
         </Box>   
     );
->>>>>>> 0a854265c7fbe451243172c80b94d58a114df17f
 };
 
 export default ExploreBox;

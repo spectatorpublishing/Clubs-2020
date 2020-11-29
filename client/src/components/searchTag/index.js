@@ -3,7 +3,7 @@ import styled, { withTheme } from 'styled-components';
 import { motion } from 'framer-motion';
 import { useFocused } from '../customHooks/index';
 
-const SearchTag = ({ text, theme, data, setData, objId, dataLimitSize }) => {
+const SearchTag = ({ text, theme, data, setData, objId, dataLimitSize, margin }) => {
   const tagVariants = {
     active: { color: theme.colors.white, backgroundColor: theme.colors.red },
     inactive: {
@@ -59,6 +59,7 @@ const SearchTag = ({ text, theme, data, setData, objId, dataLimitSize }) => {
   };
   return (
     <Tag
+      margin={margin}
       ref={searchTag}
       clicked={clicked}
       onClick={handleClick}
@@ -78,6 +79,7 @@ const Tag = styled(motion.button)`
   font-family: 'Manrope', 'Roboto', 'Arial', 'Helvetica';
   font-size: 0.9rem;
   border-radius: 1rem;
+  margin: ${props=>props.margin};
   border: 0.125rem ${(props) => props.theme.colors.red} solid;
   outline-color: ${(props) => props.theme.colors.blue};
   -webkit-user-select: none;

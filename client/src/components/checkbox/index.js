@@ -58,38 +58,39 @@ const Checkbox = ({ labelText, order, data, setData, objId }) => {
 
   return (
     <LabelContainer>
-      <CheckboxContainer tabIndex={0} ref={checkbox}>
-        <StyledCheckbox
-          order={order}
-          variants={boxVariants}
-          clicked={clicked}
-          initial={'unchecked'}
-          animate={clicked ? 'checked' : 'unchecked'}
-          transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-          onClick={handleClick}
-        >
-          {width <= breakpoint ? (
-            <MobileLabel>{labelText}</MobileLabel>
-          ) : (
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              width='25'
-              height='25'
-              viewBox=' 0 0 150 150'
-            >
-              <motion.path
-                d='M38 74.707l24.647 24.646L116.5 45.5'
-                fill='transparent'
-                strokeWidth='15'
-                stroke='white'
-                strokeLinecap='round'
-                variants={checkVariants}
-                animate={clicked ? 'checked' : 'unchecked'}
-              />
-            </svg>
-          )}
-        </StyledCheckbox>
-      </CheckboxContainer>
+      <StyledCheckbox
+        tabIndex={0}
+        ref={checkbox}
+        order={order}
+        variants={boxVariants}
+        clicked={clicked}
+        initial={'unchecked'}
+        animate={clicked ? 'checked' : 'unchecked'}
+        transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+        onClick={handleClick}
+      >
+        {width <= breakpoint ? (
+          <MobileLabel>{labelText}</MobileLabel>
+        ) : (
+          <svg
+            xmlns='http://www.w3.org/2000/svg'
+            width='25'
+            height='25'
+            viewBox=' 0 0 150 150'
+          >
+            <motion.path
+              d='M38 74.707l24.647 24.646L116.5 45.5'
+              fill='transparent'
+              strokeWidth='15'
+              stroke='white'
+              strokeLinecap='round'
+              variants={checkVariants}
+              animate={clicked ? 'checked' : 'unchecked'}
+            />
+          </svg>
+        )}
+      </StyledCheckbox>
+
       {width <= breakpoint ? (
         <></>
       ) : (
