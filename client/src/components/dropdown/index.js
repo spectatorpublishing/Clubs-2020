@@ -2,15 +2,27 @@ import React, { useState, useEffect, useRef } from 'react';
 import styled, { withTheme } from 'styled-components';
 import { motion } from 'framer-motion';
 import { spring } from 'popmotion';
-import { useFocused } from '../customHooks/index';
+import { useFocused, useOnClickOutside } from '../customHooks/index';
 
-const Dropdown = ({ items, theme }) => {
+const Dropdown = ({
+  items,
+  theme,
+  placeholder,
+  data,
+  setData,
+  objId,
+  index,
+}) => {
   const [clicked, setClicked] = useState(false);
-  const [title, setTitle] = useState('');
+  const [title, setTitle] = useState(placeholder);
   const [titleHovered, setTitleHovered] = useState(false);
   const [curIndex, setCurIndex] = useState(-1);
   const dropdown = useRef(null);
+  const dropdownContainer = useRef(null);
   const dropdownFocused = useFocused(dropdown);
+  useOnClickOutside(dropdownContainer, () => {
+    setClicked(false);
+  });
 
   useEffect(() => {
     document.addEventListener('keypress', onKeypress);
@@ -21,10 +33,12 @@ const Dropdown = ({ items, theme }) => {
     };
   }, [curIndex, titleHovered, clicked, dropdownFocused]);
 
-  const onKeypress = e => {
+  const onKeypress = (e) => {
     if (e.keyCode === 13) {
       e.preventDefault();
-      if (dropdownFocused) setClicked(!clicked);
+      if (dropdownFocused) {
+        setClicked(!clicked);
+      }
       if (clicked) {
         setTitle(items[curIndex]);
         setClicked(false);
@@ -34,7 +48,7 @@ const Dropdown = ({ items, theme }) => {
     }
   };
 
-  const onKeydown = e => {
+  const onKeydown = (e) => {
     // Down arrowkey or tab is pressed
     if (e.keyCode === 40 || e.keyCode === 9) {
       if (curIndex + 1 < items.length) setCurIndex(curIndex + 1);
@@ -43,6 +57,18 @@ const Dropdown = ({ items, theme }) => {
     } else if (e.keyCode === 38) {
       if (curIndex - 1 > -1) setCurIndex(curIndex - 1);
       else setCurIndex(items.length - 1);
+    }
+  };
+  const optionHandleClick = (item) => {
+    setClicked(false);
+    setTitle(item);
+
+    if (data && objId && setData && objId in data) {
+      let tempData = { ...data };
+      tempData[objId][index] = item;
+      setData(tempData);
+    } else if (objId) {
+      console.error('objId not in data');
     }
   };
 
@@ -64,8 +90,7 @@ const Dropdown = ({ items, theme }) => {
         }}
         noBorder={index === items.length - 1}
         onClick={() => {
-          setClicked(false);
-          setTitle(item);
+          optionHandleClick(item);
         }}
       >
         {item}
@@ -74,7 +99,7 @@ const Dropdown = ({ items, theme }) => {
   });
 
   return (
-    <DropdownContainer>
+    <DropdownContainer ref={dropdownContainer}>
       <TitleContainer
         ref={dropdown}
         type='button'
@@ -107,26 +132,32 @@ const Dropdown = ({ items, theme }) => {
           </ArrowSvg>
         </ArrowSvgContainer>
       </TitleContainer>
-      <OptionsContainer
-        initial={{ height: 0 }}
-        animate={
-          clicked
-            ? { height: 'auto', boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.25)' }
-            : {
-                height: 0,
-                boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
-                transition: { type: spring }
-              }
-        }
-      >
-        {options}
-      </OptionsContainer>
+      <div style={{ position: 'relative' }}>
+        <OptionsContainer
+          initial={{ height: 0 }}
+          animate={
+            clicked
+              ? {
+                  height: 'auto',
+                  boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.25)',
+                  transition: {},
+                }
+              : {
+                  height: 0,
+                  boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
+                  transition: { type: spring },
+                }
+          }
+        >
+          {options}
+        </OptionsContainer>
+      </div>
     </DropdownContainer>
   );
 };
 
 const DropdownContainer = styled.div`
-  width: 7.1875rem;
+  width: 7.4rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -143,17 +174,17 @@ const TitleContainer = styled(motion.button)`
   min-height: 1.25rem;
   height: auto;
   padding: 0.335rem 0.5rem;
-  background-color: ${props => props.theme.colors.fullWhite};
-  border: 0.03125rem solid ${props => props.theme.colors.gray};
+  background-color: ${(props) => props.theme.colors.fullWhite};
+  border: 0.03125rem solid ${(props) => props.theme.colors.gray};
   border-radius: 0.4375rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin: 0;
-  font-size: 1rem;
-  font-family: 'Roboto', 'Arial', 'Helvetica';
+  font-size: 0.9rem;
+  font-family: 'Manrope', 'Roboto', 'Arial', 'Helvetica';
   cursor: pointer;
-  outline-color: ${props => props.theme.colors.blue};
+  outline-color: ${(props) => props.theme.colors.blue};
 `;
 
 const ArrowSvgContainer = styled(motion.span)`
@@ -176,27 +207,33 @@ const ArrowSvg = styled(motion.svg)`
 const OptionsContainer = styled(motion.ul)`
   box-shadow: 0 0.25rem 0.625rem rgba(0, 0, 0, 0.25);
   display: flex;
-  width: 100%;
+  width: 7.4rem;
   flex-direction: column;
   border-radius: 0.8125rem;
+  justify-content: center;
   overflow: hidden;
   padding: 0;
-  margin: 0;
+  margin: 0 0 0.8rem 0;
+  position: absolute;
+  left: -3.78rem;
+  z-index: 2;
+  background: ${(props) => props.theme.colors.fullWhite};
+  font-size: 0.9rem;
 `;
 
 const Option = styled(motion.li)`
   height: auto;
-  background-color: ${props => props.theme.colors.fullWhite};
+  background-color: ${(props) => props.theme.colors.fullWhite};
   padding: 0.5rem 0.5rem;
-  border-bottom-width: ${props => (props.noBorder ? '0px' : '1px')};
+  border-bottom-width: ${(props) => (props.noBorder ? '0px' : '1px')};
   border-bottom-style: solid;
-  border-bottom-color: ${props =>
+  border-bottom-color: ${(props) =>
     props.noBorder ? 'none' : props.theme.colors.lightGray};
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   overflow-wrap: break-word;
-  font-family: 'Roboto', 'Arial', 'Helvetica';
+  font-family: 'Manrope', 'Roboto', 'Arial', 'Helvetica';
   user-select: none;
   cursor: pointer;
 `;
