@@ -51,7 +51,7 @@ const findSimilarClubs = (res, clubResult) => {
           'name': 1,
           'tags': 1,
           'imageUrl': 1,
-          'description': 1
+          'shortDescription': 1
         }
       }
     ]).exec()
