@@ -18,6 +18,11 @@ const Box = styled.div`
   width: 25rem;
   padding: 0.4rem 1rem 1rem 1rem;
   margin: 1rem;
+  @media (max-width: 420px) {
+    font-size: 11px;
+    width: 13rem;
+    padding: 1rem;
+  }
 `;
 
 const SocialLinkStyledElement = styled.div`
@@ -33,6 +38,11 @@ const StyledLink = styled.a`
     font-weight: 550;
     text-decoration: none;
   }
+  a:visited {
+    color: ${(props) => props.theme.colors.checkboxGray};
+    font-weight: 550;
+    text-decoration: none;
+  }
   margin-left: 0.7rem;
 `;
 
@@ -40,15 +50,7 @@ const Icon = styled.i`
   color: ${(props) => props.theme.colors.turquoise};
 `;
 
-function EmailLink({ email }) {
-  return (
-    <a href="mailto:" {...email}>
-      {email}
-    </a>
-  );
-}
-
-function SocialLinkElement({ linkType, link }) {
+const SocialLinkElement = ({ linkType, link }) => {
   const iconDict = {
     facebook: { type: "fab", img: "facebook-f" },
     instagram: { type: "fab", img: "instagram" },
@@ -64,7 +66,9 @@ function SocialLinkElement({ linkType, link }) {
           <FontAwesomeIcon icon={[icon.type, icon.img]}></FontAwesomeIcon>
         </Icon>
         <StyledLink>
-          <EmailLink email={link}></EmailLink>
+          <a href="mailto:" {...link}>
+            {link}
+          </a>
         </StyledLink>
       </SocialLinkStyledElement>
     );
@@ -80,9 +84,9 @@ function SocialLinkElement({ linkType, link }) {
       </SocialLinkStyledElement>
     );
   }
-}
+};
 
-function AllSocialLinks({ socialLinks }) {
+const AllSocialLinks = ({ socialLinks }) => {
   return (
     <div>
       {socialLinks.map((socialLink) => (
@@ -95,8 +99,7 @@ function AllSocialLinks({ socialLinks }) {
       ))}
     </div>
   );
-  //return links.map((key, index) => <div key={index}>{links[index]}</div>);
-}
+};
 
 export const SocialTagsBox = ({ socialLinks }) => {
   return (
