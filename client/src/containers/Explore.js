@@ -100,7 +100,8 @@ export const Explore = () => {
             .then(json => {
                 console.log(json);
                 setClubProfiles(json);
-            });    
+            })
+            .catch(error => console.log(error));    
     }, []);
 
     return(
@@ -129,7 +130,7 @@ export const Explore = () => {
                                 clubSize = {profile.memberRange}
                                 acceptingMembers = {profile.acceptingMembers}
                                 applicationRequired = {profile.applicationRequired}
-                                cardLink={`/${profile._id}`}
+                                cardLink={`/club/${profile._id}`}
                             />
                         </CardWrapper>
                     )))} 

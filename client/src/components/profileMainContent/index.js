@@ -4,16 +4,20 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckCircle } from "@fortawesome/free-regular-svg-icons";
 
 export const ProfileMain = ({description, highlights, howToJoin}) => {   
-    return (
-        <Container>
-            <h2>Description</h2>
-            <p className='one'>{description}</p>
-            <h2>Highlights</h2>
-            <p className='two'>{highlights.map(highlight => <Highlight text={highlight}/>)}</p>
-            <h2>How to Join</h2>
-            <p className='two'>{howToJoin}</p>
-        </Container>
-    );
+    if(![description, highlights, howToJoin].includes(undefined)) {
+        return (
+            <Container>
+                <h2>Description</h2>
+                <p className='one'>{description}</p>
+                <h2>Highlights</h2>
+                <p className='two'>{highlights.map(highlight => <Highlight text={highlight}/>)}</p>
+                <h2>How to Join</h2>
+                <p className='two'>{howToJoin}</p>
+            </Container>
+        );
+    } else {
+        return null;
+    }
 };
 
 export default ProfileMain;

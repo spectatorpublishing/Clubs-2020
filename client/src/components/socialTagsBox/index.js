@@ -14,15 +14,10 @@ library.add(fab, faEnvelope, faLaptop, faDesktop);
 const Box = styled.div`
   box-shadow: 2px 10px 30px rgba(0, 0, 0, 0.05);
   border-radius: 7px;
-  background-color: ${(props) => props.theme.colors.white};
-  width: 25rem;
+  background-color: ${(props) => props.theme.colors.fullWhite};
+  width: auto;
   padding: 0.4rem 1rem 1rem 1rem;
-  margin: 1rem;
-  @media (max-width: 420px) {
-    font-size: 11px;
-    width: 13rem;
-    padding: 1rem;
-  }
+  font-size: 1rem;
 `;
 
 const SocialLinkStyledElement = styled.div`

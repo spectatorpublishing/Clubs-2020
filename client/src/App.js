@@ -15,16 +15,13 @@ const App = () => {
       <Router>
         <Switch>
           <ViewportProvider>
-            <Route path='/:id'>
+            <Route path='/club/:id'>
               <ClubProfile />
             </Route>
-            <Route path='/profile-test' exact>
-              <ProfileBoxTester />
-            </Route>
-            <Route path='/profile-creation' exact>
+            <Route path='/profile-creation'>
               <ProfileCreationMaster />
             </Route>
-            <Route path='/faq' exact>
+            <Route path='/faq'>
               <FAQ />
             </Route>
             <Route path='/' exact>

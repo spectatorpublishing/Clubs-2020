@@ -8,7 +8,7 @@ import { faEdit } from '@fortawesome/free-regular-svg-icons';
 import SearchTag from '../searchTag/index';
 
 const Box = styled.div`
-    background-color: ${(props) => props.theme.colors.white};
+    background-color: ${(props) => props.theme.colors.fullWhite};
     text-align: left;
     width: auto;
     margin: 1rem;
@@ -18,7 +18,19 @@ const Box = styled.div`
     font-weight: 500;
     font-family: 'Roboto', 'Helvetica', 'Arial';
 
-    a{
+    h2 {
+      color: ${(props) => props.theme.colors.black};
+      font-weight: 400;
+      @media only screen and (max-width: 768px) {
+        padding-left: 1.5rem;
+      }
+
+      @media only screen and (max-width: 320px) {
+        padding-left: 1rem;
+      }
+    }
+
+    a {
         text-decoration: none;
     }
 
@@ -133,7 +145,8 @@ const Item = styled.div`
 
 
 export const ExploreBox = ({name, description, clubSize, tags, imageURL, acceptingMembers, applicationRequired, cardLink}) => {
-    const Members = acceptingMembers ? <><FontAwesomeIcon icon={faCheckCircle}></FontAwesomeIcon><p>Open</p></> : <><FontAwesomeIcon icon={faTimesCircle}></FontAwesomeIcon><p>Closed</p></>;
+    const Members = acceptingMembers ? <><FontAwesomeIcon icon={faCheckCircle}></FontAwesomeIcon><p>Open</p></> 
+                  : <><FontAwesomeIcon icon={faTimesCircle}></FontAwesomeIcon><p>Closed</p></>;
     const Application = applicationRequired ? <p>Application</p> : <p>No Application</p>;
         
     return (

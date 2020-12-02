@@ -6,6 +6,7 @@ import MainContent from '../components/profileMainContent/index';
 import { ProfilePageBox } from "../components/profilePageBox";
 import { Navbar } from "../components/navbar";
 import { FrequencyTag } from "../components/frequencyTag/index";
+import { SocialTagsBox } from "../components/socialTagsBox";
 
 export const ClubProfile = () => {
     const { id } = useParams();
@@ -16,7 +17,7 @@ export const ClubProfile = () => {
 
     useEffect(() => {
         window.addEventListener("resize", () => setWidth(window.innerWidth));
-        fetch(`api/clubProfiles/${id}`, {
+        fetch(`${window.origin}/api/clubProfiles/${id}`, {
             method: 'GET',
             })
           .then((res) => res.json())
@@ -25,10 +26,10 @@ export const ClubProfile = () => {
             setLoading(false);
             console.log(`api/clubProfiles/${id}`);
           })
-          .catch((error) => console.log(error));
+        //   .catch((error) => console.log(error));
     }, [id]);
 
-    const SimilarClubs = () => { return (club.similarClubs.length === 0) ? (<h1>Loading</h1>) : 
+    const SimilarClubs = () => { return (club.similarClubs === undefined) ? (<h1>Loading</h1>) : 
         (club.similarClubs.map(profile => (
             <ExploreBox 
                 name = {profile.name}
@@ -61,6 +62,26 @@ export const ClubProfile = () => {
                                 <FrequencyTag
                                     frequency={club.meetingFrequency}
                                     weekly= {club.weekly}
+                                />
+                                <SocialTagsBox
+                                    socialLinks={[
+                                    {
+                                        key: "facebook",
+                                        link: "https://www.facebook.com/CUBalletEnsemble/",
+                                    },
+                                    {
+                                        key: "instagram",
+                                        link: "https://www.instagram.com/cuballetensemble/",
+                                    },
+                                    {
+                                        key: "email",
+                                        link: "cuballetensemble@gmail.com",
+                                    },
+                                    {
+                                        key: "website",
+                                        link: "http://www.columbia.edu/cu/cuballetensemble/dancers",
+                                    },
+                                    ]}
                                 />
                                 <div><Button href={club.mailingList}><p>Join our mailing list</p></Button></div>
                                 <div><Button className= "second" href={club.applicationLink}><p>Apply</p></Button></div>
@@ -99,6 +120,26 @@ export const ClubProfile = () => {
                                             frequency={club.meetingFrequency}
                                             weekly= {club.weekly}
                                         />
+                                    <SocialTagsBox
+                                        socialLinks={[
+                                        {
+                                            key: "facebook",
+                                            link: "https://www.facebook.com/CUBalletEnsemble/",
+                                        },
+                                        {
+                                            key: "instagram",
+                                            link: "https://www.instagram.com/cuballetensemble/",
+                                        },
+                                        {
+                                            key: "email",
+                                            link: "cuballetensemble@gmail.com",
+                                        },
+                                        {
+                                            key: "website",
+                                            link: "http://www.columbia.edu/cu/cuballetensemble/dancers",
+                                        },
+                                        ]}
+                                    />
                                         <div><Button href={club.mailingList}><p>Join our mailing list</p></Button></div>
                                         <div><Button className= "second" href={club.applicationLink}><p>Apply</p></Button></div>
                                     </Column>
@@ -125,7 +166,8 @@ export const ClubProfile = () => {
                         <PageWrapper>
                             <Content>
                                 <h1>{club.name}</h1>
-                                <p>Last updated: {new Date(club.lastUpdated.toString()).toLocaleDateString("en-US", options)}</p>
+                                <p>Last updated: {club.lastUpdated && 
+                                    new Date(club.lastUpdated.toString()).toLocaleDateString("en-US", options)}</p>
                                 <MainContent 
                                     description= {club.longDescription}
                                     highlights= {club.highlights}
@@ -144,6 +186,26 @@ export const ClubProfile = () => {
                                 <FrequencyTag
                                     frequency={club.meetingFrequency}
                                     weekly= {club.weekly}
+                                />
+                                 <SocialTagsBox
+                                    socialLinks={[
+                                    {
+                                        key: "facebook",
+                                        link: "https://www.facebook.com/CUBalletEnsemble/",
+                                    },
+                                    {
+                                        key: "instagram",
+                                        link: "https://www.instagram.com/cuballetensemble/",
+                                    },
+                                    {
+                                        key: "email",
+                                        link: "cuballetensemble@gmail.com",
+                                    },
+                                    {
+                                        key: "website",
+                                        link: "http://www.columbia.edu/cu/cuballetensemble/dancers",
+                                    },
+                                    ]}
                                 />
                                 <div><Button href={club.mailingList}><p>Join our mailing list</p></Button></div>
                                 <div><Button className= "second" href={club.applicationLink}><p>Apply</p></Button></div>

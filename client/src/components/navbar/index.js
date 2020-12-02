@@ -83,7 +83,7 @@ const StyledListItem = styled.li`
 
 const NavCenter = styled.div`
   @media screen and (min-width: 769px) {
-    padding: 2rem 3rem 0 4rem;
+    padding: 0.25rem 3rem 0 4rem;
     display: flex;
     align-items: center;
     justify-content: space-between;

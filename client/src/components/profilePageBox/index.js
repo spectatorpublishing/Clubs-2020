@@ -11,11 +11,15 @@ import {
 
 
 function ClubTags({ tags }) {
-  return tags.map((tag) => (
-    <Tag>
-      <SearchTag text={tag} />
-    </Tag>
-  ));
+  if(tags !== undefined) {
+    return tags.map((tag) => (
+      <Tag>
+        <SearchTag text={tag} />
+      </Tag>
+    ));
+    } else {
+      return null;
+    }
 }
 
 function AcceptingMembers({ isAcceptingMembers }) {
