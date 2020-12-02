@@ -1,20 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
+import RedAsterisk from '../redAsterisk/index'
 
 export const getErrorMessage = (showErrorMessage, excessCharacters) => {
   return (
-    <AnimatePresence>
-      {showErrorMessage && (
-        <ErrorMessage
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-        >
-          Your message is {excessCharacters} characters too long
-        </ErrorMessage>
-      )}
-    </AnimatePresence>
+    <ErrorMessage
+      initial={{ opacity: 0, height: 0 }}
+      animate={
+        showErrorMessage
+          ? { opacity: 1, height: 'auto' }
+          : { opacity: 0, height: 0, transition: { height: { delay: 0.5 } } }
+      }
+    >
+      Your message is {excessCharacters} characters too long
+    </ErrorMessage>
   );
 };
 
@@ -34,12 +34,11 @@ export const limitSize = (
   setShowErrorMessage,
   setExcessCharacters
 ) => {
-  if (e.target.value.length > characterMax) {
+  if (characterMax !== null && e.target.value.length > characterMax) {
     setShowErrorMessage(true);
     setExcessCharacters(e.target.value.length - characterMax);
-  } else if (e.target.value.length <= characterMax) {
+  } else if (characterMax !== null && e.target.value.length <= characterMax) {
     setShowErrorMessage(false);
-    setExcessCharacters(0);
   }
 };
 
@@ -49,17 +48,18 @@ const ErrorMessage = styled(motion.div)`
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
+  font-family: 'Manrope', 'Roboto', 'Helvetica', 'Arial';
 `;
 
 const TextLabel = styled.label`
   margin-right: 0.5rem;
-  max-width: 10.1875rem;
+  width: 15rem;
   display: inline-block;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   font-size: 1.125rem;
-  font-family: 'Roboto', 'Helvetica', 'Arial';
+  font-family: 'Manrope', 'Roboto', 'Helvetica', 'Arial';
   height: fit-content;
   padding: 0.3rem 0;
   @media only screen and (max-width: 768px) {
@@ -74,9 +74,4 @@ const LabelHeader = styled.div`
 const LabelDesc = styled.div`
   font-size: 0.875rem;
 `;
-const RedAsterisk = styled.span`
-  position: absolute;
-  margin: -0.9rem 0 0 -0.575rem;
-  font-size: 1.5625rem;
-  color: ${props => props.theme.colors.red};
-`;
+
