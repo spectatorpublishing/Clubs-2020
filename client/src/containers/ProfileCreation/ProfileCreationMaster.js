@@ -68,12 +68,12 @@ const ProfileCreationMaster = () => {
       <Navbar />
       <PageContainer>
         <SetUpClubProfile />
-        {currentPath === '/profile-creation/1' && (
+        {/*{currentPath === '/profile-creation/1' && (
           <PageDesc>Get-to-Know-You's: Why Students Should Join</PageDesc>
         )}
         {currentPath === '/profile-creation' && (
           <PageDesc>Opening Statement: Provide Basic Info</PageDesc>
-        )}
+        )}*/}
         <Router>
           <Switch>
             <Route
@@ -163,7 +163,7 @@ const PageContainer = styled.div`
   }
 `;
 
-const PageDesc = styled.h2`
+export const PageDesc = styled.h2`
   font-family: 'Manrope', 'Roboto', 'Arial', 'Helvetica';
   font-weight: 400;
   padding-left: 0rem;

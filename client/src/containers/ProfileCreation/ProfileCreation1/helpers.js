@@ -58,7 +58,7 @@ export const NewMembers = ({ clubProfile, setClubProfile }) => {
       <RowHeader>
         <RedAsterisk>*</RedAsterisk> When do you take new members?
       </RowHeader>
-      <FlexRow>{checkboxes}</FlexRow>
+      <FlexRow wrap='nowrap'>{checkboxes}</FlexRow>
     </QuestionContainer>
   );
 };
@@ -203,6 +203,7 @@ const FlexRow = styled.div`
   align-items: center;
   @media screen and (max-width: 801px) {
     margin-top: 0.75rem;
+    flex-wrap: ${props=>props.wrap ? props.wrap: "wrap"};
   }
 `;
 

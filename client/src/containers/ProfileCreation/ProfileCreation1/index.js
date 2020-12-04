@@ -1,9 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-
 import TextInput from '../../../components/textInput/index';
 import { inputData } from './data';
-
+import { PageDesc } from '../ProfileCreationMaster';
 import {
   ClubSize,
   NewMembers,
@@ -19,7 +18,6 @@ const ProfileCreation1 = ({
   shortDescRef,
   longDescRef,
 }) => {
-
   const inputs = inputData.map((item, index) => {
     const key = Object.keys(item)[0];
     const getRef = () => {
@@ -45,24 +43,31 @@ const ProfileCreation1 = ({
   });
 
   return (
-    <StyledBody>
-      <Column left>
-        <Tags clubProfile={clubProfile} setClubProfile={setClubProfile} />
-      </Column>
-      <Column right>
-        {inputs}
-        <ClubSize clubProfile={clubProfile} setClubProfile={setClubProfile} />
-        <NewMembers clubProfile={clubProfile} setClubProfile={setClubProfile} />
-        <RequireApplication
-          clubProfile={clubProfile}
-          setClubProfile={setClubProfile}
-        />
-        <MeetFrequency
-          clubProfile={clubProfile}
-          setClubProfile={setClubProfile}
-        />
-      </Column>
-    </StyledBody>
+    <>
+      <PageDesc>Get-to-Know-You's: Why Students Should Join</PageDesc>
+
+      <StyledBody>
+        <Column left>
+          <Tags clubProfile={clubProfile} setClubProfile={setClubProfile} />
+        </Column>
+        <Column right>
+          {inputs}
+          <ClubSize clubProfile={clubProfile} setClubProfile={setClubProfile} />
+          <NewMembers
+            clubProfile={clubProfile}
+            setClubProfile={setClubProfile}
+          />
+          <RequireApplication
+            clubProfile={clubProfile}
+            setClubProfile={setClubProfile}
+          />
+          <MeetFrequency
+            clubProfile={clubProfile}
+            setClubProfile={setClubProfile}
+          />
+        </Column>
+      </StyledBody>
+    </>
   );
 };
 
@@ -87,23 +92,6 @@ const Column = styled.div`
     padding-left: 0;
     order: ${(props) => (props.right ? '-1' : '1')};
   }
-`;
-const TagsContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  overflow-y: auto;
-  max-height: 45rem;
-`;
-
-const TagHeader = styled.h3`
-  font-family: 'Manrope', 'Roboto', 'Arial', 'Helvetica';
-  font-weight: 400;
-  margin-left: 0.3rem;
-  font-size: 1.125rem;
-`;
-
-const TagContainer = styled.div`
-  margin: 0.3rem;
 `;
 
 const InputContainer = styled.div`
