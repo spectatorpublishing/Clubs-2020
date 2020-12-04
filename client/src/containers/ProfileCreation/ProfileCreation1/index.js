@@ -44,8 +44,7 @@ const ProfileCreation1 = ({
 
   return (
     <>
-      <PageDesc>Get-to-Know-You's: Why Students Should Join</PageDesc>
-
+      <PageDesc>Opening Statement: Provide Basic Info</PageDesc>
       <StyledBody>
         <Column left>
           <Tags clubProfile={clubProfile} setClubProfile={setClubProfile} />

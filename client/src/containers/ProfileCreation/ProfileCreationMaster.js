@@ -8,7 +8,7 @@ import {
   NavLink,
 } from 'react-router-dom';
 import ProfileCreation1 from './ProfileCreation1/index';
-import ProfileCreation2 from './ProfileCreation2';
+import ProfileCreation2 from './ProfileCreation2/index';
 import FilledButton from '../../components/filledButton/index';
 import Navbar from '../../components/navbar/index';
 

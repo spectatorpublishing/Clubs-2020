@@ -13,6 +13,7 @@ const TextInput = ({
   placeholder,
   characterMax,
   identifier,
+  labelWidth,
   reference,
 }) => {
   const [focused, setFocused] = useState(false);
@@ -62,7 +63,7 @@ const TextInput = ({
         </TextContainer>
       ) : (
         <TextContainer>
-          {getLabel(compulsory, labelHeader, labelDesc, identifier)}
+          {getLabel(compulsory, labelHeader, labelDesc, identifier, labelWidth)}
           <FlexCol width={width}>
             <StyledInput
               id={identifier}

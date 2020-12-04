@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
-import RedAsterisk from '../redAsterisk/index'
+import RedAsterisk from '../redAsterisk/index';
 
 export const getErrorMessage = (showErrorMessage, excessCharacters) => {
   return (
@@ -18,9 +18,15 @@ export const getErrorMessage = (showErrorMessage, excessCharacters) => {
   );
 };
 
-export const getLabel = (compulsory, labelHeader, labelDesc, textId) => {
+export const getLabel = (
+  compulsory,
+  labelHeader,
+  labelDesc,
+  textId,
+  labelWidth
+) => {
   return (
-    <TextLabel htmlFor={textId}>
+    <TextLabel labelWidth={labelWidth} htmlFor={textId}>
       {compulsory ? <RedAsterisk>*</RedAsterisk> : <div />}
       <LabelHeader>{labelHeader}</LabelHeader>
       <LabelDesc>{labelDesc}</LabelDesc>
@@ -43,7 +49,7 @@ export const limitSize = (
 };
 
 const ErrorMessage = styled(motion.div)`
-  color: ${props => props.theme.colors.red};
+  color: ${(props) => props.theme.colors.red};
   margin-top: 0.2rem;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -53,7 +59,7 @@ const ErrorMessage = styled(motion.div)`
 
 const TextLabel = styled.label`
   margin-right: 0.5rem;
-  width: 15rem;
+  width: ${(props) => (props.labelWidth ? props.labelWidth : '15rem')};
   display: inline-block;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -74,4 +80,3 @@ const LabelHeader = styled.div`
 const LabelDesc = styled.div`
   font-size: 0.875rem;
 `;
-
