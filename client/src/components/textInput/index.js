@@ -37,7 +37,7 @@ const TextInput = ({
     <>
       {multiline ? (
         <TextContainer>
-          {getLabel(compulsory, labelHeader, labelDesc, identifier)}
+          {getLabel(compulsory, labelHeader, labelDesc, identifier, labelWidth)}
 
           <FlexCol width={width} multiline={multiline}>
             <StyledTextArea

@@ -27,7 +27,7 @@ export const getLabel = (
 ) => {
   return (
     <TextLabel labelWidth={labelWidth} htmlFor={textId}>
-      {compulsory ? <RedAsterisk>*</RedAsterisk> : <div />}
+      {compulsory ? <RedAsterisk>*</RedAsterisk> : <></>}
       <LabelHeader>{labelHeader}</LabelHeader>
       <LabelDesc>{labelDesc}</LabelDesc>
     </TextLabel>

@@ -16,7 +16,7 @@ export const Highlights = () => {
         key={item}
         identifier={item}
         labelWidth='1.35rem'
-        width='100%'
+        width='max(38.75rem, 65%)'
         labelHeader={`${index + 1}`}
       />
     );
@@ -29,11 +29,18 @@ export const Highlights = () => {
   );
 };
 
+const TextInputContainer = styled.div`
+  width: max(38.75rem, 65%);
+  @media screen and (max-width: 801px) {
+    width: inherit;
+  }
+`;
+
 const TextSection = styled.section`
   display: flex;
   flex-direction: row;
-  @media screen and (max-width: 801px){
-   flex-direction: column;
+  @media screen and (max-width: 801px) {
+    flex-direction: column;
   }
 `;
 const TextHeader = styled.h4`
@@ -44,4 +51,4 @@ const TextHeader = styled.h4`
 
 const HighlightsContainer = styled.div`
   width: 100%;
-`
+`;
