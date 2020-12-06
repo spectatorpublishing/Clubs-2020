@@ -1,9 +1,9 @@
 import React from 'react';
-import styled, { withTheme } from 'styled-components';
+import styled, { withTheme, css } from 'styled-components';
 import { motion } from 'framer-motion';
 import { withRouter } from 'react-router-dom';
 
-const FilledButton = ({ theme, text, stateFunc, stateVal, onClick }) => {
+const TomatoButton = ({ theme, text, stateFunc, stateVal, onClick, wire }) => {
   const handleClick = () => {
     // For state change
     if (!onClick) {
@@ -14,9 +14,12 @@ const FilledButton = ({ theme, text, stateFunc, stateVal, onClick }) => {
       onClick();
     }
   };
+  let hoverEffect = {};
+  if (!wire) hoverEffect = { backgroundColor: theme.colors.darkRed };
   return (
     <StyledButton
-      whileHover={{ backgroundColor: theme.colors.darkRed }}
+      wire={wire}
+      whileHover={hoverEffect}
       whileTap={{ scale: 0.95 }}
       onClick={handleClick}
     >
@@ -30,10 +33,22 @@ const StyledButton = styled(motion.button)`
   max-width: 13rem;
   min-height: 2.225rem;
   width: auto;
-  background-color: ${(props) => props.theme.colors.red};
-  color: ${(props) => props.theme.colors.fullWhite};
+  ${(props) =>
+    props.wire &&
+    css`
+      color: ${(props) => props.theme.colors.red};
+      background-color: transparent;
+      border: 1px solid ${(props) => props.theme.colors.red};
+    `}
+  ${(props) =>
+    !props.wire &&
+    css`
+      background-color: ${(props) => props.theme.colors.red};
+      color: ${(props) => props.theme.colors.fullWhite};
+      border: none;
+    `}
   border-radius: 0.4375rem;
-  border: none;
+
   padding: 0.5rem;
   font-size: 1rem;
   font-family: 'Roboto', 'Arial', 'Helvetica';
@@ -43,4 +58,4 @@ const StyledButton = styled(motion.button)`
   user-select: none;
   cursor: pointer;
 `;
-export default withRouter(withTheme(FilledButton));
+export default withRouter(withTheme(TomatoButton));

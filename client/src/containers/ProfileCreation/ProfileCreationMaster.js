@@ -9,7 +9,7 @@ import {
 } from 'react-router-dom';
 import ProfileCreation1 from './ProfileCreation1/index';
 import ProfileCreation2 from './ProfileCreation2/index';
-import FilledButton from '../../components/filledButton/index';
+import TomatoButton from '../../components/tomatoButton/index';
 import Navbar from '../../components/navbar/index';
 
 const ProfileCreationMaster = () => {
@@ -33,7 +33,7 @@ const ProfileCreationMaster = () => {
     console.log(clubProfile);
   }, [clubProfile]);
 
-  const nextPage1 = () => {
+  const errorHandler = () => {
     let tempProfile = { ...clubProfile };
     tempProfile.clubName = clubNameInput.current.value;
     tempProfile.shortDesc = shortDescInput.current.value;
@@ -61,19 +61,13 @@ const ProfileCreationMaster = () => {
     setClubProfile(tempProfile);
     setErrorMesssage('');
   };
-  
+
   // Updates state based on input text
   return (
     <>
       <Navbar />
       <PageContainer>
         <SetUpClubProfile />
-        {/*{currentPath === '/profile-creation/1' && (
-          <PageDesc>Get-to-Know-You's: Why Students Should Join</PageDesc>
-        )}
-        {currentPath === '/profile-creation' && (
-          <PageDesc>Opening Statement: Provide Basic Info</PageDesc>
-        )}*/}
         <Router>
           <Switch>
             <Route
@@ -97,7 +91,7 @@ const ProfileCreationMaster = () => {
           */}
           <ButtonContainer>
             <NavLink
-              onMouseDown={nextPage1}
+              onMouseDown={errorHandler}
               style={{ textDecoration: 'none' }}
               to={
                 errorMessage === ''
@@ -112,7 +106,7 @@ const ProfileCreationMaster = () => {
                 }
               }}
             >
-              <FilledButton
+              <TomatoButton
                 text={
                   currentPath === '/profile-creation/1'
                     ? 'Make my club profile'

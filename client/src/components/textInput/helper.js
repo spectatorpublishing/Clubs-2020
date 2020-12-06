@@ -61,6 +61,7 @@ const TextLabel = styled.label`
   margin-right: 0.5rem;
   width: ${(props) => (props.labelWidth ? props.labelWidth : '15rem')};
   display: inline-block;
+  flex-shrink: 0;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;

@@ -16,7 +16,7 @@ export const Highlights = () => {
         key={item}
         identifier={item}
         labelWidth='1.35rem'
-        width='max(38.75rem, 65%)'
+        width='100%'
         labelHeader={`${index + 1}`}
       />
     );
@@ -29,12 +29,27 @@ export const Highlights = () => {
   );
 };
 
-const TextInputContainer = styled.div`
-  width: max(38.75rem, 65%);
-  @media screen and (max-width: 801px) {
-    width: inherit;
-  }
-`;
+export const Socials = () => {
+  const inputData = [
+    'Website',
+    'Facebook',
+    'Instagram',
+    'Twitter',
+    'Club Email',
+    'Link to join mailing list',
+  ];
+  const inputs = inputData.map((item) => {
+    return (
+      <TextInput
+        identifier={item}
+        labelHeader={item + ':'}
+        labelWidth='8.75rem'
+        width='100%'
+      />
+    );
+  });
+  return <>{inputs}</>;
+};
 
 const TextSection = styled.section`
   display: flex;
