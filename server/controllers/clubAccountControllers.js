@@ -29,7 +29,7 @@ module.exports = {
     getAll: function(req, res){
         //query for pending and sort, query for nonpending and sort
         var q1 = clubAccount.find( {verificationStatus: 'pending'} )
-            .sort( {lastUpdateDate: -1, creationDate: -1} );
+            .sort( {creationDate: -1, lastUpdateDate: -1} );
         var q2 = clubProfile.find({
             verificationStatus: {$in: ['accepted', 'denied']},
             lastUpdateDate:  {
