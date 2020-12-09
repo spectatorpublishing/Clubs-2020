@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const clubProfileSchema = new Schema({
     name: { type: String, required: true },
+    clubAccountId: {type: String, required: true},
     longDescription: { type: String, required: true },
     shortDescription: { type: String, required: true },
     lastUpdated: { type: Date, default: Date.now() },

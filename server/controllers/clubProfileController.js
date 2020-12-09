@@ -1,4 +1,6 @@
-const clubProfile = require("../models/ClubProfileModel")
+const clubAccount = require("../models/ClubAccountModel");
+const clubProfile = require("../models/ClubProfileModel");
+const { getProfile, getById } = require("./clubAccountControllers");
 
 const shuffle = (sourceArray) => {
     for (var i = 0; i < sourceArray.length - 1; i++) {
@@ -82,23 +84,37 @@ module.exports = {
     },
     create: function(req, res) {
         // TODO; req.body contains profile information
-        clubProfile.create(req.body)
-                .then(newclubProfile => res.json(newclubProfile))
+        clubProfile.create(req.body) 
+                .then(newclubProfile => {
+                  //set new profile's acc ID to the given accID
+                  newclubProfile.clubAccountId = req.params.accountId;
+                  //get the account assosiated with given accID and set its profile Id to the new club profile Id
+                  var newClubAccount = getById(req.params.accountId,res);
+                  newClubAccount.clubProfileId = newclubProfile.id;
+                  res.json(newclubProfile)
+                })
                 .catch(err => res.status(422).json(err))
     },
     update: function(req, res) {
         // TODO; req.body contains profile information and req.params.id
-        clubProfile.findOneAndUpdate({ _id: req.params.id}, req.body)
+        // req.params.accountId is account id 
+        // find associated profile from this
+        var updateProfile = getProfile(req.params.accountId,res); 
+        clubProfile.findOneAndUpdate({ _id: updateProfile.id}, req.body) 
                 .then(clubprofile => res.json(clubprofile))
                 .catch(err => res.status(422).json(err))
     },
     delete: function(req, res) {
         // TODO: req.params.id
-        clubProfile.findById({ _id: req.params.id })
-                .then(clubprofile => clubprofile.remove())
+        var deleteAccount = getById(req.params.accountId);
+        deleteAccount.clubProfileId = null;
+        var deleteProfile = getProfile(req.params.accountId ,res); 
+        clubProfile.findById({ _id: deleteProfile.id })
+                .then(clubprofile => {
+                  clubprofile.remove()
+                })
                 .then(allprofiles => res.json(allprofiles))
-                .catch(err => res.status(422).json(err))
-                
+                .catch(err => res.status(422).json(err))   
     },
     filterAndSortBy: function(req, res) {
         // TODO; req.query contains filter and/or sort information
