@@ -77,25 +77,21 @@ module.exports = {
             .catch(err => errHandling(err, res));
     },
     getById: function(req, res) {
-        // TODO; req.params.id
         clubProfile.findById( {_id: req.params.id} )
                 .then(clubprofile => findSimilarClubs(res, clubprofile))
                 .catch(err => errHandling(err, res));
     },
     create: function(req, res) {
-        // TODO; req.body contains profile information
         clubProfile.create(req.body)
                 .then(newclubProfile => res.json(newclubProfile))
                 .catch(err => errHandling(err, res))
     },
     update: function(req, res) {
-        // TODO; req.body contains profile information and req.params.id
         clubProfile.findOneAndUpdate({ _id: req.params.id}, req.body)
                 .then(clubprofile => res.json(clubprofile))
                 .catch(err => errHandling(err, res))
     },
     delete: function(req, res) {
-        // TODO: req.params.id
         clubProfile.findByIdAndDelete({ _id: req.params.id })
                 .then((profile) => res.json(profile))
                 .catch(err => errHandling(err, res))
