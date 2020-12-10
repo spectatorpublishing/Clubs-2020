@@ -4,13 +4,51 @@ const config = require("../config")
 
 module.exports = {
     create: function(req, res){
-        // TODO
+        clubAccount.create({
+            accountEmail: req.body.accountEmail,
+            firebaseId: req.body.firebaseId
+        })
+            .then(newAccount => res.json(newAccount))
+            .catch(err => res.status(422).json(err));
     },
     delete: function(req, res){
-        // TODO
+        const ret = {}
+        clubAccount.findOneAndDelete({firebaseId: req.params.firebaseId})
+            .then(account => {
+                if (account) {
+                    ret.account = JSON.parse(JSON.stringify(account))
+                    var profileId = ret.account.clubProfileId
+
+                    if (profileId) {
+                        clubProfile.findByIdAndDelete({_id: profileId})
+                            .then(profile => {
+                                ret.profile = JSON.parse(JSON.stringify(profile))
+                                res.json(ret)
+                            })
+                            .catch(err => res.status(422).json(err))
+                    } else {
+                        res.json(ret)
+                    }
+                } else {
+                    res.json(ret)
+                }
+            })
+            .catch(err => res.status(422).json(err))
     },
     changeVerificationStatus: function(req, res){
-        // TODO
+        clubAccount.findByIdAndUpdate(req.params.id, {
+            $set:{
+                verificationStatus: req.body.status,
+                deniedReason: req.body.deniedReason,
+                lastUpdateDate: Date.now()
+            }
+            
+        }, {
+            useFindAndModify: false,
+            new: true
+        })
+            .then(account => res.json(account))
+            .catch(err => res.status(422).json(err));
     },
     getProfile: function(req, res){
         clubProfile.find( {clubAccountId: req.params.id} )

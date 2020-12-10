@@ -94,9 +94,8 @@ module.exports = {
     },
     delete: function(req, res) {
         // TODO: req.params.id
-        clubProfile.findById({ _id: req.params.id })
-                .then(clubprofile => clubprofile.remove())
-                .then(allprofiles => res.json(allprofiles))
+        clubProfile.findByIdAndDelete({ _id: req.params.id })
+                .then((profile) => res.json(profile))
                 .catch(err => res.status(422).json(err))
                 
     },
