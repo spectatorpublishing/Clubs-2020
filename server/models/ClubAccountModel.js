@@ -13,6 +13,7 @@ const clubAccountSchema = new Schema({
     creationDate: { type: Date, default: Date.now },
     lastUpdateDate: { type: Date, default: null },
     deniedReason: { type: String, default: '' },
+    isAdmin: { type: Boolean, default: false }
 });
 
 const clubAccount = mongoose.model('ClubAccount', clubAccountSchema);
