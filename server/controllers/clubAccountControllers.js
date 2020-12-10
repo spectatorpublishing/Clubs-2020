@@ -4,11 +4,19 @@ const config = require("../config")
 
 module.exports = {
     create: function(req, res){
-        clubAccount.create({
-            accountEmail: req.body.accountEmail,
-            firebaseId: req.body.firebaseId
-        })
-            .then(newAccount => res.json(newAccount))
+        clubAccount.find({firebaseId: req.body.firebaseId})
+            .then((ret) => {
+                if (ret && ret.length != 0) {
+                    res.json(ret[0])
+                } else {
+                    clubAccount.create({
+                        accountEmail: req.body.accountEmail,
+                        firebaseId: req.body.firebaseId
+                    })
+                        .then(newAccount => res.json(newAccount))
+                        .catch(err => res.status(422).json(err));
+                }
+            })
             .catch(err => res.status(422).json(err));
     },
     delete: function(req, res){
@@ -37,12 +45,9 @@ module.exports = {
     },
     changeVerificationStatus: function(req, res){
         clubAccount.findByIdAndUpdate(req.params.id, {
-            $set:{
-                verificationStatus: req.body.status,
-                deniedReason: req.body.deniedReason,
-                lastUpdateDate: Date.now()
-            }
-            
+            verificationStatus: req.body.status,
+            deniedReason: req.body.deniedReason ? req.body.deniedReason : "",
+            lastUpdateDate: Date.now()
         }, {
             useFindAndModify: false,
             new: true
@@ -51,8 +56,9 @@ module.exports = {
             .catch(err => res.status(422).json(err));
     },
     getProfile: function(req, res){
-        clubProfile.find( {clubAccountId: req.params.id} )
-            .then(clubprofile => res.json(clubprofile))
+        clubProfile.find({clubAccountId: req.params.id})
+            .then(profile => profile.length > 0 ? 
+                res.json(profile[0]) : res.json(profile))
             .catch(err => res.status(422).json(err))
     },
     getById: function(req, res){
@@ -62,15 +68,17 @@ module.exports = {
     },
     getByFirebaseId: function(req, res){
         clubAccount.find( {firebaseId: req.params.firebaseId} )
-            .then(clubaccount => res.json(clubaccount))
+            .then(account => account.length > 0 ? 
+                res.json(account[0]) : res.json(account))
             .catch(err => res.status(422).json(err))
     },
     getAll: function(req, res){
-        //query for pending and sort, query for nonpending and sort
+        //Accepted and denied needs to have been updated within the last 14 days
         var rdata = {};
         var date = new Date()
         date.setDate(date.getDate() - config.discardAfterXDays)
 
+        //query for pending and sort, query for nonpending and sort
         clubAccount.find( {verificationStatus: 'pending'} )
             .sort( {creationDate: 1, lastUpdateDate: -1} ).then(
                 q1 =>{ 
@@ -78,7 +86,6 @@ module.exports = {
                     clubAccount.find({
                         verificationStatus: 'accepted',
                         lastUpdateDate:  {
-                            //Updated within the last 14 days
                             $gte: date
                         }
                     }).sort( {lastUpdateDate: -1} ).then(
@@ -88,7 +95,6 @@ module.exports = {
                             clubAccount.find({
                                 verificationStatus: 'denied',
                                 lastUpdateDate:  {
-                                    //Updated within the last 14 days
                                     $gte: date
                                 }
                             }).sort( {lastUpdateDate: -1} ).then(
