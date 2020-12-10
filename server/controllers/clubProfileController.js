@@ -95,7 +95,7 @@ module.exports = {
     delete: function(req, res) {
         // TODO: req.params.id
         clubProfile.findByIdAndDelete({ _id: req.params.id })
-                .then(() => res.sendStatus(200))
+                .then((profile) => res.json(profile))
                 .catch(err => res.status(422).json(err))
                 
     },
