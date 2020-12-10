@@ -1,6 +1,6 @@
 const clubAccount = require("../models/ClubAccountModel")
 const clubProfile = require("../models/ClubProfileModel")
-const config = require(".../config/index")
+const config = require(".../config")
 
 
 module.exports = {
@@ -32,7 +32,7 @@ module.exports = {
         //query for pending and sort, query for nonpending and sort
         var rdata = {};
         var date = new Date()
-        date.setDate(date.getDate() - config.timeFrame)
+        date.setDate(date.getDate() - config.discardAfterXDays)
 
         clubAccount.find( {verificationStatus: 'pending'} )
             .sort( {creationDate: 1, lastUpdateDate: -1} ).then(
