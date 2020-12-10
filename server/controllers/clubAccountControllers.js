@@ -1,6 +1,6 @@
 const clubAccount = require("../models/ClubAccountModel")
 const clubProfile = require("../models/ClubProfileModel")
-const config = require(".../config")
+const config = require("../config")
 
 
 module.exports = {
