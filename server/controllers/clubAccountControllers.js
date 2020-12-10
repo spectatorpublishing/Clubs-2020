@@ -25,6 +25,7 @@ module.exports = {
         clubAccount.findByIdAndUpdate(req.params.id, {
             $set:{
                 verificationStatus: req.body.status,
+                deniedReason: req.body.deniedReason,
                 lastUpdateDate: Date.now()
             }
             
