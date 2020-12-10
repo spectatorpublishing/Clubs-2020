@@ -35,7 +35,7 @@ module.exports = {
         date.setDate(date.getDate() - config.timeFrame)
 
         clubAccount.find( {verificationStatus: 'pending'} )
-            .sort( {creationDate: 1, lastUpdateDate: 1} ).then(
+            .sort( {creationDate: 1, lastUpdateDate: -1} ).then(
                 q1 =>{ 
                     rdata.pending = JSON.parse(JSON.stringify(q1))
                     clubProfile.find({
