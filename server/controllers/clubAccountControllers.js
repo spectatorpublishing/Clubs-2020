@@ -12,18 +12,28 @@ module.exports = {
             .catch(err => res.status(422).json(err));
     },
     delete: function(req, res){
-        clubAccount.find({firebaseId: req.params.firebaseId})
-            .then((account) => {
-                const accountJson = JSON.parse(JSON.stringify(account))
-                const profileId = accountJson.clubProfileId
-                if (profileId) {
-                    clubProfile.findByIdAndDelete({_id: profileId})
-                    .catch(err => res.status(422).json(err))
+        const ret = {}
+        clubAccount.findOneAndDelete({firebaseId: req.params.firebaseId})
+            .then(account => {
+                if (account) {
+                    ret.account = JSON.parse(JSON.stringify(account))
+                    var profileId = ret.account.clubProfileId
+
+                    if (profileId) {
+                        clubProfile.findByIdAndDelete({_id: profileId})
+                            .then(profile => {
+                                ret.profile = JSON.parse(JSON.stringify(profile))
+                                res.json(ret)
+                            })
+                            .catch(err => res.status(422).json(err))
+                    } else {
+                        res.json(ret)
+                    }
+                } else {
+                    res.json(ret)
                 }
             })
-            .then(() => clubAccount.findOneAndDelete({firebaseId: req.params.firebaseId}))
-            .then((account) => res.json(account))
-            .catch(err => res.status(422).json(err));
+            .catch(err => res.status(422).json(err))
     },
     changeVerificationStatus: function(req, res){
         clubAccount.findByIdAndUpdate(req.params.id, {
