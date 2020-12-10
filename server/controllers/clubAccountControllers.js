@@ -2,6 +2,8 @@ const clubAccount = require("../models/ClubAccountModel")
 const clubProfile = require("../models/ClubProfileModel")
 const config = require("../config")
 
+const errHandling = require("../common").errHandling
+
 module.exports = {
     create: function(req, res){
         clubAccount.find({firebaseId: req.body.firebaseId})
@@ -14,10 +16,10 @@ module.exports = {
                         firebaseId: req.body.firebaseId
                     })
                         .then(newAccount => res.json(newAccount))
-                        .catch(err => res.status(422).json(err));
+                        .catch(err => errHandling(err, res));
                 }
             })
-            .catch(err => res.status(422).json(err));
+            .catch(err => errHandling(err, res));
     },
     delete: function(req, res){
         const ret = {}
@@ -33,7 +35,7 @@ module.exports = {
                                 ret.profile = JSON.parse(JSON.stringify(profile))
                                 res.json(ret)
                             })
-                            .catch(err => res.status(422).json(err))
+                            .catch(err => errHandling(err, res));
                     } else {
                         res.json(ret)
                     }
@@ -41,7 +43,7 @@ module.exports = {
                     res.json(ret)
                 }
             })
-            .catch(err => res.status(422).json(err))
+            .catch(err => errHandling(err, res));
     },
     changeVerificationStatus: function(req, res){
         clubAccount.findByIdAndUpdate(req.params.id, {
@@ -53,24 +55,24 @@ module.exports = {
             new: true
         })
             .then(account => res.json(account))
-            .catch(err => res.status(422).json(err));
+            .catch(err => errHandling(err, res));
     },
     getProfile: function(req, res){
         clubProfile.find({clubAccountId: req.params.id})
             .then(profile => profile.length > 0 ? 
                 res.json(profile[0]) : res.json(profile))
-            .catch(err => res.status(422).json(err))
+            .catch(err => errHandling(err, res));
     },
     getById: function(req, res){
         clubAccount.findById( {_id: req.params.id} )
             .then(clubaccount => res.json(clubaccount))
-            .catch(err => res.status(422).json(err))
+            .catch(err => errHandling(err, res));
     },
     getByFirebaseId: function(req, res){
         clubAccount.find( {firebaseId: req.params.firebaseId} )
             .then(account => account.length > 0 ? 
                 res.json(account[0]) : res.json(account))
-            .catch(err => res.status(422).json(err))
+            .catch(err => errHandling(err, res));
     },
     getAll: function(req, res){
         //Accepted and denied needs to have been updated within the last 14 days
@@ -102,12 +104,12 @@ module.exports = {
                                     rdata.denied = JSON.parse(JSON.stringify(q3))
                                     res.json(rdata)
                                 }
-                            ).catch(err => res.status(422).json(err));
+                            ).catch(err => errHandling(err, res));
 
                         }
-                    ).catch(err => res.status(422).json(err));
+                    ).catch(err => errHandling(err, res));
 
                 }
-            ).catch(err => res.status(422).json(err));
+            ).catch(err => errHandling(err, res));
     }
 }

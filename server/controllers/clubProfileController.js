@@ -1,5 +1,7 @@
 const clubProfile = require("../models/ClubProfileModel")
 
+const errHandling = require("../common").errHandling
+
 const shuffle = (sourceArray) => {
     for (var i = 0; i < sourceArray.length - 1; i++) {
         var j = i + Math.floor(Math.random() * (sourceArray.length - i));
@@ -59,7 +61,7 @@ const findSimilarClubs = (res, clubResult) => {
         clubResult.set('similarClubs', similarClubs)
         res.json(clubResult)
       })
-      .catch(err => res.status(422).json(err));
+      .catch(err => errHandling(err, res));
 }
 
 module.exports = {
@@ -72,31 +74,31 @@ module.exports = {
                 
                 res.send(shuffledData)
             })
-            .catch(err => res.status(422).json(err));
+            .catch(err => errHandling(err, res));
     },
     getById: function(req, res) {
         // TODO; req.params.id
         clubProfile.findById( {_id: req.params.id} )
                 .then(clubprofile => findSimilarClubs(res, clubprofile))
-                .catch(err => res.status(422).json(err));
+                .catch(err => errHandling(err, res));
     },
     create: function(req, res) {
         // TODO; req.body contains profile information
         clubProfile.create(req.body)
                 .then(newclubProfile => res.json(newclubProfile))
-                .catch(err => res.status(422).json(err))
+                .catch(err => errHandling(err, res))
     },
     update: function(req, res) {
         // TODO; req.body contains profile information and req.params.id
         clubProfile.findOneAndUpdate({ _id: req.params.id}, req.body)
                 .then(clubprofile => res.json(clubprofile))
-                .catch(err => res.status(422).json(err))
+                .catch(err => errHandling(err, res))
     },
     delete: function(req, res) {
         // TODO: req.params.id
         clubProfile.findByIdAndDelete({ _id: req.params.id })
                 .then((profile) => res.json(profile))
-                .catch(err => res.status(422).json(err))
+                .catch(err => errHandling(err, res))
                 
     },
     filterAndSortBy: function(req, res) {
