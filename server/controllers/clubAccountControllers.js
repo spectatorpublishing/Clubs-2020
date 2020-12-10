@@ -31,28 +31,32 @@ module.exports = {
     getAll: function(req, res){
         //query for pending and sort, query for nonpending and sort
         var rdata = {};
+        var date = new Date()
+        date.setDate(date.getDate() - config.timeFrame)
+
         clubAccount.find( {verificationStatus: 'pending'} )
-            .sort( {creationDate: -1, lastUpdateDate: -1} ).then(
+            .sort( {creationDate: 1, lastUpdateDate: 1} ).then(
                 q1 =>{ 
-                    rdata.pending = q1
+                    rdata.pending = JSON.parse(JSON.stringify(q1))
                     clubProfile.find({
                         verificationStatus: 'accepted',
                         lastUpdateDate:  {
                             //Updated within the last 14 days
-                            $gte: (new Date(ISODate().getTime() - 1000 * 3600 * 24 * config.timeFrame))
+                            $gte: date
                         }
-                    }).sort( {lastUpdateDate: -1, creationDate: -1} ).then(
+                    }).sort( {lastUpdateDate: 1, creationDate: 1} ).then(
                         q2 => {
-                            rdata.accepted = q2
+                            rdata.accepted = JSON.parse(JSON.stringify(q2))
+
                             clubProfile.find({
                                 verificationStatus: 'denied',
                                 lastUpdateDate:  {
                                     //Updated within the last 14 days
-                                    $gte: (new Date(ISODate().getTime() - 1000 * 3600 * 24 * config.timeFrame))
+                                    $gte: date
                                 }
                             }).sort( {lastUpdateDate: -1, creationDate: -1} ).then(
                                 q3 => {
-                                    rdata.denied = q3
+                                    rdata.denied = JSON.parse(JSON.stringify(q3))
                                     res.json(rdata)
                                 }
                             ).catch(err => res.status(422).json(err));
