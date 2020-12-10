@@ -1,7 +1,7 @@
 const clubAccountControllers = require("../controllers/clubAccountControllers")
 const router = require('express').Router()
 
-router.route("/create/:firebaseId").post(clubAccountControllers.create)
+router.route("/create").post(clubAccountControllers.create)
 router.route("/update/:id").put(clubAccountControllers.changeVerificationStatus)
 router.route("/delete/:firebaseId").delete(clubAccountControllers.delete)
 
