@@ -4,7 +4,10 @@ const config = require("../config")
 
 module.exports = {
     create: function(req, res){
-        clubAccount.create(req.body)
+        clubAccount.create({
+            accountEmail: req.body.accountEmail,
+            firebaseId: req.body.firebaseId
+        })
             .then(newAccount => res.json(newAccount))
             .catch(err => res.status(422).json(err));
     },
