@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import TextInput from '../../../components/textInput/index';
 
-export const Highlights = ({ highlightRefs }) => {
+export const Highlights = ({ highlightRefs, clubProfile }) => {
   const highlightsArr = [
     'highlight1',
     'highlight2',
@@ -13,6 +13,7 @@ export const Highlights = ({ highlightRefs }) => {
   const highlights = highlightsArr.map((item, index) => {
     return (
       <TextInput
+        defaultValue={clubProfile.highlights[index]}
         key={item}
         reference={highlightRefs[index]}
         identifier={item}
@@ -30,7 +31,7 @@ export const Highlights = ({ highlightRefs }) => {
   );
 };
 
-export const Socials = ({ socialRefs }) => {
+export const Socials = ({ socialRefs, clubProfile }) => {
   const inputData = [
     'Website',
     'Facebook',
@@ -39,9 +40,18 @@ export const Socials = ({ socialRefs }) => {
     'Club Email',
     'Link to join mailing list',
   ];
+  const defaultVals = [
+    clubProfile.website,
+    clubProfile.facebook,
+    clubProfile.instagram,
+    clubProfile.twitter,
+    clubProfile.clubEmail,
+    clubProfile.mailingListLink,
+  ];
   const inputs = inputData.map((item, index) => {
     return (
       <TextInput
+        defaultValue={defaultVals[index]}
         key={`social-${index + 1}`}
         reference={socialRefs[index]}
         identifier={item}

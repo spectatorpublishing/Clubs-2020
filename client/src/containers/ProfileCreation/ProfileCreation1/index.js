@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import TextInput from '../../../components/textInput/index';
 import { inputData } from './data';
@@ -21,16 +21,18 @@ const ProfileCreation1 = ({ clubProfile, setClubProfile, history }) => {
 
   const inputs = inputData.map((item, index) => {
     const key = Object.keys(item)[0];
-    const getRef = () => {
-      if (key === 'clubName') return clubNameRef;
-      else if (key === 'shortDesc') return shortDescRef;
-      else if (key === 'longDesc') return longDescRef;
-    };
+    const refs = [clubNameRef, shortDescRef, longDescRef];
+    const defaultVals = [
+      clubProfile.clubName,
+      clubProfile.shortDesc,
+      clubProfile.longDesc,
+    ];
 
     return (
       <InputContainer key={`input-${index}`}>
         <TextInput
           compulsory
+          defaultValue={defaultVals[index]}
           width='100%'
           multiline={item[key].multiline}
           height={item[key].height}
@@ -38,7 +40,7 @@ const ProfileCreation1 = ({ clubProfile, setClubProfile, history }) => {
           labelHeader={item[key].labelHeader}
           labelDesc={item[key].labelDesc}
           identifier={key}
-          reference={getRef()}
+          reference={refs[index]}
         />
       </InputContainer>
     );

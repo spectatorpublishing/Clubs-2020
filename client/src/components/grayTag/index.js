@@ -8,12 +8,13 @@ import { GrayTagContext } from '../contexts/index';
    Use checkbox for many options to be selected
    Must be enclosed by a GrayTagContainer component */
 
-const GrayTag = ({ text, identifier }) => {
+const GrayTag = ({ text, identifier, defaultValue }) => {
   const grayTag = useRef(null);
   const { handleClick, selectedTag, data, setData, objId } = useContext(
     GrayTagContext
   );
   const grayTagFocused = useFocused(grayTag);
+  // Enter pressed
   const onKeypress = (e) => {
     if (e.keyCode === 13) {
       grayTag.current.click();
@@ -44,9 +45,13 @@ const GrayTag = ({ text, identifier }) => {
         handleClick(identifier, data, setData, objId, text);
       }}
       variants={tagVariants}
-      clicked={selectedTag === identifier}
+      clicked={selectedTag === identifier || defaultValue === text}
       initial='inactive'
-      animate={selectedTag === identifier ? 'active' : 'inactive'}
+      animate={
+        selectedTag === identifier || defaultValue === text
+          ? 'active'
+          : 'inactive'
+      }
     >
       {text ? text : 'no text entered'}
     </Tag>

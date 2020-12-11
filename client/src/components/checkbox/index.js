@@ -5,8 +5,8 @@ import { useFocused, useViewport } from '../customHooks/index';
 
 // order is for when you want border radius on sides of mobile version
 
-const Checkbox = ({ labelText, order, data, setData, objId }) => {
-  const [clicked, setClicked] = useState(false);
+const Checkbox = ({ labelText, order, data, setData, objId, defaultValue }) => {
+  const [clicked, setClicked] = useState(defaultValue);
   const checkbox = useRef(null);
   const checkboxFocused = useFocused(checkbox);
   const { width } = useViewport();

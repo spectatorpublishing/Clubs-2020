@@ -15,6 +15,7 @@ const TextInput = ({
   identifier,
   labelWidth,
   reference,
+  defaultValue,
 }) => {
   const [focused, setFocused] = useState(false);
   const [showErrorMessage, setShowErrorMessage] = useState(false);
@@ -38,9 +39,9 @@ const TextInput = ({
       {multiline ? (
         <TextContainer>
           {getLabel(compulsory, labelHeader, labelDesc, identifier, labelWidth)}
-
           <FlexCol width={width} multiline={multiline}>
             <StyledTextArea
+              defaultValue={defaultValue}
               id={identifier}
               ref={reference}
               name={identifier}
@@ -66,6 +67,7 @@ const TextInput = ({
           {getLabel(compulsory, labelHeader, labelDesc, identifier, labelWidth)}
           <FlexCol width={width}>
             <StyledInput
+              defaultValue={defaultValue}
               id={identifier}
               ref={reference}
               name={identifier}

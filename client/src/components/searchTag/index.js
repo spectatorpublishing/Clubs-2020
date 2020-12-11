@@ -3,7 +3,16 @@ import styled, { withTheme } from 'styled-components';
 import { motion } from 'framer-motion';
 import { useFocused } from '../customHooks/index';
 
-const SearchTag = ({ text, theme, data, setData, objId, dataLimitSize, margin }) => {
+const SearchTag = ({
+  text,
+  theme,
+  data,
+  setData,
+  objId,
+  dataLimitSize,
+  margin,
+  defaultValue,
+}) => {
   const tagVariants = {
     active: { color: theme.colors.white, backgroundColor: theme.colors.red },
     inactive: {
@@ -11,7 +20,7 @@ const SearchTag = ({ text, theme, data, setData, objId, dataLimitSize, margin })
       backgroundColor: 'rgba(236, 108, 82, 0.08)',
     },
   };
-  const [clicked, setClicked] = useState(false);
+  const [clicked, setClicked] = useState(defaultValue);
   const searchTag = useRef(null);
   const searchTagFocused = useFocused(searchTag);
   const onKeypress = (e) => {
@@ -79,7 +88,7 @@ const Tag = styled(motion.button)`
   font-family: 'Manrope', 'Roboto', 'Arial', 'Helvetica';
   font-size: 0.9rem;
   border-radius: 1rem;
-  margin: ${props=>props.margin};
+  margin: ${(props) => props.margin};
   border: 0.125rem ${(props) => props.theme.colors.red} solid;
   outline-color: ${(props) => props.theme.colors.blue};
   -webkit-user-select: none;
