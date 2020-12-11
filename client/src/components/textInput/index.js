@@ -13,7 +13,9 @@ const TextInput = ({
   placeholder,
   characterMax,
   identifier,
+  labelWidth,
   reference,
+  defaultValue,
 }) => {
   const [focused, setFocused] = useState(false);
   const [showErrorMessage, setShowErrorMessage] = useState(false);
@@ -36,10 +38,10 @@ const TextInput = ({
     <>
       {multiline ? (
         <TextContainer>
-          {getLabel(compulsory, labelHeader, labelDesc, identifier)}
-
+          {getLabel(compulsory, labelHeader, labelDesc, identifier, labelWidth)}
           <FlexCol width={width} multiline={multiline}>
             <StyledTextArea
+              defaultValue={defaultValue}
               id={identifier}
               ref={reference}
               name={identifier}
@@ -62,9 +64,10 @@ const TextInput = ({
         </TextContainer>
       ) : (
         <TextContainer>
-          {getLabel(compulsory, labelHeader, labelDesc, identifier)}
+          {getLabel(compulsory, labelHeader, labelDesc, identifier, labelWidth)}
           <FlexCol width={width}>
             <StyledInput
+              defaultValue={defaultValue}
               id={identifier}
               ref={reference}
               name={identifier}
@@ -118,7 +121,7 @@ const InputStyles = css`
   border-radius: 7px;
   padding: 0.5rem;
   height: ${(props) => (props.height ? props.height : 'auto')};
-  width: 97%;
+  width: 100%;
   font-size: 1.125rem;
   color: ${(props) => props.theme.colors.checkboxGray};
   font-family: 'Manrope', 'Roboto', 'Helvetica', 'Arial';

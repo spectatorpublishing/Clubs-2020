@@ -10,8 +10,15 @@ import SearchTag from '../../../components/searchTag/index';
 
 export const Tags = ({ clubProfile, setClubProfile }) => {
   const tagComponents = tagData.map((tagName, index) => {
+    const checkIfIn = () => {
+      let isIn = false;
+      for (let i = 0; i < clubProfile.tags.length; i++)
+        if (clubProfile.tags[i] === tagName) isIn = true;
+      return isIn;
+    };
     return (
       <SearchTag
+        defaultValue={checkIfIn}
         margin='0.3rem'
         key={`tag-${index}`}
         text={tagName}
@@ -40,10 +47,18 @@ export const NewMembers = ({ clubProfile, setClubProfile }) => {
     ['mid', 'Spring'],
     ['right', 'Not taking members'],
   ];
+
   const checkboxes = checkboxData.map((item, index) => {
+    const checkIfIn = () => {
+      let isIn = false;
+      for (let i = 0; i < clubProfile.memberPeriod.length; i++)
+        if (clubProfile.memberPeriod[i] === item[1]) isIn = true;
+      return isIn;
+    };
     return (
       <CheckboxContainer key={`checkbox-${index + 1}`}>
         <Checkbox
+          defaultValue={checkIfIn}
           order={item[0]}
           labelText={item[1]}
           objId='memberPeriod'
@@ -58,7 +73,7 @@ export const NewMembers = ({ clubProfile, setClubProfile }) => {
       <RowHeader>
         <RedAsterisk>*</RedAsterisk> When do you take new members?
       </RowHeader>
-      <FlexRow>{checkboxes}</FlexRow>
+      <FlexRow wrap='nowrap'>{checkboxes}</FlexRow>
     </QuestionContainer>
   );
 };
@@ -76,10 +91,18 @@ export const RequireApplication = ({ clubProfile, setClubProfile }) => {
           objId='requireApplication'
         >
           <GrayTagContainer1>
-            <GrayTag text={'Yes'} identifier='app-1' />
+            <GrayTag
+              text={'Yes'}
+              identifier='app-1'
+              defaultValue={clubProfile.requireApplication}
+            />
           </GrayTagContainer1>
           <GrayTagContainer1>
-            <GrayTag text={'No'} identifier='app-2' />
+            <GrayTag
+              text={'No'}
+              identifier='app-2'
+              defaultValue={clubProfile.requireApplication}
+            />
           </GrayTagContainer1>
         </GrayTagContainer>
       </FlexRow>
@@ -99,6 +122,7 @@ export const MeetFrequency = ({ clubProfile, setClubProfile }) => {
             index={0}
             data={clubProfile}
             setData={setClubProfile}
+            defaultValue={clubProfile.meetTime[0]}
           />
         </DropdownContainer>
         <QuestionBody>per</QuestionBody>
@@ -109,6 +133,7 @@ export const MeetFrequency = ({ clubProfile, setClubProfile }) => {
             index={1}
             data={clubProfile}
             setData={setClubProfile}
+            defaultValue={clubProfile.meetTime[1]}
           />
         </DropdownContainer>
       </FlexRow>
@@ -121,7 +146,11 @@ export const ClubSize = ({ clubProfile, setClubProfile }) => {
   const sizeTags = sizes.map((size, index) => {
     return (
       <GrayTagContainer1 key={`size-${index + 1}`}>
-        <GrayTag text={size} identifier={`size-${index + 1}`} />
+        <GrayTag
+          text={size}
+          identifier={`size-${index + 1}`}
+          defaultValue={clubProfile.size}
+        />
       </GrayTagContainer1>
     );
   });
@@ -203,6 +232,7 @@ const FlexRow = styled.div`
   align-items: center;
   @media screen and (max-width: 801px) {
     margin-top: 0.75rem;
+    flex-wrap: ${(props) => (props.wrap ? props.wrap : 'wrap')};
   }
 `;
 

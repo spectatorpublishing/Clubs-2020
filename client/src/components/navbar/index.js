@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FaBars } from 'react-icons/fa';
-import FilledButton from '../filledButton/index';
+import FilledButton from '../tomatoButton/index';
 import { NavLink } from 'react-router-dom';
 import Logout from '../logout/index';
 import { useViewport } from '../customHooks';

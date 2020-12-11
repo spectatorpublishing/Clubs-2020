@@ -5,8 +5,8 @@ import { useFocused, useViewport } from '../customHooks/index';
 
 // order is for when you want border radius on sides of mobile version
 
-const Checkbox = ({ labelText, order, data, setData, objId }) => {
-  const [clicked, setClicked] = useState(false);
+const Checkbox = ({ labelText, order, data, setData, objId, defaultValue }) => {
+  const [clicked, setClicked] = useState(defaultValue);
   const checkbox = useRef(null);
   const checkboxFocused = useFocused(checkbox);
   const { width } = useViewport();
@@ -107,12 +107,6 @@ const LabelContainer = styled.div`
   -moz-user-select: none;
 `;
 
-const CheckboxContainer = styled.div`
-  display: inline-block;
-  vertical-align: middle;
-  outline-color: ${(props) => props.theme.colors.blue};
-`;
-
 const MobileLabel = styled.h3`
   font-family: 'Manrope', 'Roboto', 'Arial', 'Helvetica';
   font-size: 0.8125rem;
@@ -137,7 +131,7 @@ const StyledCheckbox = styled(motion.div)`
     min-width: 5rem;
     width: auto;
     height: 1.25rem;
-    padding: 0.5rem 0.5rem;
+    padding: 0.5rem 0.35rem;
     border-radius: 0;
     color: ${(props) =>
       props.clicked

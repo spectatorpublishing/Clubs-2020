@@ -7,14 +7,15 @@ import { useFocused, useOnClickOutside } from '../customHooks/index';
 const Dropdown = ({
   items,
   theme,
-  placeholder,
+  defaultValue,
   data,
   setData,
   objId,
   index,
+
 }) => {
   const [clicked, setClicked] = useState(false);
-  const [title, setTitle] = useState(placeholder);
+  const [title, setTitle] = useState(defaultValue);
   const [titleHovered, setTitleHovered] = useState(false);
   const [curIndex, setCurIndex] = useState(-1);
   const dropdown = useRef(null);
