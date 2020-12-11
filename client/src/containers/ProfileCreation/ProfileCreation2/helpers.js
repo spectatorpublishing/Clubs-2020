@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import TextInput from '../../../components/textInput/index';
 
-export const Highlights = () => {
+export const Highlights = ({ highlightRefs }) => {
   const highlightsArr = [
     'highlight1',
     'highlight2',
@@ -14,6 +14,7 @@ export const Highlights = () => {
     return (
       <TextInput
         key={item}
+        reference={highlightRefs[index]}
         identifier={item}
         labelWidth='1.35rem'
         width='100%'
@@ -29,7 +30,7 @@ export const Highlights = () => {
   );
 };
 
-export const Socials = () => {
+export const Socials = ({ socialRefs }) => {
   const inputData = [
     'Website',
     'Facebook',
@@ -38,9 +39,11 @@ export const Socials = () => {
     'Club Email',
     'Link to join mailing list',
   ];
-  const inputs = inputData.map((item) => {
+  const inputs = inputData.map((item, index) => {
     return (
       <TextInput
+        key={`social-${index + 1}`}
+        reference={socialRefs[index]}
         identifier={item}
         labelHeader={item + ':'}
         labelWidth='8.75rem'
@@ -62,6 +65,9 @@ const TextHeader = styled.h4`
   margin-right: 2rem;
   font-weight: 400;
   font-family: 'Manrope', 'Helvetica', 'Arial';
+  @media screen and (max-width: 801px) {
+    margin: 0 0 0 0.5rem;
+  }
 `;
 
 const HighlightsContainer = styled.div`

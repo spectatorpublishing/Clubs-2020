@@ -119,7 +119,7 @@ const InputStyles = css`
   border-radius: 7px;
   padding: 0.5rem;
   height: ${(props) => (props.height ? props.height : 'auto')};
-  width: 97%;
+  width: 100%;
   font-size: 1.125rem;
   color: ${(props) => props.theme.colors.checkboxGray};
   font-family: 'Manrope', 'Roboto', 'Helvetica', 'Arial';

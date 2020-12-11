@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import TextInput from '../../../components/textInput/index';
 import { inputData } from './data';
-import { PageDesc } from '../ProfileCreationMaster';
+import { withRouter } from 'react-router-dom';
+import { ErrorMessage, PageDesc } from '../ProfileCreationMaster';
+import TomatoButton from '../../../components/tomatoButton/index';
 import {
   ClubSize,
   NewMembers,
@@ -11,13 +13,12 @@ import {
   Tags,
 } from './helpers';
 
-const ProfileCreation1 = ({
-  clubProfile,
-  setClubProfile,
-  clubNameRef,
-  shortDescRef,
-  longDescRef,
-}) => {
+const ProfileCreation1 = ({ clubProfile, setClubProfile, history }) => {
+  const [errorMessage, setErrorMesssage] = useState('');
+  const clubNameRef = useRef(null);
+  const shortDescRef = useRef(null);
+  const longDescRef = useRef(null);
+
   const inputs = inputData.map((item, index) => {
     const key = Object.keys(item)[0];
     const getRef = () => {
@@ -25,6 +26,7 @@ const ProfileCreation1 = ({
       else if (key === 'shortDesc') return shortDescRef;
       else if (key === 'longDesc') return longDescRef;
     };
+
     return (
       <InputContainer key={`input-${index}`}>
         <TextInput
@@ -41,6 +43,36 @@ const ProfileCreation1 = ({
       </InputContainer>
     );
   });
+
+  const errorHandler = () => {
+    let tempProfile = { ...clubProfile };
+    tempProfile.clubName = clubNameRef.current.value;
+    tempProfile.shortDesc = shortDescRef.current.value;
+    tempProfile.longDesc = longDescRef.current.value;
+
+    // Left empty
+    if (
+      tempProfile.clubName === '' ||
+      tempProfile.shortDesc === '' ||
+      tempProfile.longDesc === '' ||
+      tempProfile.size === '' ||
+      tempProfile.memberPeriod === [] ||
+      tempProfile.requireApplication === '' ||
+      tempProfile.tags === []
+    ) {
+      setErrorMesssage('Mandatory Field Missing!');
+      return;
+    } else if (
+      tempProfile.shortDesc.length > 150 ||
+      tempProfile.longDesc.length > 500
+    ) {
+      setErrorMesssage('Character Limit Exceeded!');
+      return;
+    }
+    history.push('/profile-creation/1');
+    setClubProfile(tempProfile);
+    setErrorMesssage('');
+  };
 
   return (
     <>
@@ -66,11 +98,20 @@ const ProfileCreation1 = ({
           />
         </Column>
       </StyledBody>
+      <ButtonContainer>
+        <TomatoButton text='Next' onClick={errorHandler} />
+        <ErrorMessage
+          initial={{ opacity: 0 }}
+          animate={errorMessage === '' ? { opacity: 0 } : { opacity: 1 }}
+        >
+          {errorMessage}
+        </ErrorMessage>
+      </ButtonContainer>
     </>
   );
 };
 
-export default ProfileCreation1;
+export default withRouter(ProfileCreation1);
 
 const StyledBody = styled.main`
   display: grid;
@@ -85,7 +126,7 @@ const StyledBody = styled.main`
 `;
 
 const Column = styled.div`
-  width: 100%;
+  width: auto;
   padding-left: ${(props) => (props.right ? '2.5rem' : '0rem')};
   @media only screen and (max-width: 801px) {
     padding-left: 0;
@@ -95,4 +136,12 @@ const Column = styled.div`
 
 const InputContainer = styled.div`
   margin-bottom: 1.65rem;
+`;
+
+const ButtonContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin: 0.5rem 0;
 `;

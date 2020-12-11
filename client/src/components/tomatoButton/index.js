@@ -1,14 +1,26 @@
 import React from 'react';
 import styled, { withTheme, css } from 'styled-components';
 import { motion } from 'framer-motion';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
-const TomatoButton = ({ theme, text, stateFunc, stateVal, onClick, wire }) => {
+const TomatoButton = ({
+  theme,
+  text,
+  stateFunc,
+  stateVal,
+  onClick,
+  history,
+  wire,
+  to,
+}) => {
   const handleClick = () => {
-    // For state change
     if (!onClick) {
+      // For state change
       if (stateFunc) stateFunc(!stateVal);
+      // For page change
+      if (to) history.push(to);
     }
+
     // For custom function
     else {
       onClick();
