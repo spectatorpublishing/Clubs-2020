@@ -8,6 +8,7 @@ import ProfileCreationMaster from './containers/ProfileCreation/ProfileCreationM
 import theme from './theme';
 import { ProfileBoxTester } from './containers/ProfileBoxTester';
 import { ClubProfile } from './containers/ClubProfile';
+import { AccountTagTest } from './containers/AccountTagTest';
 
 const App = () => {
   return (
@@ -27,7 +28,10 @@ const App = () => {
             <Route path='/' exact>
               <Explore />
             </Route>
-          </ViewportProvider>
+            <Route path='/account-test'>
+              <AccountTagTest />
+            </Route>          
+            </ViewportProvider>
         </Switch>
       </Router>
     </ThemeProvider>
