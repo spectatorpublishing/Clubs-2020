@@ -39,7 +39,7 @@ export const ClubProfile = () => {
                 clubSize = {profile.memberRange}
                 acceptingMembers = {profile.acceptingMembers}
                 applicationRequired = {profile.applicationRequired}
-                cardLink={`/${profile._id}`}
+                cardLink={`/club/${profile._id}`}
             />
     )))};
 
