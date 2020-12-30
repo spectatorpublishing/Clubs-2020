@@ -5,14 +5,11 @@ import styled from "styled-components";
 export const AccountTag = () => {
     return(
       <BoxWrapper>
-          <Emoji>🎉</Emoji>
+          <Emoji><span role="img" aria-label="tada">🎉</span></Emoji>
           <Text>Thank you for creating an account! Here is a preview of what other students can see. Hit edit anytime to change your information.</Text>
       </BoxWrapper>
     );
 };
-
-
-
 
 const BoxWrapper = styled.div`
     margin: 20px;
@@ -25,7 +22,7 @@ const BoxWrapper = styled.div`
     align-items: center;
 `;
 
-const Emoji = styled.div`
+const Emoji = styled.span`
     margin: 10px 10px 10px 20px;
     font-size: 30px;
 `;
@@ -34,7 +31,4 @@ const Text = styled.div`
     color: black;
     margin: 10px;
     font-weight: 600;
-
-
-
 `;

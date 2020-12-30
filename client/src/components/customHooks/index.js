@@ -14,6 +14,7 @@ export const useFocused = (obj) => {
     return () => {
       document.removeEventListener('focusin', handleFocusIn);
     };
+    // eslint-disable-next-line
   }, []);
 
   return active;

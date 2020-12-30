@@ -32,6 +32,7 @@ const Dropdown = ({
       document.removeEventListener('keypress', onKeypress);
       document.removeEventListener('keydown', onKeydown);
     };
+    // eslint-disable-next-line
   }, [curIndex, titleHovered, clicked, dropdownFocused]);
 
   const onKeypress = (e) => {

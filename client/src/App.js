@@ -6,7 +6,6 @@ import { FAQ } from './containers/FAQ';
 import { ThemeProvider } from 'styled-components';
 import ProfileCreationMaster from './containers/ProfileCreation/ProfileCreationMaster';
 import theme from './theme';
-import { ProfileBoxTester } from './containers/ProfileBoxTester';
 import { ClubProfile } from './containers/ClubProfile';
 import { AccountTagTest } from './containers/AccountTagTest';
 

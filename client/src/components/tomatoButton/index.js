@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { withTheme, css } from 'styled-components';
 import { motion } from 'framer-motion';
-import { withRouter, Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 const TomatoButton = ({
   theme,

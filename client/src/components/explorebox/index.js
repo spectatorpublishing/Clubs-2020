@@ -157,7 +157,7 @@ export const ExploreBox = ({name, description, clubSize, tags, imageURL, accepti
                         <h2>{name}</h2>
                         <p>{description}</p>
                     </div>
-                    <Icon><img alt='club picture' src={imageURL} /></Icon>
+                    <Icon><img alt='club logo' src={imageURL} /></Icon>
                 </Row>
                 <Tags>{tags.map((tag, key) => <SearchTag key={key} text={tag}/>)}</Tags>
                 <hr/>
