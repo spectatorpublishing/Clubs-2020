@@ -2,14 +2,14 @@ import * as firebase from "firebase/app";
 import "firebase/auth";
 
 var firebaseConfig = {
-    apiKey: "AIzaSyBpwMaEBw6fEuazbzVF0LV7waig2UZ8Ku4",
-    authDomain: "clubs-2020.firebaseapp.com",
-    databaseURL: "https://clubs-2020.firebaseio.com",
-    projectId: "clubs-2020",
-    storageBucket: "clubs-2020.appspot.com",
-    messagingSenderId: "885333802443",
-    appId: "1:885333802443:web:9564cab92de801bd95ca4e",
-    measurementId: "G-RLXNF5EWFE"
+    apiKey: process.env.REACT_APP_AUTH_API_KEY,
+    authDomain: process.env.REACT_APP_AUTH_API_DOMAIN,
+    databaseURL: process.env.REACT_APP_SITE_URL,
+    projectId: process.env.REACT_APP_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_AUTH_API_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_AUTH_API_MSG_SENDER_ID,
+    appId: process.env.REACT_APP_AUTH_API_APP_ID,
+    measurementId: process.env.REACT_APP_AUTH_API_MEASURMENT_ID
 };
 
 firebase.initializeApp(firebaseConfig);
