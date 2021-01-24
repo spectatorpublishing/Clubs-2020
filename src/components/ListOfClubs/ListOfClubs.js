@@ -51,7 +51,7 @@ const MoreInfo = styled.div`
     Todos:
         1. [x] Figure out a way s.t when the user ACCEPTS, we know which club is being acted upon
         2. [x] create a unique component for Deny
-        3. [ ] find a way to efficiently delete club from list upon successful action
+        3. [x] find a way to efficiently delete club from list upon successful action
 
 */
 
@@ -103,7 +103,7 @@ export const ListOfClubs = ({clubs,columnTitles}) => {
                             if ( action === 'Accept')
                                 return(<ActionColumn onClick={handleAccept} key={i}>{action}</ActionColumn>)
                             else
-                                return (<Deny clubInfo={club} num={index} handler={deny_test} />)
+                                return (<Deny key={i} clubInfo={club} num={index} handler={deny_test} />)
                                 // return(<ActionColumn key={i}>{action}</ActionColumn>)
                         }): null}
                     </Row>

@@ -11,6 +11,10 @@ const HeadingDiv = styled.div`
     display: flex;
     justify-content: space-between;
     flex-direction:row;
+
+    p {
+        text-decoration: underline;
+    }
 `;
 
 const PendingSection = styled.div`
@@ -64,6 +68,11 @@ const clubs = [
     }   
 ];
 
+const page2heading = {
+    pending: 'Pending Requests',
+    approved: 'Approved Clubs',
+    trash: 'Trash'
+}
 
 
 export const Portal = () => {
@@ -71,7 +80,9 @@ export const Portal = () => {
      * also used for page transition
     */
 
-    const [page, setPage] = useState('Pending')
+    const [page, setPage] = useState('pending')
+
+    const switchPage = (toPage) => setPage(toPage)
 
     /* 
     * data workflow:
@@ -86,18 +97,18 @@ export const Portal = () => {
     return(
         <PageWrapper>
             <HeadingDiv>
-                <h1>Clubs@CU Admin Portal</h1>
+                { page === 'pending' ? <h1>Clubs@CU Admin Portal</h1> : <p onClick={()=> switchPage('pending')}>back</p> }
                 <p>Log out</p>
             </HeadingDiv>
             <PendingSection>
-                <h3>Pending Requests</h3>
+                <h3>{page2heading[page]}</h3>
                 <ListOfClubs columnTitles={columnTitles} clubs={clubs}></ListOfClubs>
             </PendingSection>
             <ApprovedSection>
-                <h3>List of Approved Clubs</h3>
+                <h3 onClick={()=>switchPage('approved')}>List of Approved Clubs</h3>
             </ApprovedSection>
             <TrashSection>
-                <h3>Trash</h3>
+                <h3 onClick={()=>switchPage('trash')}>Trash</h3>
             </TrashSection>
         </PageWrapper>
         
