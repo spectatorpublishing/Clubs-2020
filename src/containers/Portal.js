@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from 'styled-components';
 import { ListOfClubs } from "../components/ListOfClubs/ListOfClubs";
 
@@ -67,6 +67,22 @@ const clubs = [
 
 
 export const Portal = () => {
+    /* state indicating the current page: Pending / Approved / Trash
+     * also used for page transition
+    */
+
+    const [page, setPage] = useState('Pending')
+
+    /* 
+    * data workflow:
+    *   1. On page load, make a request to bd for the list of club (type based on the state page)
+    *   2. When the ACTION button (e.g Accept/Deny for pending reqs) is clicked, 
+    *      make a request to bd for the corresponding actions
+    * 
+    *   - code for part 1 should be put in this component
+    *   - code for part 2 should be put in the <ListOfClub /> 
+    *   
+    */
     return(
         <PageWrapper>
             <HeadingDiv>
