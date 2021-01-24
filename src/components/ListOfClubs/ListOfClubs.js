@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-
-
 const ColumnTitle = styled.p`
     font-weight: bold;
 `;
@@ -45,16 +43,20 @@ const MoreInfo = styled.div`
         }
     }
 `;
-export const ListOfClubs = ({clubs,columnTitles}) => {
-    // const [moreInfo, setMoreInfo] = useState(false);
-    const expandInfo = (index)=>{
-        var isDisplayed = document.getElementById(`more-info-${index}`).style.display;
-        isDisplayed ? isDisplayed==="none" ? document.getElementById(`more-info-${index}`).style.display= "inherit" 
-            : document.getElementById(`more-info-${index}`).style.display = "none" : document.getElementById(`more-info-${index}`).style.display= "inherit";
 
+export const ListOfClubs = ({clubs,columnTitles}) => {
+    /* Toggles the <MoreInfo /> component */
+    const expandInfo = (index) => {
+        var isDisplayed = document.getElementById(`more-info-${index}`).style.display;
+        if ( isDisplayed === 'inherit')
+            document.getElementById(`more-info-${index}`).style.display = 'none';
+        else
+            document.getElementById(`more-info-${index}`).style.display = 'inherit'
     }
+
     return(
         <div>
+            {/* Renders Table Column Titles specified in `title` */}
             <Row>
                 {columnTitles.map((title,columnIndex)=>{
                     return(
@@ -62,6 +64,7 @@ export const ListOfClubs = ({clubs,columnTitles}) => {
                     )
                 })}
             </Row>
+            {/* Renders a list of clubs in the section */}
             {clubs.map((club,index)=>{
                 const moreInfo = club.moreInfo;
                 return (
@@ -78,6 +81,7 @@ export const ListOfClubs = ({clubs,columnTitles}) => {
                         }): null}
                     </Row>
                     
+                    {/* This can be toggled by cliking the **View Information** button */}
                     <MoreInfo id={`more-info-${index}`} >
                         <div> 
                             <p>Description:</p>
@@ -88,11 +92,9 @@ export const ListOfClubs = ({clubs,columnTitles}) => {
                             <span > {moreInfo.highlights}</span>  
                         </div>
                     </MoreInfo>
-                 
                 </div>
                 )
             })}
-
         </div>
 
         
