@@ -17,7 +17,7 @@ const HeadingDiv = styled.div`
     }
 `;
 
-const PendingSection = styled.div`
+const ActiveSection = styled.div`
     margin: 3% 0;
 `;
 const ApprovedSection = styled.div`
@@ -68,6 +68,12 @@ const clubs = [
     }   
 ];
 
+const page2actions = {
+    pending: ['Accept', 'Deny'],
+    approved: ['Remove'],
+    trash: ['Undo']
+}
+
 const page2heading = {
     pending: 'Pending Requests',
     approved: 'Approved Clubs',
@@ -79,7 +85,6 @@ export const Portal = () => {
     /* state indicating the current page: Pending / Approved / Trash
      * also used for page transition
     */
-
     const [page, setPage] = useState('pending')
 
     const switchPage = (toPage) => setPage(toPage)
@@ -97,19 +102,25 @@ export const Portal = () => {
     return(
         <PageWrapper>
             <HeadingDiv>
-                { page === 'pending' ? <h1>Clubs@CU Admin Portal</h1> : <p onClick={()=> switchPage('pending')}>back</p> }
+                { page === 'pending' ? <h1>Clubs@CU Admin Portal</h1> : <p onClick={()=> switchPage('pending')}>Back</p> }
                 <p>Log out</p>
             </HeadingDiv>
-            <PendingSection>
+            <ActiveSection>
                 <h3>{page2heading[page]}</h3>
-                <ListOfClubs columnTitles={columnTitles} clubs={clubs}></ListOfClubs>
-            </PendingSection>
-            <ApprovedSection>
-                <h3 onClick={()=>switchPage('approved')}>List of Approved Clubs</h3>
-            </ApprovedSection>
-            <TrashSection>
-                <h3 onClick={()=>switchPage('trash')}>Trash</h3>
-            </TrashSection>
+                <ListOfClubs columnTitles={columnTitles} clubs={clubs} actions={page2actions[page]}></ListOfClubs>
+            </ActiveSection>
+
+            { page === 'pending' ? (
+                <>
+                    <ApprovedSection>
+                        <h3 onClick={()=>switchPage('approved')}>List of Approved Clubs</h3>
+                    </ApprovedSection>
+                    <TrashSection>
+                        <h3 onClick={()=>switchPage('trash')}>Trash</h3>
+                    </TrashSection>
+                </>
+                ) : null
+            }
         </PageWrapper>
         
     )

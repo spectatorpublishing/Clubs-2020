@@ -61,4 +61,23 @@ export function Deny({ clubInfo, num, handler }) {
             <ActionColumn onClick={handleClick}>Deny</ActionColumn>
         )
     }
-} 
+}
+
+export function Plain({ clubInfo, num, handler, action }) {
+    /* handler wrapper */
+    const handleAccept = () => {
+        handler(clubInfo.clubName, action)
+
+        /* On success, delete the club
+            document.getElementById(`${clubInfo.clubName}-${num}`).remove()
+        
+        On failure, prompt failed & toggle
+            alert('Deny failed due to network errors.')
+            setReason('')
+            setShowField(false)
+        */
+    }
+
+    return(<ActionColumn onClick={handleAccept}>{action}</ActionColumn>)
+}
+
