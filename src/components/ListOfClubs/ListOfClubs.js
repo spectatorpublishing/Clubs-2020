@@ -1,6 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import { Deny, Plain } from './Controllers'
+import { column2attrName } from './testData'
+
+/* grid-template-column for different sections */
+const page2grid = {
+    'pending': '25% 20% 15% 20% 10% 10%',
+    'approved': '3.5fr 3fr 2fr 2fr 3fr 1.5fr',
+    'trash': '3.5fr 3fr 2fr 3.5fr 3fr 1.5fr'
+}
 
 const ColumnTitle = styled.p`
     font-weight: bold;
@@ -8,7 +16,7 @@ const ColumnTitle = styled.p`
 
 const Row = styled.div`
     display: grid;
-    grid-template-columns: 25% 20% 15% 20% 10% 10%;
+    grid-template-columns: ${props => page2grid[props.page]};
 `;
 
 const Column = styled.p`
@@ -39,7 +47,7 @@ const MoreInfo = styled.div`
     }
 `;
 
-export const ListOfClubs = ({clubs, actions, columnTitles}) => {
+export const ListOfClubs = ({clubs, actions, columnTitles, page}) => {
     /* Toggles the <MoreInfo /> component */
     const expandInfo = (index) => {
         var isDisplayed = document.getElementById(`more-info-${index}`).style.display;
@@ -69,7 +77,7 @@ export const ListOfClubs = ({clubs, actions, columnTitles}) => {
     return(
         <div>
             {/* Renders Table Column Titles specified in `title` */}
-            <Row>
+            <Row page={page}>
                 {columnTitles.map((title,columnIndex)=>{
                     return(
                         <ColumnTitle key={columnIndex}>{title}</ColumnTitle>
@@ -81,10 +89,17 @@ export const ListOfClubs = ({clubs, actions, columnTitles}) => {
                 const moreInfo = club.moreInfo;
                 return (
                 <div key={index} id={`${club.clubName}-${index}`}>
-                    <Row>
-                        <Column>{club.clubName}</Column>
+                    {/* TODO: Row takes a page attribute to create a corresponding grid template */}
+                    <Row page={page}>
+                        {/* TODO: map column titles to <Column> components, need a column2attrName object */}
+                        {columnTitles.map((title,index) => {
+                            let attr = column2attrName[title]
+                            console.log(attr, club[attr])
+                            return <Column key={index}>{club[attr]}</Column>
+                        })}
+                        {/* <Column>{club.clubName}</Column>
                         <Column>{club.email}</Column>
-                        <Column>{club.dateApplied}</Column>
+                        <Column>{club.dateApplied}</Column> */}
                         <Column onClick={()=>expandInfo(index)}>
                             View Information <DownwardArrow className="fa">&#xf107;</DownwardArrow>
                         </Column>

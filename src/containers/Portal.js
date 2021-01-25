@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from 'styled-components';
-import { ListOfClubs } from "../components/ListOfClubs/ListOfClubs";
+import { ListOfClubs } from "../components/ListOfClubs/ListOfClubs"
+import fetchClubs from '../components/ListOfClubs/testData'
 
 const PageWrapper = styled.div`
     margin: 0 5%;
@@ -18,7 +19,7 @@ const HeadingDiv = styled.div`
 `;
 
 const ActiveSection = styled.div`
-    margin: 3% 0;
+    margin: 3% ${props => props.page === 'pending' ? '10%' : '0' } 3% 0;
 `;
 const ApprovedSection = styled.div`
     margin: 3% 0;
@@ -31,42 +32,12 @@ const TrashSection = styled.div`
     cursor: pointer;
 `;
 
-const columnTitles = [
-    "Club name:", "Email:", "Date applied:"
-];
-const clubs = [
-    {
-        "clubName": "ADI",
-        "email": "adi@columbia.edu",
-        "dateApplied": "11/20/20",
-        "actions":["Accept","Deny"],
-        "moreInfo": {
-                "description": "Founded in 1972, Multiracial Students Alliance (MSA) provides a space for students who identify as multiracial to gather, socialize, and discuss current personal and political issues that pertain to people with multiple racial and/or ethnic backgrounnds.",
-                "highlights": "1. alsdkfjasdlfkj 2. asdl;fkasdflkjsfd 3. alkdasdlfkjasdflkj"
-            }
-        
-    },
-    {
-        "clubName": "Multiracial Students Alliance",
-        "email": "msa@columbia.edu",
-        "dateApplied": "11/20/20",
-        "actions":["Accept","Deny"],
-        "moreInfo": {
-            "description": "Founded in 1972, Multiracial Students Alliance (MSA) provides a space for students who identify as multiracial to gather, socialize, and discuss current personal and political issues that pertain to people with multiple racial and/or ethnic backgrounnds.",
-            "highlights": "1. alsdkfjasdlfkj 2. asdl;fkasdflkjsfd 3. alkdasdlfkjasdflkj"
-        }
-    }, 
-    {
-        "clubName": "Multiracial Students Alliance",
-        "email": "msa@columbia.edu",
-        "dateApplied": "11/20/20",
-        "actions":["Accept","Deny"],
-        "moreInfo": {
-            "description": "Founded in 1972, Multiracial Students Alliance (MSA) provides a space for students who identify as multiracial to gather, socialize, and discuss current personal and political issues that pertain to people with multiple racial and/or ethnic backgrounnds.",
-            "highlights": "1. alsdkfjasdlfkj 2. asdl;fkasdflkjsfd 3. alkdasdlfkjasdflkj"
-        }
-    }   
-];
+
+const page2columns = {
+    pending: [ "Club name:", "Email:", "Date applied:"],
+    approved: ['Club name:', 'Email:', 'Date approved:', 'Last update:'],
+    trash: ['Club name:', 'Email:', 'Date removed:', 'Reason for Removal:']
+}
 
 const page2actions = {
     pending: ['Accept', 'Deny'],
@@ -105,9 +76,9 @@ export const Portal = () => {
                 { page === 'pending' ? <h1>Clubs@CU Admin Portal</h1> : <p onClick={()=> switchPage('pending')}>Back</p> }
                 <p>Log out</p>
             </HeadingDiv>
-            <ActiveSection>
+            <ActiveSection page={page}>
                 <h3>{page2heading[page]}</h3>
-                <ListOfClubs columnTitles={columnTitles} clubs={clubs} actions={page2actions[page]}></ListOfClubs>
+                <ListOfClubs columnTitles={page2columns[page]} clubs={fetchClubs(page)} actions={page2actions[page]} page={page} />
             </ActiveSection>
 
             { page === 'pending' ? (
