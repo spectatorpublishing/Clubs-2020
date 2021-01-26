@@ -4,6 +4,7 @@ import { Navbar } from './components/navbar';
 import { Explore } from './containers/Explore';
 import { FAQ } from './containers/FAQ';
 import { Portal } from "./containers/Portal";
+import { PortalLogin } from './containers/PortalLogIn'
 import { ThemeProvider } from 'styled-components';
 import theme from './theme';
 
@@ -13,6 +14,7 @@ const App = () => {
       <Navbar />
       <Router>
         <Switch>
+          <Route path='/portal/login' component={PortalLogin} />
           <Route path='/explore' component={Explore} />
           <Route path='/faq' component={FAQ} />
           <Route path='/portal' component={Portal} />

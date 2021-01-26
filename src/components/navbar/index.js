@@ -39,6 +39,9 @@ export const Navbar = () => {
           <li>
             <a href="/portal">Admin Portal</a>
           </li>
+          <li>
+            <a href="/portal/login">Admin Portal Log-in</a>
+          </li>
         </NavLinksContainer>
       </nav>
     </NavWrapper>

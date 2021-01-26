@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { ListOfClubs } from "../components/ListOfClubs/ListOfClubs"
 import fetchClubs from '../components/ListOfClubs/testData'
 
-const PageWrapper = styled.div`
+export const PageWrapper = styled.div`
     margin: 0 5%;
     font-family: 'Manrope', sans-serif;
 `;
