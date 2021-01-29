@@ -1,20 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 const Box = styled.div`
   display: flex;
   background-color: ${(props) => props.theme.colors.fullWhite};
   height: 3.5rem;
-  width: 20rem;
+  width: auto;
   padding: 0 2rem;
   border-radius: 7px;
   box-shadow: 2px 10px 30px rgba(0, 0, 0, 0.05);
   align-items: center;
-
-  @media screen and (max-width: 425px) {
-    margin: 0 2rem;
-    width: 70%;
-  }
+  margin: 0.5rem 0;
 `;
 
 const Text = styled.p`

@@ -29,6 +29,7 @@ const clubProfileSchema = new Schema({
     },
     howToJoin: { type: String, default: '' },
     applicationLink: { type: String, default: '' },
+    mailingListLink: { type: String, default: '' },
     showInstagramFeed: { type: Boolean, required: true },
     similarClubs: {
         type: [Object], default: []

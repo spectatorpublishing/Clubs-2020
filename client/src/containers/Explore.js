@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Navbar } from "../components/navbar";
+import { Navbar } from '../components/navbar';
 import ExploreBox from '../components/explorebox';
 import styled from 'styled-components';
 import Join from '../components/filters/join';
@@ -9,14 +9,14 @@ import Type from '../components/filters/type';
 import FilterMobile from '../components/filters/filterMobile';
 
 const Wrapper = styled.div`
-  background-color: #F4F6F8;
+  background-color: #f4f6f8;
   background-image: url(https://clubs-cu.s3.amazonaws.com/columbia-wave.svg);
   background-repeat: no-repeat;
   background-position: top right;
 `;
 
 const PageWrapper = styled.div`
-    padding: 0.5rem 3rem 3rem 3rem;
+  padding: 0.5rem 3rem 3rem 3rem;
 
     @media only screen and (max-width : 768px) {
         padding: 1rem 0.5rem;
@@ -118,7 +118,7 @@ const FilterBottom = styled.div`
 `;
 
 const ShuffleBox = styled.div`
-    margin-left: auto;
+  margin-left: auto;
 `;
 
 export const Explore = () => {
@@ -144,7 +144,8 @@ export const Explore = () => {
             .then(json => {
                 console.log(json);
                 setClubProfiles(json);
-            });    
+            })
+            .catch(error => console.log(error));    
     }, []);
 
     return(
@@ -173,7 +174,7 @@ export const Explore = () => {
                                 clubSize = {profile.memberRange}
                                 acceptingMembers = {profile.acceptingMembers}
                                 applicationRequired = {profile.applicationRequired}
-                                cardLink="/home"
+                                cardLink={`/club/${profile._id}`}
                             />
                         </CardWrapper>
                     )))} 
