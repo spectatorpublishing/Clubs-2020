@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 
-export const AccountTag = () => {
+const AccountTag = () => {
     return(
       <BoxWrapper>
           <Emoji><span role="img" aria-label="tada">🎉</span></Emoji>
@@ -12,7 +12,7 @@ export const AccountTag = () => {
 };
 
 const BoxWrapper = styled.div`
-    margin: 20px;
+    margin: 2rem 4rem 0rem 4rem;
     padding: 10px;
     width: auto;
     background-color: white;
@@ -32,3 +32,5 @@ const Text = styled.div`
     margin: 10px;
     font-weight: 600;
 `;
+
+export default AccountTag;

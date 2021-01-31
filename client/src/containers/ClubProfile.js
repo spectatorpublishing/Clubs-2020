@@ -7,6 +7,8 @@ import { ProfilePageBox } from "../components/profilePageBox";
 import { Navbar } from "../components/navbar";
 import { FrequencyTag } from "../components/frequencyTag/index";
 import { SocialTagsBox } from "../components/socialTagsBox";
+import AccountTag from "../components/accountTag/index";
+import YourClubProfile from "../components/yourClubProfile/index";
 
 export const ClubProfile = () => {
     const { id } = useParams();
@@ -14,6 +16,8 @@ export const ClubProfile = () => {
     const [width, setWidth] = useState(window.innerWidth);
     const [isLoading, setLoading] = useState(true);
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const isLoggedin = true;
+    const firstLogIn = true;
 
     useEffect(() => {
         window.addEventListener("resize", () => setWidth(window.innerWidth));
@@ -43,12 +47,24 @@ export const ClubProfile = () => {
             />
     )))};
 
+    const ConditionalAccountTag = () => { return (firstLogIn === true) ? 
+        ( <AccountTag/> ) : 
+        (null) 
+    };
+
+    const ConditionalClubProfile = () => { return (isLoggedin === true) ? 
+        ( <YourClubProfile/> ) : 
+        (null) 
+    };
+
     if (width < 541){ // mobile view
         return (
             <>
                 {!isLoading && (
                     <Wrapper>
                         <Navbar/>
+                        <ConditionalAccountTag/>
+                        <ConditionalClubProfile/> 
                         <PageWrapper>
                             <Content>
                                 <h1>{club.name}</h1>
@@ -104,8 +120,10 @@ export const ClubProfile = () => {
                 {!isLoading && (
                     <Wrapper>
                         <Navbar/>
+                        <ConditionalAccountTag/>
+                        <ConditionalClubProfile/> 
                         <PageWrapper>
-                            <Content>
+                            <Content>                            
                                 <h1>{club.name}</h1>
                                 <p>Last updated: {new Date(club.lastUpdated.toString()).toLocaleDateString("en-US", options)}</p>
                                 <Row>
@@ -163,6 +181,8 @@ export const ClubProfile = () => {
                 {!isLoading && (
                     <Wrapper>
                         <Navbar/>
+                        <ConditionalAccountTag/>
+                        <ConditionalClubProfile/> 
                         <PageWrapper>
                             <Content>
                                 <h1>{club.name}</h1>
