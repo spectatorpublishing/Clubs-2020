@@ -22,6 +22,10 @@ const BoxWrapper = styled.div`
     align-items: center;
     border-bottom: 1px solid ${(props) => props.theme.colors.gray};
     padding: 2rem 4rem 2rem 4rem;
+
+    @media (max-width: 768px) {
+        padding: 0rem 1rem 0rem 1rem;
+    }
 ;
 `;
 

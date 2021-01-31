@@ -20,6 +20,10 @@ const BoxWrapper = styled.div`
     display: flex;
     box-shadow: 0px 0px 15px 0px #C1C1C1;
     align-items: center;
+
+    @media (max-width: 768px) {
+        margin: 0rem 1rem 0rem 1rem;
+    }
 `;
 
 const Emoji = styled.span`
