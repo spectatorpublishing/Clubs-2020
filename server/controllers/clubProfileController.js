@@ -130,7 +130,6 @@ module.exports = {
     },
     
     update: function(req, res) {
-
       // check if the associated account exists
       clubAccount.findById(req.params.accountId)
         .then(account => {
@@ -139,35 +138,45 @@ module.exports = {
               name: "InvalidId",
               message: "The account id is invalid"
             }, res)
+          } else {
+            // update the profile (including lastUpdated time)
+            // if profile doesn't exist, insert new one
+            clubProfile.findOneAndUpdate(
+              {clubAccountId: req.params.accountId},
+              {
+                ...req.body,
+                clubAccountId: req.params.accountId,
+                lastUpdated: Date.now()
+              },
+              {
+                new: true,
+                useFindAndModify: false,
+                upsert: true
+              }
+            )
+              .then(ret => res.json(ret))
+              .catch(err => errHandling(err, res))
           }
         })
         .catch(err => errHandling(err, res));
-
-      // update the profile (including lastUpdated time)
-      // if profile doesn't exist, insert new one
-      clubProfile.findOneAndUpdate(
-        {clubAccountId: req.params.accountId},
-        {
-          ...req.body,
-          clubAccountId: req.params.accountId,
-          lastUpdated: Date.now()
-        },
-        {
-          new: true,
-          useFindAndModify: false,
-          upsert: true
-        }
-      )
-        .then(ret => res.json(ret))
-        .catch(err => errHandling(err, res))
     },
 
     delete: function(req, res) {
-        // TODO: req.params.id
-        clubProfile.findByIdAndDelete({ _id: req.params.id })
-                .then((profile) => res.json(profile))
-                .catch(err => errHandling(err, res))
-                
+        // check if the associated account exists
+        clubAccount.findById(req.params.accountId)
+          .then(account => {
+            if (!account) {
+              errHandling({
+                name: "InvalidId",
+                message: "The account id is invalid"
+              }, res)
+            } else {
+              account.set('clubProfileId', null)
+              clubProfile.findOneAndDelete({clubAccountId: req.params.accountId})
+                .then(profile => res.json(profile))
+                .catch(err => errHandling(err, res));
+            }})
+          .catch(err => errHandling(err, res));
     },
     filterAndSortBy: function(req, res) {
         // TODO; req.query contains filter and/or sort information
