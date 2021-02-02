@@ -1,4 +1,3 @@
-const clubAccount = require("../models/ClubAccountModel");
 const clubProfile = require("../models/ClubProfileModel")
 
 const errHandling = require("../common").errHandling
@@ -62,7 +61,7 @@ const findSimilarClubs = (res, clubResult) => {
         clubResult.set('similarClubs', similarClubs)
         res.json(clubResult)
       })
-      .catch(err => res.status(422).json(err));
+      .catch(err => errHandling(err, res));
 }
 
 module.exports = {
@@ -75,108 +74,28 @@ module.exports = {
                 
                 res.send(shuffledData)
             })
-            .catch(err => res.status(422).json(err));
+            .catch(err => errHandling(err, res));
     },
-
     getById: function(req, res) {
         clubProfile.findById( {_id: req.params.id} )
                 .then(clubprofile => findSimilarClubs(res, clubprofile))
-                .catch(err => res.status(422).json(err));
+                .catch(err => errHandling(err, res));
     },
-
     create: function(req, res) {
-        ret = {account: null, profile: null}
-
-        // check if the associated account exists
-        clubAccount.findById(req.params.accountId)
-          .then(account => {
-            if (!account) {
-              res.status(422).json({
-                errName: "InvalidIdError",
-                errMessage: "the account id is invalid"
-              })
-            } else {
-              // delete all previous records first
-              clubProfile.findOneAndDelete({clubAccountId: req.params.accountId})
-              .then(_ => {
-                clubProfile.create({
-                  ...req.body,
-                  clubAccountId: req.params.accountId
-                })
-                .then(newProfile => {
-
-                  newProfileJson = JSON.parse(JSON.stringify(newProfile))
-                  ret.profile = newProfileJson
-
-                  clubAccount.findByIdAndUpdate(
-                    newProfileJson.clubAccountId, 
-                    {clubProfileId: newProfileJson._id},
-                    {
-                      new: true,
-                      useFindAndModify: false
-                    }
-                  )
-                  .then(account => {
-                    ret.account = JSON.parse(JSON.stringify(account))
-                    res.json(ret)
-                  })
-                  .catch(err => errHandling(err, res));
-                })
-                .catch(err => errHandling(err, res));
-              })
-              .catch(err => errHandling(err, res));
-            }})
-          .catch(err => errHandling(err, res));
+        clubProfile.create(req.body)
+                .then(newclubProfile => res.json(newclubProfile))
+                .catch(err => errHandling(err, res))
     },
-    
     update: function(req, res) {
-      // check if the associated account exists
-      clubAccount.findById(req.params.accountId)
-        .then(account => {
-          if (!account) {
-            errHandling({
-              name: "InvalidId",
-              message: "The account id is invalid"
-            }, res)
-          } else {
-            // update the profile (including lastUpdated time)
-            // if profile doesn't exist, insert new one
-            clubProfile.findOneAndUpdate(
-              {clubAccountId: req.params.accountId},
-              {
-                ...req.body,
-                clubAccountId: req.params.accountId,
-                lastUpdated: Date.now()
-              },
-              {
-                new: true,
-                useFindAndModify: false,
-                upsert: true
-              }
-            )
-              .then(ret => res.json(ret))
-              .catch(err => errHandling(err, res))
-          }
-        })
-        .catch(err => errHandling(err, res));
+        clubProfile.findOneAndUpdate({ _id: req.params.id}, req.body)
+                .then(clubprofile => res.json(clubprofile))
+                .catch(err => errHandling(err, res))
     },
-
     delete: function(req, res) {
-        // check if the associated account exists
-        clubAccount.findById(req.params.accountId)
-          .then(account => {
-            if (!account) {
-              errHandling({
-                name: "InvalidId",
-                message: "The account id is invalid"
-              }, res)
-            } else {
-              account.set('clubProfileId', null)
-              clubProfile.findOneAndDelete({clubAccountId: req.params.accountId})
-                .then(profile => res.json(profile))
-                .catch(err => errHandling(err, res));
-            }})
-          .catch(err => errHandling(err, res));
+        clubProfile.findByIdAndDelete({ _id: req.params.id })
+                .then((profile) => res.json(profile))
+                .catch(err => errHandling(err, res))
+                
     },
     filterAndSortBy: function(req, res) {
         // TODO; req.query contains filter and/or sort information
