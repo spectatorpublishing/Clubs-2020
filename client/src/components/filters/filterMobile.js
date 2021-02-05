@@ -1,10 +1,9 @@
-import React from 'react';
-import styled from 'styled-components';
-import ReactDOM from 'react-dom';
+import React, { useState } from 'react';
+import styled, { css } from 'styled-components';
 
 
 const Button = styled.button`
-    background-color: #42B7CB;
+    background-color: ${(props) => props.theme.colors.turquoise};
     box-shadow: 2px 5px 20px rgba(0, 0, 0, 0.10);
     border-radius: 25px;
     width: 130px;
@@ -15,6 +14,13 @@ const Button = styled.button`
     :hover{
         box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.25);
     }
+
+    ${({ clicked }) =>
+        clicked &&
+        css`
+            background-color: ${(props) => props.theme.colors.gray};
+        `
+    }    
 `;
 
 const TextWrapper = styled.div`
@@ -38,29 +44,17 @@ const SignWrapper = styled.div`
     margin-right: 10px;
 `;
 
-const blue = '#42B7CB';
-const grey = "#9A9A9A";
 const text = 'Filters';
 const plus = '+';
 
-export default class FilterMobile extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { color: blue };
-        this.changeColor = this.changeColor.bind(this);
-    }
-    changeColor() {
-        const newColor = this.state.color === blue ? grey : blue;
-        this.setState({ color: newColor })
-    }
+export const FilterMobile = () => {
+    const [clicked, setClicked] = useState(false);
 
-    render() {
-        return (
-            <Button style={{ backgroundColor: this.state.color }} onClick={this.changeColor} >
-                <TextWrapper><SignWrapper>{plus}</SignWrapper><Word>{text}</Word></TextWrapper>
-            </Button>
+    return (
+        <Button clicked={clicked} onClick={() => setClicked(!clicked)}>
+            <TextWrapper><SignWrapper>{plus}</SignWrapper><Word>{text}</Word></TextWrapper>
+        </Button>
+    )
+};
 
-        )
-    }
-}
-ReactDOM.render(<FilterMobile />, document.getElementById('root'))
+export default FilterMobile;
