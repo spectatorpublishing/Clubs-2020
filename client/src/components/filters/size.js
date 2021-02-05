@@ -36,37 +36,6 @@ const Word = styled.div`
 
 `;
 
-
-/*const white = '#FFFFFF';
-const teal = '#42B7CB';
-const grey = "#9A9A9A";
-const Text = 'Size +';
-const text = 'Size x';
-
-export default class Size extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { color: white, textcolor: grey, text: Text };
-        this.changeColor = this.changeColor.bind(this);
-    }
-    changeColor() {
-        const newColor = this.state.color === white ? teal : white;
-        const newTextColor = this.state.textcolor === grey ? white : grey;
-        const newText = this.state.text === text ? Text : text;
-        this.setState({ color: newColor, textcolor: newTextColor, text: newText })
-    }
-
-    render() {
-        return (
-            <Button style={{ backgroundColor: this.state.color, color: this.state.textcolor }} onClick={this.changeColor} >
-                <Word>{this.state.text}</Word>
-            </Button>
-
-        )
-    }
-}
-ReactDOM.render(<Size />, document.getElementById('root'))*/
-
 const TextAdd = 'Size +';
 const TextRemove = 'Size x';
 

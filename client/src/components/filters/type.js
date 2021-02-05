@@ -36,37 +36,6 @@ const Word = styled.div`
 
 `;
 
-/*const white = '#FFFFFF';
-const orange = '#EC6C52';
-const grey = "#9A9A9A";
-const Text = 'Type +';
-const text = 'Type x';
-export default class Type extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { color: white, textcolor: grey, text: Text };
-        this.changeColor = this.changeColor.bind(this);
-    }
-    changeColor() {
-        const newColor = this.state.color === white ? orange : white;
-        const newTextColor = this.state.textcolor === grey ? white : grey;
-        const newText = this.state.text === text ? Text : text;
-        this.setState({ color: newColor, textcolor: newTextColor, text: newText })
-    }
-
-    render() {
-        return (
-
-            <Button style={{ backgroundColor: this.state.color, color: this.state.textcolor }} onClick={this.changeColor} >
-                <Word>{this.state.text}</Word>
-            </Button>
-
-        )
-    }
-}
-ReactDOM.render(<Type />, document.getElementById('root'))
-*/
-
 const TextAdd = 'Type +';
 const TextRemove = 'Type x';
 

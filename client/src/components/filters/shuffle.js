@@ -48,24 +48,7 @@ const Image = styled.div`
         padding:0;
     }
 `;
-/*
-class Shuffle extends React.Component {
-    constructor() {
-        super();
-        this.state = { text: 'Shuffle' }
-    }
 
-    render() {
-        const { text } = this.state;
-        return (
-
-            <Button>
-                <Image><img src={Icon} width={15} height={15} alt="shuffle" /></Image>
-                <Word>{text}</Word>
-            </Button>
-        )
-    }
-}*/
 const text = 'Shuffle';
 
 export const Shuffle = () => {
