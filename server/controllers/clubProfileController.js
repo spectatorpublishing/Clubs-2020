@@ -107,5 +107,12 @@ module.exports = {
     search: function(req, res) {
         // TODO; req.query contains search query
         // support pagination with req.query 
+        const search = req.query.name
+        clubProfile.find({name:{$regex: search, $options: '$i'}})
+        .then(data=>{
+          res.send(data);
+        })
+
+        
     }
 }
