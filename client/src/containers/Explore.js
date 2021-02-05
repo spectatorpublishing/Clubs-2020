@@ -6,6 +6,7 @@ import Join from '../components/filters/join';
 import Shuffle from '../components/filters/shuffle';
 import Size from '../components/filters/size';
 import Type from '../components/filters/type';
+import SearchBar from '../components/searchBar';
 
 const Wrapper = styled.div`
   background-color: #f4f6f8;
@@ -114,6 +115,7 @@ export const Explore = () => {
                     <p>Find your Columbia community</p>
                 </TextWrapper>
                 <FiltersBox>
+                    <Filter><SearchBar></SearchBar></Filter>
                     <Filter><Type /></Filter>
                     <Filter><Size /></Filter>
                     <Filter><Join /></Filter>
