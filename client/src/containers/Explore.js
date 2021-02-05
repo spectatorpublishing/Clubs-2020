@@ -9,7 +9,7 @@ import Type from '../components/filters/type';
 import FilterMobile from '../components/filters/filterMobile';
 
 const Wrapper = styled.div`
-  background-color: #f4f6f8;
+  background-color: ${(props) => props.theme.colors.white};
   background-image: url(https://clubs-cu.s3.amazonaws.com/columbia-wave.svg);
   background-repeat: no-repeat;
   background-position: top right;
@@ -50,7 +50,7 @@ const TextWrapper = styled.div`
         font-style: normal;
         font-weight: 500;
         font-size: 1.2rem;
-        color: #9A9A9A;
+        color: ${(props) => props.theme.colors.gray};
         padding: 1rem 1rem 0 1rem;
     }
 

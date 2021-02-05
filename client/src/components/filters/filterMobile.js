@@ -27,7 +27,7 @@ const TextWrapper = styled.div`
     font-family: Roboto;
     font-style: normal;
     font-weight: 500;
-    color: white;
+    color: ${(props) => props.theme.colors.white};
     text-align: center;
     line-height: 21px;
     display: flex;

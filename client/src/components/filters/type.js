@@ -1,10 +1,10 @@
-import React from 'react';
-import styled from 'styled-components';
-import ReactDOM from 'react-dom';
+import React, { useState } from 'react';
+import styled, { css } from 'styled-components';
 
 
 const Button = styled.button`
-    background: #FFFFFF;
+    background-color: ${(props) => props.theme.colors.fullWhite};
+    color: ${(props) => props.theme.colors.gray};
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
     border-radius:7px;
     width:104px;
@@ -14,6 +14,14 @@ const Button = styled.button`
 
     :hover{
         box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    ${({ clicked }) =>
+        clicked &&
+        css`
+            background-color: ${(props) => props.theme.colors.turquoise};
+            color: ${(props) => props.theme.colors.fullWhite};
+        `
     }
 `;
 
@@ -28,7 +36,7 @@ const Word = styled.div`
 
 `;
 
-const white = '#FFFFFF';
+/*const white = '#FFFFFF';
 const orange = '#EC6C52';
 const grey = "#9A9A9A";
 const Text = 'Type +';
@@ -57,4 +65,19 @@ export default class Type extends React.Component {
     }
 }
 ReactDOM.render(<Type />, document.getElementById('root'))
+*/
 
+const TextAdd = 'Type +';
+const TextRemove = 'Type x';
+
+export const Type = () => {
+    const [clicked, setClicked] = useState(false);
+
+    return (
+        <Button clicked={clicked} onClick={() => setClicked(!clicked)}>
+            <Word>{clicked ? TextAdd : TextRemove}</Word>
+        </Button>
+    )
+};
+
+export default Type;
