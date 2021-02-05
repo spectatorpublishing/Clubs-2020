@@ -4,7 +4,7 @@ import Icon from './shuffle.png';
 
 
 const Button = styled.button`
-    background: #FFFFFF;
+    background-color: white;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
     border-radius:7px;
     width:130px;
@@ -15,6 +15,10 @@ const Button = styled.button`
     :hover{
         box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.20);
     }
+
+    @media only screen and (max-width : 768px) {
+            width: 39px;
+        }
 `;
 
 const Word = styled.div`
@@ -24,9 +28,13 @@ const Word = styled.div`
     font-size:18px;
     line-height:21px;
     text-align:center;
-    color:#9A9A9A;
+    color: ${(props) => props.theme.colors.gray};
     float:right;
     padding-right:15px;
+
+    @media only screen and (max-width : 768px) {
+            display: none;
+        }
 
 `;
 
@@ -34,23 +42,23 @@ const Image = styled.div`
     padding-top:3px;
     float:left;
     padding-left:10px;
+
+    @media only screen and (max-width : 768px) {
+        float: none;
+        padding:0;
+    }
 `;
 
-class Shuffle extends React.Component {
-    constructor() {
-        super();
-        this.state = { text: 'Shuffle' }
-    }
+const text = 'Shuffle';
 
-    render() {
-        const { text } = this.state;
-        return (
+export const Shuffle = () => {
 
-            <Button>
-                <Image><img src={Icon} width={15} height={15} alt="shuffle" /></Image>
-                <Word>{text}</Word>
-            </Button>
-        )
-    }
-}
+    return (
+        <Button>
+            <Image><img src={Icon} width={15} height={15} alt="shuffle" /></Image>
+            <Word>{text}</Word>
+        </Button>
+    )
+};
+
 export default Shuffle;
