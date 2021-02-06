@@ -45,6 +45,9 @@ export const Navbar = () => {
           <li>
             <a href="/clubprofile">Club Profile</a>
           </li>
+          <li>
+            <a href="/test">Firebase Test</a>
+          </li>
         </NavLinksContainer>
       </nav>
     </NavWrapper>

@@ -26,3 +26,6 @@ yarn-error.log*
 
 # db credentials
 server/.env
+
+# client side firebase credentials
+client/.env
