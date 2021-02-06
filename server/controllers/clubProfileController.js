@@ -107,12 +107,36 @@ module.exports = {
     search: function(req, res) {
         // TODO; req.query contains search query
         // support pagination with req.query 
-        const search = req.query.name
-        clubProfile.find({name:{$regex: search, $options: '$i'}})
-        .then(data=>{
-          res.send(data);
-        })
 
+        let searchInput = req.params.search;
+        let resultingData = {};
+
+
+        clubProfile.find({name:{$regex: searchInput, $options: 'i'}})
+        .then(q1=>{
+          resultingData.name = JSON.parse(JSON.stringify(q1));
+
+
+          clubProfile.find( {longDescription:{$regex: searchInput, $options: 'i'} })
+          .then(q2=>{
+            
+            resultingData.longDescription = JSON.parse(JSON.stringify(q2));
+            
+            clubProfile.find({shortDescription:{$regex: searchInput, $options: 'i'}})
+            .then(q3 =>{
+              
+              resultingData.shortDescription = JSON.parse(JSON.stringify(q3));
+              
+              res.json(resultingData);
+              
+
+            }).catch(err => res.status(422).json(err));
+            
+          }).catch(err => res.status(422).json(err));
+          
+        })
+        .catch(err => res.status(422).json(err));
+        
         
     }
 }
