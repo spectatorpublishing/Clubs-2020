@@ -78,7 +78,7 @@ const Box = styled.div`
   border-radius: 7px;
   background-color: ${(props) => props.theme.colors.fullWhite};
   width: auto;
-  padding: 1rem 2rem;
+  padding: 0.2rem 2rem;
   margin: 0.5rem 0;
 `;
 

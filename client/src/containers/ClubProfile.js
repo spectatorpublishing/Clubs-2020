@@ -239,11 +239,12 @@ export const ClubProfile = () => {
 };
 
 const Wrapper = styled.main`
-  background-color: ${(props) => props.theme.colors.white};
-  background-image: url(https://clubs-cu.s3.amazonaws.com/Profile+Wave.svg);
-  background-repeat: no-repeat;
-  background-position: top right;
-  width: fit-content;
+    font-family: 'Manrope', 'Roboto', 'Arial', 'Helvetica';  
+    background-color: ${(props) => props.theme.colors.white};
+    background-image: url(https://clubs-cu.s3.amazonaws.com/Profile+Wave.svg);
+    background-repeat: no-repeat;
+    background-position: top right;
+    width: fit-content;
   
 `;
 

@@ -16,14 +16,15 @@ const Box = styled.div`
   border-radius: 7px;
   background-color: ${(props) => props.theme.colors.fullWhite};
   width: auto;
-  padding: 0.4rem 1rem 1rem 1rem;
+  padding: 0.2rem 2rem 1rem 2rem;
   font-size: 1rem;
 `;
 
 const SocialLinkStyledElement = styled.div`
   display: flex;
   flex-direction: row;
-  margin: 0.5rem 0 0.5rem 0.6rem;
+  margin-top: 0.2rem;
+  margin-right: 0.2rem;
   padding: 0.2rem;
 `;
 
