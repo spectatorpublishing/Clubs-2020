@@ -61,7 +61,6 @@ const GrayTag = ({ text, identifier, defaultValue }) => {
 const Tag = styled(motion.button)`
   display: inline-block;
   padding: 0.4rem 1rem;
-  font-family: 'Manrope', 'Roboto', 'Arial', 'Helvetica';
   font-size: 0.9rem;
   border-radius: 1rem;
   border: ${(props) => (props.clicked ? '.125rem' : '0.0625rem')}

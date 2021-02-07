@@ -184,7 +184,6 @@ const TitleContainer = styled(motion.button)`
   justify-content: space-between;
   margin: 0;
   font-size: 0.9rem;
-  font-family: 'Manrope', 'Roboto', 'Arial', 'Helvetica';
   cursor: pointer;
   outline-color: ${(props) => props.theme.colors.blue};
 `;
@@ -235,7 +234,6 @@ const Option = styled(motion.li)`
   -moz-user-select: none;
   -ms-user-select: none;
   overflow-wrap: break-word;
-  font-family: 'Manrope', 'Roboto', 'Arial', 'Helvetica';
   user-select: none;
   cursor: pointer;
 `;

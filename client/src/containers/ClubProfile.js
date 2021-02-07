@@ -239,7 +239,6 @@ export const ClubProfile = () => {
 };
 
 const Wrapper = styled.main`
-    font-family: 'Manrope', 'Roboto', 'Arial', 'Helvetica';  
     background-color: ${(props) => props.theme.colors.white};
     background-image: url(https://clubs-cu.s3.amazonaws.com/Profile+Wave.svg);
     background-repeat: no-repeat;

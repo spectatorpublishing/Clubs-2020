@@ -16,7 +16,6 @@ const Box = styled.div`
     border-radius: 7px;
     border: none;
     font-weight: 500;
-    font-family: 'Manrope', 'Roboto', 'Arial', 'Helvetica';
 
     h2 {
       color: ${(props) => props.theme.colors.black};

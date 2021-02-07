@@ -33,7 +33,6 @@ const TextWrapper = styled.div`
   }
 
   p {
-    font-family: 'Manrope', 'Roboto', 'Arial', 'Helvetica';
     font-style: normal;
     font-weight: 500;
     font-size: 1.2rem;

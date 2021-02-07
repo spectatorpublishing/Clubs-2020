@@ -54,7 +54,6 @@ const ErrorMessage = styled(motion.div)`
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-  font-family: 'Manrope', 'Roboto', 'Helvetica', 'Arial';
 `;
 
 const TextLabel = styled.label`
@@ -66,7 +65,6 @@ const TextLabel = styled.label`
   -moz-user-select: none;
   -ms-user-select: none;
   font-size: 1.125rem;
-  font-family: 'Manrope', 'Roboto', 'Helvetica', 'Arial';
   height: fit-content;
   padding: 0.3rem 0;
   @media only screen and (max-width: 768px) {

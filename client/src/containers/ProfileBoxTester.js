@@ -16,7 +16,6 @@ const Title = styled.div`
   font-size: 1.5rem;
   text-align: center;
   width: 100vw;
-  font-family: 'Roboto', sans-serif;
 `;
 
 export const ProfileBoxTester = () => {

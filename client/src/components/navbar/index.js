@@ -104,7 +104,6 @@ const NavHeader = styled.div`
 const Logo = styled.div`
   height: 100%;
   font-size: 1.5rem;
-  font-family: 'Manrope', 'Arial', 'Helvetica';
   a {
     text-decoration: none;
     color: ${(props) => props.theme.colors.black};
