@@ -114,7 +114,7 @@ export const ClubProfile = () => {
                 )}
             </>
         );
-    } else if (width < 769 && width > 540){ // tablet view
+    } else if (width < 840 && width > 540){ // tablet view
         return (
             <>
                 {!isLoading && (
@@ -257,7 +257,7 @@ const PageWrapper = styled.div`
     }
 
     @media only screen 
-    and (max-width : 768px) {
+    and (max-width :768px) {
         padding: 1.2rem;
     }
 `;
@@ -271,7 +271,7 @@ const Content = styled.div`
     display: flex;
     flex-direction: column;
     @media only screen 
-    and (min-width : 769px) {
+    and (min-width : 940px) {
         width: 63%;
         padding-right: 6rem;
     }
