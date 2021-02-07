@@ -69,5 +69,5 @@ const Title = styled.h1`
   font-size: 1.5rem;
   text-align: center;
   width: 100vw;
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Manrope', 'Roboto', 'Arial', 'Helvetica';
 `;

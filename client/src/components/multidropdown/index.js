@@ -174,7 +174,7 @@ const TitleContainer = styled(motion.button)`
   justify-content: space-between;
   margin: 0;
   font-size: 1rem;
-  font-family: 'Roboto', 'Arial', 'Helvetica';
+  font-family: 'Manrope', 'Roboto', 'Arial', 'Helvetica';
   cursor: pointer;
 `;
 
@@ -218,7 +218,7 @@ const Option = styled(motion.li)`
   -moz-user-select: none;
   -ms-user-select: none;
   overflow-wrap: break-word;
-  font-family: 'Roboto', 'Arial', 'Helvetica';
+  font-family: 'Manrope', 'Roboto', 'Arial', 'Helvetica';
   user-select: none;
   cursor: pointer;
 `;

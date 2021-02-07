@@ -19,7 +19,7 @@ const Button = styled.button`
 `;
 
 const Word = styled.div`
-    font-family: Roboto;
+    font-family: 'Manrope', 'Roboto', 'Arial', 'Helvetica';
     font-style: normal;
     font-weight:500;
     font-size:18px;
