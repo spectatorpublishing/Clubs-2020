@@ -109,24 +109,44 @@ module.exports = {
         // support pagination with req.query 
 
         let searchInput = req.params.search;
-        let resultingData = {};
+        let resultingData = [];
 
+        var seenData = new Set();
 
         clubProfile.find({name:{$regex: searchInput, $options: 'i'}})
         .then(q1=>{
-          resultingData.name = JSON.parse(JSON.stringify(q1));
+          
+          let arr = JSON.parse(JSON.stringify(q1));
 
+          for (i = 0; i < arr.length; i++) {
+            if ( !(seenData.has(arr[i].name)) ) {
+              seenData.add(arr[i].name );
+              resultingData.push(arr[i]);
+            } 
+          }
 
           clubProfile.find( {longDescription:{$regex: searchInput, $options: 'i'} })
           .then(q2=>{
-            
-            resultingData.longDescription = JSON.parse(JSON.stringify(q2));
-            
+            let arr = JSON.parse(JSON.stringify(q2));
+
+            for (i = 0; i < arr.length; i++) {
+              if ( !(seenData.has(arr[i].name)) ) {
+                seenData.add(arr[i].name );
+                resultingData.push(arr[i]);
+              } 
+            }
+
             clubProfile.find({shortDescription:{$regex: searchInput, $options: 'i'}})
             .then(q3 =>{
-              
-              resultingData.shortDescription = JSON.parse(JSON.stringify(q3));
-              
+              let arr = JSON.parse(JSON.stringify(q3));
+
+              for (i = 0; i < arr.length; i++) {
+                if ( !(seenData.has(arr[i].name)) ) {
+                  seenData.add(arr[i].name );
+                  resultingData.push(arr[i]);
+                } 
+              }
+
               res.json(resultingData);
               
 
