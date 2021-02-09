@@ -19,7 +19,7 @@ const Box = styled.div`
 
     h2 {
       color: ${(props) => props.theme.colors.black};
-      font-weight: 400;
+      font-weight: 600;
       @media only screen and (max-width: 768px) {
         padding-left: 1.5rem;
       }
@@ -44,7 +44,7 @@ const Box = styled.div`
 
   p {
     font-size: 1.2rem;
-    font-weight: 500;
+    font-weight: 600;
     color: ${(props) => props.theme.colors.gray};
     padding-right: 0.9rem;
     @media only screen and (max-width: 768px) {
@@ -125,7 +125,7 @@ const Item = styled.div`
   svg {
     padding-right: 0.5rem;
     position: relative;
-    top: 10%;
+    top: 20%;
     font-size: 0.9rem;
 
     @media only screen and (max-width: 320px) {

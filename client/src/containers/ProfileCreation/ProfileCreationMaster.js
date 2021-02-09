@@ -96,7 +96,7 @@ const PageContainer = styled.div`
 `;
 
 export const PageDesc = styled.h2`
-  font-weight: 400;
+  font-weight: 600;
   padding-left: 0rem;
   @media only screen and (max-width: 600px) {
     font-size: 1rem !important;

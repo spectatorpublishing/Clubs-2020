@@ -18,8 +18,10 @@ const Button = styled.button`
 `;
 
 const Word = styled.div`
+// font-family is necessary here
+    font-family: 'Manrope', 'Roboto', 'Arial', 'Helvetica';
     font-style: normal;
-    font-weight:500;
+    font-weight:600;
     font-size:18px;
     line-height:21px;
     text-align:center;

@@ -184,6 +184,8 @@ const TitleContainer = styled(motion.button)`
   justify-content: space-between;
   margin: 0;
   font-size: 0.9rem;
+  font-weight: 600;
+  color: ${(props) => props.theme.colors.checkboxGray};
   cursor: pointer;
   outline-color: ${(props) => props.theme.colors.blue};
 `;
@@ -220,6 +222,8 @@ const OptionsContainer = styled(motion.ul)`
   z-index: 2;
   background: ${(props) => props.theme.colors.fullWhite};
   font-size: 0.9rem;
+  font-weight: 600;
+  color: ${(props) => props.theme.colors.checkboxGray};
 `;
 
 const Option = styled(motion.li)`

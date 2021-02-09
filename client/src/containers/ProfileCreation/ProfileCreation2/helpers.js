@@ -73,7 +73,7 @@ const TextSection = styled.section`
 `;
 const TextHeader = styled.h4`
   margin-right: 2rem;
-  font-weight: 400;
+  font-weight: 500;
   @media screen and (max-width: 801px) {
     margin: 0 0 0 0.5rem;
   }

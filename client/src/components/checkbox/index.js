@@ -109,7 +109,7 @@ const LabelContainer = styled.div`
 
 const MobileLabel = styled.h3`
   font-size: 0.8125rem;
-  font-weight: 400;
+  font-weight: 600;
   text-align: center;
 `;
 
@@ -154,6 +154,7 @@ const StyledCheckbox = styled(motion.div)`
 const CheckboxLabel = styled.label`
   color: ${(props) => props.theme.colors.checkboxGray};
   font-size: 1.125rem;
+  font-weight: 600;
   margin-left: 0.65rem;
   -webkit-user-select: none;
   -moz-user-select: none;

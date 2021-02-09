@@ -4,12 +4,14 @@ import { FaBars } from 'react-icons/fa';
 import FilledButton from '../tomatoButton/index';
 import { NavLink } from 'react-router-dom';
 import Logout from '../logout/index';
+import Manage from '../manageAccount/index';
 import { useViewport } from '../customHooks';
 
 export const Navbar = () => {
   const [showLinks, setShowLinks] = useState(false);
   const [currentPath, setCurrentPath] = useState('/');
   const { width } = useViewport();
+  const isLoggedin = false;
 
   return (
     <NavWrapper>
@@ -37,17 +39,29 @@ export const Navbar = () => {
         {currentPath.includes('/profile-creation') && width >= 769 && (
           <Logout />
         )}
-        {currentPath === '/' && (
+        {currentPath === '/' && isLoggedin == true && (
           <LinksContainer className={`${showLinks ? 'show-container' : null}`}>
             <MenuLinks>
               <StyledListItem>
-                <a href='/'>Home</a>
+                <a href='/manage'> <Manage/> </a>
               </StyledListItem>
               <StyledListItem>
-                <a href='/explore'>Login</a>
+                <a href='/logout'> <Logout/> </a>
+              </StyledListItem>
+            </MenuLinks>
+          </LinksContainer>
+        )}
+        {currentPath === '/' && isLoggedin == false && (
+          <LinksContainer className={`${showLinks ? 'show-container' : null}`}>
+            <MenuLinks>
+              <StyledListItem>
+                <a href='/'><h3>Home</h3></a>
               </StyledListItem>
               <StyledListItem>
-                <a href='/faq'>FAQ</a>
+                <a href='/faq'><h3>FAQs</h3></a>
+              </StyledListItem>
+              <StyledListItem>
+                <a href='/explore'><h3>Club Login</h3></a>
               </StyledListItem>
               <StyledListItem>
                 <NavLink
@@ -72,13 +86,18 @@ export const Navbar = () => {
 
 const NavWrapper = styled.nav`
   color: ${(props) => props.theme.colors.white};
-  font-weight: 500;
+  font-weight: 600;
   height: 100%;
 `;
 
 const StyledListItem = styled.li`
   display: flex;
   align-items: center;
+  h3 {
+    font-size: 1.25rem;
+    margin: 0rem;
+  }
+
 `;
 
 const NavCenter = styled.div`
@@ -104,6 +123,7 @@ const NavHeader = styled.div`
 const Logo = styled.div`
   height: 100%;
   font-size: 1.5rem;
+  font-weight: 700;
   a {
     text-decoration: none;
     color: ${(props) => props.theme.colors.black};
@@ -155,11 +175,11 @@ const MenuLinks = styled.ul`
   }
 
   a {
-    margin-top: 0.4rem;
+    margin-top: 0;
     text-decoration: none;
     color: ${(props) => props.theme.colors.black};
-    font-size: 1.2rem;
-    font-weight: 500;
+    font-size: 1.25rem;
+    font-weight: 600;
     display: block;
     transition: color 0.2s linear;
 

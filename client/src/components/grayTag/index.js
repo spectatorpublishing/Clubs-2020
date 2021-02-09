@@ -62,6 +62,7 @@ const Tag = styled(motion.button)`
   display: inline-block;
   padding: 0.4rem 1rem;
   font-size: 0.9rem;
+  font-weight: 600;
   border-radius: 1rem;
   border: ${(props) => (props.clicked ? '.125rem' : '0.0625rem')}
     ${(props) => props.theme.colors.gray} solid;

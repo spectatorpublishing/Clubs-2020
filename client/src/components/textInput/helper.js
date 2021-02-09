@@ -75,7 +75,9 @@ const TextLabel = styled.label`
 
 const LabelHeader = styled.div`
   font-size: 1.125rem;
+  font-weight: 600;
 `;
 const LabelDesc = styled.div`
   font-size: 0.875rem;
+  font-weight: 500;
 `;

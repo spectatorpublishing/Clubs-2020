@@ -13,10 +13,10 @@ const AccountTag = () => {
 
 const BoxWrapper = styled.div`
     margin: 2rem 4rem 0rem 4rem;
-    padding: 10px;
+    padding: 0.625rem;
     width: auto;
     background-color: white;
-    border-radius: 10px;
+    border-radius: 0.625rem;
     display: flex;
     box-shadow: 0px 0px 15px 0px #C1C1C1;
     align-items: center;
@@ -27,13 +27,13 @@ const BoxWrapper = styled.div`
 `;
 
 const Emoji = styled.span`
-    margin: 10px 10px 10px 20px;
-    font-size: 30px;
+    margin: 0.625rem 0.625rem 0.625rem 1.25rem;
+    font-size: 2rem;
 `;
 
 const Text = styled.div`
     color: black;
-    margin: 10px;
+    margin: 0.625rem;
     font-weight: 600;
 `;
 

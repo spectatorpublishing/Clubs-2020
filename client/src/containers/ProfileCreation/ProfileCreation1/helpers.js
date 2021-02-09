@@ -177,7 +177,7 @@ const InputContainer = styled.div`
 `;
 
 const TagHeader = styled.h3`
-  font-weight: 400;
+  font-weight: 600;
   margin-left: 0.3rem;
   font-size: 1.125rem;
 `;

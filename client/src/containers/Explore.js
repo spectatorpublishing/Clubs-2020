@@ -34,8 +34,8 @@ const TextWrapper = styled.div`
 
   p {
     font-style: normal;
-    font-weight: 500;
-    font-size: 1.2rem;
+    font-weight: 600;
+    font-size: 1.25rem;
     color: #9a9a9a;
     padding: 1rem;
     padding-bottom: 0;
