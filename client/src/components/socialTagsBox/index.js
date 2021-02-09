@@ -17,7 +17,12 @@ const Box = styled.div`
   background-color: ${(props) => props.theme.colors.fullWhite};
   width: auto;
   padding: 0.2rem 2rem 1rem 2rem;
-  font-size: 1rem;
+  font-size: 1.125rem:
+  font-weight: 500rem;
+  h3{
+    font-size: 1.25rem;
+    font-weight: 600rem;
+  }
 `;
 
 const SocialLinkStyledElement = styled.div`
@@ -31,19 +36,22 @@ const SocialLinkStyledElement = styled.div`
 const StyledLink = styled.a`
   a:link {
     color: ${(props) => props.theme.colors.checkboxGray};
-    font-weight: 550;
+    font-weight: 500;
     text-decoration: none;
+    font-size: 1.125rem;
   }
   a:visited {
     color: ${(props) => props.theme.colors.checkboxGray};
-    font-weight: 550;
+    font-weight: 500;
     text-decoration: none;
+    font-size: 1.125rem;
   }
   margin-left: 0.7rem;
 `;
 
 const Icon = styled.i`
   color: ${(props) => props.theme.colors.turquoise};
+  font-size: 1.125rem;
 `;
 
 const SocialLinkElement = ({ linkType, link }) => {

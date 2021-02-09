@@ -16,8 +16,8 @@ export const ClubProfile = () => {
     const [width, setWidth] = useState(window.innerWidth);
     const [isLoading, setLoading] = useState(true);
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    const isLoggedin = true;
-    const firstLogIn = true;
+    const isLoggedin = false;
+    const firstLogIn = false;
 
     useEffect(() => {
         window.addEventListener("resize", () => setWidth(window.innerWidth));
@@ -250,10 +250,11 @@ const Wrapper = styled.main`
 const PageWrapper = styled.div`
     display: flex;
     flex-direction: row;
-    padding: 4rem 5rem 0rem 5rem;
+    padding: 2rem 5rem 0rem 5rem;
 
     h2{
-        font-size: 1.3rem;
+        font-size: 1.25rem;
+        font-weight: 600;
     }
 
     @media only screen 
@@ -290,7 +291,8 @@ const Button = styled.a`
     margin: 1rem 0rem;
     border-radius: 5px;
     font-size: 1.2rem;
-    
+    font-weight: 600;
+
     p{
         text-align: center; 
         margin: 0 auto;

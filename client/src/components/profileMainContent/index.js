@@ -44,6 +44,8 @@ const Container = styled.div`
     p{
         color: #696969;
         line-height: 1.5em;
+        font-weight: 500;
+        font-size: 1.125rem;
     }
     
     &.one{
@@ -56,6 +58,8 @@ const Container = styled.div`
 
     h2{
         margin-top: 2rem;
+        font-weight: 600;
+        font-size: 1.25rem;        
     }
 `;
 

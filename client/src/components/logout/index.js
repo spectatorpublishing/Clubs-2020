@@ -39,6 +39,7 @@ const LogoutButton = styled(motion.button)`
   background-color: transparent;
   cursor: pointer;
   padding: 0;
+  margin: 0.25rem;
 `;
 
 const Text = styled.h3`
