@@ -1,11 +1,10 @@
-import React from 'react';
-import styled from 'styled-components';
-import ReactDOM from 'react-dom';
-
+import React, { useState } from 'react';
+import styled, { css } from 'styled-components';
 
 
 const Button = styled.button`
-    background: #FFFFFF;
+    background-color: ${(props) => props.theme.colors.fullWhite};
+    color: ${(props) => props.theme.colors.gray};
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
     border-radius:7px;
     width:99px;
@@ -15,6 +14,14 @@ const Button = styled.button`
 
     :hover{
         box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    ${({ clicked }) =>
+        clicked &&
+        css`
+            background-color: ${(props) => props.theme.colors.turquoise};
+            color: ${(props) => props.theme.colors.fullWhite};
+        `
     }
 `;
 
@@ -30,34 +37,17 @@ const Word = styled.div`
 
 `;
 
+const TextAdd = 'Size +';
+const TextRemove = 'Size x';
 
-const white = '#FFFFFF';
-const teal = '#42B7CB';
-const grey = "#9A9A9A";
-const Text = 'Size +';
-const text = 'Size x';
+export const Size = () => {
+    const [clicked, setClicked] = useState(false);
 
-export default class Size extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { color: white, textcolor: grey, text: Text };
-        this.changeColor = this.changeColor.bind(this);
-    }
-    changeColor() {
-        const newColor = this.state.color === white ? teal : white;
-        const newTextColor = this.state.textcolor === grey ? white : grey;
-        const newText = this.state.text === text ? Text : text;
-        this.setState({ color: newColor, textcolor: newTextColor, text: newText })
-    }
+    return (
+        <Button clicked={clicked} onClick={() => setClicked(!clicked)}>
+            <Word>{clicked ? TextAdd : TextRemove}</Word>
+        </Button>
+    )
+};
 
-    render() {
-        return (
-            <Button style={{ backgroundColor: this.state.color, color: this.state.textcolor }} onClick={this.changeColor} >
-                <Word>{this.state.text}</Word>
-            </Button>
-
-        )
-    }
-}
-ReactDOM.render(<Size />, document.getElementById('root'))
-
+export default Size;
