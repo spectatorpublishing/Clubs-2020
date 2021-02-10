@@ -16,6 +16,7 @@ const Box = styled.div`
 const Text = styled.p`
   color: ${(props) => props.theme.colors.checkboxGray};
   font-weight: 500;
+  font-size: 1.125rem;
 `;
 
 const Tag = styled.p`
@@ -25,7 +26,7 @@ const Tag = styled.p`
   padding: 0.2rem 1rem;
   margin: 0 1rem;
   text-align: bottom;
-  font-weight: 500;
+  font-weight: 600;
 
   &.once {
     background: rgba(66, 183, 203, 0.08);

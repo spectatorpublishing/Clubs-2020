@@ -55,9 +55,6 @@ export const Navbar = () => {
           <LinksContainer className={`${showLinks ? 'show-container' : null}`}>
             <MenuLinks>
               <StyledListItem>
-                <a href='/'><h3>Home</h3></a>
-              </StyledListItem>
-              <StyledListItem>
                 <a href='/faq'><h3>FAQs</h3></a>
               </StyledListItem>
               <StyledListItem>
@@ -95,6 +92,7 @@ const StyledListItem = styled.li`
   align-items: center;
   h3 {
     font-size: 1.25rem;
+    font-weight: 600;
     margin: 0rem;
   }
 
