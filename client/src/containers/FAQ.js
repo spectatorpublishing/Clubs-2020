@@ -20,6 +20,25 @@ const Title = styled.div`
 
 
 export const FAQ = () => {
+
+    React.useEffect(()=>{
+        //fetch(`api/clubProfiles/6018b5c565789d34a052d6a3/`).then(res=>res.json()).then(json=>console.log(json))
+        
+        
+        fetch(`api/clubProfiles/filterAndSortBy/:tags["", ""]/:acceptingMembers: True, applicationRequired: True)`).then(res=>res.json()).then(json=>console.log(json))
+        
+        /*memberRange: {$in: {$range: [{$min: [$req.query.memberRange]}, {$max: [req.query.memberRange]}]}},
+          tags: {$in: $req.query.tags},
+          acceptingMembers: $req.query.acceptingMembers,
+          applicationRequired:*/
+        
+        //fetch(`api/clubProfiles/getAll/`).then(res=>res.json()).then(json=>console.log(json))
+        
+        
+        /*club accounts*/
+        //fetch(`api/clubAccounts/getById/5fd15e92f2021311308e3414`).then(res=>res.json()).then(json=>console.log(json))
+    });
+
     return(
         <PageWrapper>
             <Title>Frequently Asked Questions</Title>
