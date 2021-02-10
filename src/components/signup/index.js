@@ -58,7 +58,7 @@ export const SignUpBox = ({ detailLink, id }) => {
               <Input type='text' id='userEmail' />
               {id === 'signup' && <InputDesc>{modalData.detailDesc}</InputDesc>}
             </InputSection>
-            <InputSection marginBottom>
+            <InputSection marginBottom={id === 'signup'}>
               <label htmlFor='userPassword'>{modalData.detailTwo}</label>
               <Input type='password' id='userPassword' />
             </InputSection>
@@ -108,6 +108,7 @@ export const SignUpBox = ({ detailLink, id }) => {
     </Wrapper>
   );
 };
+
 const Wrapper = styled.div`
   position: absolute;
   top: 50%;
@@ -231,10 +232,6 @@ const EmailLink = styled.a`
   text-decoration: none;
 `;
 
-const Details = styled.div`
-  /* padding-bottom: 1.125rem;
-  padding-top: 1.125rem; */
-`;
 const Input = styled.input`
   width: 100%;
   background: none;

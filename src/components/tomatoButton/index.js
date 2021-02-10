@@ -20,7 +20,6 @@ const TomatoButton = ({
       // For page change
       if (to) history.push(to);
     }
-
     // For custom function
     else {
       onClick();
