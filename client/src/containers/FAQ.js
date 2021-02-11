@@ -25,7 +25,7 @@ export const FAQ = () => {
         //fetch(`api/clubProfiles/6018b5c565789d34a052d6a3/`).then(res=>res.json()).then(json=>console.log(json))
         
         
-        fetch(`api/clubProfiles/filterAndSortBy/:tags["", ""]/:acceptingMembers: True, applicationRequired: True)`).then(res=>res.json()).then(json=>console.log(json))
+        fetch(`api/clubProfiles/filterAndSortBy?tags=fun&tags=music&acceptingMembers=True&applicationRequired=True&memberRanges=20-50&memberRanges=0-10`).then(res=>res.json()).then(json=>console.log(json))
         
         /*memberRange: {$in: {$range: [{$min: [$req.query.memberRange]}, {$max: [req.query.memberRange]}]}},
           tags: {$in: $req.query.tags},

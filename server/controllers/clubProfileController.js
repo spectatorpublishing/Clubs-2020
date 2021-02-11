@@ -99,20 +99,26 @@ module.exports = {
     },
     filterAndSortBy: function(req, res) {
         // TODO; req.query contains filter and/or sort information
-        // support pagination with req.query 
+        // support pagination with req.query
+        console.log(req.query.tags)
+        console.log(typeof req.query.tags)
+        console.log(req.query.acceptingMembers)
+        console.log(typeof req.query.acceptingMembers)
+        console.log(req.query.applicationRequired)
+        console.log(typeof req.query.applicationRequired)
+        console.log(req.query.memberRanges)
+        console.log(typeof req.query.memberRanges) 
+
         clubProfile.find({
-          memberRange: {$in: {$range: [{$min: [$req.query.memberRange]}, {$max: [req.query.memberRange]}]}},
-          tags: {$in: $req.query.tags},
-          acceptingMembers: $req.query.acceptingMembers,
-          applicationRequired: $req.query.applicationRequired
-        })
-        .then(
-          res.send(req.query),
-          req.query.page = Number(req.query.page) + 1
-        )
-        .catch(err => res.status(422).json(err)); 
+          memberRange: {$in: req.query.memberRanges},
+          tags: {$in: req.query.tags},
+          acceptingMembers: req.query.acceptingMembers,
+          applicationRequired: req.query.applicationRequired
+        }).then(res => res.json()
+        ).catch(err => res.status(422).json(err)); 
         
     },
+
     search: function(req, res) {
         // TODO; req.query contains search query
         // support pagination with req.query 
