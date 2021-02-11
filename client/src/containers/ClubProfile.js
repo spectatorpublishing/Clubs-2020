@@ -5,6 +5,7 @@ import ExploreBox from '../components/explorebox/index';
 import MainContent from '../components/profileMainContent/index';
 import { ProfilePageBox } from "../components/profilePageBox";
 import { Navbar } from "../components/navbar";
+import { NavbarProfile } from "../components/navbarProfile";
 import { FrequencyTag } from "../components/frequencyTag/index";
 import { SocialTagsBox } from "../components/socialTagsBox";
 import AccountTag from "../components/accountTag/index";
@@ -57,12 +58,17 @@ export const ClubProfile = () => {
         (null) 
     };
 
+    const NavbarType = () => { return (isLoggedin === true) ? 
+        ( <Navbar/> ) : 
+        ( <NavbarProfile/> ) 
+    };
+
     if (width < 541){ // mobile view
         return (
             <>
                 {!isLoading && (
                     <Wrapper>
-                        <Navbar/>
+                        <NavbarType/>
                         <ConditionalAccountTag/>
                         <ConditionalClubProfile/> 
                         <PageWrapper>
@@ -119,7 +125,7 @@ export const ClubProfile = () => {
             <>
                 {!isLoading && (
                     <Wrapper>
-                        <Navbar/>
+                        <NavbarType/>
                         <ConditionalAccountTag/>
                         <ConditionalClubProfile/> 
                         <PageWrapper>
@@ -180,7 +186,7 @@ export const ClubProfile = () => {
             <>
                 {!isLoading && (
                     <Wrapper>
-                        <Navbar/>
+                        <NavbarType/>
                         <ConditionalAccountTag/>
                         <ConditionalClubProfile/> 
                         <PageWrapper>

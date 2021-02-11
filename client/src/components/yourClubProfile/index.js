@@ -43,33 +43,3 @@ const TheButton = styled.div`
 `;
 
 export default YourClubProfile;
-
-/*
-export const EditButton = () => {
-    return(
-      <BoxWrapper>
-          <Text>Edit</Text>
-      </BoxWrapper>
-    );
-};
-
-const BoxWrapper = styled.div`
-    margin: 20px;
-    width: 8rem; //8em
-    height: 2.5rem;
-    background-color: ${(props) => props.theme.colors.red};
-    border-radius: 7px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    :hover{
-        background-color: ${(props) => props.theme.colors.darkRed};
-    }
-`;
-
-const Text = styled.div`
-    color: white;
-    margin: 10px;
-    font-weight: 600;
-`;
-*/

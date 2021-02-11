@@ -35,7 +35,7 @@ const ManageButton = styled.div`
 
 const Icon = styled.div`
   font-size: 1.4rem;
-  margin-right: .2rem;
+  margin-right: .35rem;
 `;
 
 export default Manage;
