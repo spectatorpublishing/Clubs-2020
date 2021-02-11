@@ -7,7 +7,6 @@ import { ThemeProvider } from 'styled-components';
 import ProfileCreationMaster from './containers/ProfileCreation/ProfileCreationMaster';
 import theme from './theme';
 import { ClubProfile } from './containers/ClubProfile';
-import { AccountTagTest } from './containers/AccountTagTest';
 
 const App = () => {
   return (
@@ -27,9 +26,6 @@ const App = () => {
             <Route path='/' exact>
               <Explore />
             </Route>
-            <Route path='/account-test'>
-              <AccountTagTest />
-            </Route>          
             </ViewportProvider>
         </Switch>
       </Router>

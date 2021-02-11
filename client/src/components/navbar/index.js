@@ -44,7 +44,7 @@ export const Navbar = () => {
                 <a href='/faq'><h3>FAQs</h3></a>
               </StyledListItem>
               <StyledListItem>
-                <a href='/explore'><h3>Club Login</h3></a>
+                <a href='/'><h3>Club Login</h3></a>
               </StyledListItem>
               <StyledListItem>
                 <NavLink
