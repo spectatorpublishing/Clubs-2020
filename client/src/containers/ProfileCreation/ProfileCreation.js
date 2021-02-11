@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import styled, { withTheme } from 'styled-components';
-import SearchTag from '../components/searchTag/index';
-import Checkbox from '../components/checkbox/index';
-import Dropdown from '../components/dropdown/index';
+import SearchTag from '../../components/searchTag/index';
+import Checkbox from '../../components/checkbox/index';
+import Dropdown from '../../components/dropdown/index';
 import FilledButton from '../components/filledButton/index';
 import { motion } from 'framer-motion';
-import TextInput from '../components/textInput/index';
-import Navbar from '../components/navbar';
+import TextInput from '../../components/textInput/index';
+import Navbar from '../../components/navbar';
 
 const ProfileCreation = ({ theme }) => {
   const [buttonState, setButtonState] = useState(false);
