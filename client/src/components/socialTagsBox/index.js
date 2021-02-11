@@ -16,33 +16,42 @@ const Box = styled.div`
   border-radius: 7px;
   background-color: ${(props) => props.theme.colors.fullWhite};
   width: auto;
-  padding: 0.4rem 1rem 1rem 1rem;
-  font-size: 1rem;
+  padding: 0.2rem 2rem 1rem 2rem;
+  font-size: 1.125rem:
+  font-weight: 500rem;
+  h3{
+    font-size: 1.25rem;
+    font-weight: 600rem;
+  }
 `;
 
 const SocialLinkStyledElement = styled.div`
   display: flex;
   flex-direction: row;
-  margin: 0.5rem 0 0.5rem 0.6rem;
+  margin-top: 0.2rem;
+  margin-right: 0.2rem;
   padding: 0.2rem;
 `;
 
 const StyledLink = styled.a`
   a:link {
     color: ${(props) => props.theme.colors.checkboxGray};
-    font-weight: 550;
+    font-weight: 500;
     text-decoration: none;
+    font-size: 1.125rem;
   }
   a:visited {
     color: ${(props) => props.theme.colors.checkboxGray};
-    font-weight: 550;
+    font-weight: 500;
     text-decoration: none;
+    font-size: 1.125rem;
   }
   margin-left: 0.7rem;
 `;
 
 const Icon = styled.i`
   color: ${(props) => props.theme.colors.turquoise};
+  font-size: 1.125rem;
 `;
 
 const SocialLinkElement = ({ linkType, link }) => {

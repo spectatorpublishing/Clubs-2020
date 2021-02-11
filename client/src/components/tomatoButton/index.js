@@ -60,10 +60,10 @@ const StyledButton = styled(motion.button)`
       border: none;
     `}
   border-radius: 0.4375rem;
-
-  padding: 0.5rem;
-  font-size: 1rem;
-  font-family: 'Roboto', 'Arial', 'Helvetica';
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  // font-family is necessary here
+  font-family: 'Manrope', 'Roboto', 'Arial', 'Helvetica';  font-size: 1.25rem;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;

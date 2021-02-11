@@ -78,7 +78,6 @@ const SetUpClubProfile = () => {
   );
 };
 const ClubProfileTitle = styled.h1`
-  font-family: 'Manrope', 'Roboto', 'Arial', 'Helvetica';
   font-size: 2.25rem;
   font-weight: 700;
   margin-bottom: 0;
@@ -97,8 +96,7 @@ const PageContainer = styled.div`
 `;
 
 export const PageDesc = styled.h2`
-  font-family: 'Manrope', 'Roboto', 'Arial', 'Helvetica';
-  font-weight: 400;
+  font-weight: 600;
   padding-left: 0rem;
   @media only screen and (max-width: 600px) {
     font-size: 1rem !important;
@@ -107,7 +105,6 @@ export const PageDesc = styled.h2`
 
 const Subtext = styled.h3`
   color: ${(props) => props.theme.colors.gray};
-  font-family: 'Manrope', 'Roboto', 'Arial', 'Helvetica';
   margin-top: 0.5rem;
   font-weight: 500;
   @media only screen and (max-width: 600px) {
@@ -116,7 +113,6 @@ const Subtext = styled.h3`
 `;
 
 export const ErrorMessage = styled(motion.div)`
-  font-family: 'Manrope', 'Roboto', 'Arial', 'Helvetica';
   color: ${(props) => props.theme.colors.red};
   margin: 0.8rem 0;
 `;
