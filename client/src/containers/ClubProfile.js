@@ -59,8 +59,8 @@ export const ClubProfile = () => {
     };
 
     const NavbarType = () => { return (isLoggedin === true) ? 
-        ( <Navbar/> ) : 
-        ( <NavbarProfile/> ) 
+        ( <NavbarProfile/> ) : 
+        ( <Navbar/> ) 
     };
 
     if (width < 541){ // mobile view
