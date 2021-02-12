@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import * as firebase from '../../firebase';
+import * as firebase from '../../UserAuthUtilities/firebase';
 
 const Background = styled.div`
   background-color: ${props => props.theme.colors.lightGray};
@@ -49,4 +49,3 @@ export default function Signin(props) {
         </Background>
     )
 }
-

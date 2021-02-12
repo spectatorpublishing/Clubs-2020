@@ -37,6 +37,12 @@ export const Navbar = () => {
             <a href="/faq">FAQ Page</a>
           </li>
           <li>
+            <a href="/portal">Admin Portal</a>
+          </li>
+          <li>
+            <a href="/portal/login">Admin Portal Log-in</a>
+          </li>
+          <li>
             <a href="/signup">Sign Up Page</a>
           </li>
           <li>
@@ -44,6 +50,9 @@ export const Navbar = () => {
           </li>
           <li>
             <a href="/clubprofile">Club Profile</a>
+          </li>
+          <li>
+            <a href="/test">Firebase Test</a>
           </li>
         </NavLinksContainer>
       </nav>

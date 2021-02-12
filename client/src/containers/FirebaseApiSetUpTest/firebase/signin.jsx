@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import * as firebase from '../../UserAuthUtilities/firebase';
+import * as firebase from '../../../UserAuthUtilities/firebase';
 
 const Background = styled.div`
   background-color: ${props => props.theme.colors.lightGray};
@@ -14,7 +14,7 @@ const Background = styled.div`
 
 var google = new firebase.auth.GoogleAuthProvider();
 
-export default function SendEmail(props) {
+export default function Signin(props) {
     const [message, setMessage] = useState();
 
     function handleSignin(e) {
@@ -24,19 +24,9 @@ export default function SendEmail(props) {
             // The signed-in user info.
             var user = result.user;
             var username = user.displayName;
-            var email = user.email;
 
             setMessage(`Welcome to Clubs@CU, ${username}!`);
             console.log(token, user);
-
-            // send welcome/verification Email
-            // TODO: since the same API is used to log in and sign up Gmail
-            // users, we need to manually check if the gmail user exists in our
-            // application by searching our own database using the user token 
-            firebase.auth().currentUser.sendEmailVerification()
-                .then(() => setMessage(`Email sent to ${email}!`))
-                .catch( (err) => setMessage(err.code));
-
         }).catch(function(error) {
             // Handle Errors here.
             var errorCode = error.code;
@@ -51,17 +41,6 @@ export default function SendEmail(props) {
         });
         e.preventDefault();
     }
-
-    // Illustrates the use of onAuthStateChanged to perform some routine
-    // whenever the user state changes
-    useEffect( () => {
-        firebase.auth().onAuthStateChanged( (user) => {
-            if (user) {
-                console.log(user);
-            } else {
-                console.log('No user is signed in');
-            }
-        });}, []);
 
     return (
         <Background>

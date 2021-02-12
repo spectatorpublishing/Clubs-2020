@@ -1,6 +1,7 @@
+
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import * as firebase from '../../UserAuthUtilities/firebase';
+import * as firebase from '../../../UserAuthUtilities/firebase';
 
 const Background = styled.div`
   background-color: ${props => props.theme.colors.lightGray};
