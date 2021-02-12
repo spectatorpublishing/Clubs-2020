@@ -9,6 +9,7 @@ const Bar = styled.input`
   width: 18rem;
   padding-left: 2rem;
   border-radius: 7px;
+  box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.10);
   height: 39px;
   border: 0px;
   background-color: ${(props) => props.theme.colors.fullWhite};
@@ -21,13 +22,31 @@ const Bar = styled.input`
   ::placeholder {
       color: inherit;
   }
+
+  @media only screen and (max-width : 768px) {
+    //width: 10rem;
+    width: 95%;
+  }
+`;
+
+const Icon = styled.i`
+  position: absolute;
+  color: black;
+  background-color: pink;
+`;
+
+const IconButton = styled.button`
+
 `;
 
 export const SearchBar = () => {
     
     return (
         <SearchBox>
-            <Bar type="text" placeholder="Search..."></Bar>
+          <Icon>
+            <IconButton type="submit"><i class="fas fa-search"></i></IconButton>
+          </Icon>
+          <Bar type="text" placeholder="Search..."></Bar>
         </SearchBox>
     )
 };
