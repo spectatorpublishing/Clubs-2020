@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
 const SearchBox = styled.div`
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
@@ -7,7 +9,7 @@ const SearchBox = styled.div`
 
 const Bar = styled.input`
   width: 18rem;
-  padding-left: 2rem;
+  padding-left: 3rem;
   border-radius: 7px;
   box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.10);
   height: 39px;
@@ -24,28 +26,22 @@ const Bar = styled.input`
   }
 
   @media only screen and (max-width : 768px) {
-    //width: 10rem;
-    width: 95%;
+    width: 90%;
   }
 `;
 
 const Icon = styled.i`
   position: absolute;
-  color: black;
-  background-color: pink;
+  margin: .7rem 1rem;
+  color: ${(props) => props.theme.colors.gray};
 `;
 
-const IconButton = styled.button`
-
-`;
 
 export const SearchBar = () => {
     
     return (
         <SearchBox>
-          <Icon>
-            <IconButton type="submit"><i class="fas fa-search"></i></IconButton>
-          </Icon>
+          <Icon><FontAwesomeIcon icon={faSearch} /></Icon>
           <Bar type="text" placeholder="Search..."></Bar>
         </SearchBox>
     )
