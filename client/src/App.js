@@ -3,14 +3,18 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Navbar } from './components/navbar';
 import { Explore } from './containers/Explore';
 import { FAQ } from './containers/FAQ';
+
 import { Portal } from "./containers/Portal";
 import { PortalLogin } from './containers/PortalLogIn'
+
 import { SignUp } from './containers/SignUp';
 import { Confirmation } from './containers/Confirmation';
 import { ClubProfile } from './containers/ClubProfile';
 import { ThemeProvider } from 'styled-components';
+
 import Signin from './test/firebase/signin';
 import theme from './theme';
+
 
 
 const App = () => {
