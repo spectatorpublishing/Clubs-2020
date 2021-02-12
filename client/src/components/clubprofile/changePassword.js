@@ -3,7 +3,9 @@ import styled from 'styled-components';
 import CustomInput from './input.js';
 import { Header as EmailHeader, Form, Inputs, Operations, Change, Cancel } from './changeEmail.js';
 import { Warning } from './manageAccount';
-import checkPassword from '../../test/signup/checkPassword';
+import checkPassword from '../../containers/FirebaseApiSetUpTest/signup/checkPassword';
+
+
 
 const Header = styled(EmailHeader)`
     margin-bottom: 2em;

@@ -12,7 +12,8 @@ import { Confirmation } from './containers/Confirmation';
 import { ClubProfile } from './containers/ClubProfile';
 import { ThemeProvider } from 'styled-components';
 
-import Signin from './test/firebase/signin';
+import Signin from './containers/FirebaseApiSetUpTest/firebase/signin';
+
 import theme from './theme';
 
 
