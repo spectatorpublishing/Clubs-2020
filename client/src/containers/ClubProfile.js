@@ -7,6 +7,7 @@ import { ProfilePageBox } from "../components/profilePageBox";
 import { Navbar } from "../components/navbar";
 import { FrequencyTag } from "../components/frequencyTag/index";
 import { SocialTagsBox } from "../components/socialTagsBox";
+import adCarrier from '../components/adCarrier';
 
 export const ClubProfile = () => {
     const { id } = useParams();
@@ -85,6 +86,13 @@ export const ClubProfile = () => {
                                 />
                                 <div><Button href={club.mailingList}><p>Join our mailing list</p></Button></div>
                                 <div><Button className= "second" href={club.applicationLink}><p>Apply</p></Button></div>
+                                <AdSlot>
+                                    <adCarrier
+                                    Height={90}
+                                    Width={728}
+                                    Path="cds_leaderboard"
+                                    /><h1>Placeholder for Ad</h1>
+                                </AdSlot>
                                 <MainContent 
                                     description= {club.longDescription}
                                     highlights= {club.highlights}
@@ -142,6 +150,13 @@ export const ClubProfile = () => {
                                     />
                                         <div><Button href={club.mailingList}><p>Join our mailing list</p></Button></div>
                                         <div><Button className= "second" href={club.applicationLink}><p>Apply</p></Button></div>
+                                        <AdSlot>
+                                            <adCarrier
+                                            Height={90}
+                                            Width={728}
+                                            Path="cds_leaderboard"
+                                            /><h1>Placeholder for Ad</h1>
+                                        </AdSlot>
                                     </Column>
                                 </Row>
                                 <MainContent 
@@ -209,6 +224,13 @@ export const ClubProfile = () => {
                                 />
                                 <div><Button href={club.mailingList}><p>Join our mailing list</p></Button></div>
                                 <div><Button className= "second" href={club.applicationLink}><p>Apply</p></Button></div>
+                                <AdSlot>
+                                    <adCarrier
+                                    Height={250}
+                                    Width={300}
+                                    Path="cds_leaderboard"
+                                    /><h1>Placeholder for Ad</h1>
+                                </AdSlot>
                             </Cards>
                         </PageWrapper>
                     </Wrapper>
@@ -217,6 +239,13 @@ export const ClubProfile = () => {
         );
     }
 };
+
+const AdSlot = styled.div`
+  display: flex;
+  justify-content: center;
+  height: 50px;
+  color: black;
+`
 
 const Wrapper = styled.main`
   background-color: ${(props) => props.theme.colors.white};
