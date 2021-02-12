@@ -54,7 +54,6 @@ const ErrorMessage = styled(motion.div)`
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-  font-family: 'Manrope', 'Roboto', 'Helvetica', 'Arial';
 `;
 
 const TextLabel = styled.label`
@@ -66,7 +65,6 @@ const TextLabel = styled.label`
   -moz-user-select: none;
   -ms-user-select: none;
   font-size: 1.125rem;
-  font-family: 'Manrope', 'Roboto', 'Helvetica', 'Arial';
   height: fit-content;
   padding: 0.3rem 0;
   @media only screen and (max-width: 768px) {
@@ -77,7 +75,9 @@ const TextLabel = styled.label`
 
 const LabelHeader = styled.div`
   font-size: 1.125rem;
+  font-weight: 600;
 `;
 const LabelDesc = styled.div`
   font-size: 0.875rem;
+  font-weight: 500;
 `;

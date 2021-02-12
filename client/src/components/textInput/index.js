@@ -124,7 +124,6 @@ const InputStyles = css`
   width: 100%;
   font-size: 1.125rem;
   color: ${(props) => props.theme.colors.checkboxGray};
-  font-family: 'Manrope', 'Roboto', 'Helvetica', 'Arial';
   resize: none;
   outline-color: ${(props) => props.theme.colors.blue};
   overflow-y: auto;

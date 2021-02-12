@@ -14,7 +14,7 @@ export const FAQ = () => {
           text='Clubs@CU is your central source of information about student organizations at Barnard and Columbia. 
                 Keep discovering new clubs throughout the year, not just at the Club Fair.'
           buttonText='Explore Clubs'
-          buttonLink='/explore'
+          buttonLink='/'
         />
         <FaqBox
           title='How do I use Clubs@CU? (Student)'
@@ -31,7 +31,7 @@ export const FAQ = () => {
           title='How do I use Clubs@CU? (Clubs)'
           text='Run an official or unrecognized club? Both are welcome to create profiles on our platform and be represented here.'
           buttonText='Register Club'
-          buttonLink='/'
+          buttonLink='/profile-creation'
         />
         <FaqBox
           title='I have a specific inquiry.'
@@ -66,8 +66,7 @@ const PageWrapper = styled.main`
 
 const Title = styled.h1`
   margin-top: 6rem;
-  font-size: 1.5rem;
+  font-size: 2rem;
   text-align: center;
   width: 100vw;
-  font-family: 'Roboto', sans-serif;
 `;

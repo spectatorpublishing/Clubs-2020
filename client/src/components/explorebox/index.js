@@ -16,11 +16,10 @@ const Box = styled.div`
     border-radius: 7px;
     border: none;
     font-weight: 500;
-    font-family: 'Roboto', 'Helvetica', 'Arial';
 
     h2 {
       color: ${(props) => props.theme.colors.black};
-      font-weight: 400;
+      font-weight: 600;
       @media only screen and (max-width: 768px) {
         padding-left: 1.5rem;
       }
@@ -44,8 +43,8 @@ const Box = styled.div`
   }
 
   p {
-    font-size: 1.2rem;
-    font-weight: 500;
+    font-size: 1.125rem;
+    font-weight: 600;
     color: ${(props) => props.theme.colors.gray};
     padding-right: 0.9rem;
     @media only screen and (max-width: 768px) {
@@ -101,7 +100,7 @@ const Icon = styled.div`
 const Tags = styled.div`
   padding: 0rem 0rem 0.5rem 0rem;
   margin: 0rem 1.5rem 0rem 1.2rem;
-  font-size: 0.9rem;
+  font-size: 0.875rem;
   color: ${(props) => props.theme.colors.red};
 
   button {
@@ -122,15 +121,17 @@ const Item = styled.div`
   min-width: 2rem;
   display: flex;
   flex-direction: row;
+  font-weight: 500;
+  font-size: 0.875rem;
 
   svg {
     padding-right: 0.5rem;
     position: relative;
-    top: 10%;
-    font-size: 0.9rem;
+    top: 15%;
+    font-size: 0.875rem;
 
     @media only screen and (max-width: 320px) {
-      padding-right: 0.3rem;
+      padding-right: 0.25rem;
     }
   }
 
@@ -139,7 +140,8 @@ const Item = styled.div`
     margin: 0;
     padding: 0;
     display: inline-block;
-    font-size: 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
   }
 `;
 
