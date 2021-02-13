@@ -2,6 +2,7 @@
   "name": "clubs-2020",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:8080",
   "dependencies": {
     "framer-motion": "^2.9.1",
     "firebase": "^7.24.0",

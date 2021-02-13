@@ -45,6 +45,12 @@ export const Navbar = () => {
           <li>
             <a href="/clubprofile">Club Profile</a>
           </li>
+<<<<<<< HEAD:src/components/navbar/index.js
+=======
+          <li>
+            <a href="/test">Firebase Test</a>
+          </li>
+>>>>>>> 82a725e53c64a77a48003eae06ecdf576079eb6e:client/src/components/navbar/index.js
         </NavLinksContainer>
       </nav>
     </NavWrapper>
