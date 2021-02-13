@@ -1,10 +1,10 @@
 import React from 'react';
 import { SignUpBox } from '../components/signup';
 
-export const SignUp = () => {
+export const Login = () => {
     return(
         <SignUpBox
-            id='signup'
+            id="login"
         />
     )
 }
