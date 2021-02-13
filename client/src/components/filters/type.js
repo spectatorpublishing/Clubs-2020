@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import ReactDOM from 'react-dom';
-
+import Dropdown from '../dropdown/index';
 
 const Button = styled.button`
     background: #FFFFFF;
@@ -28,15 +28,17 @@ const Word = styled.div`
 
 `;
 
+
 const white = '#FFFFFF';
 const orange = '#EC6C52';
 const grey = "#9A9A9A";
 const Text = 'Type +';
 const text = 'Type x';
+
 export default class Type extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { color: white, textcolor: grey, text: Text };
+        this.state = { color: white, textcolor: grey, text: Text, open: false};
         this.changeColor = this.changeColor.bind(this);
     }
     changeColor() {
@@ -46,13 +48,13 @@ export default class Type extends React.Component {
         this.setState({ color: newColor, textcolor: newTextColor, text: newText })
     }
 
+
     render() {
         return (
 
-            <Button style={{ backgroundColor: this.state.color, color: this.state.textcolor }} onClick={this.changeColor} >
+            <Button style={{ backgroundColor: this.state.color, color: this.state.textcolor }} onClick={() => this.handleClick()}> {/*{this.changeColor}> () => setOpen(open => !open)} > */}
                 <Word>{this.state.text}</Word>
             </Button>
-
         )
     }
 }

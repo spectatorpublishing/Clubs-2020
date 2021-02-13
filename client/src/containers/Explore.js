@@ -6,6 +6,7 @@ import Join from '../components/filters/join';
 import Shuffle from '../components/filters/shuffle';
 import Size from '../components/filters/size';
 import Type from '../components/filters/type';
+import Dropdown from '../components/dropdown/index';
 
 const Wrapper = styled.div`
   background-color: #f4f6f8;
