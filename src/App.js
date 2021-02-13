@@ -1,4 +1,4 @@
-import React from 'react';
+/*import React from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Navbar } from './components/navbar';
 import { Explore } from './containers/Explore';
@@ -23,3 +23,4 @@ const App = () => {
 };
 
 export default App;
+*/
