@@ -16,7 +16,6 @@ const Bar = styled.input`
   border: 0px;
   background-color: ${(props) => props.theme.colors.fullWhite};
   color: ${(props) => props.theme.colors.gray};
-  font-family: Roboto;
   font-weight: 500;
   font-size:18px;
   line-height:21px;
