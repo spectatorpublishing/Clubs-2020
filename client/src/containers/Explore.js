@@ -6,6 +6,7 @@ import Join from '../components/filters/join';
 import Shuffle from '../components/filters/shuffle';
 import Size from '../components/filters/size';
 import Type from '../components/filters/type';
+import SearchBar from '../components/searchBar';
 import FilterMobile from '../components/filters/filterMobile';
 
 const Wrapper = styled.div`
@@ -54,7 +55,7 @@ const TextWrapper = styled.div`
         padding: 1rem 1rem 0 1rem;
     }
 
-    @media only screen and (max-width : 769px) {
+    @media only screen and (max-width : 768px) {
         flex-direction: column;
 
         h1{
@@ -104,9 +105,19 @@ const FiltersBox = styled.div`
 const Filter = styled.div`
     margin-right: 1.5rem;
 
-    @media only screen and (max-width : 768px) {
+    @media only screen and (max-width : 1024px) {
             display: none;
         }
+`;
+
+const FiltersLeft = styled.div`
+    display: flex;
+    flex-direction: row;
+    margin-right: auto;
+
+    @media only screen and (max-width : 768px) {
+        flex-grow: 1;
+    }
 `;
 
 const FilterBottom = styled.div`
@@ -115,6 +126,14 @@ const FilterBottom = styled.div`
     left: 50%;
     margin-top: -20px;
     margin-left: -65px;
+`;
+
+const SearchBox = styled.div`
+  margin-right: 1.5rem;
+
+  @media only screen and (max-width : 768px) {
+        flex-grow: 1;
+    }
 `;
 
 const ShuffleBox = styled.div`
@@ -158,9 +177,12 @@ export const Explore = () => {
                     <p>Find your Columbia community</p>
                 </TextWrapper>
                 <FiltersBox>
-                    <Filter><Type /></Filter>
-                    <Filter><Size /></Filter>
-                    <Filter><Join /></Filter>
+                    <FiltersLeft>
+                        <SearchBox><SearchBar></SearchBar></SearchBox>
+                        <Filter><Type /></Filter>
+                        <Filter><Size /></Filter>
+                        <Filter><Join /></Filter>
+                    </FiltersLeft>
                     <ShuffleBox><Shuffle /></ShuffleBox>
                 </FiltersBox>
                 <CardsContainer>
