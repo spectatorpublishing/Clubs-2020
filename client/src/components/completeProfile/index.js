@@ -2,11 +2,11 @@ import React from "react";
 import styled from "styled-components";
 
 
-const AccountTag = () => {
+const CompleteProfile = () => {
     return(
       <BoxWrapper>
-          <Emoji><span role="img" aria-label="tada">🎉</span></Emoji>
-          <Text>Thank you for creating an account! Here is a preview of what other students can see. Hit edit anytime to change your information.</Text>
+          <Emoji><span role="img" aria-label="tada">✏️</span></Emoji>
+          <Text>Don't forget to complete your profile!</Text>
       </BoxWrapper>
     );
 };
@@ -38,4 +38,4 @@ const Text = styled.div`
     font-size: 1.125rem;
 `;
 
-export default AccountTag;
+export default CompleteProfile;

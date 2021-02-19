@@ -29,6 +29,7 @@ const SearchTag = ({
 };
 
 const Tag = styled(motion.button)`
+  cursor: default;
   display: inline-block;
   padding: 0.4rem 1rem;
   font-size: 0.9rem;
@@ -36,12 +37,11 @@ const Tag = styled(motion.button)`
   border-radius: 1rem;
   margin: ${(props) => props.margin};
   border: 0.125rem ${(props) => props.theme.colors.red} solid;
-  outline-color: ${(props) => props.theme.colors.blue};
+  outline: none;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  cursor: pointer;
   @media only screen and (max-width: 600px) {
     font-size: 0.75rem;
   }
