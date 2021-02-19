@@ -1,17 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import styled, { withTheme } from 'styled-components';
 import { motion } from 'framer-motion';
-import { useFocused } from '../customHooks/index';
 
 const SearchTag = ({
   text,
   theme,
-  data,
-  setData,
-  objId,
-  dataLimitSize,
   margin,
-  defaultValue,
 }) => {
   const tagVariants = {
     active: { color: theme.colors.white, backgroundColor: theme.colors.red },
@@ -20,62 +14,14 @@ const SearchTag = ({
       backgroundColor: 'rgba(236, 108, 82, 0.08)',
     },
   };
-  const [clicked, setClicked] = useState(defaultValue);
   const searchTag = useRef(null);
-  const searchTagFocused = useFocused(searchTag);
-  const onKeypress = (e) => {
-    if (e.keyCode === 13) {
-      searchTag.current.click();
-    }
-  };
-  useEffect(() => {
-    if (searchTagFocused) {
-      document.addEventListener('keypress', onKeypress);
-    }
-    return () => {
-      document.removeEventListener('keypress', onKeypress);
-    };
-  }, [searchTagFocused]);
 
-  const handleClick = () => {
-    if (!data || !setData || !dataLimitSize) setClicked(!clicked);
-    if (data && setData) {
-      let tempData = { ...data };
-      if (objId in tempData) {
-        if (clicked) {
-          // Removes Element
-          const index = tempData[objId].indexOf(text);
-          if (index >= -1) tempData[objId].splice(index, 1);
-          setClicked(false);
-          // Adds Element
-        } else {
-          // Limit of number of tags
-          if (dataLimitSize && tempData[objId].length < dataLimitSize) {
-            tempData[objId].push(text);
-            setClicked(true);
-          }
-          // No limit on number of tags
-          else if (!dataLimitSize) {
-            tempData[objId].push(text);
-            setClicked(true);
-          }
-        }
-        setData(tempData);
-      } else {
-        console.error('objId not in the obj');
-      }
-    }
-  };
   return (
     <Tag
       margin={margin}
       ref={searchTag}
-      clicked={clicked}
-      onClick={handleClick}
       variants={tagVariants}
-      whileTap={{ scale: 0.95 }}
       initial='inactive'
-      animate={clicked ? 'active' : 'inactive'}
     >
       {text ? text : 'no text entered'}
     </Tag>

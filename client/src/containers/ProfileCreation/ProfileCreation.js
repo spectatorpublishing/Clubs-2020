@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled, { withTheme } from 'styled-components';
-import SearchTag from '../../components/searchTag/index';
+import SearchTagActive from '../../components/searchTagActive/index';
 import Checkbox from '../../components/checkbox/index';
 import Dropdown from '../../components/dropdown/index';
 import FilledButton from '../components/filledButton/index';
@@ -16,13 +16,13 @@ const ProfileCreation = ({ theme }) => {
       <Container>
         <TempContainer>
           <TempItem>
-            <SearchTag text='Academic' />
+            <SearchTagActive text='Academic' />
           </TempItem>
           <TempItem>
-            <SearchTag text='Advising' />
+            <SearchTagActive text='Advising' />
           </TempItem>
           <TempItem>
-            <SearchTag text='Global Affairs' />
+            <SearchTagActive text='Global Affairs' />
           </TempItem>
           <TempItem>
             <Checkbox />

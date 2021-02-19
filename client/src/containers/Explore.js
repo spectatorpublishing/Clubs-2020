@@ -47,7 +47,6 @@ const TextWrapper = styled.div`
     }
 
     p{
-        font-family: Roboto;
         font-style: normal;
         font-weight: 500;
         font-size: 1.2rem;
