@@ -8,7 +8,8 @@ assignees: ''
 
 ---
 Acceptance Criteria (AC):
-[ ] - 
+- [ ] 
+- [ ] 
 
 ---
 
