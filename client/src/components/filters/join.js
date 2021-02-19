@@ -19,7 +19,7 @@ const Button = styled.button`
     ${({ clicked }) =>
         clicked &&
         css`
-            background-color: ${(props) => props.theme.colors.turquoise};
+            background-color: ${(props) => props.theme.colors.blue};
             color: ${(props) => props.theme.colors.fullWhite};
         `
     }
