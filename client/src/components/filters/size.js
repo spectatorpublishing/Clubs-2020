@@ -34,42 +34,73 @@ const Word = styled.div`
 const SectionWrap = styled.div`
 `;
 
+const CheckboxContainer = styled.div`
+  margin: 0 0.75rem 0.5rem;
+  @media screen and (max-width: 800px) {
+    margin: 0 1.5rem 0.5rem 0;
+  }
+  @media screen and (max-width: 600px) {
+    margin: 0;
+  }
+`;
+
+const MultiselectWrap = styled.div`
+  @media screen and (max-width: 800px) {
+    margin: 0;
+  }
+`;
+
+
 const white = '#FFFFFF';
 const teal = '#42B7CB';
 const grey = "#9A9A9A";
 const Text = 'Size +';
 const text = 'Size x';
 
+
 export default class Size extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { color: white, textcolor: grey, text: Text, dropdownOpen: false, selectedTags:[], sizes: ["0-10", "10-20", "20-50" ]};
-        this.changeColor = this.changeColor.bind(this);
+        this.state = { color: white, textcolor: grey, text: Text, dropdownOpen: false, selectedSizes:[], sizes: ["0-10", "10-20", "20-50" ]};
+        this.handleClick = this.handleClick.bind(this);
     }
-    changeColor() {
+    handleClick() {
+        if (this.state.dropdownOpen) {
+            this.removeSelectedSizes(); //if it was true before clicking (so now false)
+        }
         const newColor = this.state.color === white ? teal : white;
         const newTextColor = this.state.textcolor === grey ? white : grey;
         const newText = this.state.text === text ? Text : text;
-        this.setState({ color: newColor, textcolor: newTextColor, text: newText, dropdownOpen: true })
+        this.setState({ color: newColor, textcolor: newTextColor, text: newText, dropdownOpen: !this.state.dropdownOpen})
+        
+    }
+
+    removeSelectedSizes() {
+        this.setState({selectedSizes:[]});
     }
 
     
 
     render() {
-        let { dropdownOpen, sizes, selectedTags } = this.state;
+        let {dropdownOpen, sizes, selectedSizes} = this.state;
+        console.log("selected sizes", selectedSizes);
+
         return (
-            <SectionWrap>
-                <Button style={{ backgroundColor: this.state.color, color: this.state.textcolor }} onClick={this.changeColor} >
-                    <Word>{this.state.text}</Word>
-                </Button>
-            
-                <Multiselect 
-                    open={dropdownOpen}
+        <SectionWrap>
+            <Button style={{ backgroundColor: this.state.color, color: this.state.textcolor }} onClick={this.handleClick} >
+                <Word>{this.state.text}</Word>
+            </Button>
+
+            {dropdownOpen && (
+                <MultiselectWrap>
+                    <Multiselect 
                     data={sizes}
-                    value={selectedTags}
-                    onChange={selectedTags => this.setState({ selectedTags })}
-                    textField="name"
-                />
+                    value={selectedSizes}
+                    onChange={selectedSizes => this.setState({ selectedSizes })}
+                    textField="sizes"
+                    />
+                </MultiselectWrap>
+            )}
             </SectionWrap>
         )
     }

@@ -30,6 +30,9 @@ const Word = styled.div`
 
 `;
 
+const SectionWrap = styled.div`
+`;
+
 const CheckboxContainer = styled.div`
   margin: 0 0.75rem 0.5rem;
   @media screen and (max-width: 800px) {
@@ -46,8 +49,6 @@ const MultiselectWrap = styled.div`
   }
 `;
 
-const SectionWrap = styled.div`
-`;
 
 const white = '#FFFFFF';
 const orange = '#EC6C52';
@@ -59,20 +60,27 @@ const text = 'Type x';
 export default class Type extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { color: white, textcolor: grey, text: Text, dropdownOpen: false, selectedTags:[], types: ["Cultural", "Pre Professional", "Performance" ]};
-        //this.changeColor = this.changeColor.bind(this);
+        this.state = { color: white, textcolor: grey, text: Text, dropdownOpen: false, selectedTypes:[], types: ["Cultural", "Pre Professional", "Performance" ]};
         this.handleClick = this.handleClick.bind(this);
     }
     handleClick() {
+      if (this.state.dropdownOpen) {
+        this.removeSelectedTypes(); //if it was true before clicking (so now false)
+      }
         const newColor = this.state.color === white ? orange : white;
         const newTextColor = this.state.textcolor === grey ? white : grey;
         const newText = this.state.text === text ? Text : text;
         this.setState({ color: newColor, textcolor: newTextColor, text: newText, dropdownOpen: !this.state.dropdownOpen})
     }
 
+    removeSelectedTypes() {
+      this.setState({selectedTypes:[]});
+    }
 
     render() {
-        let { dropdownOpen, types, selectedTags } = this.state;
+        let { dropdownOpen, types, selectedTypes} = this.state;
+        console.log("selectedTypes", selectedTypes);
+                
         return (
         <SectionWrap>
           <Button style={{ backgroundColor: this.state.color, color: this.state.textcolor }} onClick={this.handleClick} >
@@ -83,8 +91,8 @@ export default class Type extends React.Component {
           <MultiselectWrap>
             <Multiselect 
             data={types}
-            value={selectedTags}
-            onChange={selectedTags => this.setState({ selectedTags })}
+            value={selectedTypes}
+            onChange={selectedTypes => this.setState({selectedTypes})}
             textField="types"
             />
           </MultiselectWrap>

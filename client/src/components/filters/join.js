@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import ReactDOM from 'react-dom';
 
+import 'react-widgets/dist/css/react-widgets.css';
+import { Multiselect } from 'react-widgets'
 
 const Button = styled.button`
     background: #FFFFFF;
@@ -28,6 +30,25 @@ const Word = styled.div`
 
 `;
 
+const SectionWrap = styled.div`
+`;
+
+const CheckboxContainer = styled.div`
+  margin: 0 0.75rem 0.5rem;
+  @media screen and (max-width: 800px) {
+    margin: 0 1.5rem 0.5rem 0;
+  }
+  @media screen and (max-width: 600px) {
+    margin: 0;
+  }
+`;
+
+const MultiselectWrap = styled.div`
+  @media screen and (max-width: 800px) {
+    margin: 0;
+  }
+`;
+
 
 const white = '#FFFFFF';
 const blue = '#78C0F5';
@@ -38,22 +59,42 @@ const text = 'Joining x';
 export default class Join extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { color: white, textcolor: grey, text: Text };
-        this.changeColor = this.changeColor.bind(this);
+        this.state = { color: white, textcolor: grey, text: Text, dropdownOpen: false, selectedJoining:[], joining: ["Accepting New Members", "No Application", "Application Required"  ]};
+        this.handleClick = this.handleClick.bind(this);
     }
-    changeColor() {
+    handleClick() {
+        if (this.state.dropdownOpen) {
+            this.removeSelectedJoining(); //if it was true before clicking (so now false)
+        }
         const newColor = this.state.color === white ? blue : white;
         const newTextColor = this.state.textcolor === grey ? white : grey;
         const newText = this.state.text === text ? Text : text;
-        this.setState({ color: newColor, textcolor: newTextColor, text: newText })
+        this.setState({ color: newColor, textcolor: newTextColor, text: newText,  dropdownOpen: !this.state.dropdownOpen})
+    }
+    removeSelectedJoining() {
+        this.setState({selectedJoining:[]});
     }
 
     render() {
+        let {dropdownOpen, joining, selectedJoining} = this.state;
+        console.log("selected joining", selectedJoining);
         return (
-            <Button style={{ backgroundColor: this.state.color, color: this.state.textcolor }} onClick={this.changeColor} >
+            <SectionWrap>
+            <Button style={{ backgroundColor: this.state.color, color: this.state.textcolor }} onClick={this.handleClick} >
                 <Word>{this.state.text}</Word>
             </Button>
 
+            {dropdownOpen && (
+                <MultiselectWrap>
+                    <Multiselect 
+                    data={joining}
+                    value={selectedJoining}
+                    onChange={selectedJoining => this.setState({selectedJoining})}
+                    textField="joining"
+                    />
+                </MultiselectWrap>
+            )}
+            </SectionWrap>
         )
     }
 }
