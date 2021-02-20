@@ -67,7 +67,7 @@ export default class Type extends React.Component {
         const newColor = this.state.color === white ? orange : white;
         const newTextColor = this.state.textcolor === grey ? white : grey;
         const newText = this.state.text === text ? Text : text;
-        this.setState({ color: newColor, textcolor: newTextColor, text: newText, dropdownOpen: true})
+        this.setState({ color: newColor, textcolor: newTextColor, text: newText, dropdownOpen: !this.state.dropdownOpen})
     }
 
 
@@ -85,7 +85,7 @@ export default class Type extends React.Component {
             data={types}
             value={selectedTags}
             onChange={selectedTags => this.setState({ selectedTags })}
-            textField="name"
+            textField="types"
             />
           </MultiselectWrap>
         )}

@@ -31,6 +31,8 @@ const Word = styled.div`
 
 `;
 
+const SectionWrap = styled.div`
+`;
 
 const white = '#FFFFFF';
 const teal = '#42B7CB';
@@ -41,14 +43,14 @@ const text = 'Size x';
 export default class Size extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { color: white, textcolor: grey, text: Text, selectedTags:[], sizes: ["0-10", "10-20", "20-50" ]};
+        this.state = { color: white, textcolor: grey, text: Text, dropdownOpen: false, selectedTags:[], sizes: ["0-10", "10-20", "20-50" ]};
         this.changeColor = this.changeColor.bind(this);
     }
     changeColor() {
         const newColor = this.state.color === white ? teal : white;
         const newTextColor = this.state.textcolor === grey ? white : grey;
         const newText = this.state.text === text ? Text : text;
-        this.setState({ color: newColor, textcolor: newTextColor, text: newText })
+        this.setState({ color: newColor, textcolor: newTextColor, text: newText, dropdownOpen: true })
     }
 
     
@@ -56,16 +58,19 @@ export default class Size extends React.Component {
     render() {
         let { dropdownOpen, sizes, selectedTags } = this.state;
         return (
-            /*<Button style={{ backgroundColor: this.state.color, color: this.state.textcolor }} onClick={this.changeColor} >
-                <Word>{this.state.text}</Word>
-            </Button>*/
-           
-            <Multiselect 
-                data={sizes}
-                value={selectedTags}
-                onChange={selectedTags => this.setState({ selectedTags })}
-                textField="name"
-            />
+            <SectionWrap>
+                <Button style={{ backgroundColor: this.state.color, color: this.state.textcolor }} onClick={this.changeColor} >
+                    <Word>{this.state.text}</Word>
+                </Button>
+            
+                <Multiselect 
+                    open={dropdownOpen}
+                    data={sizes}
+                    value={selectedTags}
+                    onChange={selectedTags => this.setState({ selectedTags })}
+                    textField="name"
+                />
+            </SectionWrap>
         )
     }
 }
