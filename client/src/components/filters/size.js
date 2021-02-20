@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import ReactDOM from 'react-dom';
 
+import 'react-widgets/dist/css/react-widgets.css';
 import { Multiselect } from 'react-widgets'
 
 
@@ -62,7 +63,6 @@ export default class Size extends React.Component {
             <Multiselect 
                 data={sizes}
                 value={selectedTags}
-                
                 onChange={selectedTags => this.setState({ selectedTags })}
                 textField="name"
             />

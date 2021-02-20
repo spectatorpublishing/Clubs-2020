@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import ReactDOM from 'react-dom';
-import Dropdown from '../dropdown/index';
 
+import 'react-widgets/dist/css/react-widgets.css';
 import { Multiselect } from 'react-widgets'
 
 const Button = styled.button`
@@ -70,21 +70,6 @@ export default class Type extends React.Component {
         this.setState({ color: newColor, textcolor: newTextColor, text: newText, dropdownOpen: true})
     }
 
-    handleCreate(type) {
-      let { types, selectedTags } = this.state;
-  
-      let newOption = {
-        type,
-        id: types.length + 1
-      }
-  
-      this.setState({
-        selectedTags: [...selectedTags, newOption],  // select new option
-        types: [...types, newOption] // add new option to our dataset
-      })
-    }
-  
-
 
     render() {
         let { dropdownOpen, types, selectedTags } = this.state;
@@ -99,8 +84,6 @@ export default class Type extends React.Component {
             <Multiselect 
             data={types}
             value={selectedTags}
-            allowCreate="onFilter"
-            onCreate={type => this.handleCreate(type)}
             onChange={selectedTags => this.setState({ selectedTags })}
             textField="name"
             />
