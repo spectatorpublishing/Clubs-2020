@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import ReactDOM from 'react-dom';
 import Dropdown from '../dropdown/index';
 
+import { Multiselect } from 'react-widgets'
+
 const Button = styled.button`
     background: #FFFFFF;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
@@ -38,12 +40,14 @@ const CheckboxContainer = styled.div`
   }
 `;
 
-const DropdownContainer = styled(CheckboxContainer)`
+const MultiselectWrap = styled.div`
   @media screen and (max-width: 800px) {
     margin: 0;
   }
 `;
 
+const SectionWrap = styled.div`
+`;
 
 const white = '#FFFFFF';
 const orange = '#EC6C52';
@@ -55,7 +59,7 @@ const text = 'Type x';
 export default class Type extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { color: white, textcolor: grey, text: Text, dropdownOpen: false, selectedTags:};
+        this.state = { color: white, textcolor: grey, text: Text, dropdownOpen: false, selectedTags:[], types: ["Cultural", "Pre Professional", "Performance" ]};
         //this.changeColor = this.changeColor.bind(this);
         this.handleClick = this.handleClick.bind(this);
     }
@@ -66,12 +70,44 @@ export default class Type extends React.Component {
         this.setState({ color: newColor, textcolor: newTextColor, text: newText, dropdownOpen: true})
     }
 
+    handleCreate(type) {
+      let { types, selectedTags } = this.state;
+  
+      let newOption = {
+        type,
+        id: types.length + 1
+      }
+  
+      this.setState({
+        selectedTags: [...selectedTags, newOption],  // select new option
+        types: [...types, newOption] // add new option to our dataset
+      })
+    }
+  
+
 
     render() {
+        let { dropdownOpen, types, selectedTags } = this.state;
         return (
-        <Button style={{ backgroundColor: this.state.color, color: this.state.textcolor }} onClick={this.handleClick} >
-            <Word>{this.state.text}</Word>
-        </Button>
+        <SectionWrap>
+          <Button style={{ backgroundColor: this.state.color, color: this.state.textcolor }} onClick={this.handleClick} >
+              <Word>{this.state.text}</Word>
+          </Button>
+        
+        {dropdownOpen && (
+          <MultiselectWrap>
+            <Multiselect 
+            data={types}
+            value={selectedTags}
+            allowCreate="onFilter"
+            onCreate={type => this.handleCreate(type)}
+            onChange={selectedTags => this.setState({ selectedTags })}
+            textField="name"
+            />
+          </MultiselectWrap>
+        )}
+        
+        </SectionWrap>
         )
     }
 }

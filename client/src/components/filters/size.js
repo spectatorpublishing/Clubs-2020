@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import ReactDOM from 'react-dom';
 
+import { Multiselect } from 'react-widgets'
 
 
 const Button = styled.button`
@@ -39,7 +40,7 @@ const text = 'Size x';
 export default class Size extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { color: white, textcolor: grey, text: Text };
+        this.state = { color: white, textcolor: grey, text: Text, selectedTags:[], sizes: ["0-10", "10-20", "20-50" ]};
         this.changeColor = this.changeColor.bind(this);
     }
     changeColor() {
@@ -49,12 +50,22 @@ export default class Size extends React.Component {
         this.setState({ color: newColor, textcolor: newTextColor, text: newText })
     }
 
-    render() {
-        return (
-            <Button style={{ backgroundColor: this.state.color, color: this.state.textcolor }} onClick={this.changeColor} >
-                <Word>{this.state.text}</Word>
-            </Button>
+    
 
+    render() {
+        let { dropdownOpen, sizes, selectedTags } = this.state;
+        return (
+            /*<Button style={{ backgroundColor: this.state.color, color: this.state.textcolor }} onClick={this.changeColor} >
+                <Word>{this.state.text}</Word>
+            </Button>*/
+           
+            <Multiselect 
+                data={sizes}
+                value={selectedTags}
+                
+                onChange={selectedTags => this.setState({ selectedTags })}
+                textField="name"
+            />
         )
     }
 }
