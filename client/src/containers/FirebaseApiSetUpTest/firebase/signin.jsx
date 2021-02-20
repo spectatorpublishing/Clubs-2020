@@ -14,47 +14,68 @@ const Background = styled.div`
 `;
 
 var google = new firebase.auth.GoogleAuthProvider();
+var db_root = 'http://localhost:8080'
+
+/* encodes an object into x-www-form-urlencode form for POST */
+function encodeFormData(details) {
+    var formBody = [];
+    for (var property in details) {
+        var encodedKey = encodeURIComponent(property);
+        var encodedValue = encodeURIComponent(details[property]);
+        formBody.push(encodedKey + "=" + encodedValue);
+    }
+    formBody = formBody.join("&");
+
+    return formBody;
+}
+
+/* @param user: user object returned from firebase-auth
+ *
+ * gets called after user authenticates successfully with firebase-auth
+ */
+function login(user) {
+    /* unverified email address, send user to verify your email page */
+    if (user.emailVerified === false) {
+        return Promise.resolve('verify');
+    } else {
+        let loginCred = {
+            firebaseId: user.uid,
+            accountEmail: user.email
+        }
+
+        return fetch(`${db_root}/api/clubAccounts/create`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: encodeFormData(loginCred),
+        })
+            .then(res => res.json())
+            /* club profile not created, direct to profile creation page */
+            .then(res => res.clubProfileID ? 'home' : 'profile')
+    }
+}
 
 export default function Signin(props) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [message, setMessage] = useState('');
+    const [redirect, setRedirect] = useState('');
 
     function handleSignin(e) {
-        firebase.auth().signInWithPopup(google).then(function(result) {
-            // This gives you a Google Access Token. You can use it to access the Google API.
-            var token = result.credential.accessToken;
-            // The signed-in user info.
-            var user = result.user;
-            var username = user.displayName;
+        firebase.auth().signInWithPopup(google)
+            .then(user => login(user))
+            .then(page => setRedirect(page))
+            .catch(err => setMessage(err))
 
-            setMessage(`Welcome to Clubs@CU, ${username}!`);
-            console.log(token, user);
-        }).catch(function(error) {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            // The email of the user's account used.
-            var email = error.email;
-            // The firebase.auth.AuthCredential type that was used.
-            var credential = error.credential;
-
-            setMessage(errorMessage);
-            console.log(errorCode, errorMessage, email, credential);
-        });
         e.preventDefault();
     }
 
     function signInWithPasswrod(e) {
         firebase.auth().signInWithEmailAndPassword(email, password)
-            .then(userCredential => {
-                setMessage('password signin success!');
-                console.log(userCredential);
-                setMessage(`Welcome to Clubs@CU, ${userCredential.user.uid}!`)
-            }, error => {
-                setMessage(error.code);
-                console.log(error);
-            });
+            .then(userCred => login(userCred.user))
+            .then(page => setRedirect(page))
+            .catch(err => setMessage(err))
 
         e.preventDefault();
     }
@@ -63,19 +84,19 @@ export default function Signin(props) {
         <Background>
             <button onClick={handleSignin}>Sign in with Google</button>
             <div>{message}</div>
-            <Signout/>
+            <Signout />
 
             {/* Sign in with email and password */}
             <form onSubmit={signInWithPasswrod}>
                 <label> email:</label>
-                <input type='email' value={email} onChange={e => setEmail(e.target.value)}/>
+                <input type='email' value={email} onChange={e => setEmail(e.target.value)} />
 
                 <label> password:</label>
-                <input type='password' value={password} onChange={e => setPassword(e.target.value)}/>
+                <input type='password' value={password} onChange={e => setPassword(e.target.value)} />
 
-                <input value="sign in" type="submit"/>
+                <input value="sign in" type="submit" />
             </form>
-            <div>{message}</div>
+            <div>{redirect}</div>
         </Background>
     )
 }
