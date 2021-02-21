@@ -22,7 +22,7 @@ const BoxWrapper = styled.div`
     align-items: center;
 
     @media (max-width: 768px) {
-        margin: 0rem 1rem 0rem 1rem;
+        margin: 1rem;
     }
 `;
 
