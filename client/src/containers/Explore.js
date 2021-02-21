@@ -8,6 +8,7 @@ import Size from '../components/filters/size';
 import Type from '../components/filters/type';
 import SearchBar from '../components/searchBar';
 import FilterMobile from '../components/filters/filterMobile';
+import Icon from '../components/filters/shuffle.png';
 
 const Wrapper = styled.div`
   background-color: ${(props) => props.theme.colors.white};
@@ -140,10 +141,63 @@ const ShuffleBox = styled.div`
   margin-left: auto;
 `;
 
+const ShuffleButton = styled.button`
+    background-color: white;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+    border-radius:7px;
+    width:130px;
+    height:39px;
+    border:0px;
+    cursor: pointer;
+
+    :hover{
+        box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.20);
+    }
+
+    @media only screen and (max-width : 768px) {
+            width: 39px;
+        }
+`;
+
+const ShuffleWord = styled.div`
+    // font-family is necessary here
+    font-family: 'Manrope', 'Roboto', 'Arial', 'Helvetica';    
+    font-style: normal;
+    font-weight:600;
+    font-size:18px;
+    line-height:21px;
+    text-align:center;
+    color: ${(props) => props.theme.colors.gray};
+    float:right;
+    padding-right:15px;
+
+    @media only screen and (max-width : 768px) {
+            display: none;
+        }
+
+`;
+
+const ShuffleImage = styled.div`
+    padding-top:3px;
+    float:left;
+    padding-left:10px;
+
+    @media only screen and (max-width : 768px) {
+        float: none;
+        padding:0;
+    }
+`;
+
 export const Explore = () => {
     const [clubProfiles, setClubProfiles] = useState([]);
 
     useEffect(() => {
+        console.log("this is use effect");
+        newFetch();  
+    }, []);
+
+    const newFetch = async () => {
+        console.log("this is newFetch");
         fetch(`api/clubProfiles/`, {
             method: 'GET',
             headers: {
@@ -165,7 +219,7 @@ export const Explore = () => {
                 setClubProfiles(json);
             })
             .catch(error => console.log(error));    
-    }, []);
+    };
 
     return(
         <Wrapper>
@@ -183,7 +237,12 @@ export const Explore = () => {
                         <Filter><Size /></Filter>
                         <Filter><Join /></Filter>
                     </FiltersLeft>
-                    <ShuffleBox><Shuffle /></ShuffleBox>
+                    <ShuffleBox>
+                        <ShuffleButton onClick={newFetch}>
+                            <ShuffleImage><img src={Icon} width={15} height={15} alt="shuffle" /></ShuffleImage>
+                            <ShuffleWord>Shuffle</ShuffleWord>
+                        </ShuffleButton>
+                    </ShuffleBox>
                 </FiltersBox>
                 <CardsContainer>
                     {(clubProfiles.length === 0) ? (<h1>Loading</h1>) : (clubProfiles.map(profile => (
