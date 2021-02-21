@@ -10,6 +10,7 @@ import { FrequencyTag } from "../components/frequencyTag/index";
 import { SocialTagsBox } from "../components/socialTagsBox";
 import AccountTag from "../components/accountTag/index";
 import YourClubProfile from "../components/yourClubProfile/index";
+import CompleteProfile from "../components/completeProfile";
 
 export const ClubProfile = () => {
     const { id } = useParams();
@@ -17,8 +18,9 @@ export const ClubProfile = () => {
     const [width, setWidth] = useState(window.innerWidth);
     const [isLoading, setLoading] = useState(true);
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    const isLoggedin = false;
-    const firstLogIn = false;
+    const isLoggedin = true;
+    const firstLogIn = true;
+    const completeProfile = true;
 
     useEffect(() => {
         window.addEventListener("resize", () => setWidth(window.innerWidth));
@@ -53,6 +55,11 @@ export const ClubProfile = () => {
         (null) 
     };
 
+    const ConditionalCompleteProfile = () => { return (completeProfile === true) ? 
+        ( <CompleteProfile/> ) : 
+        (null) 
+    };
+
     const ConditionalClubProfile = () => { return (isLoggedin === true) ? 
         ( <YourClubProfile/> ) : 
         (null) 
@@ -69,8 +76,8 @@ export const ClubProfile = () => {
                 {!isLoading && (
                     <Wrapper>
                         <NavbarType/>
-                        <ConditionalAccountTag/>
                         <ConditionalClubProfile/> 
+                        <ConditionalAccountTag/>
                         <PageWrapper>
                             <Content>
                                 <h1>{club.name}</h1>
@@ -127,6 +134,7 @@ export const ClubProfile = () => {
                     <Wrapper>
                         <NavbarType/>
                         <ConditionalAccountTag/>
+                        <ConditionalCompleteProfile/>
                         <ConditionalClubProfile/> 
                         <PageWrapper>
                             <Content>                            
@@ -188,6 +196,7 @@ export const ClubProfile = () => {
                     <Wrapper>
                         <NavbarType/>
                         <ConditionalAccountTag/>
+                        <ConditionalCompleteProfile/>
                         <ConditionalClubProfile/> 
                         <PageWrapper>
                             <Content>

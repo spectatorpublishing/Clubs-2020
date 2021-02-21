@@ -24,7 +24,6 @@ const Button = styled.button`
 `;
 
 const TextWrapper = styled.div`
-    font-family: Roboto;
     font-style: normal;
     font-weight: 500;
     color: ${(props) => props.theme.colors.white};
