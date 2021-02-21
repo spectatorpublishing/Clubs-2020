@@ -1,10 +1,10 @@
-import React from 'react';
-import styled from 'styled-components';
-import ReactDOM from 'react-dom';
+import React, { useState } from 'react';
+import styled, { css } from 'styled-components';
 
 
 const Button = styled.button`
-    background: #FFFFFF;
+    background-color: ${(props) => props.theme.colors.fullWhite};
+    color: ${(props) => props.theme.colors.gray};
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
     border-radius:7px;
     width:104px;
@@ -15,12 +15,21 @@ const Button = styled.button`
     :hover{
         box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.15);
     }
+
+    ${({ clicked }) =>
+        clicked &&
+        css`
+            background-color: ${(props) => props.theme.colors.turquoise};
+            color: ${(props) => props.theme.colors.fullWhite};
+        `
+    }
 `;
 
 const Word = styled.div`
-    font-family: Roboto;
+// font-family is necessary here
+    font-family: 'Manrope', 'Roboto', 'Arial', 'Helvetica';
     font-style: normal;
-    font-weight:500;
+    font-weight:600;
     font-size:18px;
     line-height:21px;
     text-align:center;
@@ -28,33 +37,17 @@ const Word = styled.div`
 
 `;
 
-const white = '#FFFFFF';
-const orange = '#EC6C52';
-const grey = "#9A9A9A";
-const Text = 'Type +';
-const text = 'Type x';
-export default class Type extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { color: white, textcolor: grey, text: Text };
-        this.changeColor = this.changeColor.bind(this);
-    }
-    changeColor() {
-        const newColor = this.state.color === white ? orange : white;
-        const newTextColor = this.state.textcolor === grey ? white : grey;
-        const newText = this.state.text === text ? Text : text;
-        this.setState({ color: newColor, textcolor: newTextColor, text: newText })
-    }
+const TextAdd = 'Type +';
+const TextRemove = 'Type x';
 
-    render() {
-        return (
+export const Type = () => {
+    const [clicked, setClicked] = useState(false);
 
-            <Button style={{ backgroundColor: this.state.color, color: this.state.textcolor }} onClick={this.changeColor} >
-                <Word>{this.state.text}</Word>
-            </Button>
+    return (
+        <Button clicked={clicked} onClick={() => setClicked(!clicked)}>
+            <Word>{clicked ? TextAdd : TextRemove}</Word>
+        </Button>
+    )
+};
 
-        )
-    }
-}
-ReactDOM.render(<Type />, document.getElementById('root'))
-
+export default Type;

@@ -40,7 +40,12 @@ function ApplicationRequired({ isApplicationRequired }) {
 
 const Info = styled.p`
   color: ${(props) => props.theme.colors.gray};
-  font-weight: 700;
+  font-weight: 500;
+  font-size: 1.125rem;
+  margin: 0rem 0rem 0.5rem 0rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 `;
 
 export const ProfilePageBox = ({
@@ -56,19 +61,22 @@ export const ProfilePageBox = ({
         <ClubTags tags={tags} />
       </ProfileTags>
       <Info>
-        <FontAwesomeIcon icon={faUser} /> Club Size: {memberRange}
+        <FontAwesomeIcon icon={faUser} /> <Label>Club Size: {memberRange}</Label>
       </Info>
       <Info>
         <FontAwesomeIcon icon={faCheckCircle} />{' '}
-        <AcceptingMembers
+        <Label><AcceptingMembers
           isAcceptingMembers={acceptingMembers}
         ></AcceptingMembers>
+        </Label>     
       </Info>
       <Info>
         <FontAwesomeIcon icon={faEdit} />{' '}
-        <ApplicationRequired
+        <Label>
+          <ApplicationRequired
           isApplicationRequired={applicationRequired}
-        ></ApplicationRequired>
+          ></ApplicationRequired>
+        </Label>
       </Info>
     </Box>
   );
@@ -78,17 +86,26 @@ const Box = styled.div`
   border-radius: 7px;
   background-color: ${(props) => props.theme.colors.fullWhite};
   width: auto;
-  padding: 1rem 2rem;
+  padding: 0.5rem 2rem 1rem 2rem;
   margin: 0.5rem 0;
+
+  h3{
+    font-size: 1.25rem;
+  }
 `;
 
 const ProfileTags = styled.div`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  margin-bottom: 1.25rem;
 `;
 
 const Tag = styled.div`
   margin-right: 0.2rem;
   margin-top: 0.2rem;
+`;
+
+const Label = styled.div`
+  margin-left: 0.5rem;
 `;

@@ -5,9 +5,12 @@ import ExploreBox from '../components/explorebox/index';
 import MainContent from '../components/profileMainContent/index';
 import { ProfilePageBox } from "../components/profilePageBox";
 import { Navbar } from "../components/navbar";
+import { NavbarProfile } from "../components/navbarProfile";
 import { FrequencyTag } from "../components/frequencyTag/index";
 import { SocialTagsBox } from "../components/socialTagsBox";
 import adCarrier from '../components/adCarrier';
+import AccountTag from "../components/accountTag/index";
+import YourClubProfile from "../components/yourClubProfile/index";
 
 export const ClubProfile = () => {
     const { id } = useParams();
@@ -15,6 +18,8 @@ export const ClubProfile = () => {
     const [width, setWidth] = useState(window.innerWidth);
     const [isLoading, setLoading] = useState(true);
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    const isLoggedin = false;
+    const firstLogIn = false;
 
     useEffect(() => {
         window.addEventListener("resize", () => setWidth(window.innerWidth));
@@ -44,12 +49,29 @@ export const ClubProfile = () => {
             />
     )))};
 
+    const ConditionalAccountTag = () => { return (firstLogIn === true) ? 
+        ( <AccountTag/> ) : 
+        (null) 
+    };
+
+    const ConditionalClubProfile = () => { return (isLoggedin === true) ? 
+        ( <YourClubProfile/> ) : 
+        (null) 
+    };
+
+    const NavbarType = () => { return (isLoggedin === true) ? 
+        ( <NavbarProfile/> ) : 
+        ( <Navbar/> ) 
+    };
+
     if (width < 541){ // mobile view
         return (
             <>
                 {!isLoading && (
                     <Wrapper>
-                        <Navbar/>
+                        <NavbarType/>
+                        <ConditionalAccountTag/>
+                        <ConditionalClubProfile/> 
                         <PageWrapper>
                             <Content>
                                 <h1>{club.name}</h1>
@@ -106,14 +128,16 @@ export const ClubProfile = () => {
                 )}
             </>
         );
-    } else if (width < 769 && width > 540){ // tablet view
+    } else if (width < 840 && width > 540){ // tablet view
         return (
             <>
                 {!isLoading && (
                     <Wrapper>
-                        <Navbar/>
+                        <NavbarType/>
+                        <ConditionalAccountTag/>
+                        <ConditionalClubProfile/> 
                         <PageWrapper>
-                            <Content>
+                            <Content>                            
                                 <h1>{club.name}</h1>
                                 <p>Last updated: {new Date(club.lastUpdated.toString()).toLocaleDateString("en-US", options)}</p>
                                 <Row>
@@ -177,7 +201,9 @@ export const ClubProfile = () => {
             <>
                 {!isLoading && (
                     <Wrapper>
-                        <Navbar/>
+                        <NavbarType/>
+                        <ConditionalAccountTag/>
+                        <ConditionalClubProfile/> 
                         <PageWrapper>
                             <Content>
                                 <h1>{club.name}</h1>
@@ -248,25 +274,26 @@ const AdSlot = styled.div`
 `
 
 const Wrapper = styled.main`
-  background-color: ${(props) => props.theme.colors.white};
-  background-image: url(https://clubs-cu.s3.amazonaws.com/Profile+Wave.svg);
-  background-repeat: no-repeat;
-  background-position: top right;
-  width: fit-content;
+    background-color: ${(props) => props.theme.colors.white};
+    background-image: url(https://clubs-cu.s3.amazonaws.com/Profile+Wave.svg);
+    background-repeat: no-repeat;
+    background-position: top right;
+    width: fit-content;
   
 `;
 
 const PageWrapper = styled.div`
     display: flex;
     flex-direction: row;
-    padding: 4rem 5rem 0rem 5rem;
+    padding: 2rem 5rem 0rem 5rem;
 
     h2{
-        font-size: 1.3rem;
+        font-size: 1.25rem;
+        font-weight: 600;
     }
 
     @media only screen 
-    and (max-width : 768px) {
+    and (max-width :768px) {
         padding: 1.2rem;
     }
 `;
@@ -280,7 +307,7 @@ const Content = styled.div`
     display: flex;
     flex-direction: column;
     @media only screen 
-    and (min-width : 769px) {
+    and (min-width : 940px) {
         width: 63%;
         padding-right: 6rem;
     }
@@ -299,7 +326,8 @@ const Button = styled.a`
     margin: 1rem 0rem;
     border-radius: 5px;
     font-size: 1.2rem;
-    
+    font-weight: 600;
+
     p{
         text-align: center; 
         margin: 0 auto;

@@ -9,10 +9,10 @@ const Box = styled.div`
   width: 30rem;
   border-radius: 7px;
   box-shadow: 2px 10px 30px rgba(0, 0, 0, 0.25);
-  background-color: ${(props) => props.theme.colors.white};
+  background-color: ${(props) => props.theme.colors.fullWhite};
   padding: 0.5rem 1rem 1rem 1.5rem;
 
-  margin: 2rem;
+  margin: 1rem;
 
   a {
     text-decoration: none;
@@ -25,7 +25,9 @@ const Box = styled.div`
   }
 
   @media screen and (max-width: 767px) {
-    width: 15rem;
+    margin-left: 0;
+    margin-right: 0;
+    width: 80%;
   }
 `;
 
@@ -43,13 +45,14 @@ const BoxWrapper = styled.div`
 
 const Button = styled.button`
   cursor: pointer;
-  background-color: ${(props) => props.theme.colors.white};
+  background-color: ${(props) => props.theme.colors.fullWhite};
   color: ${(props) => props.theme.colors.red};
   border: 2px solid;
   border-color: ${(props) => props.theme.colors.red};
-  border-radius: 5px;
-  padding: 0.3rem 2rem;
-  font-weight: 600;
+  border-radius: 6px;
+  padding: 0.5rem 2rem;
+  font-weight: 500;
+  font-size: 1.2rem;
 
   :hover {
     box-shadow: 2px 7px 7px rgba(0, 0, 0, 0.2);

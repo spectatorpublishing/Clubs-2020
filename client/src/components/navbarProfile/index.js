@@ -1,13 +1,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FaBars } from 'react-icons/fa';
-import FilledButton from '../tomatoButton/index';
-import { NavLink } from 'react-router-dom';
 import Logout from '../logout/index';
+import Manage from '../manageAccount/index';
 import { useViewport } from '../customHooks';
-import adCarrier from '../adCarrier';
 
-export const Navbar = () => {
+export const NavbarProfile = () => {
   const [showLinks, setShowLinks] = useState(false);
   const [currentPath, setCurrentPath] = useState('/');
   const { width } = useViewport();
@@ -42,45 +40,18 @@ export const Navbar = () => {
           <LinksContainer className={`${showLinks ? 'show-container' : null}`}>
             <MenuLinks>
               <StyledListItem>
-                <a href='/faq'><h3>FAQs</h3></a>
+                <a href='/manage'> <Manage/> </a>
               </StyledListItem>
               <StyledListItem>
-                <a href='/'><h3>Club Login</h3></a>
-              </StyledListItem>
-              <StyledListItem>
-                <NavLink
-                  style={{ textDecoration: 'none' }}
-                  to='/profile-creation'
-                  isActive={(match) => {
-                    if (match) {
-                      setCurrentPath('/profile-creation');
-                    }
-                  }}
-                >
-                  <FilledButton text='Register Club' />
-                </NavLink>
+                <a href='/logout'> <Logout/> </a>
               </StyledListItem>
             </MenuLinks>
           </LinksContainer>
         )}
       </NavCenter>
-      <AdSlot>
-        <adCarrier
-          Height={90}
-          Width={728}
-          Path="cds_leaderboard"
-        /><h1>Placeholder for Ad</h1>
-      </AdSlot>
     </NavWrapper>
   );
 };
-
-const AdSlot = styled.div`
-  display: flex;
-  justify-content: center;
-  height: 50px;
-  color: black;
-`
 
 const NavWrapper = styled.nav`
   color: ${(props) => props.theme.colors.white};
@@ -101,7 +72,7 @@ const StyledListItem = styled.li`
 
 const NavCenter = styled.div`
   @media screen and (min-width: 769px) {
-    padding: 0.25rem 3rem 0 4rem;
+    padding: 0.5rem 3rem 0 4rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -201,4 +172,4 @@ const MenuLinks = styled.ul`
   }
 `;
 
-export default Navbar;
+export default NavbarProfile;

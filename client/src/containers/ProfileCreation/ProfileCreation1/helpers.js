@@ -177,8 +177,7 @@ const InputContainer = styled.div`
 `;
 
 const TagHeader = styled.h3`
-  font-family: 'Manrope', 'Roboto', 'Arial', 'Helvetica';
-  font-weight: 400;
+  font-weight: 600;
   margin-left: 0.3rem;
   font-size: 1.125rem;
 `;
@@ -195,7 +194,6 @@ const QuestionBody = styled.span`
   font-size: 1rem;
   margin-bottom: 1.1rem;
   color: ${(props) => props.theme.colors.checkboxGray};
-  font-family: 'Manrope', 'Roboto', 'Arial', 'Helvetica';
   @media screen and (max-width: 801px) {
     margin: 0 0.75rem 0.7rem;
   }
