@@ -3,7 +3,6 @@ import { Navbar } from '../components/navbar';
 import ExploreBox from '../components/explorebox';
 import styled from 'styled-components';
 import Join from '../components/filters/join';
-import Shuffle from '../components/filters/shuffle';
 import Size from '../components/filters/size';
 import Type from '../components/filters/type';
 import SearchBar from '../components/searchBar';
@@ -192,12 +191,10 @@ export const Explore = () => {
     const [clubProfiles, setClubProfiles] = useState([]);
 
     useEffect(() => {
-        console.log("this is use effect");
         newFetch();  
     }, []);
 
     const newFetch = async () => {
-        console.log("this is newFetch");
         fetch(`api/clubProfiles/`, {
             method: 'GET',
             headers: {
