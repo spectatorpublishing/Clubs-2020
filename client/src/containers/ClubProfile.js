@@ -18,9 +18,9 @@ export const ClubProfile = () => {
     const [width, setWidth] = useState(window.innerWidth);
     const [isLoading, setLoading] = useState(true);
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    const isLoggedin = true;
-    const firstLogIn = true;
-    const completeProfile = true;
+    const [isLoggedin, setLoggedIn] = useState(false);
+    const [firstLogIn, setFirstLog] = useState(false);
+    const [completeProfile, setComplete] = useState(false);
 
     useEffect(() => {
         window.addEventListener("resize", () => setWidth(window.innerWidth));
@@ -50,6 +50,17 @@ export const ClubProfile = () => {
             />
     )))};
 
+    const ProfileNav = () => { 
+        return (
+        <>
+            <NavbarType/>
+            <ConditionalAccountTag/>
+            <ConditionalCompleteProfile/>
+            <ConditionalClubProfile/>
+        </>
+        );
+    }
+
     const ConditionalAccountTag = () => { return (firstLogIn === true) ? 
         ( <AccountTag/> ) : 
         (null) 
@@ -70,18 +81,23 @@ export const ClubProfile = () => {
         ( <Navbar/> ) 
     };
 
+    function setAdmin(){
+        setLoggedIn(!isLoggedin);
+        setFirstLog(!firstLogIn);
+        setComplete(!completeProfile);
+    }
+
     if (width < 541){ // mobile view
         return (
             <>
                 {!isLoading && (
                     <Wrapper>
-                        <NavbarType/>
-                        <ConditionalClubProfile/> 
-                        <ConditionalAccountTag/>
+                        <ProfileNav/>
                         <PageWrapper>
                             <Content>
                                 <h1>{club.name}</h1>
                                 <p>Last updated: {new Date(club.lastUpdated.toString()).toLocaleDateString("en-US", options)}</p>
+                                <div><Button onClick={setAdmin}><p>Show/Hide Club Admin View</p></Button></div>
                                 <ProfilePageBox 
                                     memberRange= {club.memberRange}
                                     acceptingMembers={club.acceptingMembers}
@@ -132,10 +148,7 @@ export const ClubProfile = () => {
             <>
                 {!isLoading && (
                     <Wrapper>
-                        <NavbarType/>
-                        <ConditionalAccountTag/>
-                        <ConditionalCompleteProfile/>
-                        <ConditionalClubProfile/> 
+                        <ProfileNav/>
                         <PageWrapper>
                             <Content>                            
                                 <h1>{club.name}</h1>
@@ -148,6 +161,7 @@ export const ClubProfile = () => {
                                         tags={club.tags}
                                     />
                                     <Column>
+                                    <div><Button onClick={setAdmin}><p>Show/Hide Club Admin View</p></Button></div>
                                         <FrequencyTag
                                             frequency={club.meetingFrequency}
                                             weekly= {club.weekly}
@@ -194,10 +208,7 @@ export const ClubProfile = () => {
             <>
                 {!isLoading && (
                     <Wrapper>
-                        <NavbarType/>
-                        <ConditionalAccountTag/>
-                        <ConditionalCompleteProfile/>
-                        <ConditionalClubProfile/> 
+                        <ProfileNav/>
                         <PageWrapper>
                             <Content>
                                 <h1>{club.name}</h1>
@@ -212,6 +223,7 @@ export const ClubProfile = () => {
                                 <SimilarClubs/> 
                             </Content>
                             <Cards>
+                                <div><Button onClick={setAdmin}><p>Show/Hide Club Admin View</p></Button></div>
                                 <ProfilePageBox 
                                     memberRange= {club.memberRange}
                                     acceptingMembers={club.acceptingMembers}
@@ -321,7 +333,7 @@ const Button = styled.a`
     &.second{
         background-color: ${(props) => props.theme.colors.red};
         p{
-            color: ${(props) => props.theme.colors.fullWhite};;
+            color: ${(props) => props.theme.colors.fullWhite};
         }
     }
 
