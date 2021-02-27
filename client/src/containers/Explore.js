@@ -145,16 +145,28 @@ const AdBox = styled.div`
   margin-top: 1.5rem;
   color: black;
   background: grey;
-  height: 5.625rem;
-  width: 45.5rem;
+  height: 90px;
+  width: 728px;
+  margin-left: auto;
+  margin-right: auto;
+`
+
+const AdBoxMobile = styled.div`
+  margin-top: 1.5rem;
+  color: black;
+  background: grey;
+  height: 50px;
+  width: 328px;
   margin-left: auto;
   margin-right: auto;
 `
 
 export const Explore = () => {
     const [clubProfiles, setClubProfiles] = useState([]);
+    const [width, setWidth] = useState(window.innerWidth);
 
     useEffect(() => {
+        window.addEventListener("resize", () => setWidth(window.innerWidth));
         fetch(`api/clubProfiles/`, {
             method: 'GET',
             headers: {
@@ -178,7 +190,57 @@ export const Explore = () => {
             .catch(error => console.log(error));    
     }, []);
 
+    if (width < 840){ // mobile view
     return(
+        <Wrapper>
+        <Navbar />
+        <main>
+            <PageWrapper>
+                <AdBoxMobile>
+                    <adCarrier
+                    Height={50}
+                    Width={328}
+                    Path="cds_leaderboard"
+                    />
+                </AdBoxMobile>
+                <TextWrapper>
+                    <h1>Explore Clubs</h1>
+                    <p>Find your Columbia community</p>
+                </TextWrapper>
+                <FiltersBox>
+                    <FiltersLeft>
+                        <SearchBox><SearchBar></SearchBar></SearchBox>
+                        <Filter><Type /></Filter>
+                        <Filter><Size /></Filter>
+                        <Filter><Join /></Filter>
+                    </FiltersLeft>
+                    <ShuffleBox><Shuffle /></ShuffleBox>
+                </FiltersBox>
+                <CardsContainer>
+                    {(clubProfiles.length === 0) ? (<h1>Loading</h1>) : (clubProfiles.map(profile => (
+                        <CardWrapper>
+                            <ExploreBox 
+                                name = {profile.name}
+                                description = {profile.shortDescription}
+                                imageURL = {profile.imageUrl}
+                                tags = {profile.tags}
+                                clubSize = {profile.memberRange}
+                                acceptingMembers = {profile.acceptingMembers}
+                                applicationRequired = {profile.applicationRequired}
+                                cardLink={`/club/${profile._id}`}
+                            />
+                        </CardWrapper>
+                    )))} 
+                </CardsContainer>  
+                <BottomWrapper>
+                    <FilterBottom><FilterMobile /></FilterBottom>
+                </BottomWrapper>
+            </PageWrapper>
+        </main>
+        </Wrapper>
+    )
+    } else { //desktop view
+        return(
         <Wrapper>
         <Navbar />
         <main>
@@ -226,4 +288,5 @@ export const Explore = () => {
         </main>
         </Wrapper>
     )
+    }
 }
