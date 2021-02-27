@@ -5,7 +5,6 @@ import FilledButton from '../tomatoButton/index';
 import { NavLink } from 'react-router-dom';
 import Logout from '../logout/index';
 import { useViewport } from '../customHooks';
-import adCarrier from '../adCarrier';
 
 export const Navbar = () => {
   const [showLinks, setShowLinks] = useState(false);
@@ -64,23 +63,9 @@ export const Navbar = () => {
           </LinksContainer>
         )}
       </NavCenter>
-      <AdSlot>
-        <adCarrier
-          Height={90}
-          Width={728}
-          Path="cds_leaderboard"
-        /><h1>Placeholder for Ad</h1>
-      </AdSlot>
     </NavWrapper>
   );
 };
-
-const AdSlot = styled.div`
-  display: flex;
-  justify-content: center;
-  height: 50px;
-  color: black;
-`
 
 const NavWrapper = styled.nav`
   color: ${(props) => props.theme.colors.white};

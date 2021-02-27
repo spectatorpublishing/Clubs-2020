@@ -108,13 +108,13 @@ export const ClubProfile = () => {
                                 />
                                 <div><Button href={club.mailingList}><p>Join our mailing list</p></Button></div>
                                 <div><Button className= "second" href={club.applicationLink}><p>Apply</p></Button></div>
-                                <AdSlot>
+                                <AdBox>
                                     <adCarrier
                                     Height={90}
                                     Width={728}
                                     Path="cds_leaderboard"
-                                    /><h1>Placeholder for Ad</h1>
-                                </AdSlot>
+                                    />
+                                </AdBox>
                                 <MainContent 
                                     description= {club.longDescription}
                                     highlights= {club.highlights}
@@ -174,13 +174,13 @@ export const ClubProfile = () => {
                                     />
                                         <div><Button href={club.mailingList}><p>Join our mailing list</p></Button></div>
                                         <div><Button className= "second" href={club.applicationLink}><p>Apply</p></Button></div>
-                                        <AdSlot>
+                                        <AdBox>
                                             <adCarrier
                                             Height={90}
                                             Width={728}
                                             Path="cds_leaderboard"
-                                            /><h1>Placeholder for Ad</h1>
-                                        </AdSlot>
+                                            />
+                                        </AdBox>
                                     </Column>
                                 </Row>
                                 <MainContent 
@@ -250,13 +250,13 @@ export const ClubProfile = () => {
                                 />
                                 <div><Button href={club.mailingList}><p>Join our mailing list</p></Button></div>
                                 <div><Button className= "second" href={club.applicationLink}><p>Apply</p></Button></div>
-                                <AdSlot>
+                                <AdBox>
                                     <adCarrier
-                                    Height={250}
-                                    Width={300}
+                                    Height={90}
+                                    Width={728}
                                     Path="cds_leaderboard"
-                                    /><h1>Placeholder for Ad</h1>
-                                </AdSlot>
+                                    />
+                                </AdBox>
                             </Cards>
                         </PageWrapper>
                     </Wrapper>
@@ -266,11 +266,14 @@ export const ClubProfile = () => {
     }
 };
 
-const AdSlot = styled.div`
-  display: flex;
-  justify-content: center;
-  height: 50px;
+const AdBox = styled.div`
+  margin-top: 1.5rem;
   color: black;
+  background: grey;
+  height: 250px;
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
 `
 
 const Wrapper = styled.main`

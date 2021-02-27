@@ -141,6 +141,16 @@ const ShuffleBox = styled.div`
   margin-left: auto;
 `;
 
+const AdBox = styled.div`
+  margin-top: 1.5rem;
+  color: black;
+  background: grey;
+  height: 5.625rem;
+  width: 45.5rem;
+  margin-left: auto;
+  margin-right: auto;
+`
+
 export const Explore = () => {
     const [clubProfiles, setClubProfiles] = useState([]);
 
@@ -173,6 +183,13 @@ export const Explore = () => {
         <Navbar />
         <main>
             <PageWrapper>
+                <AdBox>
+                    <adCarrier
+                    Height={90}
+                    Width={728}
+                    Path="cds_leaderboard"
+                    />
+                </AdBox>
                 <TextWrapper>
                     <h1>Explore Clubs</h1>
                     <p>Find your Columbia community</p>
