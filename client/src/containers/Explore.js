@@ -317,7 +317,12 @@ export const Explore = () => {
                         <Filter><Size /></Filter>
                         <Filter><Join /></Filter>
                     </FiltersLeft>
-                    <ShuffleBox><Shuffle /></ShuffleBox>
+                    <ShuffleBox>
+                        <ShuffleButton onClick={newFetch}>
+                            <ShuffleImage><img src={Icon} width={15} height={15} alt="shuffle" /></ShuffleImage>
+                            <ShuffleWord>Shuffle</ShuffleWord>
+                        </ShuffleButton>
+                    </ShuffleBox>
                 </FiltersBox>
                 <CardsContainer>
                     {(clubProfiles.length === 0) ? (<h1>Loading</h1>) : (clubProfiles.map(profile => (
