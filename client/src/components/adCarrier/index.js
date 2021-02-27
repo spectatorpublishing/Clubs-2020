@@ -14,8 +14,9 @@ const Style = styled.div`
 
 const adCarrier = ({Height, Width, Path}) =>{
   return (
+    <div>
+    <h1>PlaceholderText</h1>
     <Style>
-      <h1>PlaceholderText</h1>
       <DFPSlotsProvider 
         dfpNetworkId="59699124"
         /* sizeMapping={[{viewport:[sizeMobile,sizeMobile], sizes: []}, //Alternate units?
@@ -28,6 +29,7 @@ const adCarrier = ({Height, Width, Path}) =>{
         </div>
       </DFPSlotsProvider>
     </Style> 
+    </div>
   );
 }
 
