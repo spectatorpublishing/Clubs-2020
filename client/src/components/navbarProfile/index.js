@@ -19,7 +19,7 @@ export const NavbarProfile = () => {
               setCurrentPath('/');
             }}
           >
-            <a href='/'>Clubs@CU</a>
+            <p>Clubs@CU</p>
           </Logo>
           {currentPath === '/' && (
             <NavToggle
@@ -40,10 +40,10 @@ export const NavbarProfile = () => {
           <LinksContainer className={`${showLinks ? 'show-container' : null}`}>
             <MenuLinks>
               <StyledListItem>
-                <a href='/manage'> <Manage/> </a>
+                <a> <Manage/> </a>
               </StyledListItem>
               <StyledListItem>
-                <a href='/logout'> <Logout/> </a>
+                <a> <Logout/> </a>
               </StyledListItem>
             </MenuLinks>
           </LinksContainer>
@@ -94,7 +94,7 @@ const Logo = styled.div`
   height: 100%;
   font-size: 1.5rem;
   font-weight: 700;
-  a {
+  p {
     text-decoration: none;
     color: ${(props) => props.theme.colors.black};
   }

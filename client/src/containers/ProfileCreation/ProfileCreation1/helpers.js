@@ -6,7 +6,7 @@ import GrayTagContainer from '../../../components/grayTag/container';
 import GrayTag from '../../../components/grayTag/index';
 import RedAsterisk from '../../../components/redAsterisk/index';
 import { tagData } from './data';
-import SearchTag from '../../../components/searchTag/index';
+import SearchTagActive from '../../../components/searchTagActive/index';
 
 export const Tags = ({ clubProfile, setClubProfile }) => {
   const tagComponents = tagData.map((tagName, index) => {
@@ -17,7 +17,7 @@ export const Tags = ({ clubProfile, setClubProfile }) => {
       return isIn;
     };
     return (
-      <SearchTag
+      <SearchTagActive
         defaultValue={checkIfIn}
         margin='0.3rem'
         key={`tag-${index}`}

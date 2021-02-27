@@ -11,6 +11,7 @@ import { SocialTagsBox } from "../components/socialTagsBox";
 import adCarrier from '../components/adCarrier';
 import AccountTag from "../components/accountTag/index";
 import YourClubProfile from "../components/yourClubProfile/index";
+import CompleteProfile from "../components/completeProfile";
 
 export const ClubProfile = () => {
     const { id } = useParams();
@@ -18,8 +19,9 @@ export const ClubProfile = () => {
     const [width, setWidth] = useState(window.innerWidth);
     const [isLoading, setLoading] = useState(true);
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    const isLoggedin = false;
-    const firstLogIn = false;
+    const [isLoggedin, setLoggedIn] = useState(false);
+    const [firstLogIn, setFirstLog] = useState(false);
+    const [completeProfile, setComplete] = useState(false);
 
     useEffect(() => {
         window.addEventListener("resize", () => setWidth(window.innerWidth));
@@ -49,8 +51,24 @@ export const ClubProfile = () => {
             />
     )))};
 
+    const ProfileNav = () => { 
+        return (
+        <>
+            <NavbarType/>
+            <ConditionalAccountTag/>
+            <ConditionalCompleteProfile/>
+            <ConditionalClubProfile/>
+        </>
+        );
+    }
+
     const ConditionalAccountTag = () => { return (firstLogIn === true) ? 
         ( <AccountTag/> ) : 
+        (null) 
+    };
+
+    const ConditionalCompleteProfile = () => { return (completeProfile === true) ? 
+        ( <CompleteProfile/> ) : 
         (null) 
     };
 
@@ -64,18 +82,23 @@ export const ClubProfile = () => {
         ( <Navbar/> ) 
     };
 
+    function setAdmin(){
+        setLoggedIn(!isLoggedin);
+        setFirstLog(!firstLogIn);
+        setComplete(!completeProfile);
+    }
+
     if (width < 541){ // mobile view
         return (
             <>
                 {!isLoading && (
                     <Wrapper>
-                        <NavbarType/>
-                        <ConditionalAccountTag/>
-                        <ConditionalClubProfile/> 
+                        <ProfileNav/>
                         <PageWrapper>
                             <Content>
                                 <h1>{club.name}</h1>
                                 <p>Last updated: {new Date(club.lastUpdated.toString()).toLocaleDateString("en-US", options)}</p>
+                                <div><Button onClick={setAdmin}><p>Show/Hide Club Admin View</p></Button></div>
                                 <ProfilePageBox 
                                     memberRange= {club.memberRange}
                                     acceptingMembers={club.acceptingMembers}
@@ -133,9 +156,7 @@ export const ClubProfile = () => {
             <>
                 {!isLoading && (
                     <Wrapper>
-                        <NavbarType/>
-                        <ConditionalAccountTag/>
-                        <ConditionalClubProfile/> 
+                        <ProfileNav/>
                         <PageWrapper>
                             <Content>                            
                                 <h1>{club.name}</h1>
@@ -148,6 +169,7 @@ export const ClubProfile = () => {
                                         tags={club.tags}
                                     />
                                     <Column>
+                                    <div><Button onClick={setAdmin}><p>Show/Hide Club Admin View</p></Button></div>
                                         <FrequencyTag
                                             frequency={club.meetingFrequency}
                                             weekly= {club.weekly}
@@ -201,9 +223,7 @@ export const ClubProfile = () => {
             <>
                 {!isLoading && (
                     <Wrapper>
-                        <NavbarType/>
-                        <ConditionalAccountTag/>
-                        <ConditionalClubProfile/> 
+                        <ProfileNav/>
                         <PageWrapper>
                             <Content>
                                 <h1>{club.name}</h1>
@@ -218,6 +238,7 @@ export const ClubProfile = () => {
                                 <SimilarClubs/> 
                             </Content>
                             <Cards>
+                                <div><Button onClick={setAdmin}><p>Show/Hide Club Admin View</p></Button></div>
                                 <ProfilePageBox 
                                     memberRange= {club.memberRange}
                                     acceptingMembers={club.acceptingMembers}
@@ -344,7 +365,7 @@ const Button = styled.a`
     &.second{
         background-color: ${(props) => props.theme.colors.red};
         p{
-            color: ${(props) => props.theme.colors.fullWhite};;
+            color: ${(props) => props.theme.colors.fullWhite};
         }
     }
 
