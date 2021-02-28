@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from 'styled-components';
 import { ListOfClubs } from "../components/ListOfClubs/ListOfClubs"
-import fetchClubs from '../components/ListOfClubs/testData'
+import { joinAccountProfile as fetchApplications } from '../components/ListOfClubs/wrapper'
 
 export const PageWrapper = styled.div`
     margin: 0 5%;
@@ -19,7 +19,7 @@ const HeadingDiv = styled.div`
 `;
 
 const ActiveSection = styled.div`
-    margin: 3% ${props => props.page === 'pending' ? '10%' : '0' } 3% 0;
+    margin: 3% ${props => props.page === 'pending' ? '10%' : '0'} 3% 0;
 `;
 const ApprovedSection = styled.div`
     margin: 3% 0;
@@ -32,9 +32,16 @@ const TrashSection = styled.div`
     cursor: pointer;
 `;
 
+const Loading = styled.div`
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+`;
+
 
 const page2columns = {
-    pending: [ "Club name:", "Email:", "Date applied:"],
+    pending: ["Club name:", "Email:", "Date applied:"],
     approved: ['Club name:', 'Email:', 'Date approved:', 'Last update:'],
     trash: ['Club name:', 'Email:', 'Date removed:', 'Reason for Removal:']
 }
@@ -51,48 +58,68 @@ const page2heading = {
     trash: 'Trash'
 }
 
+const page2dbAttr = {
+    pending: 'pending',
+    approved: 'accepted',
+    trash: 'denied'
+}
 
 export const Portal = () => {
-    /* state indicating the current page: Pending / Approved / Trash
-     * also used for page transition
+    /* 
+     * @page:   current page: Pending / Approved / Trash
+     * @data:   array of club applications to render
+     * @ready:  true when data has been fetched
     */
     const [page, setPage] = useState('pending')
+    const [data, setData] = useState([])
+    const [ready, setReady] = useState(false)
 
-    const switchPage = (toPage) => setPage(toPage)
+    useEffect(() => {
+        fetchApplications(page2dbAttr[page])
+            .then(data => {
+                setData(data);
+                setReady(true);
+            })
+            .catch(err => console.log(err))
+    }, [page])
 
-    /* 
-    * data workflow:
-    *   1. On page load, make a request to bd for the list of club (type based on the state page)
-    *   2. When the ACTION button (e.g Accept/Deny for pending reqs) is clicked, 
-    *      make a request to bd for the corresponding actions
-    * 
-    *   - code for part 1 should be put in this component
-    *   - code for part 2 should be put in the <ListOfClub /> 
-    *   
-    */
-    return(
+    const switchPage = (toPage) => {
+        if (toPage === page)
+            return;
+
+        setReady(false);
+        setPage(toPage);
+    }
+
+    if (!ready)
+        return (
+            <PageWrapper>
+                <Loading>Loading...</Loading>
+            </PageWrapper>
+        )
+
+    return (
         <PageWrapper>
             <HeadingDiv>
-                { page === 'pending' ? <h1>Clubs@CU Admin Portal</h1> : <p onClick={()=> switchPage('pending')}>Back</p> }
+                {page === 'pending' ? <h1>Clubs@CU Admin Portal</h1> : <p onClick={() => switchPage('pending')}>Back</p>}
                 <p>Log out</p>
             </HeadingDiv>
             <ActiveSection page={page}>
                 <h3>{page2heading[page]}</h3>
-                <ListOfClubs columnTitles={page2columns[page]} clubs={fetchClubs(page)} actions={page2actions[page]} page={page} />
+                <ListOfClubs columnTitles={page2columns[page]} clubs={data} actions={page2actions[page]} page={page} />
             </ActiveSection>
 
             { page === 'pending' ? (
                 <>
                     <ApprovedSection>
-                        <h3 onClick={()=>switchPage('approved')}>List of Approved Clubs</h3>
+                        <h3 onClick={() => switchPage('approved')}>List of Approved Clubs</h3>
                     </ApprovedSection>
                     <TrashSection>
-                        <h3 onClick={()=>switchPage('trash')}>Trash</h3>
+                        <h3 onClick={() => switchPage('trash')}>Trash</h3>
                     </TrashSection>
                 </>
-                ) : null
+            ) : null
             }
         </PageWrapper>
-        
     )
 }

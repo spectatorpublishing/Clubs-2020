@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { Deny, Plain } from './Controllers'
-import { column2attrName } from './testData'
 
 /* grid-template-column for different sections */
 const page2grid = {
@@ -39,93 +38,89 @@ const MoreInfo = styled.div`
         font-size: 90%;
         p{
             margin: 0;
-            padding: 11% 0 ;
+            padding: 11% 0;
         }
         span{
             padding: 1% 0 1% 2%;
+            white-space: pre-wrap;
         }
     }
 `;
 
-export const ListOfClubs = ({clubs, actions, columnTitles, page}) => {
+/* mapping: displayed column name -> club oject attribute */
+const column2attrName = {
+    'Club name:': 'clubName',
+    'Email:': 'email',
+    'Date applied:': 'dateApplied',
+    'Date approved:': 'dateApproved',
+    'Date removed:': 'dateRemoved',
+    'Last update:': 'lastUpdate',
+    'Reason for Removal:': 'reason'
+}
+
+export const ListOfClubs = ({ clubs, actions, columnTitles, page }) => {
     /* Toggles the <MoreInfo /> component */
     const expandInfo = (index) => {
         var isDisplayed = document.getElementById(`more-info-${index}`).style.display;
-        if ( isDisplayed === 'inherit')
+        if (isDisplayed === 'inherit')
             document.getElementById(`more-info-${index}`).style.display = 'none';
         else
             document.getElementById(`more-info-${index}`).style.display = 'inherit'
     }
 
-    /* test is a placeholder for the actual API */
-    const test = (club, action) => {
-        alert(`You ${action}ed ${club}'s request!`)
-    }
-
-    const deny_test = (club, reason) => {
-        alert(`You denied ${club}'s request because ${reason}!`)
-    }
-
-    /* TODO: substitute with actual APIs */
-    const action2handler = {
-        Accept: test,
-        Deny: deny_test,
-        Undo: test,
-        Remove: test
-    }
-
-    return(
+    return (
         <div>
             {/* Renders Table Column Titles specified in `title` */}
             <Row page={page}>
-                {columnTitles.map((title,columnIndex)=>{
-                    return(
+                {columnTitles.map((title, columnIndex) => {
+                    return (
                         <ColumnTitle key={columnIndex}>{title}</ColumnTitle>
                     )
                 })}
             </Row>
             {/* Renders a list of clubs in the section */}
-            {clubs.map((club,index)=>{
+            {clubs.map((club, index) => {
                 const moreInfo = club.moreInfo;
                 return (
-                <div key={index} id={`${club.clubName}-${index}`}>
-                    {/* TODO: Row takes a page attribute to create a corresponding grid template */}
-                    <Row page={page}>
-                        {/* TODO: map column titles to <Column> components, need a column2attrName object */}
-                        {columnTitles.map((title,index) => {
-                            let attr = column2attrName[title]
-                            console.log(attr, club[attr])
-                            return <Column key={index}>{club[attr]}</Column>
-                        })}
-                        {/* <Column>{club.clubName}</Column>
-                        <Column>{club.email}</Column>
-                        <Column>{club.dateApplied}</Column> */}
-                        <Column onClick={()=>expandInfo(index)}>
-                            View Information <DownwardArrow className="fa">&#xf107;</DownwardArrow>
-                        </Column>
-                        {actions ? actions.map((action,i)=>{
-                            /* pass in a unique handler for each club and type */
-                            if ( action === 'Deny')
-                                return (<Deny key={i} clubInfo={club} num={index} handler={action2handler[action]} />)
-                            else
-                                return (<Plain key={i} clubInfo={club} num={index} handler={action2handler[action]} action={action} />)
-                        }): null}
-                    </Row>
-                    
-                    {/* This can be toggled by cliking the **View Information** button */}
-                    <MoreInfo id={`more-info-${index}`} >
-                        <div> 
-                            <p>Description:</p>
-                            <span >{moreInfo.description}</span> 
-                        </div>
-                        <div>
-                            <p>Highlights:</p>
-                            <span > {moreInfo.highlights}</span>  
-                        </div>
-                    </MoreInfo>
-                </div>
+                    <div key={index} id={`${club.clubName}-${index}`}>
+                        <Row page={page}>
+                            {
+                                columnTitles.map((title, index) => {
+                                    let attr = column2attrName[title]
+                                    return <Column key={index}>{club[attr]}</Column>
+                                })
+                            }
+
+                            <Column onClick={() => expandInfo(index)}>
+                                View Information <DownwardArrow className="fa">&#xf107;</DownwardArrow>
+                            </Column>
+
+                            {
+                                actions ? actions.map((action, i) => {
+                                    /* pass in a unique handler for each club and type */
+                                    if (action === 'Deny')
+                                        return (<Deny key={i} clubInfo={club} num={index} />)
+                                    else
+                                        return (<Plain key={i} clubInfo={club} num={index} action={action} />)
+                                }) : null
+                            }
+                        </Row>
+
+                        {/* This can be toggled by cliking the **View Information** button */}
+                        <MoreInfo id={`more-info-${index}`} >
+                            <div>
+                                <p>Description:</p>
+                                <span >{moreInfo.description}</span>
+                            </div>
+
+                            <div>
+                                <p>Highlights:</p>
+                                <span > {moreInfo.highlights}</span>
+                            </div>
+                        </MoreInfo>
+                    </div>
                 )
             })}
-        </div> 
+        </div>
     )
 }
