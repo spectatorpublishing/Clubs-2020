@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Join from '../components/filters/join';
 import Size from '../components/filters/size';
 import Type from '../components/filters/type';
+import adCarrier from '../components/adCarrier';
 import SearchBar from '../components/searchBar';
 import FilterMobile from '../components/filters/filterMobile';
 import Icon from '../components/filters/shuffle.png';
@@ -139,6 +140,25 @@ const ShuffleBox = styled.div`
   margin-left: auto;
 `;
 
+const AdBox = styled.div`
+  margin-top: 1.5rem;
+  color: black;
+  background: grey;
+  height: 90px;
+  width: 728px;
+  margin-left: auto;
+  margin-right: auto;
+`
+
+const AdBoxMobile = styled.div`
+  margin-top: 1.5rem;
+  color: black;
+  background: grey;
+  height: 50px;
+  width: 328px;
+  margin-left: auto;
+  margin-right: auto;
+`
 const ShuffleButton = styled.button`
     background-color: white;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
@@ -188,8 +208,10 @@ const ShuffleImage = styled.div`
 
 export const Explore = () => {
     const [clubProfiles, setClubProfiles] = useState([]);
+    const [width, setWidth] = useState(window.innerWidth);
 
     useEffect(() => {
+        window.addEventListener("resize", () => setWidth(window.innerWidth));
         newFetch();  
     }, []);
 
@@ -217,11 +239,23 @@ export const Explore = () => {
             .catch(error => console.log(error));    
     };
 
+    const AdBoxType = () => { return (width < 840) ? 
+        ( <AdBoxMobile/> ) : 
+        ( <AdBox/>) 
+    };
+
     return(
         <Wrapper>
         <Navbar />
         <main>
             <PageWrapper>
+                <AdBoxType>
+                    <adCarrier
+                    Height={50}
+                    Width={328}
+                    Path="cds_leaderboard"
+                    />
+                </AdBoxType>
                 <TextWrapper>
                     <h1>Explore Clubs</h1>
                     <p>Find your Columbia community</p>
