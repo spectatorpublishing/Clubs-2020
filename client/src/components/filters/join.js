@@ -5,6 +5,8 @@ import ReactDOM from 'react-dom';
 import 'react-widgets/dist/css/react-widgets.css';
 import { Multiselect } from 'react-widgets'
 
+import Dropdown from '../dropdown/index';
+
 const Button = styled.button`
     background: #FFFFFF;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
@@ -59,7 +61,7 @@ const text = 'Joining x';
 export default class Join extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { color: white, textcolor: grey, text: Text, dropdownOpen: false, selectedJoining:[], joining: ["Accepting New Members", "No Application", "Application Required"  ]};
+        this.state = { color: white, textcolor: grey, text: Text, dropdownOpen: false, selectedJoining:[], joining: ["Fall", "Spring", "Not Taking Members"  ]};
         this.handleClick = this.handleClick.bind(this);
     }
     handleClick() {
@@ -86,11 +88,21 @@ export default class Join extends React.Component {
 
             {dropdownOpen && (
                 <MultiselectWrap>
+                    {/* 
                     <Multiselect 
                     data={joining}
                     value={selectedJoining}
                     onChange={selectedJoining => this.setState({selectedJoining})}
                     textField="joining"
+                    />
+                    */}
+                    <Dropdown
+                        items={joining}
+                        objId='joining'
+                        index={1}
+                        data={selectedJoining}
+                        setData={selectedJoining => this.setState({ selectedJoining })}
+                        defaultValue={joining[0]}
                     />
                 </MultiselectWrap>
             )}

@@ -2,8 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import ReactDOM from 'react-dom';
 
+import { tagData } from '../../containers/ProfileCreation/ProfileCreation1/data'
+
 import 'react-widgets/dist/css/react-widgets.css';
 import { Multiselect } from 'react-widgets'
+
+import Dropdown from '../dropdown/index';
 
 const Button = styled.button`
     background: #FFFFFF;
@@ -60,7 +64,7 @@ const text = 'Type x';
 export default class Type extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { color: white, textcolor: grey, text: Text, dropdownOpen: false, selectedTypes:[], types: ["Cultural", "Pre Professional", "Performance" ]};
+        this.state = { color: white, textcolor: grey, text: Text, dropdownOpen: false, selectedTypes:[], types: tagData };//["Cultural", "Pre Professional", "Performance" ]};
         this.handleClick = this.handleClick.bind(this);
     }
     handleClick() {
@@ -89,12 +93,23 @@ export default class Type extends React.Component {
         
         {dropdownOpen && (
           <MultiselectWrap>
+            {/*}
             <Multiselect 
             data={types}
             value={selectedTypes}
             onChange={selectedTypes => this.setState({selectedTypes})}
             textField="types"
             />
+            */}
+            <Dropdown
+              items={types}
+              objId='types'
+              index={1}
+              data={selectedTypes}
+              setData={selectedTypes => this.setState({ selectedTypes })}
+              defaultValue={types[0]}
+            />
+
           </MultiselectWrap>
         )}
         
