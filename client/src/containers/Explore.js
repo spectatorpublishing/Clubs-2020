@@ -239,19 +239,23 @@ export const Explore = () => {
             .catch(error => console.log(error));    
     };
 
-    if (width < 840){ // mobile view
+    const AdBoxType = () => { return (width < 840) ? 
+        ( <AdBoxMobile/> ) : 
+        ( <AdBox/>) 
+    };
+
     return(
         <Wrapper>
         <Navbar />
         <main>
             <PageWrapper>
-                <AdBoxMobile>
+                <AdBoxType>
                     <adCarrier
                     Height={50}
                     Width={328}
                     Path="cds_leaderboard"
                     />
-                </AdBoxMobile>
+                </AdBoxType>
                 <TextWrapper>
                     <h1>Explore Clubs</h1>
                     <p>Find your Columbia community</p>
@@ -293,59 +297,4 @@ export const Explore = () => {
         </main>
         </Wrapper>
     )
-    } else { //desktop view
-        return(
-        <Wrapper>
-        <Navbar />
-        <main>
-            <PageWrapper>
-                <AdBox>
-                    <adCarrier
-                    Height={90}
-                    Width={728}
-                    Path="cds_leaderboard"
-                    />
-                </AdBox>
-                <TextWrapper>
-                    <h1>Explore Clubs</h1>
-                    <p>Find your Columbia community</p>
-                </TextWrapper>
-                <FiltersBox>
-                    <FiltersLeft>
-                        <SearchBox><SearchBar></SearchBar></SearchBox>
-                        <Filter><Type /></Filter>
-                        <Filter><Size /></Filter>
-                        <Filter><Join /></Filter>
-                    </FiltersLeft>
-                    <ShuffleBox>
-                        <ShuffleButton onClick={newFetch}>
-                            <ShuffleImage><img src={Icon} width={15} height={15} alt="shuffle" /></ShuffleImage>
-                            <ShuffleWord>Shuffle</ShuffleWord>
-                        </ShuffleButton>
-                    </ShuffleBox>
-                </FiltersBox>
-                <CardsContainer>
-                    {(clubProfiles.length === 0) ? (<h1>Loading</h1>) : (clubProfiles.map(profile => (
-                        <CardWrapper>
-                            <ExploreBox 
-                                name = {profile.name}
-                                description = {profile.shortDescription}
-                                imageURL = {profile.imageUrl}
-                                tags = {profile.tags}
-                                clubSize = {profile.memberRange}
-                                acceptingMembers = {profile.acceptingMembers}
-                                applicationRequired = {profile.applicationRequired}
-                                cardLink={`/club/${profile._id}`}
-                            />
-                        </CardWrapper>
-                    )))} 
-                </CardsContainer>  
-                <BottomWrapper>
-                    <FilterBottom><FilterMobile /></FilterBottom>
-                </BottomWrapper>
-            </PageWrapper>
-        </main>
-        </Wrapper>
-    )
-    }
 }
