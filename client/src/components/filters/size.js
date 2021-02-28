@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 import 'react-widgets/dist/css/react-widgets.css';
 import { Multiselect } from 'react-widgets'
 
+import Dropdown from '../dropdown/index';
 
 const Button = styled.button`
     background: #FFFFFF;
@@ -61,7 +62,7 @@ const text = 'Size x';
 export default class Size extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { color: white, textcolor: grey, text: Text, dropdownOpen: false, selectedSizes:[], sizes: ["0-10", "10-20", "20-50" ]};
+        this.state = { color: white, textcolor: grey, text: Text, dropdownOpen: false, selectedSizes:[], sizes: ["0-10", "10-20", "20-50", "50-100", "100+" ]};
         this.handleClick = this.handleClick.bind(this);
     }
     handleClick() {
@@ -93,11 +94,23 @@ export default class Size extends React.Component {
 
             {dropdownOpen && (
                 <MultiselectWrap>
+                    {/* 
                     <Multiselect 
                     data={sizes}
                     value={selectedSizes}
                     onChange={selectedSizes => this.setState({ selectedSizes })}
                     textField="sizes"
+                    placeholder = "Select Size"
+                    showPlaceholderWithValues = {true}
+                    />
+                    */}
+                    <Dropdown
+                        items={sizes}
+                        objId='size'
+                        index={1}
+                        data={selectedSizes}
+                        setData={selectedSizes => this.setState({ selectedSizes })}
+                        defaultValue={sizes[0]}
                     />
                 </MultiselectWrap>
             )}
