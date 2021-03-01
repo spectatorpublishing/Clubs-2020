@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
 import styled, { withTheme } from 'styled-components';
 import { motion } from 'framer-motion';
 

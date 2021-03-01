@@ -1,31 +1,22 @@
-
-import React, { Component } from 'react';
+import React from 'react';
 import { DFPSlotsProvider, AdSlot } from 'react-dfp';
-import styled from 'styled-components';
 
-
-const adCarrier = ({Height, Width, Path}) =>{
+export const AdCarrier = ({width, height, path}) => {
   return (
-    <div>
-      <DFPSlotsProvider 
-        dfpNetworkId="59699124"
-        /* sizeMapping={[{viewport:[sizeMobile,sizeMobile], sizes: []},
-                      {viewport:[sizeTab,sizeTab], sizes: []},
-                      {viewport:[sizeCPU,sizeCPU], sizes: []} ]} //ADSLOT ACCEPTS, DEPENDENT USAGE
-        //collapseEmptyDivs Turn back on for final product */
-      >
+      <DFPSlotsProvider dfpNetworkId="59699124">
         <div>
-          <AdSlot sizes={[[Width, Height]]} adUnit={Path} />
+          <AdSlot sizes={[[width, height]]} adUnit={path} />
         </div>
       </DFPSlotsProvider>
-    </div> 
   );
 }
 
-export default adCarrier;
+export default AdCarrier;
 
-
-
+        /* sizeMapping={[{viewport:[sizeMobile,sizeMobile], sizes: []},
+                      {viewport:[sizeTab,sizeTab], sizes: []},
+                      {viewport:[sizeCPU,sizeCPU], sizes: []} ]} //ADSLOT ACCEPTS, DEPENDENT USAGE
+                      //collapseEmptyDivs Turn back on for final product */
  
 /*
 NOTE: ALL REQUIRED AD SLOTS BASED ON PROVIDED MOCKUPS:
