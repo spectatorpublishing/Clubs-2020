@@ -99,9 +99,18 @@ module.exports = {
     },
     filterAndSortBy: function(req, res) {
         // TODO; req.query contains filter and/or sort information
-        // support pagination with req.query 
-        
+
+        clubProfile.find({
+          memberRange: {$in: req.query.memberRange},
+          tags: {$in: req.query.tags},
+          acceptingMembers: req.query.acceptingMembers,
+          applicationRequired: req.query.applicationRequired
+        }).then(clubprofile => res.json(clubprofile)
+        ).catch(err => errHandling(err, res)); 
+      
     },
+
+
     search: function(req, res) {
         // TODO; req.query contains search query
         // support pagination with req.query 

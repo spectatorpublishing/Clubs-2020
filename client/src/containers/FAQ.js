@@ -20,6 +20,7 @@ const Title = styled.div`
 
 
 export const FAQ = () => {
+
     return(
         <PageWrapper>
             <Title>Frequently Asked Questions</Title>
