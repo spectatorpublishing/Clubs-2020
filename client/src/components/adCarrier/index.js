@@ -1,4 +1,4 @@
-/*
+
 import React, { Component } from 'react';
 import { DFPSlotsProvider, AdSlot } from 'react-dfp';
 import styled from 'styled-components';
@@ -12,7 +12,7 @@ const adCarrier = ({Height, Width, Path}) =>{
         /* sizeMapping={[{viewport:[sizeMobile,sizeMobile], sizes: []},
                       {viewport:[sizeTab,sizeTab], sizes: []},
                       {viewport:[sizeCPU,sizeCPU], sizes: []} ]} //ADSLOT ACCEPTS, DEPENDENT USAGE
-        //collapseEmptyDivs Turn back on for final product 
+        //collapseEmptyDivs Turn back on for final product */
       >
         <div>
           <AdSlot sizes={[[Width, Height]]} adUnit={Path} />
@@ -24,7 +24,7 @@ const adCarrier = ({Height, Width, Path}) =>{
 
 export default adCarrier;
 
-*/
+
 
  
 /*
