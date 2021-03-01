@@ -120,6 +120,34 @@ const FiltersLeft = styled.div`
     }
 `;
 
+const FiltersBelow = styled.div`
+    display: flex;
+    flex-direction: row;
+    margin: 1rem 2rem 1rem;
+    
+    @media only screen and (max-width : 430px) {
+        flex-direction: column;
+    }
+
+    @media only screen and (min-width : 1024px) {
+        display: none;
+    }
+`;
+
+const MobileFilter = styled.div`
+    margin-right: 1.5rem;
+
+    @media only screen and (max-width : 430px) {
+        padding-top:10px;
+        
+    }
+
+    @media only screen and (min-width : 1025px) {
+        display: none;
+        
+    }
+`;
+
 const FilterBottom = styled.div`
     position: absolute;
     top: 50%;
@@ -228,6 +256,7 @@ export const Explore = () => {
     };
 
     return(
+
         <Wrapper>
         <Navbar />
         <main>
@@ -257,6 +286,11 @@ export const Explore = () => {
                         </ShuffleButton>
                     </ShuffleBox>
                 </FiltersBox>
+                <FiltersBelow>
+                        <MobileFilter><Type /></MobileFilter>
+                        <MobileFilter><Size /></MobileFilter>
+                        <MobileFilter><Join /></MobileFilter>
+                </FiltersBelow>
                 <CardsContainer>
                     {(clubProfiles.length === 0) ? (<h1>Loading</h1>) : (clubProfiles.map(profile => (
                         <CardWrapper>
@@ -273,9 +307,6 @@ export const Explore = () => {
                         </CardWrapper>
                     )))} 
                 </CardsContainer>  
-                <BottomWrapper>
-                    <FilterBottom><FilterMobile /></FilterBottom>
-                </BottomWrapper>
             </PageWrapper>
         </main>
         </Wrapper>
