@@ -232,9 +232,12 @@ export const Explore = () => {
     const [searchQuery, setSearchQuery] = useState('')
 
     const [sizeSelected, setSizeSelected] = useState([]);
-    
+    const [joinSelected, setJoinSelected] = useState([]);
+    const [typeSelected, setTypeSelected] = useState([]);
+    const [searchBarText, setSearchBarText] = useState('');
 
     useEffect(() => {
+        setSearchBarText('')
         if (join.length === 0 && size.length === 0 && type.length === 0) {
             newFetch('')
         } else {
@@ -256,12 +259,15 @@ export const Explore = () => {
     }, [join, size, type]);
 
     useEffect(() => {
+        setSizeSelected([])
+        setJoinSelected([])
+        setTypeSelected([])
+
         if (searchQuery === '') {
             newFetch('')
         } else {
             newFetch(`search?search=${searchQuery}`)
         }
-        setSizeSelected([])
     }, [searchQuery])
     
     const newFetch = async (url) => {
@@ -309,15 +315,24 @@ export const Explore = () => {
                     <FiltersLeft>
                         <SearchBox><SearchBar 
                             setData={setSearchQuery}
-                            initialData={searchQuery}
+                            barText={searchBarText}
+                            setBarText={setSearchBarText}
                         ></SearchBar></SearchBox>
-                        <Filter><Type setData={setType}/></Filter>
+                        <Filter><Type 
+                            setData={setType}
+                            selected={typeSelected}
+                            setSelected={setTypeSelected}
+                        /></Filter>
                         <Filter><Size 
                             setData={setSize}
                             selected={sizeSelected}
                             setSelected={setSizeSelected}
                         /></Filter>
-                        <Filter><Join setData={setJoin}/></Filter>
+                        <Filter><Join 
+                            setData={setJoin}
+                            selected={joinSelected}
+                            setSelected={setJoinSelected}
+                        /></Filter>
                     </FiltersLeft>
                     <ShuffleBox>
                         <ShuffleButton onClick={() => newFetch('')}>
@@ -327,13 +342,21 @@ export const Explore = () => {
                     </ShuffleBox>
                 </FiltersBox>
                 <FiltersBelow>
-                        <MobileFilter><Type setData={setType}/></MobileFilter>
+                        <MobileFilter><Type 
+                            setData={setType}
+                            selected={typeSelected}
+                            setSelected={setTypeSelected}
+                        /></MobileFilter>
                         <MobileFilter><Size 
                             setData={setSize}
                             selected={sizeSelected}
                             setSelected={setSizeSelected}
                         /></MobileFilter>
-                        <MobileFilter><Join setData={setJoin}/></MobileFilter>
+                        <MobileFilter><Join 
+                            setData={setJoin}
+                            selected={joinSelected}
+                            setSelected={setJoinSelected}
+                        /></MobileFilter>
                 </FiltersBelow>
                 <CardsContainer>
                     {(clubProfiles.length === 0) ? (<h1>Loading</h1>) : (clubProfiles.map(profile => (

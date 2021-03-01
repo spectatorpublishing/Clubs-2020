@@ -47,11 +47,11 @@ const Join = ({
     items,
     theme,
     setData,
-  
+    selected,
+    setSelected
   }) => {
 
     const [clicked, setClicked] = useState(false);
-    const [selected, setSelected] = useState([]);
     const [titleHovered, setTitleHovered] = useState(false);
     const [curIndex, setCurIndex] = useState(-1);
     const dropdown = useRef(null);
