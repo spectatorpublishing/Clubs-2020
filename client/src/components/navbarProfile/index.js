@@ -40,10 +40,10 @@ export const NavbarProfile = () => {
           <LinksContainer className={`${showLinks ? 'show-container' : null}`}>
             <MenuLinks>
               <StyledListItem>
-                <a> <Manage/> </a>
+                <a href="/manage"> <Manage/> </a>
               </StyledListItem>
               <StyledListItem>
-                <a> <Logout/> </a>
+                <a href="/logout"> <Logout/> </a>
               </StyledListItem>
             </MenuLinks>
           </LinksContainer>
