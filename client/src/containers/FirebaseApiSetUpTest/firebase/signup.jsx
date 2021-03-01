@@ -15,7 +15,7 @@ const Background = styled.div`
 export default function Signup(props) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [message, setMessage] = useState();
+    const [message, setMessage] = useState('');
 
     function handleSignup(e) {
         firebase.auth().createUserWithEmailAndPassword(email, password)
