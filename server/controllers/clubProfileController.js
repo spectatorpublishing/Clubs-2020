@@ -108,7 +108,7 @@ module.exports = {
         // TODO; req.query contains search query
         // support pagination with req.query 
 
-        let searchInput = req.params.search;
+        let searchInput = req.query.search;
         let resultingData = [];
 
         var seenData = new Set();
