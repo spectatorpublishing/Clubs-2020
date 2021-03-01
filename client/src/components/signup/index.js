@@ -31,7 +31,6 @@ export const SignUpBox = ({ detailLink, id }) => {
       shouldSubmit = false;
     } else if (email && !email.current.value.match(emailEx)) {
       setEmailContainsIllegalCharacters(false);
-      console.log('hi')
     }
 
     return shouldSubmit;
