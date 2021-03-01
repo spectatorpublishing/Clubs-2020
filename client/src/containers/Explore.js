@@ -229,6 +229,11 @@ export const Explore = () => {
     const [size, setSize] = useState([])
     const [type, setType] = useState([])
 
+    const [searchQuery, setSearchQuery] = useState('')
+
+    const [sizeSelected, setSizeSelected] = useState([]);
+    
+
     useEffect(() => {
         if (join.length === 0 && size.length === 0 && type.length === 0) {
             newFetch('')
@@ -250,6 +255,15 @@ export const Explore = () => {
         }
     }, [join, size, type]);
 
+    useEffect(() => {
+        if (searchQuery === '') {
+            newFetch('')
+        } else {
+            newFetch(`search?search=${searchQuery}`)
+        }
+        setSizeSelected([])
+    }, [searchQuery])
+    
     const newFetch = async (url) => {
         fetch(`api/clubProfiles/${url}`, {
             method: 'GET',
@@ -293,9 +307,16 @@ export const Explore = () => {
                 </TextWrapper>
                 <FiltersBox>
                     <FiltersLeft>
-                        <SearchBox><SearchBar></SearchBar></SearchBox>
+                        <SearchBox><SearchBar 
+                            setData={setSearchQuery}
+                            initialData={searchQuery}
+                        ></SearchBar></SearchBox>
                         <Filter><Type setData={setType}/></Filter>
-                        <Filter><Size setData={setSize}/></Filter>
+                        <Filter><Size 
+                            setData={setSize}
+                            selected={sizeSelected}
+                            setSelected={setSizeSelected}
+                        /></Filter>
                         <Filter><Join setData={setJoin}/></Filter>
                     </FiltersLeft>
                     <ShuffleBox>
@@ -307,7 +328,11 @@ export const Explore = () => {
                 </FiltersBox>
                 <FiltersBelow>
                         <MobileFilter><Type setData={setType}/></MobileFilter>
-                        <MobileFilter><Size setData={setSize}/></MobileFilter>
+                        <MobileFilter><Size 
+                            setData={setSize}
+                            selected={sizeSelected}
+                            setSelected={setSizeSelected}
+                        /></MobileFilter>
                         <MobileFilter><Join setData={setJoin}/></MobileFilter>
                 </FiltersBelow>
                 <CardsContainer>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
@@ -36,12 +36,30 @@ const Icon = styled.i`
 `;
 
 
-export const SearchBar = () => {
+
+export const SearchBar = ({
+  initialData,
+  setData
+}) => {
+    const [text, setText] = useState(initialData)
+    
+    const handleKeyDown = (e) => {
+      if (e.key === 'Enter'){
+        setData(e.target.value)
+      } else {
+        setText(e.target.value)
+      }
+    }
     
     return (
         <SearchBox>
           <Icon><FontAwesomeIcon icon={faSearch} /></Icon>
-          <Bar type="text" placeholder="Search..."></Bar>
+          <Bar 
+            type="text" 
+            placeholder="Search..."
+            text={text}
+            onKeyDown={(e) => {handleKeyDown(e)}}
+          ></Bar>
         </SearchBox>
     )
 };
