@@ -141,7 +141,7 @@ const ShuffleBox = styled.div`
 `;
 
 const AdBox = styled.div`
-  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
   color: black;
   background: grey;
   height: 90px;
@@ -151,7 +151,7 @@ const AdBox = styled.div`
 `
 
 const AdBoxMobile = styled.div`
-  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
   color: black;
   background: grey;
   height: 50px;
