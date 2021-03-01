@@ -34,7 +34,7 @@ function encodeFormData(details) {
  *
  * gets called after user authenticates successfully with firebase-auth
  */
-function login(user) {
+export function login(user) {
   /* unverified email address, send user to verify your email page */
   if (user.emailVerified === false) {
     return new Promise(function (resolve, reject) {
@@ -48,10 +48,12 @@ function login(user) {
         console.log('err', err);
       });
   } else {
+
     let loginCred = {
       firebaseId: user.uid,
       accountEmail: user.email,
     };
+    console.log(loginCred)
 
     return (
       fetch(`${db_root}/api/clubAccounts/create`, {

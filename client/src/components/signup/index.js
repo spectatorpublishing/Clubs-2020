@@ -1,39 +1,70 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
+import { useHistory } from 'react-router-dom';
 import TomatoButton from '../tomatoButton';
-import { ErrorText } from './helper';
+import { ErrorText, handleLogin } from './helper';
+import Signout from '../signout/index';
+import * as firebase from '../../UserAuthUtilities/firebase';
+import {createUser} from './helper'
 
-export const SignUpBox = ({ detailLink, id }) => {
+export const SignUpBox = ({ detailLink, id, userCred }) => {
   const email = useRef(null);
   const password = useRef(null);
   const confirmPassword = useRef(null);
   const [doPasswordsMatch, setDoPasswordsMatch] = useState(true);
   const [isPasswordShort, setIsPasswordShort] = useState(false);
+  const history = useHistory();
   const [
     emailContainsIllegalCharacters,
     setEmailContainsIllegalCharacters,
   ] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   let modalData = {};
-  // TODO: Add firebase functionality using Yunlan's branch: ''
+
   const emailEx = /^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+/;
 
-  function onSignupSubmit() {
+  function onSignupSubmit(e) {
     let shouldSubmit = true;
+    if (password.current.value !== confirmPassword.current.value) {
+      shouldSubmit = false;
+    }
     if (password && password.current.value.length <= 5) {
       setIsPasswordShort(true);
       shouldSubmit = false;
     } else if (password && password.current.value.length > 5)
       setIsPasswordShort(false);
-    if (email && email.current.value.match(emailEx)) {
+    /*if (email && email.current.value.match(emailEx)) {
       setEmailContainsIllegalCharacters(true);
       shouldSubmit = false;
     } else if (email && !email.current.value.match(emailEx)) {
       setEmailContainsIllegalCharacters(false);
-    }
+    }*/
+    if (shouldSubmit) {
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(
+          email.current.value,
+          password.current.value
+        )
+        .then(
+          (result) => {
+            console.log(result.user.uid);
+            createUser(result.user);
+            firebase
+              .auth()
+              .currentUser.sendEmailVerification()
+              .then(() => console.log(`Email sent to ${email.current.value}!`))
+              .catch((err) => console.log(err.code));
+            //history.push('/');
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
 
-    return shouldSubmit;
+      //e.preventDefault();
+    }
   }
   if (id === 'signup') {
     modalData = {
@@ -219,14 +250,26 @@ export const SignUpBox = ({ detailLink, id }) => {
             <TomatoButton
               text='Create Club Profile'
               wire
-              type='submit'
-              onClick={onSignupSubmit}
+              type='button'
+              onClick={(e) => {
+                onSignupSubmit(e);
+              }}
             />
           </FlexContainer>
         )}
         {id === 'login' && (
           <FlexContainer>
             <TomatoButton text='Log in' wire />
+            <TomatoButton
+              text='Log in with Google'
+              wire
+              margin='0.65rem 0 0 0'
+              type='button'
+              onClick={() => {
+                handleLogin(userCred, history);
+              }}
+            />
+            <Signout />
             <Description>Having Trouble?</Description>
           </FlexContainer>
         )}
@@ -247,7 +290,7 @@ export const SignUpBox = ({ detailLink, id }) => {
   );
 };
 
-const Wrapper = styled.form`
+const Wrapper = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
