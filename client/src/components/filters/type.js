@@ -89,13 +89,12 @@ const tagData = [
 const Type = ({
     items,
     theme,
-    defaultValue,
+    setData,
   
   }) => {
 
     const [clicked, setClicked] = useState(false);
     const [selected, setSelected] = useState([]);
-    const [title, setTitle] = useState(defaultValue);
     const [titleHovered, setTitleHovered] = useState(false);
     const [curIndex, setCurIndex] = useState(-1);
     const dropdown = useRef(null);
@@ -122,7 +121,6 @@ const Type = ({
           setClicked(!clicked);
         }
         if (clicked) {
-          setTitle(items[curIndex]);
           setClicked(false);
         } else if (titleHovered) {
           setClicked(!clicked);
@@ -156,6 +154,7 @@ const Type = ({
       }
 
       console.log(selected)
+      //setData(selected)
     };
 
     items= tagData

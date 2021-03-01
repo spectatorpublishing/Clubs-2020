@@ -46,13 +46,12 @@ const TextRemove = 'Size x';
 const Size = ({
     items,
     theme,
-    defaultValue,
+    setData,
   
   }) => {
 
     const [clicked, setClicked] = useState(false);
     const [selected, setSelected] = useState([]);
-    const [title, setTitle] = useState(defaultValue);
     const [titleHovered, setTitleHovered] = useState(false);
     const [curIndex, setCurIndex] = useState(-1);
     const dropdown = useRef(null);
@@ -79,7 +78,6 @@ const Size = ({
           setClicked(!clicked);
         }
         if (clicked) {
-          setTitle(items[curIndex]);
           setClicked(false);
         } else if (titleHovered) {
           setClicked(!clicked);
@@ -108,6 +106,7 @@ const Size = ({
       }
 
       console.log(selected)
+      //setData(selected)
     };
 
     items= ['0-10', '10-20','20-50','50-100','100+']

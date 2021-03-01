@@ -46,13 +46,12 @@ const TextRemove = 'Joining x';
 const Join = ({
     items,
     theme,
-    defaultValue,
+    setData,
   
   }) => {
 
     const [clicked, setClicked] = useState(false);
     const [selected, setSelected] = useState([]);
-    const [title, setTitle] = useState(defaultValue);
     const [titleHovered, setTitleHovered] = useState(false);
     const [curIndex, setCurIndex] = useState(-1);
     const dropdown = useRef(null);
@@ -79,7 +78,6 @@ const Join = ({
           setClicked(!clicked);
         }
         if (clicked) {
-          setTitle(items[curIndex]);
           setClicked(false);
         } else if (titleHovered) {
           setClicked(!clicked);
@@ -108,6 +106,7 @@ const Join = ({
       }
 
       console.log(selected)
+      //setData(selected)
     };
 
     items= ['No application Required', 'Accepting Members']
