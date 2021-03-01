@@ -114,5 +114,56 @@ module.exports = {
     search: function(req, res) {
         // TODO; req.query contains search query
         // support pagination with req.query 
+
+        let searchInput = req.query.search;
+        let resultingData = [];
+
+        var seenData = new Set();
+
+        clubProfile.find({name:{$regex: searchInput, $options: 'i'}})
+        .then(q1=>{
+          
+          let arr = JSON.parse(JSON.stringify(q1));
+
+          for (i = 0; i < arr.length; i++) {
+            if ( !(seenData.has(arr[i].name)) ) {
+              seenData.add(arr[i].name );
+              resultingData.push(arr[i]);
+            } 
+          }
+
+          clubProfile.find( {longDescription:{$regex: searchInput, $options: 'i'} })
+          .then(q2=>{
+            let arr = JSON.parse(JSON.stringify(q2));
+
+            for (i = 0; i < arr.length; i++) {
+              if ( !(seenData.has(arr[i].name)) ) {
+                seenData.add(arr[i].name );
+                resultingData.push(arr[i]);
+              } 
+            }
+
+            clubProfile.find({shortDescription:{$regex: searchInput, $options: 'i'}})
+            .then(q3 =>{
+              let arr = JSON.parse(JSON.stringify(q3));
+
+              for (i = 0; i < arr.length; i++) {
+                if ( !(seenData.has(arr[i].name)) ) {
+                  seenData.add(arr[i].name );
+                  resultingData.push(arr[i]);
+                } 
+              }
+
+              res.json(resultingData);
+              
+
+            }).catch(err => res.status(422).json(err));
+            
+          }).catch(err => res.status(422).json(err));
+          
+        })
+        .catch(err => res.status(422).json(err));
+        
+        
     }
 }
