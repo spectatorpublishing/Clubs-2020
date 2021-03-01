@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import * as firebase from '../../../UserAuthUtilities/firebase';
 
@@ -42,9 +42,37 @@ export default function Signin(props) {
         e.preventDefault();
     }
 
+    function checkSignin(e) {
+        console.log("checking sign in state...")
+        window.location.reload();
+    }
+
+    function handleSignOut(e){
+        firebase.auth().signOut().then(() => {
+            // Sign-out successful.
+            console.log("Sign-out successful")
+
+          }).catch((error) => {
+            // An error happened.
+            console.log("Failed to Sign Out")
+          });
+    }
+
+    useEffect( () => {
+        firebase.auth().onAuthStateChanged( (user) => {
+            if (user) {
+                console.log(user);
+            } else {
+                console.log('No user is signed in');
+            }
+        });}, []);
+
+
     return (
         <Background>
             <button onClick={handleSignin}>Sign in with Google</button>
+            <input type="submit" onClick={checkSignin} name = "Check if signed in"/>
+            <button onClick={handleSignOut}>Sign Out</button>
             <div>{message}</div>
         </Background>
     )

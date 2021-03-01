@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect }  from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Navbar } from './components/navbar';
 import { Explore } from './containers/Explore';
@@ -8,6 +8,7 @@ import { Portal } from "./containers/Portal";
 import { PortalLogin } from './containers/PortalLogIn'
 
 import { SignUp } from './containers/SignUp';
+import  Signup   from './containers/FirebaseApiSetUpTest/firebase/signup';
 import { Confirmation } from './containers/Confirmation';
 import { ClubProfile } from './containers/ClubProfile';
 import { ThemeProvider } from 'styled-components';
@@ -16,9 +17,19 @@ import Signin from './containers/FirebaseApiSetUpTest/firebase/signin';
 
 import theme from './theme';
 
+import * as firebase from './UserAuthUtilities/firebase';
 
 
 const App = () => {
+  useEffect( () => {
+    firebase.auth().onAuthStateChanged( (user) => {
+        if (user) {
+            console.log(user);
+            console.log(user.uid);
+        } else {
+            console.log('No user is signed in');
+        }
+    });}, []);
   return (
     <ThemeProvider theme={theme}>
       <Navbar />
@@ -32,6 +43,8 @@ const App = () => {
           <Route path='/confirm' component={Confirmation} />
           <Route path='/clubprofile' component={ClubProfile} />
           <Route path='/test' component={Signin} /> 
+          <Route path='/signupTest' component={Signup} />
+
         </Switch>
       </Router>
     </ThemeProvider>

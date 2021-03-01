@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
 import { ListOfClubs } from "../components/ListOfClubs/ListOfClubs"
 import fetchClubs from '../components/ListOfClubs/testData'
+import * as firebase from '../UserAuthUtilities/firebase';
+
 
 export const PageWrapper = styled.div`
     margin: 0 5%;
@@ -70,6 +72,15 @@ export const Portal = () => {
     *   - code for part 2 should be put in the <ListOfClub /> 
     *   
     */
+   useEffect( () => {
+    firebase.auth().onAuthStateChanged( (user) => {
+        if (user) {
+            console.log(user);
+        } else {
+            console.log('No user is signed in');
+        }
+    });}, []);
+
     return(
         <PageWrapper>
             <HeadingDiv>
