@@ -21,7 +21,7 @@ const App = () => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         console.log(user.email);
-        setUserCred(user)
+        setUserCred(user);
         console.log('Signed in.');
       } else {
         console.log('Not signed in.');
@@ -38,7 +38,9 @@ const App = () => {
           <Route path='/explore' component={Explore} />
           <Route path='/faq' component={FAQ} />
           <Route path='/portal' component={Portal} />
-          <Route path='/signup' component={SignUp} userCred={userCred} />
+          <Route path='/signup'>
+            <SignUp userCred={userCred} />
+          </Route>
           <Route path='/confirm' component={Confirmation} />
           <Route path='/clubprofile' component={ClubProfile} />
           <Route path='/login'>
