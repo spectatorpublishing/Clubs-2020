@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Navbar } from './components/navbar';
 import { Explore } from './containers/Explore';
@@ -13,14 +13,15 @@ import { ThemeProvider } from 'styled-components';
 import Signin from './containers/FirebaseApiSetUpTest/firebase/signin';
 import Signup from './containers/FirebaseApiSetUpTest/firebase/signup';
 import * as firebase from './UserAuthUtilities/firebase';
-
 import theme from './theme';
 
 const App = () => {
+  const [userCred, setUserCred] = useState(null);
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         console.log(user.email);
+        setUserCred(user)
         console.log('Signed in.');
       } else {
         console.log('Not signed in.');
@@ -37,10 +38,12 @@ const App = () => {
           <Route path='/explore' component={Explore} />
           <Route path='/faq' component={FAQ} />
           <Route path='/portal' component={Portal} />
-          <Route path='/signup' component={SignUp} />
+          <Route path='/signup' component={SignUp} userCred={userCred} />
           <Route path='/confirm' component={Confirmation} />
           <Route path='/clubprofile' component={ClubProfile} />
-          <Route path='/login' component={Login} />
+          <Route path='/login'>
+            <Login userCred={userCred} />
+          </Route>
           <Route path='/test' component={Signin} />
           <Route path='/test_signin' component={Signin} />
           <Route path='/test_signup' component={Signup} />

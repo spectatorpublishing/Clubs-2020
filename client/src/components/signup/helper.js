@@ -1,6 +1,7 @@
 import React from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import styled from 'styled-components';
+import { login } from '../../containers/FirebaseApiSetUpTest/firebase/signin';
 
 export function ErrorText({ marginTop, marginBottom, stateToCheck, text }) {
   const errorVariants = {
@@ -33,3 +34,11 @@ const ErrorContainer = styled(motion.div)`
   margin-top: ${(props) => props.collapse && '0rem'};
   transition: margin-top 450ms;
 `;
+
+export function handleLogin(userCred, history){
+  let userId = userCred.userId;
+  let userEmail = userCred.userEmail;
+  console.log(userCred)
+  login(userCred)
+  history.push('/');
+}
