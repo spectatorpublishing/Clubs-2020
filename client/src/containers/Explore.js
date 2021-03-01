@@ -129,7 +129,7 @@ const FiltersBelow = styled.div`
         flex-direction: column;
     }
 
-    @media only screen and (min-width : 769px) {
+    @media only screen and (min-width : 1024px) {
         display: none;
     }
 `;
@@ -142,7 +142,7 @@ const MobileFilter = styled.div`
         
     }
 
-    @media only screen and (min-width : 769px) {
+    @media only screen and (min-width : 1025px) {
         display: none;
         
     }
