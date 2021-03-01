@@ -100,13 +100,23 @@ module.exports = {
     filterAndSortBy: function(req, res) {
         // TODO; req.query contains filter and/or sort information
 
-        clubProfile.find({
-          memberRange: {$in: req.query.memberRange},
-          tags: {$in: req.query.tags},
-          acceptingMembers: req.query.acceptingMembers,
-          applicationRequired: req.query.applicationRequired
-        }).then(clubprofile => res.json(clubprofile)
-        ).catch(err => errHandling(err, res)); 
+        var specs = {}
+        if (req.query.memberRange) {
+          specs['memberRange'] = {$in: req.query.memberRange}
+        }
+        if (req.query.tags) {
+          specs['tags'] = {$in: req.query.tags}
+        }
+        if (req.query.acceptingMembers) {
+          specs['acceptingMembers'] = Boolean(req.query.acceptingMembers)
+        }
+        if (req.query.applicationRequired) {
+          specs['applicationRequired'] = Boolean(req.query.applicationRequired)
+        }
+        
+        clubProfile.find(specs)
+          .then(clubprofile => res.json(clubprofile))
+          .catch(err => errHandling(err, res)); 
       
     },
 

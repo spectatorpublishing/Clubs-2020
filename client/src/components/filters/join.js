@@ -98,18 +98,21 @@ const Join = ({
     };
 
     const optionHandleClick = (item) => {
+      var newSelected
       if (!selected.includes(item)) {
-          selected.push(item)
+          newSelected = [...selected, item]
       } else {
-          var ind = selected.indexOf(item)
-          selected.splice(ind,1)
+          newSelected = selected.filter((element) => {
+            return element != item 
+          })
       }
 
-      console.log(selected)
-      //setData(selected)
+      // console.log("selected: ", newSelected)
+      setData(newSelected)
+      setSelected(newSelected)
     };
 
-    items= ['No application Required', 'Accepting Members']
+    items= ['No Application Required', 'Accepting Members']
   
     const options = items.map( (item, index) => {
       return (

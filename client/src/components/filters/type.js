@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { spring } from 'popmotion';
 import { useFocused, useOnClickOutside } from '../customHooks/index';
 
+import { tagData } from "../../containers/ProfileCreation/ProfileCreation1/data"
 
 const Button = styled.button`
     background-color: ${(props) => props.theme.colors.fullWhite};
@@ -42,55 +43,11 @@ const Word = styled.div`
 
 const TextAdd = 'Type +';
 const TextRemove = 'Type x';
-const tagData = [
-    'Academic',
-    'Advising',
-    'Performing Arts',
-    'Comedy',
-    'Community Service',
-    'Athletics',
-    'Dance',
-    'Music',
-    'Global Affairs',
-    'Engineering',
-    'A Capella',
-    'Advocacy',
-    'Pre-Professional',
-    'Design',
-    'Cultural',
-    'Charity',
-    'Food',
-    'Entrepreneurship',
-    'Environmental',
-    'Greek Life',
-    'Health',
-    'Journalism',
-    'Instructional',
-    'Law',
-    'Media',
-    'Medicine',
-    'Mentorship',
-    'Politics',
-    'Outdoors',
-    'Programming',
-    'Peer Education',
-    'Religious/Spiritual',
-    'Publication',
-    'Student Governance',
-    'Social',
-    'Technology',
-    'Travel',
-    'Theatre',
-    'Writing',
-    'Youth'
-  ];
-
 
 const Type = ({
     items,
     theme,
     setData,
-  
   }) => {
 
     const [clicked, setClicked] = useState(false);
@@ -141,20 +98,18 @@ const Type = ({
     };
 
     const optionHandleClick = (item) => {
+      var newSelected
       if (!selected.includes(item)) {
-          if (selected.length >= 5) {
-            selected.splice(0,1)
-              selected.push(item)
-          } else {
-              selected.push(item)
-          }
+          newSelected = [...selected, item]
       } else {
-          var ind = selected.indexOf(item)
-          selected.splice(ind,1)
+          newSelected = selected.filter((element) => {
+            return element != item 
+          })
       }
 
-      console.log(selected)
-      //setData(selected)
+      // console.log("selected: ", newSelected)
+      setData(newSelected)
+      setSelected(newSelected)
     };
 
     items= tagData

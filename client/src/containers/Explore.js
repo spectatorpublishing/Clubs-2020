@@ -224,15 +224,34 @@ const ShuffleImage = styled.div`
 
 export const Explore = () => {
     const [clubProfiles, setClubProfiles] = useState([]);
-    // const [width, setWidth] = useState(window.innerWidth);
+    
+    const [join, setJoin] = useState([])
+    const [size, setSize] = useState([])
+    const [type, setType] = useState([])
 
     useEffect(() => {
-        // window.addEventListener("resize", () => setWidth(window.innerWidth));
-        newFetch();  
-    }, []);
+        if (join.length === 0 && size.length === 0 && type.length === 0) {
+            newFetch('')
+        } else {
+            let tagsQuery = (type.length === 0) ? '' : `tags=${type.join(`&tags=`)}`
+            let memberRangeQuery = (size.length === 0) ? '' : `memberRange=${size.join(`&memberRange=`)}`
+            
+            var joinQuery = ''
+            if (join.length != 0) {
+                let acceptingMembers = 
+                    join.includes('Accepting Members') ? `&acceptingMembers=true` : ''
+                let applicationRequired = 
+                    join.includes('No Application Required') ? `&applicationRequired=false` : ''
+                joinQuery = acceptingMembers + applicationRequired
+            }
+   
+            let url = `filterAndSortBy?${tagsQuery}&${memberRangeQuery}${joinQuery}`
+            newFetch(url);  
+        }
+    }, [join, size, type]);
 
-    const newFetch = async () => {
-        fetch(`api/clubProfiles/`, {
+    const newFetch = async (url) => {
+        fetch(`api/clubProfiles/${url}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -275,21 +294,21 @@ export const Explore = () => {
                 <FiltersBox>
                     <FiltersLeft>
                         <SearchBox><SearchBar></SearchBar></SearchBox>
-                        <Filter><Type /></Filter>
-                        <Filter><Size /></Filter>
-                        <Filter><Join /></Filter>
+                        <Filter><Type setData={setType}/></Filter>
+                        <Filter><Size setData={setSize}/></Filter>
+                        <Filter><Join setData={setJoin}/></Filter>
                     </FiltersLeft>
                     <ShuffleBox>
-                        <ShuffleButton onClick={newFetch}>
+                        <ShuffleButton onClick={() => newFetch('')}>
                             <ShuffleImage><img src={Icon} width={15} height={15} alt="shuffle" /></ShuffleImage>
                             <ShuffleWord>Shuffle</ShuffleWord>
                         </ShuffleButton>
                     </ShuffleBox>
                 </FiltersBox>
                 <FiltersBelow>
-                        <MobileFilter><Type /></MobileFilter>
-                        <MobileFilter><Size /></MobileFilter>
-                        <MobileFilter><Join /></MobileFilter>
+                        <MobileFilter><Type setData={setType}/></MobileFilter>
+                        <MobileFilter><Size setData={setSize}/></MobileFilter>
+                        <MobileFilter><Join setData={setJoin}/></MobileFilter>
                 </FiltersBelow>
                 <CardsContainer>
                     {(clubProfiles.length === 0) ? (<h1>Loading</h1>) : (clubProfiles.map(profile => (
