@@ -220,11 +220,11 @@ export const Explore = () => {
     const [typeSelected, setTypeSelected] = useState([]);
     const [searchBarText, setSearchBarText] = useState('');
 
-    useEffect(() => {
+    /*useEffect(() => {
         window.addEventListener("resize", () => setWidth(window.innerWidth));
         console.log("window: " , window.innerWidth)
         console.log("width: ", width)
-    },);
+    },);*/
 
     useEffect(() => {
         setSearchBarText('')
@@ -326,21 +326,21 @@ export const Explore = () => {
                     </ShuffleBox>
                 </FiltersBox>
                 <FiltersBelow>
-                    <MobileFilter><Type 
-                        setData={setType}
-                        selected={typeSelected}
-                        setSelected={setTypeSelected}
-                    /></MobileFilter>
-                    <MobileFilter><Size 
-                        setData={setSize}
-                        selected={sizeSelected}
-                        setSelected={setSizeSelected}
-                    /></MobileFilter>
-                    <MobileFilter><Join 
-                        setData={setJoin}
-                        selected={joinSelected}
-                        setSelected={setJoinSelected}
-                    /></MobileFilter>
+                        <MobileFilter><Type 
+                            setData={setType}
+                            selected={typeSelected}
+                            setSelected={setTypeSelected}
+                        /></MobileFilter>
+                        <MobileFilter><Size 
+                            setData={setSize}
+                            selected={sizeSelected}
+                            setSelected={setSizeSelected}
+                        /></MobileFilter>
+                        <MobileFilter><Join 
+                            setData={setJoin}
+                            selected={joinSelected}
+                            setSelected={setJoinSelected}
+                        /></MobileFilter>
                 </FiltersBelow>
                 <CardsContainer>
                     {(clubProfiles.length === 0) ? (<h1>{loadText}</h1>) : (clubProfiles.map(profile => (
