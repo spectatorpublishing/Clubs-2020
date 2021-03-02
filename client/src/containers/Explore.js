@@ -7,7 +7,7 @@ import Size from '../components/filters/size';
 import Type from '../components/filters/type';
 import AdCarrier from '../components/adCarrier';
 import SearchBar from '../components/searchBar';
-import FilterMobile from '../components/filters/filterMobile';
+//import FilterMobile from '../components/filters/filterMobile';
 import Icon from '../components/filters/shuffle.png';
 
 const Wrapper = styled.div`
@@ -207,6 +207,7 @@ const ShuffleImage = styled.div`
 export const Explore = () => {
     const [clubProfiles, setClubProfiles] = useState([]);
     const [width, setWidth] = useState(window.innerWidth);
+    const [loadText, setLoadText] = useState("Loading...")
     
     const [join, setJoin] = useState([])
     const [size, setSize] = useState([])
@@ -219,21 +220,23 @@ export const Explore = () => {
     const [typeSelected, setTypeSelected] = useState([]);
     const [searchBarText, setSearchBarText] = useState('');
 
-    useEffect(() => {
+    /*useEffect(() => {
         window.addEventListener("resize", () => setWidth(window.innerWidth));
-        newFetch('');
-    },[]);
+        console.log(window.innerWidth)
+        newFetch('')
+    },[window]);*/
 
     useEffect(() => {
         setSearchBarText('')
         if (join.length === 0 && size.length === 0 && type.length === 0) {
             newFetch('')
+            setLoadText("Loading...")  
         } else {
             let tagsQuery = (type.length === 0) ? '' : `tags=${type.join(`&tags=`)}`
             let memberRangeQuery = (size.length === 0) ? '' : `memberRange=${size.join(`&memberRange=`)}`
             
             var joinQuery = ''
-            if (join.length != 0) {
+            if (join.length !== 0) {
                 let acceptingMembers = 
                     join.includes('Accepting Members') ? `&acceptingMembers=true` : ''
                 let applicationRequired = 
@@ -242,7 +245,8 @@ export const Explore = () => {
             }
    
             let url = `filterAndSortBy?${tagsQuery}&${memberRangeQuery}${joinQuery}`
-            newFetch(url);  
+            newFetch(url);
+            setLoadText("No Clubs Match Your Criteria...")  
         }
     }, [join, size, type]);
 
@@ -253,13 +257,16 @@ export const Explore = () => {
 
         if (searchQuery === '') {
             newFetch('')
+            setLoadText("Loading...")  
         } else {
             newFetch(`search?search=${searchQuery}`)
+            setLoadText("No Clubs Match Your Criteria...")  
         }
     }, [searchQuery])
     
     const newFetch = async (url) => {
-        window.addEventListener("resize", () => setWidth(window.innerWidth));
+        //window.addEventListener("resize", () => setWidth(window.innerWidth));
+        //console.log(window.innerWidth)
         fetch(`api/clubProfiles/${url}`, {
             method: 'GET',
             headers: {
@@ -338,7 +345,7 @@ export const Explore = () => {
                     /></MobileFilter>
                 </FiltersBelow>
                 <CardsContainer>
-                    {(clubProfiles.length === 0) ? (<h1>Loading</h1>) : (clubProfiles.map(profile => (
+                    {(clubProfiles.length === 0) ? (<h1>{loadText}</h1>) : (clubProfiles.map(profile => (
                         <CardWrapper>
                             <ExploreBox 
                                 name = {profile.name}
