@@ -19,6 +19,8 @@ export const ClubProfile = () => {
     const [width, setWidth] = useState(window.innerWidth);
     const [isLoading, setLoading] = useState(true);
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    
+    /* temporary for conditional components */
     const [isLoggedin, setLoggedIn] = useState(false);
     const [firstLogIn, setFirstLog] = useState(false);
     const [completeProfile, setComplete] = useState(false);
@@ -82,6 +84,7 @@ export const ClubProfile = () => {
         ( <Navbar/> ) 
     };
 
+    /* temporary for conditional components */
     function setAdmin(){
         setLoggedIn(!isLoggedin);
         setFirstLog(!firstLogIn);
