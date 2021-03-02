@@ -220,11 +220,11 @@ export const Explore = () => {
     const [typeSelected, setTypeSelected] = useState([]);
     const [searchBarText, setSearchBarText] = useState('');
 
-    /*useEffect(() => {
+    useEffect(() => {
         window.addEventListener("resize", () => setWidth(window.innerWidth));
-        console.log(window.innerWidth)
-        newFetch('')
-    },[window]);*/
+        console.log("window: " , window.innerWidth)
+        console.log("width: ", width)
+    },);
 
     useEffect(() => {
         setSearchBarText('')
@@ -265,8 +265,6 @@ export const Explore = () => {
     }, [searchQuery])
     
     const newFetch = async (url) => {
-        //window.addEventListener("resize", () => setWidth(window.innerWidth));
-        //console.log(window.innerWidth)
         fetch(`api/clubProfiles/${url}`, {
             method: 'GET',
             headers: {
@@ -292,7 +290,7 @@ export const Explore = () => {
 
     const ExploreContents = () => { 
         return (
-        <>
+        <div>
                 <TextWrapper>
                     <h1>Explore Clubs</h1>
                     <p>Find your Columbia community</p>
@@ -346,7 +344,7 @@ export const Explore = () => {
                 </FiltersBelow>
                 <CardsContainer>
                     {(clubProfiles.length === 0) ? (<h1>{loadText}</h1>) : (clubProfiles.map(profile => (
-                        <CardWrapper>
+                        <CardWrapper key={profile._id}>
                             <ExploreBox 
                                 name = {profile.name}
                                 description = {profile.shortDescription}
@@ -360,7 +358,7 @@ export const Explore = () => {
                         </CardWrapper>
                     )))} 
                 </CardsContainer>  
-        </>
+        </div>
         );
     }
 
