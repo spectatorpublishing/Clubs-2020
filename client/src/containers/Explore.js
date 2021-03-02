@@ -220,11 +220,11 @@ export const Explore = () => {
     const [typeSelected, setTypeSelected] = useState([]);
     const [searchBarText, setSearchBarText] = useState('');
 
-    /*useEffect(() => {
+    useEffect(() => {
         window.addEventListener("resize", () => setWidth(window.innerWidth));
         console.log("window: " , window.innerWidth)
         console.log("width: ", width)
-    },);*/
+    },);
 
     useEffect(() => {
         setSearchBarText('')
