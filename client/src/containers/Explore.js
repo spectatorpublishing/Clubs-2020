@@ -25,19 +25,6 @@ const PageWrapper = styled.div`
     }
 `;
 
-const BottomWrapper = styled.div`
-    height: 70px;
-    width: 100%;
-    z-index: 1;
-    background-color: #F4F6F8;
-    position: fixed;
-    bottom: 0;
-
-    @media only screen and (min-width : 769px) {
-        display: none;
-    }
-`;
-
 const TextWrapper = styled.div`
     display: flex;
     flex-direction: row;
@@ -148,14 +135,6 @@ const MobileFilter = styled.div`
     }
 `;
 
-const FilterBottom = styled.div`
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-top: -20px;
-    margin-left: -65px;
-`;
-
 const SearchBox = styled.div`
   margin-right: 1.5rem;
 
@@ -172,7 +151,10 @@ const AdContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 2rem;
+  
+  @media only screen and (max-width : 768px) {
+    margin-bottom: 1rem;
+  }
 `;
 
 const ShuffleButton = styled.button`
@@ -224,6 +206,7 @@ const ShuffleImage = styled.div`
 
 export const Explore = () => {
     const [clubProfiles, setClubProfiles] = useState([]);
+    const [width, setWidth] = useState(window.innerWidth);
     
     const [join, setJoin] = useState([])
     const [size, setSize] = useState([])
@@ -235,6 +218,11 @@ export const Explore = () => {
     const [joinSelected, setJoinSelected] = useState([]);
     const [typeSelected, setTypeSelected] = useState([]);
     const [searchBarText, setSearchBarText] = useState('');
+
+    useEffect(() => {
+        window.addEventListener("resize", () => setWidth(window.innerWidth));
+        newFetch('');
+    },[]);
 
     useEffect(() => {
         setSearchBarText('')
@@ -271,6 +259,7 @@ export const Explore = () => {
     }, [searchQuery])
     
     const newFetch = async (url) => {
+        window.addEventListener("resize", () => setWidth(window.innerWidth));
         fetch(`api/clubProfiles/${url}`, {
             method: 'GET',
             headers: {
@@ -294,19 +283,9 @@ export const Explore = () => {
             .catch(error => console.log(error));    
     };
 
-    return(
-
-        <Wrapper>
-        <Navbar />
-        <main>
-            <PageWrapper>
-                <AdContainer>
-                    <AdCarrier
-                        width={728} 
-                        height={90}
-                        path="cds_leaderboard"
-                    />
-                </AdContainer>
+    const ExploreContents = () => { 
+        return (
+        <>
                 <TextWrapper>
                     <h1>Explore Clubs</h1>
                     <p>Find your Columbia community</p>
@@ -317,7 +296,7 @@ export const Explore = () => {
                             setData={setSearchQuery}
                             barText={searchBarText}
                             setBarText={setSearchBarText}
-                        ></SearchBar></SearchBox>
+                        /></SearchBox>
                         <Filter><Type 
                             setData={setType}
                             selected={typeSelected}
@@ -342,21 +321,21 @@ export const Explore = () => {
                     </ShuffleBox>
                 </FiltersBox>
                 <FiltersBelow>
-                        <MobileFilter><Type 
-                            setData={setType}
-                            selected={typeSelected}
-                            setSelected={setTypeSelected}
-                        /></MobileFilter>
-                        <MobileFilter><Size 
-                            setData={setSize}
-                            selected={sizeSelected}
-                            setSelected={setSizeSelected}
-                        /></MobileFilter>
-                        <MobileFilter><Join 
-                            setData={setJoin}
-                            selected={joinSelected}
-                            setSelected={setJoinSelected}
-                        /></MobileFilter>
+                    <MobileFilter><Type 
+                        setData={setType}
+                        selected={typeSelected}
+                        setSelected={setTypeSelected}
+                    /></MobileFilter>
+                    <MobileFilter><Size 
+                        setData={setSize}
+                        selected={sizeSelected}
+                        setSelected={setSizeSelected}
+                    /></MobileFilter>
+                    <MobileFilter><Join 
+                        setData={setJoin}
+                        selected={joinSelected}
+                        setSelected={setJoinSelected}
+                    /></MobileFilter>
                 </FiltersBelow>
                 <CardsContainer>
                     {(clubProfiles.length === 0) ? (<h1>Loading</h1>) : (clubProfiles.map(profile => (
@@ -374,8 +353,45 @@ export const Explore = () => {
                         </CardWrapper>
                     )))} 
                 </CardsContainer>  
-            </PageWrapper>
-        </main>
-        </Wrapper>
-    )
+        </>
+        );
+    }
+
+    if (width < 840){
+        return(
+            <Wrapper>
+            <Navbar />
+            <main>
+                <PageWrapper>
+                    <AdContainer>
+                    <AdCarrier
+                        width={320} 
+                        height={50}
+                        path="cds_leaderboard_mobile"
+                    />
+                    </AdContainer>
+                    <ExploreContents/>
+                </PageWrapper>
+            </main>
+            </Wrapper>
+        )
+    } else {
+        return(
+            <Wrapper>
+            <Navbar />
+            <main>
+                <PageWrapper>
+                    <AdContainer>
+                    <AdCarrier
+                        width={728} 
+                        height={90}
+                        path="cds_leaderboard"
+                    />
+                    </AdContainer>
+                    <ExploreContents/>
+                </PageWrapper>
+            </main>
+            </Wrapper>
+        )
+    }
 }
