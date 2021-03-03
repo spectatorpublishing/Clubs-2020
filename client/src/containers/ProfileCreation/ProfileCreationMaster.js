@@ -6,7 +6,7 @@ import ProfileCreation1 from './ProfileCreation1/index';
 import ProfileCreation2 from './ProfileCreation2/index';
 import Navbar from '../../components/navbar/index';
 
-const ProfileCreationMaster = () => {
+const ProfileCreationMaster = ({ userCred }) => {
   const [clubProfile, setClubProfile] = useState({
     tags: [],
     clubName: '',
@@ -47,6 +47,7 @@ const ProfileCreationMaster = () => {
                   {...props}
                   clubProfile={clubProfile}
                   setClubProfile={setClubProfile}
+                  userCred={userCred}
                 />
               )}
             />
@@ -57,6 +58,7 @@ const ProfileCreationMaster = () => {
                   {...props}
                   clubProfile={clubProfile}
                   setClubProfile={setClubProfile}
+                  userCred={userCred}
                 />
               )}
             />

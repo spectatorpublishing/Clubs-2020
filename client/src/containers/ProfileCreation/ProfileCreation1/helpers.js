@@ -55,6 +55,7 @@ export const NewMembers = ({ clubProfile, setClubProfile }) => {
         if (clubProfile.memberPeriod[i] === item[1]) isIn = true;
       return isIn;
     };
+    
     return (
       <CheckboxContainer key={`checkbox-${index + 1}`}>
         <Checkbox

@@ -42,7 +42,7 @@ const App = () => {
               <ClubProfileDisplay />
             </Route>
             <Route path='/profile-creation'>
-              <ProfileCreationMaster />
+              <ProfileCreationMaster userCred={userCred} />
             </Route>
             <Route path='/faq'>
               <FAQ />

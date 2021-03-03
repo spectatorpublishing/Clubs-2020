@@ -43,8 +43,9 @@ const ProfileCreation2 = ({ clubProfile, setClubProfile, history }) => {
       if (!refsToCheck[i].current) everythingDefined = false;
     if (everythingDefined) {
       let tempProfile = { ...clubProfile };
-      for (let i = 0; i < tempProfile.highlights.length; i++)
+      for (let i = 0; i < tempProfile.highlights.length; i++) {
         tempProfile.highlights[i] = refsToCheck[i].current.value;
+      }
       tempProfile.howToJoin = howToJoin.current.value;
       tempProfile.appLink = linkToApplication.current.value;
       tempProfile.website = website.current.value;
@@ -53,6 +54,11 @@ const ProfileCreation2 = ({ clubProfile, setClubProfile, history }) => {
       tempProfile.twitter = twitter.current.value;
       tempProfile.clubEmail = clubEmail.current.value;
       tempProfile.mailingListLink = mailingListLink.current.value;
+
+      tempProfile.firebaseId = userCred;
+
+      console.log(userCred);
+
       setClubProfile(tempProfile);
       if (to) history.push(to);
     } else console.error('ONE OF THE REFS IS NOT DEFINED!');
@@ -122,9 +128,9 @@ const ProfileCreation2 = ({ clubProfile, setClubProfile, history }) => {
           }}
         />
         <TomatoButton
-          text='Next'
+          text='Submit'
           onClick={() => {
-            handleClick();
+            handleClick('/confirm');
           }}
         />
       </ButtonContainer>

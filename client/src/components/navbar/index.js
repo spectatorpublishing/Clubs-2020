@@ -44,15 +44,15 @@ export const Navbar = () => {
                 <a href='/faq'><h3>FAQs</h3></a>
               </StyledListItem>
               <StyledListItem>
-                <a href='/'><h3>Club Login</h3></a>
+                <a href='/login'><h3>Club Login</h3></a>
               </StyledListItem>
               <StyledListItem>
                 <NavLink
                   style={{ textDecoration: 'none' }}
-                  to='/profile-creation'
+                  to='/signup'
                   isActive={(match) => {
                     if (match) {
-                      setCurrentPath('/profile-creation');
+                      setCurrentPath('/signup');
                     }
                   }}
                 >

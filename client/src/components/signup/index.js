@@ -85,7 +85,7 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
               .currentUser.sendEmailVerification()
               .then(() => console.log(`Email sent to ${email.current.value}!`))
               .catch((err) => console.log(err.code));
-            history.push('/');
+            history.push('/profile-creation');
           },
           (error) => {
             console.log(error);
@@ -475,7 +475,7 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
               onClick={(e) => {
                 onLoginSubmit(e, true);
               }}/>
-            <Signout />
+            {/* <Signout /> */}
             <Description>Having Trouble?</Description>
           </FlexContainer>
         )}

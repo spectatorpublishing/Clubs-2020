@@ -15,6 +15,7 @@ function Signout() {
         console.log(err);
       });
   }
+  
   return <TomatoButton text='Sign Out' onClick={handleClick} />;
 }
 
