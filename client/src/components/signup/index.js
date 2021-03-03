@@ -7,7 +7,7 @@ import { ErrorText, handleLogin } from './helper';
 import Signout from '../signout/index';
 import * as firebase from '../../UserAuthUtilities/firebase';
 import {createUser} from './helper'
-//this is the version of the sign-up form to be used
+//this is the version of the sign-up/login (depends on id value given to components) form to be used
 
 export const SignUpBox = ({ detailLink, id, userCred }) => {
   const email = useRef(null);
@@ -15,6 +15,10 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
   const confirmPassword = useRef(null);
   const [doPasswordsMatch, setDoPasswordsMatch] = useState(true);
   const [isPasswordShort, setIsPasswordShort] = useState(false);
+  const [isEmailNotFound, setIsEmailNotFound] = useState(false);
+  const [isEmailInvalid, setIsEmailInvalid] = useState(false);
+  const [isEmailEmpty, setIsEmailEmpty] = useState(false);
+  const [isPasswordIncorrect, setIsPasswordIncorrect] = useState(false);
   const history = useHistory();
   const [
     emailContainsIllegalCharacters,
@@ -27,10 +31,14 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
 
   function onSignupSubmit(e) {
     let shouldSubmit = true;
-    // console.log(email.current.value.length)
+
     if (email.current.value.length <= 0) {
       shouldSubmit = false;
+      setIsEmailEmpty(true)
       //display message that email is empty
+    }
+    else{
+      setIsEmailEmpty(false)
     }
     //if email is of invalid format, display invailidity and the reasons
 
@@ -64,16 +72,155 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
               .currentUser.sendEmailVerification()
               .then(() => console.log(`Email sent to ${email.current.value}!`))
               .catch((err) => console.log(err.code));
-            //history.push('/');
+            history.push('/');
           },
           (error) => {
             console.log(error);
+            handleErrors("signup" , error)
           }
         );
 
       //e.preventDefault();
     }
   }
+
+
+  function onLoginSubmit(e, withGoogle = false) {
+    if (withGoogle){
+      var google = new firebase.auth.GoogleAuthProvider();
+
+      firebase.auth()
+      .signInWithPopup(google)
+      .then((result) => {
+        /** @type {firebase.auth.OAuthCredential} */
+        var credential = result.credential;
+
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        var token = credential.accessToken;
+        // The signed-in user info.
+        var user = result.user;
+        console.log("signin successful")
+        history.push('/');
+        // ...
+      }).catch((error) => {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // The email of the user's account used.
+        var email = error.email;
+        // The firebase.auth.AuthCredential type that was used.
+        var credential = error.credential;
+        // ...
+      });
+
+
+    }
+    else{
+      let shouldSubmit = true;
+      // console.log(email.current.value.length)
+      if (email.current.value.length <= 0) {
+        shouldSubmit = false;
+        setIsEmailEmpty(true)
+        //display message that email is empty
+      }
+      else{
+        setIsEmailEmpty(false)
+      }
+      //if email is of invalid format, display invailidity and the reasons
+
+    
+      if (password && password.current.value.length <= 5) {
+        setIsPasswordShort(true);
+        shouldSubmit = false;
+      } else if (password && password.current.value.length > 5)
+        setIsPasswordShort(false);
+      
+      /*if (email && email.current.value.match(emailEx)) {
+        setEmailContainsIllegalCharacters(true);
+        shouldSubmit = false;
+      } else if (email && !email.current.value.match(emailEx)) {
+        setEmailContainsIllegalCharacters(false);
+      }*/
+      if (shouldSubmit) {
+        firebase.auth().signInWithEmailAndPassword(
+          email.current.value,
+          password.current.value)
+
+          .then((userCredential) => {
+            // Signed in
+            var user = userCredential.user;
+            console.log(user)
+            console.log("user logged in")
+            setIsEmailNotFound(false);
+            setIsPasswordIncorrect(false);
+            setIsEmailInvalid(false);
+
+            history.push('/');
+
+
+            // ...
+          })
+          .catch((error) => {
+            handleErrors("login" , error)
+          });
+
+
+      }
+      else{
+        setIsEmailNotFound(false);
+        setIsPasswordIncorrect(false);
+        setIsEmailInvalid(false);
+      }
+    
+     
+
+      //e.preventDefault();
+    }
+  }
+
+  function handleErrors(type, error){
+  
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    console.log(errorMessage)
+    console.log(errorCode)
+
+
+
+    //general errors
+    if (errorCode == "auth/invalid-email"){
+      setIsEmailInvalid(true);
+    }
+    else{
+      setIsEmailInvalid(false);
+    }
+
+
+    if (type == "signup"){
+        //errors specific to signup
+    }
+    else if (type == "login"){
+        //errors specific to login
+
+      if (errorCode == "auth/user-not-found"){
+        setIsEmailNotFound(true);
+      }
+      else{
+        setIsEmailNotFound(false);
+      }
+      if (errorCode == "auth/wrong-password"){
+        setIsPasswordIncorrect(true);
+      }
+      else{
+        setIsPasswordIncorrect(false);
+      }
+
+    }
+    
+    
+    
+  }
+
   if (id === 'signup') {
     modalData = {
       title: 'Welcome to Clubs@CU',
@@ -165,14 +312,36 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
                     setEmailContainsIllegalCharacters(
                       e.target.value.match(emailEx) === null
                     );
+
+                  
+                   isEmailEmpty !=  e.target.value.length <= 0 &&
+                   setIsEmailEmpty(false);
+
+                  
+                   setIsEmailInvalid(false);
                 }}
               />
               {id === 'signup' && <InputDesc>{modalData.detailDesc}</InputDesc>}
               <ErrorText
                 marginTop={8}
+                stateToCheck={isEmailEmpty}
+                text='Email may not be empty'
+              />
+              <ErrorText
+                marginTop={8}
+                stateToCheck={isEmailInvalid}
+                text='Email invalid'
+              />
+              <ErrorText
+                marginTop={8}
                 stateToCheck={emailContainsIllegalCharacters}
                 text='Your email contains illegal characters'
               />
+              <ErrorText
+                  marginTop={8}
+                  stateToCheck={isEmailNotFound}
+                  text='no account found for this email'
+                />
             </InputSection>
             <InputSection marginBottom={id === 'signup'}>
               <label htmlFor='userPassword'>{modalData.detailTwo}</label>
@@ -215,6 +384,11 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
                 stateToCheck={isPasswordShort}
                 text='Your password needs to be longer than 5 characters'
               />
+              <ErrorText
+                  marginTop={8}
+                  stateToCheck={isPasswordIncorrect}
+                  text='password is incorrect'
+                />
             </InputSection>
             {id === 'signup' && (
               <InputSection>
@@ -267,16 +441,17 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
         )}
         {id === 'login' && (
           <FlexContainer>
-            <TomatoButton text='Log in' wire />
+            <TomatoButton text='Log in' wire  onClick={(e) => {
+                onLoginSubmit(e);
+              }}/>
             <TomatoButton
               text='Log in with Google'
               wire
               margin='0.65rem 0 0 0'
               type='button'
-              onClick={() => {
-                handleLogin(userCred, history);
-              }}
-            />
+              onClick={(e) => {
+                onLoginSubmit(e, true);
+              }}/>
             <Signout />
             <Description>Having Trouble?</Description>
           </FlexContainer>
