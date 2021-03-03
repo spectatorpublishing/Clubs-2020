@@ -204,67 +204,21 @@ const ShuffleImage = styled.div`
     }
 `;
 
-export const Explore = () => {
-    const [clubProfiles, setClubProfiles] = useState([]);
-    const [width, setWidth] = useState(window.innerWidth);
-    const [loadText, setLoadText] = useState("Loading...")
-    
-    const [join, setJoin] = useState([])
-    const [size, setSize] = useState([])
-    const [type, setType] = useState([])
 
-    const [searchQuery, setSearchQuery] = useState('')
+
+const Explore = () => {
+    const [clubProfiles, setClubProfiles] = useState([]);
+    const [loadText, setLoadText] = useState("Loading...");
 
     const [sizeSelected, setSizeSelected] = useState([]);
     const [joinSelected, setJoinSelected] = useState([]);
     const [typeSelected, setTypeSelected] = useState([]);
     const [searchBarText, setSearchBarText] = useState('');
 
-    useEffect(() => {
-        window.addEventListener("resize", () => setWidth(window.innerWidth));
-        console.log("window: " , window.innerWidth)
-        console.log("width: ", width)
-    },);
+    const width = window.innerWidth;
 
-    useEffect(() => {
-        setSearchBarText('')
-        if (join.length === 0 && size.length === 0 && type.length === 0) {
-            newFetch('')
-            setLoadText("Loading...")  
-        } else {
-            let tagsQuery = (type.length === 0) ? '' : `tags=${type.join(`&tags=`)}`
-            let memberRangeQuery = (size.length === 0) ? '' : `memberRange=${size.join(`&memberRange=`)}`
-            
-            var joinQuery = ''
-            if (join.length !== 0) {
-                let acceptingMembers = 
-                    join.includes('Accepting Members') ? `&acceptingMembers=true` : ''
-                let applicationRequired = 
-                    join.includes('No Application Required') ? `&applicationRequired=false` : ''
-                joinQuery = acceptingMembers + applicationRequired
-            }
-   
-            let url = `filterAndSortBy?${tagsQuery}&${memberRangeQuery}${joinQuery}`
-            newFetch(url);
-            setLoadText("No Clubs Match Your Criteria...")  
-        }
-    }, [join, size, type]);
-
-    useEffect(() => {
-        setSizeSelected([])
-        setJoinSelected([])
-        setTypeSelected([])
-
-        if (searchQuery === '') {
-            newFetch('')
-            setLoadText("Loading...")  
-        } else {
-            newFetch(`search?search=${searchQuery}`)
-            setLoadText("No Clubs Match Your Criteria...")  
-        }
-    }, [searchQuery])
     
-    const newFetch = async (url) => {
+    const fetchData = async (url) => {
         fetch(`api/clubProfiles/${url}`, {
             method: 'GET',
             headers: {
@@ -288,8 +242,74 @@ export const Explore = () => {
             .catch(error => console.log(error));    
     };
 
-    const ExploreContents = () => { 
-        return (
+    const updateFilters = async (inputType, input) => {
+        setSearchBarText('');
+
+        let newJoin;
+        let newType;
+        let newSize;
+
+        if(inputType === "type") {
+            setTypeSelected(input);
+            newType = input;
+            newJoin = joinSelected;
+            newSize = sizeSelected;
+        } else if(inputType === "join") {
+            setJoinSelected(input);
+
+            newJoin = input;
+            newType = typeSelected;
+            newSize = sizeSelected;
+        } else if(inputType === "size") {
+            setSizeSelected(input);
+
+            newSize = input;
+            newType = typeSelected;
+            newJoin = joinSelected;
+        } 
+
+        if (newJoin.length === 0 && newSize.length === 0 && newType.length === 0) {
+            fetchData('');
+            setLoadText("Loading...");
+        } else {
+            const tagsQuery = (newType.length === 0) ? '' : `tags=${newType.join(`&tags=`)}`;
+            const memberRangeQuery = (newSize.length === 0) ? '' : `memberRange=${newSize.join(`&memberRange=`)}`;
+            
+            let joinQuery = '';
+            if (newJoin.length !== 0) {
+                const acceptingMembers = 
+                    newJoin.includes('Accepting Members') ? `&acceptingMembers=true` : '';
+                const applicationRequired = 
+                    newJoin.includes('No Application Required') ? `&applicationRequired=false` : '';
+                joinQuery = acceptingMembers + applicationRequired;
+            }
+   
+            fetchData(`filterAndSortBy?${tagsQuery}&${memberRangeQuery}${joinQuery}`);
+            setLoadText("No Clubs Match Your Criteria...")  ;
+        }
+    };
+
+    const updateSearch = async (input) => {
+        setSearchBarText(input);
+
+        setSizeSelected([]);
+        setTypeSelected([]);
+        setJoinSelected([]);
+
+        if (searchBarText === '') {
+            fetchData('');
+            setLoadText("Loading...");  
+        } else {
+            fetchData(`search?search=${searchBarText}`);
+            setLoadText("No Clubs Match Your Criteria...");  
+        }
+     };
+
+     useEffect(() => {
+        fetchData('');
+    },[]);
+
+    const ExploreContents =  (
         <div>
                 <TextWrapper>
                     <h1>Explore Clubs</h1>
@@ -298,28 +318,24 @@ export const Explore = () => {
                 <FiltersBox>
                     <FiltersLeft>
                         <SearchBox><SearchBar 
-                            setData={setSearchQuery}
                             barText={searchBarText}
-                            setBarText={setSearchBarText}
+                            setBarText={updateSearch}
                         /></SearchBox>
                         <Filter><Type 
-                            setData={setType}
                             selected={typeSelected}
-                            setSelected={setTypeSelected}
+                            setSelected={updateFilters}
                         /></Filter>
                         <Filter><Size 
-                            setData={setSize}
                             selected={sizeSelected}
-                            setSelected={setSizeSelected}
+                            setSelected={updateFilters}
                         /></Filter>
                         <Filter><Join 
-                            setData={setJoin}
                             selected={joinSelected}
-                            setSelected={setJoinSelected}
+                            setSelected={updateFilters}
                         /></Filter>
                     </FiltersLeft>
                     <ShuffleBox>
-                        <ShuffleButton onClick={() => newFetch('')}>
+                        <ShuffleButton onClick={() => fetchData('')}>
                             <ShuffleImage><img src={Icon} width={15} height={15} alt="shuffle" /></ShuffleImage>
                             <ShuffleWord>Shuffle</ShuffleWord>
                         </ShuffleButton>
@@ -327,19 +343,16 @@ export const Explore = () => {
                 </FiltersBox>
                 <FiltersBelow>
                         <MobileFilter><Type 
-                            setData={setType}
                             selected={typeSelected}
-                            setSelected={setTypeSelected}
+                            setSelected={updateFilters}
                         /></MobileFilter>
                         <MobileFilter><Size 
-                            setData={setSize}
                             selected={sizeSelected}
-                            setSelected={setSizeSelected}
+                            setSelected={updateFilters}
                         /></MobileFilter>
                         <MobileFilter><Join 
-                            setData={setJoin}
                             selected={joinSelected}
-                            setSelected={setJoinSelected}
+                            setSelected={updateFilters}
                         /></MobileFilter>
                 </FiltersBelow>
                 <CardsContainer>
@@ -360,9 +373,9 @@ export const Explore = () => {
                 </CardsContainer>  
         </div>
         );
-    }
 
     if (width < 840){
+        console.log(width);
         return(
             <Wrapper>
             <Navbar />
@@ -375,12 +388,13 @@ export const Explore = () => {
                         path="cds_leaderboard_mobile"
                     />
                     </AdContainer>
-                    <ExploreContents/>
+                    {ExploreContents}
                 </PageWrapper>
             </main>
             </Wrapper>
         )
     } else {
+        console.log(width);
         return(
             <Wrapper>
             <Navbar />
@@ -393,10 +407,12 @@ export const Explore = () => {
                         path="cds_leaderboard"
                     />
                     </AdContainer>
-                    <ExploreContents/>
+                    {ExploreContents}
                 </PageWrapper>
             </main>
             </Wrapper>
         )
     }
 }
+
+export default Explore;

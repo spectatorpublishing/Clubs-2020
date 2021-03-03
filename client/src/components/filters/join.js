@@ -46,7 +46,7 @@ const TextRemove = 'Joining x';
 const Join = ({
     items,
     theme,
-    setData,
+    // setData,
     selected,
     setSelected
   }) => {
@@ -98,18 +98,18 @@ const Join = ({
     };
 
     const optionHandleClick = (item) => {
-      var newSelected
+      var newSelected;
       if (!selected.includes(item)) {
           newSelected = [...selected, item]
       } else {
           newSelected = selected.filter((element) => {
-            return element != item 
+            return element != item; 
           })
       }
 
       // console.log("selected: ", newSelected)
-      setData(newSelected)
-      setSelected(newSelected)
+      // setData(newSelected)
+      setSelected("join", newSelected)
     };
 
     items= ['No Application Required', 'Accepting Members']
