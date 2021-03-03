@@ -7,6 +7,7 @@ import { ErrorText, handleLogin } from './helper';
 import Signout from '../signout/index';
 import * as firebase from '../../UserAuthUtilities/firebase';
 import {createUser} from './helper'
+//this is the version of the sign-up form to be used
 
 export const SignUpBox = ({ detailLink, id, userCred }) => {
   const email = useRef(null);
@@ -26,6 +27,13 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
 
   function onSignupSubmit(e) {
     let shouldSubmit = true;
+    // console.log(email.current.value.length)
+    if (email.current.value.length <= 0) {
+      shouldSubmit = false;
+      //display message that email is empty
+    }
+    //if email is of invalid format, display invailidity and the reasons
+
     if (password.current.value !== confirmPassword.current.value) {
       shouldSubmit = false;
     }

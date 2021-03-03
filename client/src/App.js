@@ -46,9 +46,9 @@ const App = () => {
           <Route path='/login'>
             <Login userCred={userCred} />
           </Route>
-          <Route path='/test' component={Signin} />
+          {/* <Route path='/test' component={Signin} />
           <Route path='/test_signin' component={Signin} />
-          <Route path='/test_signup' component={Signup} />
+          <Route path='/test_signup' component={Signup} /> */}
         </Switch>
       </Router>
     </ThemeProvider>
