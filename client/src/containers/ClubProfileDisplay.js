@@ -13,7 +13,7 @@ import AccountTag from "../components/accountTag/index";
 import YourClubProfile from "../components/yourClubProfile/index";
 import CompleteProfile from "../components/completeProfile";
 
-export const ClubProfile = () => {
+const ClubProfileDisplay = () => {
     const { id } = useParams();
     const [club, setClub] = useState();
     const [width, setWidth] = useState(window.innerWidth);
@@ -384,3 +384,5 @@ const Column = styled.div`
     width: 100%;
     margin-left: 1rem;
 `;
+
+export default ClubProfileDisplay;
