@@ -19,6 +19,7 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
   const [isEmailInvalid, setIsEmailInvalid] = useState(false);
   const [isEmailEmpty, setIsEmailEmpty] = useState(false);
   const [isPasswordIncorrect, setIsPasswordIncorrect] = useState(false);
+  const [isPasswordInvalid, setIsPasswordInvalid] = useState(false);
   const history = useHistory();
   const [
     emailContainsIllegalCharacters,
@@ -28,6 +29,8 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
   let modalData = {};
 
   const emailEx = /^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+/;
+
+  const passEx = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)/;
 
   function onSignupSubmit(e) {
     let shouldSubmit = true;
@@ -50,12 +53,22 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
       shouldSubmit = false;
     } else if (password && password.current.value.length > 5)
       setIsPasswordShort(false);
-    /*if (email && email.current.value.match(emailEx)) {
-      setEmailContainsIllegalCharacters(true);
-      shouldSubmit = false;
-    } else if (email && !email.current.value.match(emailEx)) {
-      setEmailContainsIllegalCharacters(false);
-    }*/
+
+      if (password.current.value.match(passEx)) {
+        console.log("matched")
+        setIsPasswordInvalid(false)
+      }
+      else{
+        console.log("pass not matching reqs")
+        setIsPasswordInvalid(true)
+
+      }
+    // if (email && email.current.value.match(emailEx)) {
+    //   setEmailContainsIllegalCharacters(true);
+    //   shouldSubmit = false;
+    // } else if (email && !email.current.value.match(emailEx)) {
+    //   setEmailContainsIllegalCharacters(false);
+    // }
     if (shouldSubmit) {
       firebase
         .auth()
@@ -362,10 +375,15 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
                       setContainsIllegalCharacters(
                         e.target.value.match(emailEx) !== null
                       );*/
+                      
                     id === 'signup' &&
                       isPasswordShort &&
                       confirmPassword &&
                       setIsPasswordShort(e.target.value.length <= 5);
+
+           
+                    id === 'signup' && setIsPasswordInvalid(false)
+                  
                   }}
                 />
                 <ShowPasswordButton
@@ -389,6 +407,11 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
                   stateToCheck={isPasswordIncorrect}
                   text='password is incorrect'
                 />
+              <ErrorText
+                marginTop={8}
+                stateToCheck={isPasswordInvalid}
+                text='Your password must contain a combination of lowercase letters and at least one capital letter, symbol and number'
+              />
             </InputSection>
             {id === 'signup' && (
               <InputSection>
