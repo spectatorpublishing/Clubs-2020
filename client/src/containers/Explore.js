@@ -7,7 +7,7 @@ import Size from '../components/filters/size';
 import Type from '../components/filters/type';
 import AdCarrier from '../components/adCarrier';
 import SearchBar from '../components/searchBar';
-import FilterMobile from '../components/filters/filterMobile';
+//import FilterMobile from '../components/filters/filterMobile';
 import Icon from '../components/filters/shuffle.png';
 
 const Wrapper = styled.div`
@@ -22,19 +22,6 @@ const PageWrapper = styled.div`
 
     @media only screen and (max-width : 768px) {
         padding: 1rem 0.5rem;
-    }
-`;
-
-const BottomWrapper = styled.div`
-    height: 70px;
-    width: 100%;
-    z-index: 1;
-    background-color: #F4F6F8;
-    position: fixed;
-    bottom: 0;
-
-    @media only screen and (min-width : 769px) {
-        display: none;
     }
 `;
 
@@ -148,14 +135,6 @@ const MobileFilter = styled.div`
     }
 `;
 
-const FilterBottom = styled.div`
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-top: -20px;
-    margin-left: -65px;
-`;
-
 const SearchBox = styled.div`
   margin-right: 1.5rem;
 
@@ -172,7 +151,10 @@ const AdContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 2rem;
+  
+  @media only screen and (max-width : 768px) {
+    margin-bottom: 1rem;
+  }
 `;
 
 const ShuffleButton = styled.button`
@@ -222,55 +204,21 @@ const ShuffleImage = styled.div`
     }
 `;
 
-export const Explore = () => {
-    const [clubProfiles, setClubProfiles] = useState([]);
-    
-    const [join, setJoin] = useState([])
-    const [size, setSize] = useState([])
-    const [type, setType] = useState([])
 
-    const [searchQuery, setSearchQuery] = useState('')
+
+const Explore = () => {
+    const [clubProfiles, setClubProfiles] = useState([]);
+    const [loadText, setLoadText] = useState("Loading...");
 
     const [sizeSelected, setSizeSelected] = useState([]);
     const [joinSelected, setJoinSelected] = useState([]);
     const [typeSelected, setTypeSelected] = useState([]);
     const [searchBarText, setSearchBarText] = useState('');
 
-    useEffect(() => {
-        setSearchBarText('')
-        if (join.length === 0 && size.length === 0 && type.length === 0) {
-            newFetch('')
-        } else {
-            let tagsQuery = (type.length === 0) ? '' : `tags=${type.join(`&tags=`)}`
-            let memberRangeQuery = (size.length === 0) ? '' : `memberRange=${size.join(`&memberRange=`)}`
-            
-            var joinQuery = ''
-            if (join.length != 0) {
-                let acceptingMembers = 
-                    join.includes('Accepting Members') ? `&acceptingMembers=true` : ''
-                let applicationRequired = 
-                    join.includes('No Application Required') ? `&applicationRequired=false` : ''
-                joinQuery = acceptingMembers + applicationRequired
-            }
-   
-            let url = `filterAndSortBy?${tagsQuery}&${memberRangeQuery}${joinQuery}`
-            newFetch(url);  
-        }
-    }, [join, size, type]);
+    const width = window.innerWidth;
 
-    useEffect(() => {
-        setSizeSelected([])
-        setJoinSelected([])
-        setTypeSelected([])
-
-        if (searchQuery === '') {
-            newFetch('')
-        } else {
-            newFetch(`search?search=${searchQuery}`)
-        }
-    }, [searchQuery])
     
-    const newFetch = async (url) => {
+    const fetchData = async (url) => {
         fetch(`api/clubProfiles/${url}`, {
             method: 'GET',
             headers: {
@@ -294,19 +242,75 @@ export const Explore = () => {
             .catch(error => console.log(error));    
     };
 
-    return(
+    const updateFilters = async (inputType, input) => {
+        setSearchBarText('');
 
-        <Wrapper>
-        <Navbar />
-        <main>
-            <PageWrapper>
-                <AdContainer>
-                    <AdCarrier
-                        width={728} 
-                        height={90}
-                        path="cds_leaderboard"
-                    />
-                </AdContainer>
+        let newJoin;
+        let newType;
+        let newSize;
+
+        if(inputType === "type") {
+            setTypeSelected(input);
+            newType = input;
+            newJoin = joinSelected;
+            newSize = sizeSelected;
+        } else if(inputType === "join") {
+            setJoinSelected(input);
+
+            newJoin = input;
+            newType = typeSelected;
+            newSize = sizeSelected;
+        } else if(inputType === "size") {
+            setSizeSelected(input);
+
+            newSize = input;
+            newType = typeSelected;
+            newJoin = joinSelected;
+        } 
+
+        if (newJoin.length === 0 && newSize.length === 0 && newType.length === 0) {
+            fetchData('');
+            setLoadText("Loading...");
+        } else {
+            const tagsQuery = (newType.length === 0) ? '' : `tags=${newType.join(`&tags=`)}`;
+            const memberRangeQuery = (newSize.length === 0) ? '' : `memberRange=${newSize.join(`&memberRange=`)}`;
+            
+            let joinQuery = '';
+            if (newJoin.length !== 0) {
+                const acceptingMembers = 
+                    newJoin.includes('Accepting Members') ? `&acceptingMembers=true` : '';
+                const applicationRequired = 
+                    newJoin.includes('No Application Required') ? `&applicationRequired=false` : '';
+                joinQuery = acceptingMembers + applicationRequired;
+            }
+   
+            fetchData(`filterAndSortBy?${tagsQuery}&${memberRangeQuery}${joinQuery}`);
+            setLoadText("No Clubs Match Your Criteria...")  ;
+        }
+    };
+
+    const updateSearch = async (input) => {
+        setSearchBarText(input);
+
+        setSizeSelected([]);
+        setTypeSelected([]);
+        setJoinSelected([]);
+
+        if (searchBarText === '') {
+            fetchData('');
+            setLoadText("Loading...");  
+        } else {
+            fetchData(`search?search=${searchBarText}`);
+            setLoadText("No Clubs Match Your Criteria...");  
+        }
+     };
+
+     useEffect(() => {
+        fetchData('');
+    },[]);
+
+    const ExploreContents =  (
+        <div>
                 <TextWrapper>
                     <h1>Explore Clubs</h1>
                     <p>Find your Columbia community</p>
@@ -314,28 +318,24 @@ export const Explore = () => {
                 <FiltersBox>
                     <FiltersLeft>
                         <SearchBox><SearchBar 
-                            setData={setSearchQuery}
                             barText={searchBarText}
-                            setBarText={setSearchBarText}
-                        ></SearchBar></SearchBox>
+                            setBarText={updateSearch}
+                        /></SearchBox>
                         <Filter><Type 
-                            setData={setType}
                             selected={typeSelected}
-                            setSelected={setTypeSelected}
+                            setSelected={updateFilters}
                         /></Filter>
                         <Filter><Size 
-                            setData={setSize}
                             selected={sizeSelected}
-                            setSelected={setSizeSelected}
+                            setSelected={updateFilters}
                         /></Filter>
                         <Filter><Join 
-                            setData={setJoin}
                             selected={joinSelected}
-                            setSelected={setJoinSelected}
+                            setSelected={updateFilters}
                         /></Filter>
                     </FiltersLeft>
                     <ShuffleBox>
-                        <ShuffleButton onClick={() => newFetch('')}>
+                        <ShuffleButton onClick={() => fetchData('')}>
                             <ShuffleImage><img src={Icon} width={15} height={15} alt="shuffle" /></ShuffleImage>
                             <ShuffleWord>Shuffle</ShuffleWord>
                         </ShuffleButton>
@@ -343,24 +343,21 @@ export const Explore = () => {
                 </FiltersBox>
                 <FiltersBelow>
                         <MobileFilter><Type 
-                            setData={setType}
                             selected={typeSelected}
-                            setSelected={setTypeSelected}
+                            setSelected={updateFilters}
                         /></MobileFilter>
                         <MobileFilter><Size 
-                            setData={setSize}
                             selected={sizeSelected}
-                            setSelected={setSizeSelected}
+                            setSelected={updateFilters}
                         /></MobileFilter>
                         <MobileFilter><Join 
-                            setData={setJoin}
                             selected={joinSelected}
-                            setSelected={setJoinSelected}
+                            setSelected={updateFilters}
                         /></MobileFilter>
                 </FiltersBelow>
                 <CardsContainer>
-                    {(clubProfiles.length === 0) ? (<h1>Loading</h1>) : (clubProfiles.map(profile => (
-                        <CardWrapper>
+                    {(clubProfiles.length === 0) ? (<h1>{loadText}</h1>) : (clubProfiles.map(profile => (
+                        <CardWrapper key={profile._id}>
                             <ExploreBox 
                                 name = {profile.name}
                                 description = {profile.shortDescription}
@@ -374,8 +371,48 @@ export const Explore = () => {
                         </CardWrapper>
                     )))} 
                 </CardsContainer>  
-            </PageWrapper>
-        </main>
-        </Wrapper>
-    )
+        </div>
+        );
+
+    if (width < 840){
+        console.log(width);
+        return(
+            <Wrapper>
+            <Navbar />
+            <main>
+                <PageWrapper>
+                    <AdContainer>
+                    <AdCarrier
+                        width={320} 
+                        height={50}
+                        path="cds_leaderboard_mobile"
+                    />
+                    </AdContainer>
+                    {ExploreContents}
+                </PageWrapper>
+            </main>
+            </Wrapper>
+        )
+    } else {
+        console.log(width);
+        return(
+            <Wrapper>
+            <Navbar />
+            <main>
+                <PageWrapper>
+                    <AdContainer>
+                    <AdCarrier
+                        width={728} 
+                        height={90}
+                        path="cds_leaderboard"
+                    />
+                    </AdContainer>
+                    {ExploreContents}
+                </PageWrapper>
+            </main>
+            </Wrapper>
+        )
+    }
 }
+
+export default Explore;

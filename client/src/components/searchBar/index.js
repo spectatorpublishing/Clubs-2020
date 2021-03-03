@@ -37,34 +37,31 @@ const Icon = styled.i`
 
 
 
-export const SearchBar = ({
+const SearchBar = ({
   barText,
   setBarText,
-  setData
 }) => {
 
-    const [text, setText] = useState(barText)
-    useEffect(() => {
-      setText(barText)
-    }, [barText])
+    // const [text, setText] = useState(barText)
+    // useEffect(() => {
+    //   setText(barText)
+    // }, [barText])
 
-    const handleKeyDown = (e) => {
-      setBarText(e.target.value)
-      if (e.key === 'Enter'){
-        setData(e.target.value)
-      }
-    }
+    // const handleKeyDown = (e) => {
+    //   setBarText(e.target.value)
+    //   if (e.key === 'Enter'){
+    //     setData(e.target.value)
+    //   }
+    // }
     
     return (
         <SearchBox>
           <Icon><FontAwesomeIcon icon={faSearch} /></Icon>
           <Bar 
-            type="text" 
+            key="search_text" 
             placeholder="Search..."
-            text={text}
-            onKeyDown={(e) => {
-              handleKeyDown(e)
-            }}
+            value={barText}
+            onChange={(e) => setBarText(e.target.value)}
           ></Bar>
         </SearchBox>
     )

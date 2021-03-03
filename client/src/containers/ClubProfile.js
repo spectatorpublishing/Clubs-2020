@@ -19,6 +19,8 @@ export const ClubProfile = () => {
     const [width, setWidth] = useState(window.innerWidth);
     const [isLoading, setLoading] = useState(true);
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
+    
+    /* temporary for conditional components */
     const [isLoggedin, setLoggedIn] = useState(false);
     const [firstLogIn, setFirstLog] = useState(false);
     const [completeProfile, setComplete] = useState(false);
@@ -34,7 +36,7 @@ export const ClubProfile = () => {
             setLoading(false);
             console.log(`api/clubProfiles/${id}`);
           })
-        //   .catch((error) => console.log(error));
+        //.catch((error) => console.log(error));
     }, [id]);
 
     const SimilarClubs = () => { return (club.similarClubs === undefined) ? (<h1>Loading</h1>) : 
@@ -82,6 +84,7 @@ export const ClubProfile = () => {
         ( <Navbar/> ) 
     };
 
+    /* temporary for conditional components */
     function setAdmin(){
         setLoggedIn(!isLoggedin);
         setFirstLog(!firstLogIn);
@@ -134,8 +137,8 @@ export const ClubProfile = () => {
                                 <AdContainer>
                                 <AdCarrier
                                     width={300} 
-                                    height={600}
-                                    path="cds_vertical_box"
+                                    height={250}
+                                    path="cds_horizontal_box_mobile"
                                 />
                                 </AdContainer>
                                 <MainContent 
@@ -197,11 +200,11 @@ export const ClubProfile = () => {
                                         <div><Button href={club.mailingList}><p>Join our mailing list</p></Button></div>
                                         <div><Button className= "second" href={club.applicationLink}><p>Apply</p></Button></div>
                                         <AdContainer>
-                                        <AdCarrier
-                                            width={300} 
-                                            height={600}
-                                            path="cds_vertical_box"
-                                        />
+                                            <AdCarrier
+                                                width={300} 
+                                                height={250}
+                                                path="cds_horizontal_box_mobile"
+                                            />
                                         </AdContainer>
                                     </Column>
                                 </Row>
@@ -274,8 +277,8 @@ export const ClubProfile = () => {
                                 <AdContainer>
                                     <AdCarrier
                                         width={300} 
-                                        height={600}
-                                        path="cds_vertical_box"
+                                        height={250}
+                                        path="cds_horizontal_box_mobile"
                                     />
                                 </AdContainer>
                             </Cards>
@@ -293,8 +296,7 @@ const Wrapper = styled.main`
     background-image: url(https://clubs-cu.s3.amazonaws.com/Profile+Wave.svg);
     background-repeat: no-repeat;
     background-position: top right;
-    width: fit-content;
-  
+    background-size: contain;  
 `;
 
 const PageWrapper = styled.div`

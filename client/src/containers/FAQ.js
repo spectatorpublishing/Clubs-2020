@@ -56,6 +56,7 @@ const Wrapper = styled.div`
   background-repeat: no-repeat;
   background-position: top;
   background-attachment: fixed;
+  background-size: contain;  
 `;
 
 const PageWrapper = styled.main`
