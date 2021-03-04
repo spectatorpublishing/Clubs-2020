@@ -57,7 +57,7 @@ function encodeFormData(details) {
 
 export function createUser(user) {
   const google = new firebase.auth.GoogleAuthProvider();
-  const db_root = 'http://localhost:8080';
+  // const db_root = 'http://localhost:8080';
   /* unverified email address, send user to verify your email page */
   if (user.emailVerified === false) {
     return new Promise(function (resolve, reject) {
@@ -78,7 +78,7 @@ export function createUser(user) {
     console.log(loginCred);
 
     return (
-      fetch(`${db_root}/api/clubAccounts/create`, {
+      fetch(`/api/clubAccounts/create`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -87,7 +87,12 @@ export function createUser(user) {
       })
         .then((res) => res.json())
         /* club profile not created, direct to profile creation page */
-        .then((res) => (res.clubProfileID ? 'home' : 'profile'))
+        .then((res) => {
+          console.log("creating account....")
+          console.log(res)
+          // localStorage.setItem('clubProfileId', res.clubProfileID)
+          return res.clubProfileID ? 'home' : 'profile'
+        })
         .catch(function (err) {
           console.error(err);
         })

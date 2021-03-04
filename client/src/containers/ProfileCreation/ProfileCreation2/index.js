@@ -6,7 +6,7 @@ import { Highlights, Socials } from './helpers';
 import TextInput from '../../../components/textInput/index';
 import TomatoButton from '../../../components/tomatoButton/index';
 
-const ProfileCreation2 = ({ clubProfile, setClubProfile, history }) => {
+const ProfileCreation2 = ({ clubProfile, setClubProfile, history, userCred }) => {
   const highlight1 = useRef(null);
   const highlight2 = useRef(null);
   const highlight3 = useRef(null);

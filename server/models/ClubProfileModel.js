@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const clubProfileSchema = new Schema({
-    firebaseId: { type: String, required: true },
+    clubAccountId: { type: String, default: null },
     name: { type: String, required: true },
     longDescription: { type: String, required: true },
     shortDescription: { type: String, required: true },
