@@ -15,7 +15,7 @@ const Background = styled.div`
 `;
 
 var google = new firebase.auth.GoogleAuthProvider();
-var db_root = 'http://localhost:8080';
+var db_root = '';
 
 /* encodes an object into x-www-form-urlencode form for POST */
 function encodeFormData(details) {

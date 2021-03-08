@@ -31,6 +31,68 @@ const ProfileCreationMaster = ({ userCred }) => {
     console.log(clubProfile);
   }, [clubProfile]);
 
+  const parseState = (() => {
+    const toSubmit = {
+      name: clubProfile.clubName,
+      longDescription: clubProfile.longDesc,
+      shortDescription: clubProfile.shortDesc,
+      // NEED TO UPDATE THIS-- MAKE THEM CHOOSE FROM PRECONFIGURED IMAGES OR THEIR OWN LOGO
+      // ASK PRODUCT DESIGN???
+      imageUrl: "https://www.nomadfoods.com/wp-content/uploads/2018/08/placeholder-1-e1533569576673.png",
+      memberRange: clubProfile.size,
+      // this is not used rn, but we should update it to take advantage of their preferences
+      acceptingMembers: !clubProfile.memberPeriod.includes('Not taking members'),
+      springRecruiting: clubProfile.memberPeriod.includes('Spring'),
+      fallRecruiting: clubProfile.memberPeriod.includes('Fall'),
+      applicationRequired: clubProfile.requireApplication === 'Yes',
+      meetingFrequency: clubProfile.meetTime,
+      socialLinks: {
+          facebook: clubProfile.facebook,
+          email: clubProfile.clubEmail,
+          website: clubProfile.website,
+          instagram: clubProfile.instagram,
+          twitter: clubProfile.twitter
+      },
+      tags: clubProfile.tags,
+      highlights: clubProfile.highlights,
+      howToJoin: clubProfile.howToJoin,
+      applicationLink: clubProfile.appLink,
+      mailingListLink: clubProfile.mailingListLink,
+      showInstagramFeed: false,
+    };
+
+    return toSubmit;
+  });
+
+  const submitProfile = () => {  
+    fetch(`/api/clubAccounts/getByFirebaseId/${userCred.uid}`, {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log("-------------inside first fetch-------------");
+        console.log(data);
+
+        console.log(`/api/clubProfiles/create/${data._id}`);
+
+        fetch(`/api/clubProfiles/submit/${data._id}`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(parseState())
+        })
+          .then(response => response.json())
+          .then(data => {
+            console.log("-------------inside second fetch-------------");
+            console.log(data);
+          })
+          .catch(error => console.error(error));
+      });
+  };
+
   // Updates state based on input text
   return (
     <>
@@ -59,6 +121,7 @@ const ProfileCreationMaster = ({ userCred }) => {
                   clubProfile={clubProfile}
                   setClubProfile={setClubProfile}
                   userCred={userCred}
+                  submitProfile={submitProfile}
                 />
               )}
             />

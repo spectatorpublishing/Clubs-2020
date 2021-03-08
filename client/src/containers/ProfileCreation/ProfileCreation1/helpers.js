@@ -48,6 +48,8 @@ export const NewMembers = ({ clubProfile, setClubProfile }) => {
     ['right', 'Not taking members'],
   ];
 
+  console.log("NEW MEMBERs")
+
   const checkboxes = checkboxData.map((item, index) => {
     const checkIfIn = () => {
       let isIn = false;

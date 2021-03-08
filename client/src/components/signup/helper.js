@@ -59,18 +59,18 @@ export function createUser(user) {
   const google = new firebase.auth.GoogleAuthProvider();
   // const db_root = 'http://localhost:8080';
   /* unverified email address, send user to verify your email page */
-  if (user.emailVerified === false) {
-    return new Promise(function (resolve, reject) {
-      console.log('waited 500 millis');
-      resolve('verify!');
-    })
-      .then(function (someNumber) {
-        console.log(someNumber);
-      })
-      .catch(function (err) {
-        console.log('err', err);
-      });
-  } else {
+  // if (user.emailVerified === false) {
+  //   return new Promise(function (resolve, reject) {
+  //     console.log('waited 500 millis');
+  //     resolve('verify!');
+  //   })
+  //     .then(function (someNumber) {
+  //       console.log(someNumber);
+  //     })
+  //     .catch(function (err) {
+  //       console.log('err', err);
+  //     });
+  // } else {
     let loginCred = {
       firebaseId: user.uid,
       accountEmail: user.email,
@@ -97,5 +97,5 @@ export function createUser(user) {
           console.error(err);
         })
     );
-  }
+  // }
 }

@@ -13,12 +13,13 @@ const clubProfileSchema = new Schema({
     springRecruiting: { type: Boolean, required: true },
     fallRecruiting: { type: Boolean, required: true },
     applicationRequired: { type: Boolean, required: true },
-    meetingFrequency: { type: String, required: true },
+    meetingFrequency: { type: [String], required: true },
     socialLinks: {
         facebook: { type: String, default: '' },
         email: { type: String, default: '' },
         website: { type: String, default: '' },
         instagram: { type: String, default: '' },
+        twitter: { type: String, default: '' },
     },
     tags: {
         type: [String],

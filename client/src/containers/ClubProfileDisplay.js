@@ -109,8 +109,8 @@ const ClubProfileDisplay = () => {
                                     tags={club.tags}
                                 />
                                 <FrequencyTag
-                                    frequency={club.meetingFrequency}
-                                    weekly= {club.weekly}
+                                        frequency={club.meetingFrequency[0]}
+                                        weekly= {club.meetingFrequency[1]}
                                 />
                                 <SocialTagsBox
                                     socialLinks={[
@@ -174,8 +174,8 @@ const ClubProfileDisplay = () => {
                                     <Column>
                                     <div><Button onClick={setAdmin}><p>Show/Hide Club Admin View</p></Button></div>
                                         <FrequencyTag
-                                            frequency={club.meetingFrequency}
-                                            weekly= {club.weekly}
+                                            frequency={club.meetingFrequency[0]}
+                                            weekly= {club.meetingFrequency[1]}
                                         />
                                     <SocialTagsBox
                                         socialLinks={[
@@ -249,8 +249,8 @@ const ClubProfileDisplay = () => {
                                     tags={club.tags}
                                 />
                                 <FrequencyTag
-                                    frequency={club.meetingFrequency}
-                                    weekly= {club.weekly}
+                                            frequency={club.meetingFrequency[0]}
+                                            weekly= {club.meetingFrequency[1]}
                                 />
                                  <SocialTagsBox
                                     socialLinks={[
