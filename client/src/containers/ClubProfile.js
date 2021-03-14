@@ -332,6 +332,10 @@ const Content = styled.div`
     h1{
         margin-bottom: 0rem;
     }
+
+    h2{
+        display: ${props => (props.profile === undefined) ? 'none' : 'block'};
+    }
 `;
 
 const AdContainer = styled.div`

@@ -9,10 +9,10 @@ export const ProfileMain = ({description, highlights, howToJoin}) => {
             <Container>
                 <h2>Description</h2>
                 <p className='one'>{description}</p>
-                <h2>Highlights</h2>
-                <p className='two'>{highlights.map(highlight => <Highlight text={highlight}/>)}</p>
-                <h2>How to Join</h2>
-                <p className='two'>{howToJoin}</p>
+                <h2 className='high'>Highlights</h2>
+                <p className='two high'>{highlights.map(highlight => <Highlight text={highlight}/>)}</p>
+                <h2 className='howTo'>How to Join</h2>
+                <p className='two howTo'>hel{howToJoin}lo</p>
             </Container>
         );
     } else {
@@ -31,7 +31,7 @@ const Highlight = ({text}) => {
 };
 
 const Row = styled.div`
-    display: in-line;
+    display: block;
     padding: 5px;
     svg{
         padding-right: 10px;
@@ -46,6 +46,10 @@ const Container = styled.div`
         line-height: 1.5em;
         font-weight: 500;
         font-size: 1.125rem;
+        
+        &.howTo{
+            display: ${props => (props.howToJoin === undefined) ? 'none' : 'block'};
+        }
     }
     
     &.one{
@@ -59,7 +63,15 @@ const Container = styled.div`
     h2{
         margin-top: 2rem;
         font-weight: 600;
-        font-size: 1.25rem;        
+        font-size: 1.25rem;   
+
+        &.high{
+            display: ${props => (props.highlights === []) ? 'none' : 'block'};
+        }
+        
+        &.howTo{
+            display: ${props => (props.howToJoin === undefined) ? 'none' : 'block'};
+        }
     }
 `;
 
