@@ -1,7 +1,7 @@
 import React from 'react';
 import ViewportProvider from './components/viewportProvider/index';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { Explore } from './containers/Explore';
+import Explore from './containers/Explore';
 import { FAQ } from './containers/FAQ';
 import { ThemeProvider } from 'styled-components';
 import ProfileCreationMaster from './containers/ProfileCreation/ProfileCreationMaster';

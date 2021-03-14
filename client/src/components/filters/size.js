@@ -46,7 +46,6 @@ const TextRemove = 'Size x';
 const Size = ({
     items,
     theme,
-    setData,
     selected, 
     setSelected
   }) => {
@@ -108,8 +107,8 @@ const Size = ({
       }
 
       // console.log("selected: ", newSelected)
-      setData(newSelected)
-      setSelected(newSelected)
+      // setData(newSelected)
+      setSelected("size", newSelected);
     };
 
     items= ['0-10', '10-20','20-50','50-100','100+']

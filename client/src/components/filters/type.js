@@ -30,7 +30,6 @@ const Button = styled.button`
 `;
 
 const Word = styled.div`
-// font-family is necessary here
     font-family: 'Manrope', 'Roboto', 'Arial', 'Helvetica';
     font-style: normal;
     font-weight:600;
@@ -47,7 +46,7 @@ const TextRemove = 'Type x';
 const Type = ({
     items,
     theme,
-    setData,
+    // setData,
     selected,
     setSelected
   }) => {
@@ -99,7 +98,7 @@ const Type = ({
     };
 
     const optionHandleClick = (item) => {
-      var newSelected
+      let newSelected;
       if (!selected.includes(item)) {
           newSelected = [...selected, item]
       } else {
@@ -109,8 +108,8 @@ const Type = ({
       }
 
       // console.log("selected: ", newSelected)
-      setData(newSelected)
-      setSelected(newSelected)
+      // setData(newSelected)
+      setSelected("type", newSelected);
     };
 
     items= tagData
@@ -133,9 +132,7 @@ const Type = ({
             setCurIndex(-1);
           }}
           noBorder={index === items.length - 1}
-          onClick={() => {
-            optionHandleClick(item);
-          }}
+          onClick={() => optionHandleClick(item)}
         >
           {item}
         </Option>
