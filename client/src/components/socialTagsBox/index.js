@@ -17,7 +17,7 @@ const Box = styled.div`
   background-color: ${(props) => props.theme.colors.fullWhite};
   width: auto;
   padding: 0.2rem 2rem 1rem 2rem;
-  font-size: 1.125rem:
+  font-size: 1.125rem;
   font-weight: 500rem;
   h3{
     font-size: 1.25rem;
@@ -71,7 +71,7 @@ const SocialLinkElement = ({ linkType, link }) => {
         </Icon>
         <StyledLink>
           <a href="mailto:" {...link}>
-            {link}
+            {linkType}
           </a>
         </StyledLink>
       </SocialLinkStyledElement>
