@@ -27,15 +27,18 @@ export const ProfileMain = ({description, highlights, howToJoin}) => {
 export default ProfileMain;
 
 const Highlight = ({text}) => {
-    return (
-        <Row>
-            <FontAwesomeIcon icon={faCheckCircle}></FontAwesomeIcon>{text}
-        </Row>
-    )
+    if (text !== '') {
+        return (
+            <Row>
+                <FontAwesomeIcon icon={faCheckCircle}></FontAwesomeIcon>{text}
+            </Row>
+        );
+    } else {
+        return null;
+    }
 };
 
 const Row = styled.div`
-    display: block;
     padding: 5px;
     svg{
         padding-right: 10px;
