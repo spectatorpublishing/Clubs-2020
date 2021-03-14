@@ -4,6 +4,8 @@ import { FaBars } from 'react-icons/fa';
 import Logout from '../logout/index';
 import Manage from '../manageAccount/index';
 import { useViewport } from '../customHooks';
+import FilledButton from '../tomatoButton/index';
+import { NavLink } from 'react-router-dom';
 
 export const NavbarProfile = () => {
   const [showLinks, setShowLinks] = useState(false);
@@ -19,7 +21,7 @@ export const NavbarProfile = () => {
               setCurrentPath('/');
             }}
           >
-            <p>Clubs@CU</p>
+            <a href="/">Clubs@CU</a>
           </Logo>
           {currentPath === '/' && (
             <NavToggle
@@ -38,12 +40,28 @@ export const NavbarProfile = () => {
         )}
         {currentPath === '/' && (
           <LinksContainer className={`${showLinks ? 'show-container' : null}`}>
-            <MenuLinks>
+            <MenuLinks>              
+              <StyledListItem>
+                <a href='/faq'><h3>FAQs</h3></a>
+              </StyledListItem>
+              <StyledListItem>
+                <a href="/logout"> <Logout/> </a>
+              </StyledListItem>
               <StyledListItem>
                 <a href="/manage"> <Manage/> </a>
               </StyledListItem>
               <StyledListItem>
-                <a href="/logout"> <Logout/> </a>
+                <NavLink
+                  style={{ textDecoration: 'none' }}
+                  to='/'
+                  isActive={(match) => {
+                    if (match) {
+                      setCurrentPath('/');
+                    }
+                  }}
+                >
+                  <FilledButton text='My Profile' />
+                </NavLink>
               </StyledListItem>
             </MenuLinks>
           </LinksContainer>
@@ -94,7 +112,7 @@ const Logo = styled.div`
   height: 100%;
   font-size: 1.5rem;
   font-weight: 700;
-  p {
+  a {
     text-decoration: none;
     color: ${(props) => props.theme.colors.black};
   }

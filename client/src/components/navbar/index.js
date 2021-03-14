@@ -20,7 +20,7 @@ export const Navbar = () => {
               setCurrentPath('/');
             }}
           >
-            <a href='/'>Clubs@CU</a>
+            <a href="/">Clubs@CU</a>
           </Logo>
           {currentPath === '/' && (
             <NavToggle
@@ -86,7 +86,7 @@ const StyledListItem = styled.li`
 
 const NavCenter = styled.div`
   @media screen and (min-width: 769px) {
-    padding: 0.25rem 3rem 0 4rem;
+    padding: 0.5rem 3rem 0 4rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
