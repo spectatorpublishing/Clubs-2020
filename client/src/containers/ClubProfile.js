@@ -116,19 +116,19 @@ export const ClubProfile = () => {
                                     socialLinks={[
                                     {
                                         key: "facebook",
-                                        link: club.socialLinks.facebook,
+                                        link: "https://www.facebook.com/CUBalletEnsemble/",
                                     },
                                     {
                                         key: "instagram",
-                                        link: club.socialLinks.instagram,
+                                        link: "https://www.instagram.com/cuballetensemble/",
                                     },
                                     {
                                         key: "email",
-                                        link: club.socialLinks.email,
+                                        link: "cuballetensemble@gmail.com",
                                     },
                                     {
                                         key: "website",
-                                        link: club.socialLinks.website,
+                                        link: "http://www.columbia.edu/cu/cuballetensemble/dancers",
                                     },
                                     ]}
                                 />
@@ -181,19 +181,19 @@ export const ClubProfile = () => {
                                         socialLinks={[
                                         {
                                             key: "facebook",
-                                            link: club.socialLinks.facebook,
+                                            link: "https://www.facebook.com/CUBalletEnsemble/",
                                         },
                                         {
                                             key: "instagram",
-                                            link: club.socialLinks.instagram,
+                                            link: "https://www.instagram.com/cuballetensemble/",
                                         },
                                         {
                                             key: "email",
-                                            link: club.socialLinks.email,
+                                            link: "cuballetensemble@gmail.com",
                                         },
                                         {
                                             key: "website",
-                                            link: club.socialLinks.website,
+                                            link: "http://www.columbia.edu/cu/cuballetensemble/dancers",
                                         },
                                         ]}
                                     />
@@ -256,20 +256,20 @@ export const ClubProfile = () => {
                                     socialLinks={[
                                     {
                                         key: "facebook",
-                                        link: club.socialLinks.facebook,
+                                        link: "https://www.facebook.com/CUBalletEnsemble/",
                                     },
                                     {
                                         key: "instagram",
-                                        link: club.socialLinks.instagram,
+                                        link: "https://www.instagram.com/cuballetensemble/",
                                     },
                                     {
                                         key: "email",
-                                        link: club.socialLinks.email,
+                                        link: "cuballetensemble@gmail.com",
                                     },
                                     {
                                         key: "website",
-                                        link: club.socialLinks.website,
-                                    }
+                                        link: "http://www.columbia.edu/cu/cuballetensemble/dancers",
+                                    },
                                     ]}
                                 />
                                 <div><Button href={club.mailingList}><p>Join our mailing list</p></Button></div>
