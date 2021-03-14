@@ -213,7 +213,7 @@ export const ClubProfile = () => {
                                     highlights= {club.highlights}
                                     howToJoin= {club.howToJoin}
                                 />
-                                <h2>Similar Clubs</h2>
+                                <HeaderSimilarClubs>Similar Clubs</HeaderSimilarClubs>
                                 <SimilarClubs/> 
                             </Content>
                         </PageWrapper>
@@ -237,7 +237,7 @@ export const ClubProfile = () => {
                                     highlights= {club.highlights}
                                     howToJoin= {club.howToJoin}
                                 />
-                                <h2>Similar Clubs</h2>
+                                <HeaderSimilarClubs>Similar Clubs</HeaderSimilarClubs>
                                 <SimilarClubs/> 
                             </Content>
                             <Cards>
@@ -332,10 +332,10 @@ const Content = styled.div`
     h1{
         margin-bottom: 0rem;
     }
+`;
 
-    h2{
-        display: ${props => (props.profile === undefined) ? 'none' : 'block'};
-    }
+const HeaderSimilarClubs = styled.h2`
+    display: ${props => (props.profile === undefined) ? 'none' : 'block'};
 `;
 
 const AdContainer = styled.div`
