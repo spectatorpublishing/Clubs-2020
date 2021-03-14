@@ -89,11 +89,13 @@ const StyledListItem = styled.li`
 `;
 
 const NavCenter = styled.div`
-  @media screen and (min-width: 769px) {
-    padding: 0.5rem 3rem 0 4rem;
+  @media screen and (min-width: 900px) {
     display: flex;
     align-items: center;
     justify-content: space-between;
+  }
+  @media screen and (min-width: 769px) {
+    padding: 0.5rem 3rem 0 4rem;
   }
 `;
 
@@ -103,7 +105,7 @@ const NavHeader = styled.div`
   justify-content: space-between;
   padding: 1rem;
 
-  @media screen and (min-width: 769px) {
+  @media screen and (min-width: 900px) {
     padding: 0;
   }
 `;
@@ -134,7 +136,7 @@ const NavToggle = styled.div`
     transform: rotate(90deg);
   }
 
-  @media screen and (min-width: 769px) {
+  @media screen and (min-width: 900px) {
     display: none;
   }
 `;
@@ -148,7 +150,7 @@ const LinksContainer = styled.div`
     height: fit-content;
   }
 
-  @media screen and (min-width: 769px) {
+  @media screen and (min-width: 900px) {
     height: auto !important;
     background-color: transparent;
   }
@@ -176,7 +178,7 @@ const MenuLinks = styled.ul`
     }
   }
 
-  @media (min-width: 769px) {
+  @media (min-width: 900px) {
     display: flex;
     margin: 0;
     padding: 0;
