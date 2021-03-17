@@ -6,7 +6,8 @@ import TomatoButton from '../tomatoButton';
 import { ErrorText, handleLogin } from './helper';
 import Signout from '../signout/index';
 import * as firebase from '../../UserAuthUtilities/firebase';
-import {createUser} from './helper'
+import { createUser } from './helper';
+import Checkbox from '../checkbox';
 //this is the version of the sign-up/login (depends on id value given to components) form to be used
 
 export const SignUpBox = ({ detailLink, id, userCred }) => {
@@ -37,11 +38,10 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
 
     if (email.current.value.length <= 0) {
       shouldSubmit = false;
-      setIsEmailEmpty(true)
+      setIsEmailEmpty(true);
       //display message that email is empty
-    }
-    else{
-      setIsEmailEmpty(false)
+    } else {
+      setIsEmailEmpty(false);
     }
     //if email is of invalid format, display invailidity and the reasons
 
@@ -54,15 +54,13 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
     } else if (password && password.current.value.length > 5)
       setIsPasswordShort(false);
 
-      if (password.current.value.match(passEx)) {
-        console.log("matched")
-        setIsPasswordInvalid(false)
-      }
-      else{
-        console.log("pass not matching reqs")
-        setIsPasswordInvalid(true)
-
-      }
+    if (password.current.value.match(passEx)) {
+      console.log('matched');
+      setIsPasswordInvalid(false);
+    } else {
+      console.log('pass not matching reqs');
+      setIsPasswordInvalid(true);
+    }
     // if (email && email.current.value.match(emailEx)) {
     //   setEmailContainsIllegalCharacters(true);
     //   shouldSubmit = false;
@@ -89,7 +87,7 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
           },
           (error) => {
             console.log(error);
-            handleErrors("signup" , error)
+            handleErrors('signup', error);
           }
         );
 
@@ -97,57 +95,47 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
     }
   }
 
-
   function onLoginSubmit(e, withGoogle = false) {
-    if (withGoogle){
+    if (withGoogle) {
       var google = new firebase.auth.GoogleAuthProvider();
 
-      firebase.auth()
-      .signInWithPopup(google)
-      .then((result) => {
-        /** @type {firebase.auth.OAuthCredential} */
-        var credential = result.credential;
+      firebase
+        .auth()
+        .signInWithPopup(google)
+        .then((result) => {
+          /** @type {firebase.auth.OAuthCredential} */
+          var credential = result.credential; // This gives you a Google Access Token. You can use it to access the Google API.
 
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        var token = credential.accessToken;
-        // The signed-in user info.
-        var user = result.user;
-        console.log("signin successful")
-        history.push('/');
-        // ...
-      }).catch((error) => {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // The email of the user's account used.
-        var email = error.email;
-        // The firebase.auth.AuthCredential type that was used.
-        var credential = error.credential;
-        // ...
-      });
-
-
-    }
-    else{
+          var token = credential.accessToken; // The signed-in user info.
+          var user = result.user;
+          console.log('signin successful');
+          history.push('/'); // ...
+        })
+        .catch((error) => {
+          // Handle Errors here.
+          var errorCode = error.code;
+          var errorMessage = error.message; // The email of the user's account used.
+          var email = error.email; // The firebase.auth.AuthCredential type that was used.
+          var credential = error.credential; // ...
+        });
+    } else {
       let shouldSubmit = true;
       // console.log(email.current.value.length)
       if (email.current.value.length <= 0) {
         shouldSubmit = false;
-        setIsEmailEmpty(true)
+        setIsEmailEmpty(true);
         //display message that email is empty
-      }
-      else{
-        setIsEmailEmpty(false)
+      } else {
+        setIsEmailEmpty(false);
       }
       //if email is of invalid format, display invailidity and the reasons
 
-    
       if (password && password.current.value.length <= 5) {
         setIsPasswordShort(true);
         shouldSubmit = false;
       } else if (password && password.current.value.length > 5)
         setIsPasswordShort(false);
-      
+
       /*if (email && email.current.value.match(emailEx)) {
         setEmailContainsIllegalCharacters(true);
         shouldSubmit = false;
@@ -155,83 +143,68 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
         setEmailContainsIllegalCharacters(false);
       }*/
       if (shouldSubmit) {
-        firebase.auth().signInWithEmailAndPassword(
-          email.current.value,
-          password.current.value)
+        firebase
+          .auth()
+          .signInWithEmailAndPassword(
+            email.current.value,
+            password.current.value
+          )
 
           .then((userCredential) => {
             // Signed in
             var user = userCredential.user;
-            console.log(user)
-            console.log("user logged in")
+            console.log(user);
+            console.log('user logged in');
             setIsEmailNotFound(false);
             setIsPasswordIncorrect(false);
             setIsEmailInvalid(false);
 
             history.push('/');
 
-
             // ...
           })
           .catch((error) => {
-            handleErrors("login" , error)
+            handleErrors('login', error);
           });
-
-
-      }
-      else{
+      } else {
         setIsEmailNotFound(false);
         setIsPasswordIncorrect(false);
         setIsEmailInvalid(false);
       }
-    
-     
 
       //e.preventDefault();
     }
   }
 
-  function handleErrors(type, error){
-  
+  function handleErrors(type, error) {
     var errorCode = error.code;
     var errorMessage = error.message;
-    console.log(errorMessage)
-    console.log(errorCode)
-
-
+    console.log(errorMessage);
+    console.log(errorCode);
 
     //general errors
-    if (errorCode == "auth/invalid-email"){
+    if (errorCode == 'auth/invalid-email') {
       setIsEmailInvalid(true);
-    }
-    else{
+    } else {
       setIsEmailInvalid(false);
     }
 
+    if (type == 'signup') {
+      //errors specific to signup
+    } else if (type == 'login') {
+      //errors specific to login
 
-    if (type == "signup"){
-        //errors specific to signup
-    }
-    else if (type == "login"){
-        //errors specific to login
-
-      if (errorCode == "auth/user-not-found"){
+      if (errorCode == 'auth/user-not-found') {
         setIsEmailNotFound(true);
-      }
-      else{
+      } else {
         setIsEmailNotFound(false);
       }
-      if (errorCode == "auth/wrong-password"){
+      if (errorCode == 'auth/wrong-password') {
         setIsPasswordIncorrect(true);
-      }
-      else{
+      } else {
         setIsPasswordIncorrect(false);
       }
-
     }
-    
-    
-    
   }
 
   if (id === 'signup') {
@@ -326,19 +299,17 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
                       e.target.value.match(emailEx) === null
                     );
 
-                  
-                   isEmailEmpty !=  e.target.value.length <= 0 &&
-                   setIsEmailEmpty(false);
+                  isEmailEmpty != e.target.value.length <= 0 &&
+                    setIsEmailEmpty(false);
 
-                  
-                   setIsEmailInvalid(false);
+                  setIsEmailInvalid(false);
                 }}
               />
               {id === 'signup' && <InputDesc>{modalData.detailDesc}</InputDesc>}
               <ErrorText
                 marginTop={8}
                 stateToCheck={isEmailEmpty}
-                text='Email may not be empty'
+                text='Email cannot be empty'
               />
               <ErrorText
                 marginTop={8}
@@ -351,10 +322,10 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
                 text='Your email contains illegal characters'
               />
               <ErrorText
-                  marginTop={8}
-                  stateToCheck={isEmailNotFound}
-                  text='no account found for this email'
-                />
+                marginTop={8}
+                stateToCheck={isEmailNotFound}
+                text='no account found for this email'
+              />
             </InputSection>
             <InputSection marginBottom={id === 'signup'}>
               <label htmlFor='userPassword'>{modalData.detailTwo}</label>
@@ -375,15 +346,13 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
                       setContainsIllegalCharacters(
                         e.target.value.match(emailEx) !== null
                       );*/
-                      
+
                     id === 'signup' &&
                       isPasswordShort &&
                       confirmPassword &&
                       setIsPasswordShort(e.target.value.length <= 5);
 
-           
-                    id === 'signup' && setIsPasswordInvalid(false)
-                  
+                    id === 'signup' && setIsPasswordInvalid(false);
                   }}
                 />
                 <ShowPasswordButton
@@ -403,10 +372,10 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
                 text='Your password needs to be longer than 5 characters'
               />
               <ErrorText
-                  marginTop={8}
-                  stateToCheck={isPasswordIncorrect}
-                  text='password is incorrect'
-                />
+                marginTop={8}
+                stateToCheck={isPasswordIncorrect}
+                text='password is incorrect'
+              />
               <ErrorText
                 marginTop={8}
                 stateToCheck={isPasswordInvalid}
@@ -464,9 +433,19 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
         )}
         {id === 'login' && (
           <FlexContainer>
-            <TomatoButton text='Log in' wire  onClick={(e) => {
+            <FlexContainer margin='0 0 .75rem 0' flexDirection='row'>
+              <Checkbox
+                firebase
+                labelText='Remember Me'
+              />
+            </FlexContainer>
+            <TomatoButton
+              text='Log in'
+              wire
+              onClick={(e) => {
                 onLoginSubmit(e);
-              }}/>
+              }}
+            />
             <TomatoButton
               text='Log in with Google'
               wire
@@ -474,7 +453,8 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
               type='button'
               onClick={(e) => {
                 onLoginSubmit(e, true);
-              }}/>
+              }}
+            />
             {/* <Signout /> */}
             <Description>Having Trouble?</Description>
           </FlexContainer>
@@ -526,8 +506,10 @@ const Title = styled.h1`
 
 const FlexContainer = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: ${(props) =>
+    props.flexDirection ? props.flexDirection : 'column'};
   align-items: center;
+  margin: ${(props) => props.margin};
 `;
 
 const FlexRow = styled.div`
