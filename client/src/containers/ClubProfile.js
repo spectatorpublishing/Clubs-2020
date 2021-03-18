@@ -115,20 +115,20 @@ export const ClubProfile = () => {
                                 <SocialTagsBox
                                     socialLinks={[
                                     {
-                                        key: "facebook",
-                                        link: "https://www.facebook.com/CUBalletEnsemble/",
+                                        key: "Facebook",
+                                        link: club.socialLinks.facebook,
                                     },
                                     {
-                                        key: "instagram",
-                                        link: "https://www.instagram.com/cuballetensemble/",
+                                        key: "Instagram",
+                                        link: club.socialLinks.instagram,
                                     },
                                     {
-                                        key: "email",
-                                        link: "cuballetensemble@gmail.com",
+                                        key: "Email",
+                                        link: club.socialLinks.email,
                                     },
                                     {
-                                        key: "website",
-                                        link: "http://www.columbia.edu/cu/cuballetensemble/dancers",
+                                        key: "Website",
+                                        link: club.socialLinks.website,
                                     },
                                     ]}
                                 />
@@ -180,20 +180,20 @@ export const ClubProfile = () => {
                                     <SocialTagsBox
                                         socialLinks={[
                                         {
-                                            key: "facebook",
-                                            link: "https://www.facebook.com/CUBalletEnsemble/",
+                                            key: "Facebook",
+                                            link: club.socialLinks.facebook,
                                         },
                                         {
-                                            key: "instagram",
-                                            link: "https://www.instagram.com/cuballetensemble/",
+                                            key: "Instagram",
+                                            link: club.socialLinks.instagram,
                                         },
                                         {
-                                            key: "email",
-                                            link: "cuballetensemble@gmail.com",
+                                            key: "Email",
+                                            link: club.socialLinks.email,
                                         },
                                         {
-                                            key: "website",
-                                            link: "http://www.columbia.edu/cu/cuballetensemble/dancers",
+                                            key: "Website",
+                                            link: club.socialLinks.website,
                                         },
                                         ]}
                                     />
@@ -255,21 +255,21 @@ export const ClubProfile = () => {
                                  <SocialTagsBox
                                     socialLinks={[
                                     {
-                                        key: "facebook",
-                                        link: "https://www.facebook.com/CUBalletEnsemble/",
+                                        key: "Facebook",
+                                        link: club.socialLinks.facebook,
                                     },
                                     {
-                                        key: "instagram",
-                                        link: "https://www.instagram.com/cuballetensemble/",
+                                        key: "Instagram",
+                                        link: club.socialLinks.instagram,
                                     },
                                     {
-                                        key: "email",
-                                        link: "cuballetensemble@gmail.com",
+                                        key: "Email",
+                                        link: club.socialLinks.email,
                                     },
                                     {
-                                        key: "website",
-                                        link: "http://www.columbia.edu/cu/cuballetensemble/dancers",
-                                    },
+                                        key: "Website",
+                                        link: club.socialLinks.website,
+                                    }
                                     ]}
                                 />
                                 <div><Button href={club.mailingList}><p>Join our mailing list</p></Button></div>
