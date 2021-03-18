@@ -56,36 +56,42 @@ const Icon = styled.i`
 
 const SocialLinkElement = ({ linkType, link }) => {
   const iconDict = {
-    facebook: { type: "fab", img: "facebook-f" },
-    instagram: { type: "fab", img: "instagram" },
-    twitter: { type: "fab", img: "twitter" },
-    email: { type: "fas", img: "envelope" },
-    website: { type: "fas", img: "desktop" },
+    Facebook: { type: "fab", img: "facebook-f" },
+    Instagram: { type: "fab", img: "instagram" },
+    Twitter: { type: "fab", img: "twitter" },
+    Email: { type: "fas", img: "envelope" },
+    Website: { type: "fas", img: "desktop" },
   };
   const icon = iconDict[linkType];
-  if (linkType === "email") {
-    return (
-      <SocialLinkStyledElement>
-        <Icon>
-          <FontAwesomeIcon icon={[icon.type, icon.img]}></FontAwesomeIcon>
-        </Icon>
-        <StyledLink>
-          <a href="mailto:" {...link}>
-            {link}
-          </a>
-        </StyledLink>
-      </SocialLinkStyledElement>
-    );
+  if (link != ""){
+    if (linkType === "Email") {
+      return (
+        <SocialLinkStyledElement>
+          <Icon>
+            <FontAwesomeIcon icon={[icon.type, icon.img]}></FontAwesomeIcon>
+          </Icon>
+          <StyledLink>
+            <a href="mailto:" {...link}>
+              {link}
+            </a>
+          </StyledLink>
+        </SocialLinkStyledElement>
+      );
+    } else {
+      return (
+        <SocialLinkStyledElement>
+          <Icon>
+            <FontAwesomeIcon icon={[icon.type, icon.img]}></FontAwesomeIcon>
+          </Icon>
+          <StyledLink>
+            <a href={link}>{linkType}</a>
+          </StyledLink>
+        </SocialLinkStyledElement>
+      );
+    }
   } else {
     return (
-      <SocialLinkStyledElement>
-        <Icon>
-          <FontAwesomeIcon icon={[icon.type, icon.img]}></FontAwesomeIcon>
-        </Icon>
-        <StyledLink>
-          <a href={link}>{linkType}</a>
-        </StyledLink>
-      </SocialLinkStyledElement>
+      null
     );
   }
 };

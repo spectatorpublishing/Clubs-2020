@@ -115,19 +115,19 @@ export const ClubProfile = () => {
                                 <SocialTagsBox
                                     socialLinks={[
                                     {
-                                        key: "facebook",
+                                        key: "Facebook",
                                         link: club.socialLinks.facebook,
                                     },
                                     {
-                                        key: "instagram",
+                                        key: "Instagram",
                                         link: club.socialLinks.instagram,
                                     },
                                     {
-                                        key: "email",
+                                        key: "Email",
                                         link: club.socialLinks.email,
                                     },
                                     {
-                                        key: "website",
+                                        key: "Website",
                                         link: club.socialLinks.website,
                                     },
                                     ]}
@@ -180,19 +180,19 @@ export const ClubProfile = () => {
                                     <SocialTagsBox
                                         socialLinks={[
                                         {
-                                            key: "facebook",
+                                            key: "Facebook",
                                             link: club.socialLinks.facebook,
                                         },
                                         {
-                                            key: "instagram",
+                                            key: "Instagram",
                                             link: club.socialLinks.instagram,
                                         },
                                         {
-                                            key: "email",
+                                            key: "Email",
                                             link: club.socialLinks.email,
                                         },
                                         {
-                                            key: "website",
+                                            key: "Website",
                                             link: club.socialLinks.website,
                                         },
                                         ]}
@@ -255,19 +255,19 @@ export const ClubProfile = () => {
                                  <SocialTagsBox
                                     socialLinks={[
                                     {
-                                        key: "facebook",
+                                        key: "Facebook",
                                         link: club.socialLinks.facebook,
                                     },
                                     {
-                                        key: "instagram",
+                                        key: "Instagram",
                                         link: club.socialLinks.instagram,
                                     },
                                     {
-                                        key: "email",
+                                        key: "Email",
                                         link: club.socialLinks.email,
                                     },
                                     {
-                                        key: "website",
+                                        key: "Website",
                                         link: club.socialLinks.website,
                                     }
                                     ]}
