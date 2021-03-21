@@ -220,8 +220,7 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
            * Password reset email sent.
            * No need to toggle error states because we'll be redirected
            */
-          history.push('/confirmpassword');
-          // history.push('/findpassword/confirm')
+          history.push('/findpassword/confirm');
         })
         .catch(function(error) {
           handleErrors('findpassword', error)

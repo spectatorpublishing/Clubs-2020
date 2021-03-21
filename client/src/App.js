@@ -63,9 +63,8 @@ const App = () => {
             <Route path='/login'>
               <Login userCred={userCred} />
             </Route>
-            {/* <Route path='/findpassword/confirm' component={ConfirmPasswordReset} /> */}
-            <Route path='/confirmpassword' component={ConfirmPasswordReset} />
-            <Route path='/findpassword'>
+            <Route exact path='/findpassword/confirm' component={ConfirmPasswordReset} />
+            <Route exact path='/findpassword'>
               <FindPassword userCred={userCred} />
             </Route>
           </ViewportProvider>
