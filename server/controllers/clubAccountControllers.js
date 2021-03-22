@@ -54,7 +54,10 @@ module.exports = {
             useFindAndModify: false,
             new: true
         })
-            .then(account => res.json(account))
+            .then(account => {
+                if (req.params.status == 'denied')
+                res.json(account)
+            })
             .catch(err => errHandling(err, res));
     },
     getProfile: function(req, res){
