@@ -1,8 +1,45 @@
 const clubAccount = require("../models/ClubAccountModel")
 const clubProfile = require("../models/ClubProfileModel")
 const config = require("../config")
-
 const errHandling = require("../common").errHandling
+
+/*
+Setting up email-sending transporter
+
+This app uses gmail's smtp server. To set up the sender's account, 
+0. Create the google account, and copy the username to the "user" field below
+1. Go to gmail > settings > all settings > Forwarding and POP/IMAP > Enable IMAP > Save Changes
+2. Go to google account > Security > Turn on 2-step verification
+3. Go to google account > App passwords > App: Mail; device: custom (enter random name) > Generate > copy password in "pass" field below
+4. To ensure this works on heroku's machine too, go to https://accounts.google.com/b/0/DisplayUnlockCaptcha and allow access to sender account
+
+for partial reference: https://jay315.medium.com/sending-email-using-express-js-with-nodemailer-in-heroku-71741f29463c
+*/
+const nodemailer = require("nodemailer");
+var transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 465,
+    secure: true,
+    auth: {
+        // should be replaced with real sender's account
+        user: 'hello@gmail.com',
+        pass: 'jafjioaejiofajio'
+    }
+  });
+
+transporter.verify(function(error, _) {
+    if (error) {
+         console.log(error);
+    } else {
+         console.log('Stmp server is ready to take mails');
+    }
+ });
+
+const message = (email, status, text) => ({
+    to: email,
+    subject: `[LionsClub] Your club profile has been ${status}`,
+    text: text
+})
 
 module.exports = {
     create: function(req, res){
@@ -54,8 +91,31 @@ module.exports = {
             useFindAndModify: false,
             new: true
         })
-            .then(account => {
-                if (req.params.status == 'denied')
+            .then((account) => {
+                var mes
+                if (req.body.status === 'denied'){
+                    mes = message(
+                        JSON.parse(JSON.stringify(account)).accountEmail,
+                        'denied',
+                        `Hi, your club account associated with this email has been denied`
+                        `the reason being ${req.body.deniedReason ? req.body.deniedReason : ""}. `
+                        `Please review your profile for any unclear or offensive information, and contact us with any further questions.`
+                    )
+                } else if (req.body.status === 'accepted'){
+                    mes = message(
+                        JSON.parse(JSON.stringify(account)).accountEmail,
+                        'accepted!',
+                        `Congratulations! Your club account associated with this email has been verified. Go check out your club on lionclubs!`
+                    )
+                }
+                if (mes) {
+                    transporter.sendMail(mes, (error, info) => {
+                        if (error) {
+                            return console.log("nodemailer error", error);
+                        }
+                        console.log('Message sent: %s', info.messageId);
+                    })
+                }
                 res.json(account)
             })
             .catch(err => errHandling(err, res));
