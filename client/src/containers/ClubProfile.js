@@ -112,6 +112,7 @@ export const ClubProfile = () => {
                                     frequency={club.meetingFrequency}
                                     weekly= {club.weekly}
                                 />
+                                {(club.socialLinks.facebook === "" && club.socialLinks.instagram === "" && club.socialLinks.email === "" && club.socialLinks.website === "" ) ? null :
                                 <SocialTagsBox
                                     socialLinks={[
                                     {
@@ -131,9 +132,11 @@ export const ClubProfile = () => {
                                         link: club.socialLinks.website,
                                     },
                                     ]}
-                                />
-                                <div><Button href={club.mailingList}><p>Join our mailing list</p></Button></div>
-                                <div><Button className= "second" href={club.applicationLink}><p>Apply</p></Button></div>
+                                />}
+                                {(club.mailingList) ?
+                                <div><Button href={club.mailingList}><p>Join our mailing list</p></Button></div> : null}
+                                {(club.applicationLink) ?
+                                <div><Button className= "second" href={club.applicationLink}><p>Apply</p></Button></div> : null}
                                 <AdContainer>
                                 <AdCarrier
                                     width={300} 
@@ -146,7 +149,7 @@ export const ClubProfile = () => {
                                     highlights= {club.highlights}
                                     howToJoin= {club.howToJoin}
                                 />
-                                <h2>Similar Clubs</h2>
+                                {(club.similarClubs.length === 0) ? null : <h2>Similar Clubs</h2>}
                                 <SimilarClubs/> 
                             </Content>
                         </PageWrapper>
@@ -172,33 +175,36 @@ export const ClubProfile = () => {
                                         tags={club.tags}
                                     />
                                     <Column>
-                                    <div><Button onClick={setAdmin}><p>Show/Hide Club Admin View</p></Button></div>
-                                        <FrequencyTag
-                                            frequency={club.meetingFrequency}
-                                            weekly= {club.weekly}
-                                        />
-                                    <SocialTagsBox
-                                        socialLinks={[
-                                        {
-                                            key: "Facebook",
-                                            link: club.socialLinks.facebook,
-                                        },
-                                        {
-                                            key: "Instagram",
-                                            link: club.socialLinks.instagram,
-                                        },
-                                        {
-                                            key: "Email",
-                                            link: club.socialLinks.email,
-                                        },
-                                        {
-                                            key: "Website",
-                                            link: club.socialLinks.website,
-                                        },
-                                        ]}
-                                    />
-                                        <div><Button href={club.mailingList}><p>Join our mailing list</p></Button></div>
-                                        <div><Button className= "second" href={club.applicationLink}><p>Apply</p></Button></div>
+                                        <div><Button onClick={setAdmin}><p>Show/Hide Club Admin View</p></Button></div>
+                                            <FrequencyTag
+                                                frequency={club.meetingFrequency}
+                                                weekly= {club.weekly}
+                                            />
+                                        {(club.socialLinks.facebook === "" && club.socialLinks.instagram === "" && club.socialLinks.email === "" && club.socialLinks.website === "" ) ? null :
+                                        <SocialTagsBox
+                                            socialLinks={[
+                                            {
+                                                key: "Facebook",
+                                                link: club.socialLinks.facebook,
+                                            },
+                                            {
+                                                key: "Instagram",
+                                                link: club.socialLinks.instagram,
+                                            },
+                                            {
+                                                key: "Email",
+                                                link: club.socialLinks.email,
+                                            },
+                                            {
+                                                key: "Website",
+                                                link: club.socialLinks.website,
+                                            },
+                                            ]}
+                                        />}
+                                        {(club.mailingList) ?
+                                        <div><Button href={club.mailingList}><p>Join our mailing list</p></Button></div> : null}
+                                        {(club.applicationLink) ?
+                                        <div><Button className= "second" href={club.applicationLink}><p>Apply</p></Button></div> : null}
                                         <AdContainer>
                                             <AdCarrier
                                                 width={300} 
@@ -213,7 +219,7 @@ export const ClubProfile = () => {
                                     highlights= {club.highlights}
                                     howToJoin= {club.howToJoin}
                                 />
-                                <h2>Similar Clubs</h2>
+                                {(club.similarClubs.length === 0) ? null : <h2>Similar Clubs</h2>}
                                 <SimilarClubs/> 
                             </Content>
                         </PageWrapper>
@@ -237,7 +243,7 @@ export const ClubProfile = () => {
                                     highlights= {club.highlights}
                                     howToJoin= {club.howToJoin}
                                 />
-                                <h2>Similar Clubs</h2>
+                                {(club.similarClubs.length === 0) ? null : <h2>Similar Clubs</h2>}
                                 <SimilarClubs/> 
                             </Content>
                             <Cards>
@@ -252,7 +258,8 @@ export const ClubProfile = () => {
                                     frequency={club.meetingFrequency}
                                     weekly= {club.weekly}
                                 />
-                                 <SocialTagsBox
+                                {(club.socialLinks.facebook === "" && club.socialLinks.instagram === "" && club.socialLinks.email === "" && club.socialLinks.website === "" ) ? null :
+                                <SocialTagsBox
                                     socialLinks={[
                                     {
                                         key: "Facebook",
@@ -269,11 +276,13 @@ export const ClubProfile = () => {
                                     {
                                         key: "Website",
                                         link: club.socialLinks.website,
-                                    }
+                                    },
                                     ]}
-                                />
-                                <div><Button href={club.mailingList}><p>Join our mailing list</p></Button></div>
-                                <div><Button className= "second" href={club.applicationLink}><p>Apply</p></Button></div>
+                                />}
+                                {(club.mailingList) ?
+                                <div><Button href={club.mailingList}><p>Join our mailing list</p></Button></div> : null}
+                                {(club.applicationLink) ?
+                                <div><Button className= "second" href={club.applicationLink}><p>Apply</p></Button></div> : null}
                                 <AdContainer>
                                     <AdCarrier
                                         width={300} 
