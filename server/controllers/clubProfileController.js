@@ -93,7 +93,6 @@ module.exports = {
         })
       )
       .then(newProfile => {
-        console.log("new profile", newProfile)
         newProfileJson = JSON.parse(JSON.stringify(newProfile))
         return clubAccount.findByIdAndUpdate(
           newProfileJson.clubAccountId, 

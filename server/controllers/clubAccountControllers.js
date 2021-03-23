@@ -9,21 +9,24 @@ module.exports = {
     create: function(req, res){
         clubAccount.find({firebaseId: req.body.firebaseId})
             .then((ret) => {
+                // if account already exists but is without profile, create an empty one regardless
                 if (ret && ret.length != 0) {
-                    res.json(ret[0])
+                    if (ret[0].clubProfileId){
+                        res.json(ret[0])
+                    } else {
+                        createEmptyProfile(ret[0]._id)
+                        .then(finalAccount => res.json(finalAccount))
+                        .catch(err => errHandling(err, res));
+                    }
+                    
                 } else {
                     clubAccount.create({
                         accountEmail: req.body.accountEmail,
                         firebaseId: req.body.firebaseId
                     })
                     .then(newAccount => createEmptyProfile(JSON.parse(JSON.stringify(newAccount))._id))
-                    .then(finalAccount => {
-                        console.log("final account", finalAccount)
-                        res.json(finalAccount)
-                    })
-                    .catch(err => {
-                        console.log("whops error")
-                        errHandling(err, res)});
+                    .then(finalAccount => res.json(finalAccount))
+                    .catch(err => errHandling(err, res));
                 }
             })
             .catch(err => errHandling(err, res));
