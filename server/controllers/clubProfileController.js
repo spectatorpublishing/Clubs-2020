@@ -64,18 +64,27 @@ const findSimilarClubs = (res, clubResult) => {
       })
       .catch(err => res.status(422).json(err));
 }
-
+//, status: 'complete'
 module.exports = {
     getAll: function(req, res) {
-        clubProfile.find({})
+        clubAccount.find({verificationStatus: 'accepted' }).select({clubProfileId: 1})
+        .then( acceptedClubs => {
+      
+          clubs = []
+          acceptedClubs.map(obj => (clubs.push(obj.clubProfileId)))
+
+          clubProfile.find({_id:{$in: clubs}, status: 'complete'})
             .select({_id: 1, name: 1, shortDescription: 1, imageUrl: 1, tags: 1, memberRange: 1, acceptingMembers: 1, applicationRequired: 1})
             .then(rdata => {
-                var data = JSON.parse(JSON.stringify(rdata))
+                var data = JSON.parse(JSON.stringify(rdata));
                 var shuffledData = shuffle(data);
                 
                 res.send(shuffledData)
             })
-            .catch(err => res.status(422).json(err));
+            .catch(err => errHandling(err, res));
+        })
+        .catch(err =>  errHandling(err, res));
+        
     },
 
     getById: function(req, res) {

@@ -9,10 +9,16 @@ export const ProfileMain = ({description, highlights, howToJoin}) => {
             <Container>
                 <h2>Description</h2>
                 <p className='one'>{description}</p>
-                <h2>Highlights</h2>
-                <p className='two'>{highlights.map(highlight => <Highlight text={highlight}/>)}</p>
-                <h2>How to Join</h2>
-                <p className='two'>{howToJoin}</p>
+                {(highlights.length === 0) ? null :
+                <div>
+                    <h2>Highlights</h2>
+                    <p>{highlights.map(highlight => <Highlight text={highlight}/>)}</p>
+                </div> }
+                {(howToJoin) ?
+                <div>
+                    <h2>How to Join</h2>
+                    <p>{howToJoin}</p>
+                </div> : null}
             </Container>
         );
     } else {
@@ -23,15 +29,18 @@ export const ProfileMain = ({description, highlights, howToJoin}) => {
 export default ProfileMain;
 
 const Highlight = ({text}) => {
-    return (
-        <Row>
-            <FontAwesomeIcon icon={faCheckCircle}></FontAwesomeIcon>{text}
-        </Row>
-    )
+    if (text !== '') {
+        return (
+            <Row>
+                <FontAwesomeIcon icon={faCheckCircle}></FontAwesomeIcon>{text}
+            </Row>
+        );
+    } else {
+        return null;
+    }
 };
 
 const Row = styled.div`
-    display: in-line;
     padding: 5px;
     svg{
         padding-right: 10px;
@@ -59,7 +68,6 @@ const Container = styled.div`
     h2{
         margin-top: 2rem;
         font-weight: 600;
-        font-size: 1.25rem;        
+        font-size: 1.25rem;     
     }
 `;
-

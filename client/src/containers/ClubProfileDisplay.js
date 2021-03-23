@@ -112,28 +112,31 @@ const ClubProfileDisplay = () => {
                                         frequency={club.meetingFrequency[0]}
                                         weekly= {club.meetingFrequency[1]}
                                 />
+                                {(club.socialLinks.facebook === "" && club.socialLinks.instagram === "" && club.socialLinks.email === "" && club.socialLinks.website === "" ) ? null :
                                 <SocialTagsBox
                                     socialLinks={[
                                     {
-                                        key: "facebook",
-                                        link: "https://www.facebook.com/CUBalletEnsemble/",
+                                        key: "Facebook",
+                                        link: club.socialLinks.facebook,
                                     },
                                     {
-                                        key: "instagram",
-                                        link: "https://www.instagram.com/cuballetensemble/",
+                                        key: "Instagram",
+                                        link: club.socialLinks.instagram,
                                     },
                                     {
-                                        key: "email",
-                                        link: "cuballetensemble@gmail.com",
+                                        key: "Email",
+                                        link: club.socialLinks.email,
                                     },
                                     {
-                                        key: "website",
-                                        link: "http://www.columbia.edu/cu/cuballetensemble/dancers",
+                                        key: "Website",
+                                        link: club.socialLinks.website,
                                     },
                                     ]}
-                                />
-                                <div><Button href={club.mailingList}><p>Join our mailing list</p></Button></div>
-                                <div><Button className= "second" href={club.applicationLink}><p>Apply</p></Button></div>
+                                />}
+                                {(club.mailingList) ?
+                                <div><Button href={club.mailingList}><p>Join our mailing list</p></Button></div> : null}
+                                {(club.applicationLink) ?
+                                <div><Button className= "second" href={club.applicationLink}><p>Apply</p></Button></div> : null}
                                 <AdContainer>
                                 <AdCarrier
                                     width={300} 
@@ -146,7 +149,7 @@ const ClubProfileDisplay = () => {
                                     highlights= {club.highlights}
                                     howToJoin= {club.howToJoin}
                                 />
-                                <h2>Similar Clubs</h2>
+                                {(club.similarClubs.length === 0) ? null : <h2>Similar Clubs</h2>}
                                 <SimilarClubs/> 
                             </Content>
                         </PageWrapper>
@@ -172,33 +175,36 @@ const ClubProfileDisplay = () => {
                                         tags={club.tags}
                                     />
                                     <Column>
-                                    <div><Button onClick={setAdmin}><p>Show/Hide Club Admin View</p></Button></div>
-                                        <FrequencyTag
-                                            frequency={club.meetingFrequency[0]}
-                                            weekly= {club.meetingFrequency[1]}
-                                        />
-                                    <SocialTagsBox
-                                        socialLinks={[
-                                        {
-                                            key: "facebook",
-                                            link: "https://www.facebook.com/CUBalletEnsemble/",
-                                        },
-                                        {
-                                            key: "instagram",
-                                            link: "https://www.instagram.com/cuballetensemble/",
-                                        },
-                                        {
-                                            key: "email",
-                                            link: "cuballetensemble@gmail.com",
-                                        },
-                                        {
-                                            key: "website",
-                                            link: "http://www.columbia.edu/cu/cuballetensemble/dancers",
-                                        },
-                                        ]}
-                                    />
-                                        <div><Button href={club.mailingList}><p>Join our mailing list</p></Button></div>
-                                        <div><Button className= "second" href={club.applicationLink}><p>Apply</p></Button></div>
+                                        <div><Button onClick={setAdmin}><p>Show/Hide Club Admin View</p></Button></div>
+                                            <FrequencyTag
+                                                frequency={club.meetingFrequency}
+                                                weekly= {club.weekly}
+                                            />
+                                        {(club.socialLinks.facebook === "" && club.socialLinks.instagram === "" && club.socialLinks.email === "" && club.socialLinks.website === "" ) ? null :
+                                        <SocialTagsBox
+                                            socialLinks={[
+                                            {
+                                                key: "Facebook",
+                                                link: club.socialLinks.facebook,
+                                            },
+                                            {
+                                                key: "Instagram",
+                                                link: club.socialLinks.instagram,
+                                            },
+                                            {
+                                                key: "Email",
+                                                link: club.socialLinks.email,
+                                            },
+                                            {
+                                                key: "Website",
+                                                link: club.socialLinks.website,
+                                            },
+                                            ]}
+                                        />}
+                                        {(club.mailingList) ?
+                                        <div><Button href={club.mailingList}><p>Join our mailing list</p></Button></div> : null}
+                                        {(club.applicationLink) ?
+                                        <div><Button className= "second" href={club.applicationLink}><p>Apply</p></Button></div> : null}
                                         <AdContainer>
                                             <AdCarrier
                                                 width={300} 
@@ -213,7 +219,7 @@ const ClubProfileDisplay = () => {
                                     highlights= {club.highlights}
                                     howToJoin= {club.howToJoin}
                                 />
-                                <h2>Similar Clubs</h2>
+                                {(club.similarClubs.length === 0) ? null : <h2>Similar Clubs</h2>}
                                 <SimilarClubs/> 
                             </Content>
                         </PageWrapper>
@@ -237,7 +243,7 @@ const ClubProfileDisplay = () => {
                                     highlights= {club.highlights}
                                     howToJoin= {club.howToJoin}
                                 />
-                                <h2>Similar Clubs</h2>
+                                {(club.similarClubs.length === 0) ? null : <h2>Similar Clubs</h2>}
                                 <SimilarClubs/> 
                             </Content>
                             <Cards>
@@ -252,28 +258,31 @@ const ClubProfileDisplay = () => {
                                             frequency={club.meetingFrequency[0]}
                                             weekly= {club.meetingFrequency[1]}
                                 />
-                                 <SocialTagsBox
+                                {(club.socialLinks.facebook === "" && club.socialLinks.instagram === "" && club.socialLinks.email === "" && club.socialLinks.website === "" ) ? null :
+                                <SocialTagsBox
                                     socialLinks={[
                                     {
-                                        key: "facebook",
-                                        link: "https://www.facebook.com/CUBalletEnsemble/",
+                                        key: "Facebook",
+                                        link: club.socialLinks.facebook,
                                     },
                                     {
-                                        key: "instagram",
-                                        link: "https://www.instagram.com/cuballetensemble/",
+                                        key: "Instagram",
+                                        link: club.socialLinks.instagram,
                                     },
                                     {
-                                        key: "email",
-                                        link: "cuballetensemble@gmail.com",
+                                        key: "Email",
+                                        link: club.socialLinks.email,
                                     },
                                     {
-                                        key: "website",
-                                        link: "http://www.columbia.edu/cu/cuballetensemble/dancers",
+                                        key: "Website",
+                                        link: club.socialLinks.website,
                                     },
                                     ]}
-                                />
-                                <div><Button href={club.mailingList}><p>Join our mailing list</p></Button></div>
-                                <div><Button className= "second" href={club.applicationLink}><p>Apply</p></Button></div>
+                                />}
+                                {(club.mailingList) ?
+                                <div><Button href={club.mailingList}><p>Join our mailing list</p></Button></div> : null}
+                                {(club.applicationLink) ?
+                                <div><Button className= "second" href={club.applicationLink}><p>Apply</p></Button></div> : null}
                                 <AdContainer>
                                     <AdCarrier
                                         width={300} 
