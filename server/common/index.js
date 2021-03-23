@@ -5,20 +5,20 @@ const errHandling = (err, res) => {
     })
 }
 
-const emptyProfile = {
-    name: '',
-    longDescription: '',
-    shortDescription: '',
-    imageUrl: '',
-    memberRange: '',
-    acceptingMembers: '',
+const emptyProfile = () => ({
+    name: ' ',
+    longDescription: ' ',
+    shortDescription: ' ',
+    imageUrl: ' ',
+    memberRange: ' ',
+    acceptingMembers: false,
     springRecruiting: false,
     fallRecruiting: false,
     applicationRequired: false,
-    meetingFrequency: '',
+    meetingFrequency: ' ',
     tags: [],
     showInstagramFeed: false,
-}
+})
 
 module.exports = {
     errHandling,
