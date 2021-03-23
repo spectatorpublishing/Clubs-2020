@@ -63,7 +63,6 @@ const CardsContainer = styled.div`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
     align-items: center;
 
     @media only screen and (max-width : 768px) {
@@ -76,7 +75,15 @@ const CardWrapper = styled.div`
     
     @media only screen and (max-width : 768px) {
             width: 95%;
-        }
+    }
+
+    @media only screen and (min-width : 1880px) {
+        width: 33%;
+    }
+
+    @media only screen and (min-width : 2800px) {
+        width: 25%;
+    }
 `;
 
 const FiltersBox = styled.div`
