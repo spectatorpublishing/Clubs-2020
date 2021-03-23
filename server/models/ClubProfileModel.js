@@ -35,6 +35,11 @@ const clubProfileSchema = new Schema({
     showInstagramFeed: { type: Boolean, required: true },
     similarClubs: {
         type: [Object], default: []
+    },
+    status: {
+        type: String,
+        enum: ['complete', 'incomplete'],
+        default: 'incomplete'
     }
 });
 
