@@ -51,7 +51,7 @@ const Checkbox = ({
   const handleClick = () => {
     // For remember me checkbox
     if(firebase){
-      rememberMe(clicked)
+      rememberMe(!clicked) //pass the opposite because at the end of this function: setClicked(!clicked)
     }
     else if (!onClick) {
       if (data && setData) {

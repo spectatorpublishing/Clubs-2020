@@ -455,6 +455,7 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
                 onLoginSubmit(e, true);
               }}
             />
+            {/* This is for testing VVVVV: */}
             {/* <Signout /> */}
             <Description>Having Trouble?</Description>
           </FlexContainer>
