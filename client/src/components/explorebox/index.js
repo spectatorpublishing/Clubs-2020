@@ -79,21 +79,18 @@ const Row = styled.div`
 `;
 
 const Icon = styled.div`
-  width: 10rem;
-  margin: 0.5rem 0rem 0.5rem 0.5rem;
-  position: relative;
-  display: block;
+  margin: 1.5rem 0.5rem 0.5rem auto;
+  height: 6rem;
 
   img {
-    max-width: 100%;
-    position: absolute;
-    top: 8%;
+    display: block;
+    object-fit: contain;
+    height: 100%;
   }
 
   @media only screen and (max-width: 768px) {
-    margin-right: 0.5rem;
-    width: 8rem;
-    height: 2rem;
+    margin-right: 1rem;
+    height: 5rem;
   }
 `;
 
@@ -159,7 +156,7 @@ export const ExploreBox = ({name, description, clubSize, tags, imageURL, accepti
                         <h2>{name}</h2>
                         <p>{description}</p>
                     </div>
-                    <Icon><img alt='club logo' src={imageURL} /></Icon>
+                    <Icon><img alt='club logo' src={imageURL}/></Icon>
                 </Row>
                 <Tags>{tags.map((tag, key) => <SearchTag key={key} text={tag}/>)}</Tags>
                 <hr/>
