@@ -149,7 +149,22 @@ module.exports = {
                 upsert: true
               }
             )
-              .then(ret => res.json(ret))
+              .then(ret => {
+                // if this is for final submission of a profile
+                // and the account status was previously 'incomplete'
+                // change it to 'pending'
+                if (req.query.submit) {
+                  clubAccount.findById({_id: req.params.accountId})
+                  .then(account => {
+                    if (account.verificationStatus === 'incomplete') {
+                      account.set('verificationStatus', 'pending')
+                      account.save()
+                    }
+                  })
+                  .catch(err => errHandling(err, res))
+                }
+                res.json(ret)
+              })
               .catch(err => errHandling(err, res))
           }
         })
