@@ -85,37 +85,25 @@ module.exports = {
     },
 
     createEmptyProfile: function(accountId) {
-      ret = {profile: null, account: null}
-
       // delete all previous records first
-      clubProfile.findOneAndDelete({clubAccountId: accountId})
-        .then(_ => {
-            let data = emptyProfile()
-            data.clubAccountId = accountId
-          
-            clubProfile.create(data)
-            .then(newProfile => {
-                newProfileJson = JSON.parse(JSON.stringify(newProfile))
-                ret.profile = newProfileJson
-                
-                clubAccount.findByIdAndUpdate(
-                  newProfileJson.clubAccountId, 
-                  {clubProfileId: newProfileJson._id},
-                  {
-                    new: true,
-                    useFindAndModify: false
-                  }
-                )
-                .then(account => {
-                    ret.account = JSON.parse(JSON.stringify(account))
-                    console.log("ret: ", ret)
-                    return [ret, null]
-                })
-                .catch(err => {return [null, err]});
-            })
-            .catch(err => { return [null, err] });
+      return clubProfile.findOneAndDelete({clubAccountId: accountId})
+      .then(_ => clubProfile.create({
+          ...emptyProfile(),
+          clubAccountId: accountId
         })
-        .catch(err => {return [null, err]});
+      )
+      .then(newProfile => {
+        console.log("new profile", newProfile)
+        newProfileJson = JSON.parse(JSON.stringify(newProfile))
+        return clubAccount.findByIdAndUpdate(
+          newProfileJson.clubAccountId, 
+          {clubProfileId: newProfileJson._id},
+          {
+            new: true,
+            useFindAndModify: false
+          }
+        )
+      })
     },
 
     create: function(req, res) {

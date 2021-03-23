@@ -16,17 +16,14 @@ module.exports = {
                         accountEmail: req.body.accountEmail,
                         firebaseId: req.body.firebaseId
                     })
-                    .then(newAccount => {
-                        ret = createEmptyProfile(JSON.parse(JSON.stringify(newAccount))._id)
-                        console.log("hi", ret)
-                        if (ret[0] !== null) {
-                            res.json(ret[0])
-                        } else {
-                            errHandling(err, res[1])
-                        }
-                        
+                    .then(newAccount => createEmptyProfile(JSON.parse(JSON.stringify(newAccount))._id))
+                    .then(finalAccount => {
+                        console.log("final account", finalAccount)
+                        res.json(finalAccount)
                     })
-                    .catch(err => errHandling(err, res));
+                    .catch(err => {
+                        console.log("whops error")
+                        errHandling(err, res)});
                 }
             })
             .catch(err => errHandling(err, res));
