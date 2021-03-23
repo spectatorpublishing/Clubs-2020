@@ -9,14 +9,16 @@ export const ProfileMain = ({description, highlights, howToJoin}) => {
             <Container>
                 <h2>Description</h2>
                 <p className='one'>{description}</p>
-                <HighlightsSection>
+                {(highlights.length === 0) ? null :
+                <div>
                     <h2>Highlights</h2>
                     <p>{highlights.map(highlight => <Highlight text={highlight}/>)}</p>
-                </HighlightsSection>
-                <HowToSection>
+                </div> }
+                {(howToJoin) ?
+                <div>
                     <h2>How to Join</h2>
                     <p>{howToJoin}</p>
-                </HowToSection>
+                </div> : null}
             </Container>
         );
     } else {
@@ -68,12 +70,4 @@ const Container = styled.div`
         font-weight: 600;
         font-size: 1.25rem;     
     }
-`;
-
-const HighlightsSection = styled.div`
-    display: ${props => (props.highlights === []) ? 'none' : 'block'};
-`;
-
-const HowToSection = styled.div`
-    display: ${props => (props.howToJoin === undefined) ? 'none' : 'block'};
 `;
