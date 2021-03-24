@@ -1,26 +1,36 @@
 const clubAccount = require("../models/ClubAccountModel")
 const clubProfile = require("../models/ClubProfileModel")
+const createEmptyProfile = require("../controllers/clubProfileController").createEmptyProfile
 const config = require("../config")
-
 const errHandling = require("../common").errHandling
 
 module.exports = {
+    // creates a new account, along with an empty profile
     create: function(req, res){
         clubAccount.find({firebaseId: req.body.firebaseId})
             .then((ret) => {
+                // if account already exists but is without profile, create an empty one regardless
                 if (ret && ret.length != 0) {
-                    res.json(ret[0])
+                    if (ret[0].clubProfileId){
+                        res.json(ret[0])
+                    } else {
+                        createEmptyProfile(ret[0]._id)
+                        .then(finalAccount => res.json(finalAccount))
+                        .catch(err => errHandling(err, res));
+                    }
+                    
                 } else {
                     clubAccount.create({
                         accountEmail: req.body.accountEmail,
                         firebaseId: req.body.firebaseId
                     })
-                        .then(newAccount => res.json(newAccount))
-                        .catch(err => errHandling(err, res));
+                    .then(newAccount => createEmptyProfile(JSON.parse(JSON.stringify(newAccount))._id))
+                    .then(finalAccount => res.json(finalAccount))
+                    .catch(err => errHandling(err, res));
                 }
             })
             .catch(err => errHandling(err, res));
-    },
+        },
     delete: function(req, res){
         const ret = {}
         clubAccount.findOneAndDelete({firebaseId: req.params.firebaseId})

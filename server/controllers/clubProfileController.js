@@ -1,7 +1,7 @@
 const clubAccount = require("../models/ClubAccountModel");
 const clubProfile = require("../models/ClubProfileModel")
 
-const errHandling = require("../common").errHandling
+const { errHandling, emptyProfile } = require("../common")
 
 const shuffle = (sourceArray) => {
     for (var i = 0; i < sourceArray.length - 1; i++) {
@@ -84,6 +84,27 @@ module.exports = {
                 .catch(err => res.status(422).json(err));
     },
 
+    createEmptyProfile: function(accountId) {
+      // delete all previous records first
+      return clubProfile.findOneAndDelete({clubAccountId: accountId})
+      .then(_ => clubProfile.create({
+          ...emptyProfile(),
+          clubAccountId: accountId
+        })
+      )
+      .then(newProfile => {
+        newProfileJson = JSON.parse(JSON.stringify(newProfile))
+        return clubAccount.findByIdAndUpdate(
+          newProfileJson.clubAccountId, 
+          {clubProfileId: newProfileJson._id},
+          {
+            new: true,
+            useFindAndModify: false
+          }
+        )
+      })
+    },
+
     create: function(req, res) {
         ret = {account: null, profile: null}
 
@@ -96,36 +117,10 @@ module.exports = {
                 errMessage: "the account id is invalid"
               })
             } else {
-              // delete all previous records first
-              clubProfile.findOneAndDelete({clubAccountId: req.params.accountId})
-              .then(_ => {
-                clubProfile.create({
-                  ...req.body,
-                  clubAccountId: req.params.accountId
-                })
-                .then(newProfile => {
-
-                  newProfileJson = JSON.parse(JSON.stringify(newProfile))
-                  ret.profile = newProfileJson
-
-                  clubAccount.findByIdAndUpdate(
-                    newProfileJson.clubAccountId, 
-                    {clubProfileId: newProfileJson._id},
-                    {
-                      new: true,
-                      useFindAndModify: false
-                    }
-                  )
-                  .then(account => {
-                    ret.account = JSON.parse(JSON.stringify(account))
-                    res.json(ret)
-                  })
-                  .catch(err => errHandling(err, res));
-                })
-                .catch(err => errHandling(err, res));
-              })
-              .catch(err => errHandling(err, res));
-            }})
+              ret = this.createEmptyProfile(JSON.parse(JSON.stringify(account))._id) 
+              res.json(ret)
+            }
+          })
           .catch(err => errHandling(err, res));
     },
     
@@ -154,7 +149,18 @@ module.exports = {
                 upsert: true
               }
             )
-              .then(ret => res.json(ret))
+              .then(ret => {
+                // if this is for final submission of a profile
+                // and the profile status was previously 'incomplete'
+                // change it to 'complete'
+                if (req.query.submit) {
+                  if (ret.status === 'incomplete'){
+                    ret.status = 'complete'
+                    ret.save()
+                  }
+                }
+                res.json(ret)
+              })
               .catch(err => errHandling(err, res))
           }
         })

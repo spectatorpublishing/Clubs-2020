@@ -19,6 +19,7 @@ import theme from './theme';
 import { Navbar } from './components/userAuthNavBar';
 import { FindPassword } from './containers/FindPassword';
 import { ConfirmPasswordReset } from './containers/ConfirmPasswordReset';
+import { rememberMe } from './containers/FirebaseApiSetUpTest/firebase/rememberMe';
 
 const App = () => {
   const [userCred, setUserCred] = useState(null);
@@ -29,6 +30,8 @@ const App = () => {
         setUserCred(user);
         console.log('Signed in.');
       } else {
+        //make sure firebase auth login persistence is set to session only
+        rememberMe(false)
         console.log('Not signed in.');
       }
     });
