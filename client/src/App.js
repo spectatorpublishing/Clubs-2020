@@ -17,6 +17,8 @@ import Signup from './containers/FirebaseApiSetUpTest/firebase/signup';
 import * as firebase from './UserAuthUtilities/firebase';
 import theme from './theme';
 import { Navbar } from './components/userAuthNavBar';
+import { FindPassword } from './containers/FindPassword';
+import { ConfirmPasswordReset } from './containers/ConfirmPasswordReset';
 import { rememberMe } from './containers/FirebaseApiSetUpTest/firebase/rememberMe';
 
 const App = () => {
@@ -63,6 +65,10 @@ const App = () => {
             <Route path='/clubprofile' component={ClubAccountManagement} />
             <Route path='/login'>
               <Login userCred={userCred} />
+            </Route>
+            <Route exact path='/findpassword/confirm' component={ConfirmPasswordReset} />
+            <Route exact path='/findpassword'>
+              <FindPassword userCred={userCred} />
             </Route>
           </ViewportProvider>
           {/* <Route path='/test' component={Signin} />

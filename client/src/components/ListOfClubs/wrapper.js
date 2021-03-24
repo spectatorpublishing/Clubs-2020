@@ -48,7 +48,13 @@ function addProfileInfo(base, profile) {
     base.moreInfo.description = profile.longDescription;
 
     let highlights = [];
-    profile.highlights.forEach((hl, idx) => highlights[idx] = `${idx + 1}. ${hl}`);
+    console.log("========================1")
+    console.log(profile.highlights)
+    console.log("========================2")
+
+    if (profile && profile.highlights){
+        profile.highlights.forEach((hl, idx) => highlights[idx] = `${idx + 1}. ${hl}`);
+    }
     base.moreInfo.highlights = highlights.join('\n');
 }
 
@@ -98,7 +104,13 @@ export function joinAccountProfile(type) {
             return fetchProfiles(id_list)
         })
         .then(profile_list => {
-            profile_list.forEach((prof, idx) => addProfileInfo(list[idx], prof));
+            console.log(profile_list)
+            console.log(profile_list != null, profile_list != undefined)
+            profile_list.forEach((prof, idx) => {
+                console.log(prof)
+
+                addProfileInfo(list[idx], prof)
+            });
             return list;
         })
 }
