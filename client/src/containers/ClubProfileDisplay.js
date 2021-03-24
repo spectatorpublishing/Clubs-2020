@@ -96,7 +96,7 @@ const ClubProfileDisplay = () => {
             <>
                 {!isLoading && (
                     <Wrapper>
-                        <ProfileNav/>
+                        {/* <ProfileNav/> */}
                         <PageWrapper>
                             <Content>
                                 <h1>{club.name}</h1>
@@ -162,7 +162,7 @@ const ClubProfileDisplay = () => {
             <>
                 {!isLoading && (
                     <Wrapper>
-                        <ProfileNav/>
+                        {/* <ProfileNav/> */}
                         <PageWrapper>
                             <Content>                            
                                 <h1>{club.name}</h1>
@@ -232,7 +232,7 @@ const ClubProfileDisplay = () => {
             <>
                 {!isLoading && (
                     <Wrapper>
-                        <ProfileNav/>
+                        {/* <ProfileNav/> */}
                         <PageWrapper>
                             <Content>
                                 <h1>{club.name}</h1>

@@ -16,19 +16,56 @@ import Signin from './containers/FirebaseApiSetUpTest/firebase/signin';
 import Signup from './containers/FirebaseApiSetUpTest/firebase/signup';
 import * as firebase from './UserAuthUtilities/firebase';
 import theme from './theme';
-import { Navbar } from './components/userAuthNavBar';
+// import { Navbar } from './components/userAuthNavBar';
+import { Navbar } from './components/navbar';
 import { FindPassword } from './containers/FindPassword';
 import { ConfirmPasswordReset } from './containers/ConfirmPasswordReset';
 import { rememberMe } from './containers/FirebaseApiSetUpTest/firebase/rememberMe';
 
 const App = () => {
   const [userCred, setUserCred] = useState(null);
+
+  const [clubInfo, setClubInfo] = useState(null);
+  
+
+  const getAuthenticationLevel = (f_id) => {
+
+    console.log("----------------vvv")
+
+
+
+    // This function grabs the user account info to be passed down
+    fetch(`/api/clubAccounts/getByFirebaseId/${f_id}`)
+    // fetch(`http://localhost:8080/api/clubAccounts/getAll`)
+    .then(res => res.json())
+        .then(res => {
+            console.log("---------------------vvvvvvvvv")
+            console.log(res)
+            console.log("^^^^^^^^^---------------------")
+            setClubInfo(res)
+      })
+
+      /* club profile not created, direct to profile creation page */
+      // .then((res) => (res.clubProfileID ? 'home' : 'profile'))
+      .catch(function (err) {
+        console.error(err);
+        console.error("err");
+      })
+  }
+
+
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         console.log(user.email);
+        console.log("userId: ", user.uid);
+        getAuthenticationLevel(user.uid)
+
         setUserCred(user);
         console.log('Signed in.');
+
+
+
       } else {
         //make sure firebase auth login persistence is set to session only
         rememberMe(false)
@@ -37,12 +74,17 @@ const App = () => {
     });
   }, []);
 
+  
+
   return (
     <ThemeProvider theme={theme}>
       {/* <Navbar/> */}
+
+      
       <Router>
         <Switch>
           <ViewportProvider>
+            <Navbar loggedIn = {userCred !== null}/>
             <Route path='/club/:id'>
               <ClubProfileDisplay />
             </Route>

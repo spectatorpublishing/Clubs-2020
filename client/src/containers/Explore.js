@@ -385,7 +385,7 @@ const Explore = () => {
         console.log(width);
         return(
             <Wrapper>
-            <Navbar />
+            {/* <Navbar /> */}
             <main>
                 <PageWrapper>
                     <AdContainer>
@@ -404,7 +404,7 @@ const Explore = () => {
         console.log(width);
         return(
             <Wrapper>
-            <Navbar />
+            {/* <Navbar /> */}
             <main>
                 <PageWrapper>
                     <AdContainer>
