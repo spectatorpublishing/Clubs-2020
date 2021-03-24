@@ -107,6 +107,9 @@ export function joinAccountProfile(type) {
         .then(res => {
             let id_list = [];
             res.forEach((account) => id_list.push(account.id));
+            console.log("accounts list:")
+            console.log(res)
+            console.log(list)
 
             return fetchProfiles(id_list)
         })
