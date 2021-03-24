@@ -20,6 +20,7 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
   const [isEmailEmpty, setIsEmailEmpty] = useState(false);
   const [isPasswordIncorrect, setIsPasswordIncorrect] = useState(false);
   const [isPasswordInvalid, setIsPasswordInvalid] = useState(false);
+  const [isPasswordEmpty, setIsPasswordEmpty] = useState(false);
   const history = useHistory();
   const [
     emailContainsIllegalCharacters,
@@ -32,36 +33,61 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
 
   const passEx = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)/;
 
+  const pwReqLength = 8;
+
   function onSignupSubmit(e) {
     let shouldSubmit = true;
 
-    if (email.current.value.length <= 0) {
+    if (!email || email.current.value.length <= 0) {
       shouldSubmit = false;
       setIsEmailEmpty(true)
+      console.log("arrived here1")
+
       //display message that email is empty
     }
     else {
       setIsEmailEmpty(false)
     }
-    //if email is of invalid format, display invailidity and the reasons
 
-    if (password.current.value !== confirmPassword.current.value) {
-      shouldSubmit = false;
-    }
-    if (password && password.current.value.length <= 5) {
-      setIsPasswordShort(true);
-      shouldSubmit = false;
-    } else if (password && password.current.value.length > 5)
-      setIsPasswordShort(false);
+    console.log("arrived here2")
+    console.log(password.current.value.length <= 0)
 
-    if (password.current.value.match(passEx)) {
-      console.log("matched")
-      setIsPasswordInvalid(false)
+
+    if (!password || !password.current || password.current.value.length <= 0) {
+      console.log("arrived here3")
+
+      shouldSubmit = false;
+      setIsPasswordEmpty(true)
     }
-    else {
-      console.log("pass not matching reqs")
-      setIsPasswordInvalid(true)
+
+    else{
+
+      //if email is of invalid format, display invailidity and the reasons
+
+      if (password && password.current.value !== confirmPassword.current.value) {
+        shouldSubmit = false;
+      }
+      if (password && password.current.value.length <= pwReqLength) {
+        setIsPasswordShort(true);
+        shouldSubmit = false;
+      } else if (password && password.current.value.length > pwReqLength)
+        setIsPasswordShort(false);
+
+      if (password.current.value.match(passEx)) {
+        console.log("matched")
+        setIsPasswordInvalid(false)
+      }
+      else {
+        console.log("pass not matching reqs")
+        setIsPasswordInvalid(true)
+      }
+
+    
+      setIsPasswordEmpty(false)
+
     }
+    
+    
     // if (email && email.current.value.match(emailEx)) {
     //   setEmailContainsIllegalCharacters(true);
     //   shouldSubmit = false;
@@ -130,7 +156,7 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
     else {
       let shouldSubmit = true;
       // console.log(email.current.value.length)
-      if (email.current.value.length <= 0) {
+      if (!email || email.current.value.length <= 0) {
         shouldSubmit = false;
         setIsEmailEmpty(true)
         //display message that email is empty
@@ -138,14 +164,23 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
       else {
         setIsEmailEmpty(false)
       }
+
+      if (!password || password.current.value.length <= 0) {
+        shouldSubmit = false;
+        setIsPasswordEmpty(true)
+        //display message that email is empty
+      }
+      else {
+        setIsPasswordEmpty(false)
+      }
       //if email is of invalid format, display invailidity and the reasons
 
 
-      if (password && password.current.value.length <= 5) {
-        setIsPasswordShort(true);
-        shouldSubmit = false;
-      } else if (password && password.current.value.length > 5)
-        setIsPasswordShort(false);
+          // if (password && password.current.value.length <= pwReqLength) {
+          //   setIsPasswordShort(true);
+          //   shouldSubmit = false;
+          // } else if (password && password.current.value.length > pwReqLength)
+          //   setIsPasswordShort(false);
 
       /*if (email && email.current.value.match(emailEx)) {
         setEmailContainsIllegalCharacters(true);
@@ -320,7 +355,7 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
     modalData = {
       title: 'Password Reset Email Sent',
       desc: 'Already have an account?',
-      descLink: './login',
+      descLink: '/login',
       descLinkText: 'Login Here',
       detail:
         'Password reset instructions have been sent to specified email. If you have any questions, please contact\n',
@@ -377,7 +412,7 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
         </Description>
         {id === 'signup' || id === 'login' || id === 'findpassword' ? (
           <SignUp>
-            <InputSection marginBottom>
+            <InputSection marginBottom = {id !== 'findpassword'}>
               <label htmlFor='userEmail'>{modalData.detail}</label>
               <Input
                 type='email'
@@ -403,7 +438,7 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
               <ErrorText
                 marginTop={8}
                 stateToCheck={isEmailEmpty}
-                text='Email may not be empty'
+                text='Enter your email'
               />
               <ErrorText
                 marginTop={8}
@@ -421,7 +456,7 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
                 text='no account found for this email'
               />
             </InputSection>
-            {id === 'signup' || id === 'login' && (
+            {(id === 'signup' || id === 'login' ) && (
               <InputSection marginBottom={id === 'signup'}>
                 <label htmlFor='userPassword'>{modalData.detailTwo}</label>
                 <FlexRow>
@@ -445,7 +480,7 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
                       id === 'signup' &&
                         isPasswordShort &&
                         confirmPassword &&
-                        setIsPasswordShort(e.target.value.length <= 5);
+                        setIsPasswordShort(e.target.value.length <= pwReqLength);
 
 
                       id === 'signup' && setIsPasswordInvalid(false)
@@ -462,11 +497,15 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
                     {showPassword ? openEye() : closeEye()}
                   </ShowPasswordButton>
                 </FlexRow>
-
+                <ErrorText
+                marginTop={8}
+                stateToCheck={isPasswordEmpty}
+                text='Enter your password'
+              />
                 <ErrorText
                   marginTop={8}
                   stateToCheck={isPasswordShort}
-                  text='Your password needs to be longer than 5 characters'
+                  text={'Your password needs to be longer than '+ pwReqLength +' characters'}
                 />
                 <ErrorText
                   marginTop={8}
@@ -501,7 +540,7 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
                 <ErrorText
                   marginTop={8}
                   stateToCheck={!doPasswordsMatch}
-                  text='Confirmed password does not match'
+                  text='passwords do not match'
                 />
               </InputSection>
             )}
