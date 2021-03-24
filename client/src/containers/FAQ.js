@@ -1,12 +1,12 @@
 import React from 'react';
-import { Navbar } from '../components/navbar';
+// import { Navbar } from '../components/navbar';
 import { FaqBox } from '../components/faqbox';
 import styled from 'styled-components';
 
 export const FAQ = () => {
   return (
     <Wrapper>
-      <Navbar />
+      {/* <Navbar /> */}
       <PageWrapper>
         <Title>Frequently Asked Questions</Title>
         <FaqBox
