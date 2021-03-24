@@ -73,7 +73,8 @@ module.exports = {
           clubs = []
           acceptedClubs.map(obj => (clubs.push(obj.clubProfileId)))
 
-          clubProfile.find({_id:{$in: clubs}, status: 'complete'})
+          // clubProfile.find({_id:{$in: clubs}, status: 'complete'})
+          clubProfile.find({_id:{$in: clubs}})
             .select({_id: 1, name: 1, shortDescription: 1, imageUrl: 1, tags: 1, memberRange: 1, acceptingMembers: 1, applicationRequired: 1})
             .then(rdata => {
                 var data = JSON.parse(JSON.stringify(rdata));
@@ -196,8 +197,11 @@ module.exports = {
     },
     filterAndSortBy: function(req, res) {
         // TODO; req.query contains filter and/or sort information
+        // console.log(getAll(req, res))
 
         var specs = {}
+        // {verificationStatus: 'accepted' }
+        // specs["verificationStatus"] = 'accepted'
         if (req.query.memberRange) {
           specs['memberRange'] = {$in: req.query.memberRange}
         }
@@ -211,9 +215,21 @@ module.exports = {
           specs['applicationRequired'] = Boolean(req.query.applicationRequired)
         }
         
-        clubProfile.find(specs)
+        clubAccount.find({verificationStatus: 'accepted' }).select({clubProfileId: 1})
+        .then( acceptedClubs => {
+      
+          clubs = []
+          acceptedClubs.map(obj => (clubs.push(obj.clubProfileId)))
+
+          specs['_id']= {$in: clubs}
+          clubProfile.find(specs)
           .then(clubprofile => res.json(clubprofile))
           .catch(err => errHandling(err, res)); 
+
+        })
+        .catch(err =>  errHandling(err, res));
+
+        
       
     },
 
@@ -227,21 +243,21 @@ module.exports = {
 
         var seenData = new Set();
 
-        clubProfile.find({name:{$regex: searchInput, $options: 'i'}})
-        .then(q1=>{
+
+
+        clubAccount.find({verificationStatus: 'accepted' }).select({clubProfileId: 1})
+        .then( acceptedClubs => {
+      
+          clubs = []
+          acceptedClubs.map(obj => (clubs.push(obj.clubProfileId)))
+
+          // specs['_id']= {$in: clubs}
           
-          let arr = JSON.parse(JSON.stringify(q1));
-
-          for (i = 0; i < arr.length; i++) {
-            if ( !(seenData.has(arr[i].name)) ) {
-              seenData.add(arr[i].name );
-              resultingData.push(arr[i]);
-            } 
-          }
-
-          clubProfile.find( {longDescription:{$regex: searchInput, $options: 'i'} })
-          .then(q2=>{
-            let arr = JSON.parse(JSON.stringify(q2));
+          
+          clubProfile.find({_id: {$in: clubs}, name:{$regex: searchInput, $options: 'i'}})
+          .then(q1=>{
+            
+            let arr = JSON.parse(JSON.stringify(q1));
 
             for (i = 0; i < arr.length; i++) {
               if ( !(seenData.has(arr[i].name)) ) {
@@ -250,9 +266,9 @@ module.exports = {
               } 
             }
 
-            clubProfile.find({shortDescription:{$regex: searchInput, $options: 'i'}})
-            .then(q3 =>{
-              let arr = JSON.parse(JSON.stringify(q3));
+            clubProfile.find( {_id: {$in: clubs}, longDescription:{$regex: searchInput, $options: 'i'} })
+            .then(q2=>{
+              let arr = JSON.parse(JSON.stringify(q2));
 
               for (i = 0; i < arr.length; i++) {
                 if ( !(seenData.has(arr[i].name)) ) {
@@ -261,15 +277,33 @@ module.exports = {
                 } 
               }
 
-              res.json(resultingData);
+              clubProfile.find({_id: {$in: clubs}, shortDescription:{$regex: searchInput, $options: 'i'}})
+              .then(q3 =>{
+                let arr = JSON.parse(JSON.stringify(q3));
+
+                for (i = 0; i < arr.length; i++) {
+                  if ( !(seenData.has(arr[i].name)) ) {
+                    seenData.add(arr[i].name );
+                    resultingData.push(arr[i]);
+                  } 
+                }
+
+                res.json(resultingData);
               
 
+              }).catch(err => res.status(422).json(err));
+              
             }).catch(err => res.status(422).json(err));
             
-          }).catch(err => res.status(422).json(err));
+          })
+          .catch(err => res.status(422).json(err));
+
+
           
         })
-        .catch(err => res.status(422).json(err));
+        .catch(err =>  errHandling(err, res));
+
+        
         
         
     }
