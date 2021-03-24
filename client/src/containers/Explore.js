@@ -12,7 +12,7 @@ import Icon from '../components/filters/shuffle.png';
 
 const Wrapper = styled.div`
   background-color: ${(props) => props.theme.colors.white};
-  background-image: url(https://clubs-cu.s3.amazonaws.com/columbia-wave.svg);
+  background-image: url("https://clubs-cu.s3.amazonaws.com/columbia-wave.svg");
   background-repeat: no-repeat;
   background-position: top right;
 `;
