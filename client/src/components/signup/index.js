@@ -21,6 +21,7 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
   const [isEmailEmpty, setIsEmailEmpty] = useState(false);
   const [isPasswordIncorrect, setIsPasswordIncorrect] = useState(false);
   const [isPasswordInvalid, setIsPasswordInvalid] = useState(false);
+  const [isPasswordEmpty, setIsPasswordEmpty] = useState(false);
   const history = useHistory();
   const [
     emailContainsIllegalCharacters,
@@ -33,33 +34,53 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
 
   const passEx = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\W)/;
 
+  const pwReqLength = 8;
+
   function onSignupSubmit(e) {
     let shouldSubmit = true;
 
-    if (email.current.value.length <= 0) {
+    if (!email || email.current.value.length <= 0) {
       shouldSubmit = false;
       setIsEmailEmpty(true);
       //display message that email is empty
     } else {
       setIsEmailEmpty(false);
     }
-    //if email is of invalid format, display invailidity and the reasons
 
-    if (password.current.value !== confirmPassword.current.value) {
+    console.log("arrived here2")
+    console.log(password.current.value.length <= 0)
+
+
+    if (!password || !password.current || password.current.value.length <= 0) {
+      console.log("arrived here3")
+
       shouldSubmit = false;
+      setIsPasswordEmpty(true)
     }
-    if (password && password.current.value.length <= 5) {
-      setIsPasswordShort(true);
-      shouldSubmit = false;
-    } else if (password && password.current.value.length > 5)
-      setIsPasswordShort(false);
 
-    if (password.current.value.match(passEx)) {
-      console.log('matched');
-      setIsPasswordInvalid(false);
-    } else {
-      console.log('pass not matching reqs');
-      setIsPasswordInvalid(true);
+    else{
+
+      //if email is of invalid format, display invailidity and the reasons
+
+      if (password && password.current.value !== confirmPassword.current.value) {
+        shouldSubmit = false;
+      }
+      if (password && password.current.value.length <= pwReqLength) {
+        setIsPasswordShort(true);
+        shouldSubmit = false;
+      } else if (password && password.current.value.length > pwReqLength)
+        setIsPasswordShort(false);
+
+
+      if (password.current.value.match(passEx)) {
+        console.log("matched")
+        setIsPasswordInvalid(false)
+      } 
+      else {
+        console.log("pass not matching reqs")
+        setIsPasswordInvalid(true)
+      }
+      setIsPasswordEmpty(false)
     }
     // if (email && email.current.value.match(emailEx)) {
     //   setEmailContainsIllegalCharacters(true);
@@ -121,20 +142,30 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
     } else {
       let shouldSubmit = true;
       // console.log(email.current.value.length)
-      if (email.current.value.length <= 0) {
+      if (!email || email.current.value.length <= 0) {
         shouldSubmit = false;
         setIsEmailEmpty(true);
         //display message that email is empty
       } else {
         setIsEmailEmpty(false);
       }
+
+      if (!password || password.current.value.length <= 0) {
+        shouldSubmit = false;
+        setIsPasswordEmpty(true)
+        //display message that email is empty
+      }
+      else {
+        setIsPasswordEmpty(false)
+      }
       //if email is of invalid format, display invailidity and the reasons
 
-      if (password && password.current.value.length <= 5) {
-        setIsPasswordShort(true);
-        shouldSubmit = false;
-      } else if (password && password.current.value.length > 5)
-        setIsPasswordShort(false);
+
+          // if (password && password.current.value.length <= pwReqLength) {
+          //   setIsPasswordShort(true);
+          //   shouldSubmit = false;
+          // } else if (password && password.current.value.length > pwReqLength)
+          //   setIsPasswordShort(false);
 
       /*if (email && email.current.value.match(emailEx)) {
         setEmailContainsIllegalCharacters(true);
@@ -171,19 +202,57 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
         setIsPasswordIncorrect(false);
         setIsEmailInvalid(false);
       }
-
       //e.preventDefault();
     }
   }
 
+
+  /*
+   * on /findpassword, we only worry about
+   *  isEmailNotFound, isEmailInvalid, isEmailEmpty, emailContainsIllegalCharacters
+   * field and we will enter with only setIsEmailEmpty and emailContainsIllegalCharacters
+   * set if any.
+   */
+  function onSendReset() {
+    if (!email.current.value.length) {
+      // when user hasn't typed anything, email is empty but state not set
+      setIsEmailEmpty(true)
+      return
+    } else if (emailContainsIllegalCharacters)
+      return
+
+    /* TODO:
+     * @url: the continue url after users click the password reset link
+     * sent via email and completes password reset. Need to set to our
+     * login page.
+     */
+    var actionCodeSettings = {
+    //   url: 'https://www.example.com/?email=user@example.com',
+    };
+
+    firebase.auth().sendPasswordResetEmail(
+        email.current.value, actionCodeSettings)
+        .then(function() {
+          /* 
+           * Password reset email sent.
+           * No need to toggle error states because we'll be redirected
+           */
+          history.push('/findpassword/confirm');
+        })
+        .catch(function(error) {
+          handleErrors('findpassword', error)
+        });
+  }
+
   function handleErrors(type, error) {
+
     var errorCode = error.code;
     var errorMessage = error.message;
     console.log(errorMessage);
     console.log(errorCode);
 
     //general errors
-    if (errorCode == 'auth/invalid-email') {
+    if (errorCode == "auth/invalid-email") {
       setIsEmailInvalid(true);
     } else {
       setIsEmailInvalid(false);
@@ -194,15 +263,29 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
     } else if (type == 'login') {
       //errors specific to login
 
-      if (errorCode == 'auth/user-not-found') {
+    if (type === "signup") {
+      //errors specific to signup
+    } else if (type === "login") {
+      //errors specific to login
+
+      if (errorCode === "auth/user-not-found") {
         setIsEmailNotFound(true);
       } else {
         setIsEmailNotFound(false);
       }
-      if (errorCode == 'auth/wrong-password') {
+      
+      if (errorCode === "auth/wrong-password") {
         setIsPasswordIncorrect(true);
       } else {
         setIsPasswordIncorrect(false);
+      }
+    } else if (type === 'findpassword') {
+      switch(errorCode) {
+        case 'auth/user-not-found':
+          setIsEmailNotFound(true)
+          break
+        default:
+          setIsEmailNotFound(false)
       }
     }
   }
@@ -240,6 +323,33 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
       descLinkText: 'Register Here',
       detail: 'Email',
       detailTwo: 'Password',
+      detailTwoDesc: 'Forgot Your Password?',
+      detailTwoDescLink: './findpassword',
+      detailTwoDescLinkText: 'Reset Here',
+    };
+  } else if (id === 'findpassword') {
+    modalData = {
+      title: 'Password Reset',
+      desc: "Don't have an account for your club? ",
+      descLink: '/signup',
+      descLinkText: 'Register Here',
+      detail: 'Account Email',
+    }
+  } else if (id === 'confirmpwdreset') {
+    modalData = {
+      title: 'Password Reset Email Sent',
+      desc: 'Already have an account?',
+      descLink: '/login',
+      descLinkText: 'Login Here',
+      detail:
+        'Password reset instructions have been sent to specified email. If you have any questions, please contact\n',
+      detailLink: 'mailto:publisher@columbiaspectator.com',
+      detailLinkText: 'publisher@columbiaspectator.com',
+      detailTwo: '.\n\nSomething went wrong?\n',
+      detailLinkTwo: '/findpassword',
+      detailLinkTwoText: 'Resend Email',
+      signUp: 'none',
+      confirmation: true,
     };
   }
 
@@ -284,9 +394,9 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
             {modalData.descLinkText}
           </Link>
         </Description>
-        {id === 'signup' || id === 'login' ? (
+        {id === 'signup' || id === 'login' || id === 'findpassword' ? (
           <SignUp>
-            <InputSection marginBottom>
+            <InputSection marginBottom = {id !== 'findpassword'}>
               <label htmlFor='userEmail'>{modalData.detail}</label>
               <Input
                 type='email'
@@ -302,14 +412,16 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
                   isEmailEmpty != e.target.value.length <= 0 &&
                     setIsEmailEmpty(false);
 
-                  setIsEmailInvalid(false);
+
+                  setIsEmailInvalid && setIsEmailInvalid(false);
+                  setIsEmailNotFound && setIsEmailNotFound(false);
                 }}
               />
               {id === 'signup' && <InputDesc>{modalData.detailDesc}</InputDesc>}
               <ErrorText
                 marginTop={8}
                 stateToCheck={isEmailEmpty}
-                text='Email cannot be empty'
+                text='Enter your email'
               />
               <ErrorText
                 marginTop={8}
@@ -327,61 +439,71 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
                 text='no account found for this email'
               />
             </InputSection>
-            <InputSection marginBottom={id === 'signup'}>
-              <label htmlFor='userPassword'>{modalData.detailTwo}</label>
-              <FlexRow>
-                <Input
-                  type={showPassword ? 'text' : 'password'}
-                  id='userPassword'
-                  ref={password}
-                  required
-                  onChange={(e) => {
-                    id === 'signup' &&
-                      confirmPassword !== null &&
-                      setDoPasswordsMatch(
-                        e.target.value === confirmPassword.current.value
-                      );
-                    /*id === 'signup' &&
-                      containsIllegalCharacters &&
-                      setContainsIllegalCharacters(
-                        e.target.value.match(emailEx) !== null
-                      );*/
+               
+            {(id === 'signup' || id === 'login' ) && (
+              <InputSection marginBottom={id === 'signup'}>
+                <label htmlFor='userPassword'>{modalData.detailTwo}</label>
+                <FlexRow>
+                  <Input
+                    type={showPassword ? 'text' : 'password'}
+                    id='userPassword'
+                    ref={password}
+                    required
+                    onChange={(e) => {
+                      id === 'signup' &&
+                        confirmPassword !== null &&
+                        setDoPasswordsMatch(
+                          e.target.value === confirmPassword.current.value
+                        );
+                      /*id === 'signup' &&
+                        containsIllegalCharacters &&
+                        setContainsIllegalCharacters(
+                          e.target.value.match(emailEx) !== null
+                        );*/
 
-                    id === 'signup' &&
-                      isPasswordShort &&
-                      confirmPassword &&
-                      setIsPasswordShort(e.target.value.length <= 5);
+                      id === 'signup' &&
+                        isPasswordShort &&
+                        confirmPassword &&
+                        setIsPasswordShort(e.target.value.length <= pwReqLength);
 
-                    id === 'signup' && setIsPasswordInvalid(false);
-                  }}
+
+                      id === 'signup' && setIsPasswordInvalid(false)
+
+                    }}
+                  />
+                  <ShowPasswordButton
+                    type='button'
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => {
+                      setShowPassword(!showPassword);
+                    }}
+                  >
+                    {showPassword ? openEye() : closeEye()}
+                  </ShowPasswordButton>
+                </FlexRow>
+                <ErrorText
+                  marginTop={8}
+                  stateToCheck={isPasswordEmpty}
+                  text='Enter your password'
                 />
-                <ShowPasswordButton
-                  type='button'
-                  whileTap={{ scale: 0.95 }}
-                  onClick={() => {
-                    setShowPassword(!showPassword);
-                  }}
-                >
-                  {showPassword ? openEye() : closeEye()}
-                </ShowPasswordButton>
-              </FlexRow>
-
-              <ErrorText
-                marginTop={8}
-                stateToCheck={isPasswordShort}
-                text='Your password needs to be longer than 5 characters'
-              />
-              <ErrorText
-                marginTop={8}
-                stateToCheck={isPasswordIncorrect}
-                text='password is incorrect'
-              />
-              <ErrorText
-                marginTop={8}
-                stateToCheck={isPasswordInvalid}
-                text='Your password must contain a combination of lowercase letters and at least one capital letter, symbol and number'
-              />
-            </InputSection>
+                <ErrorText
+                  marginTop={8}
+                  stateToCheck={isPasswordShort}
+                  text={'Your password needs to be longer than '+ pwReqLength +' characters'}
+                />
+                <ErrorText
+                  marginTop={8}
+                  stateToCheck={isPasswordIncorrect}
+                  text='password is incorrect'
+                />
+                <ErrorText
+                  marginTop={8}
+                  stateToCheck={isPasswordInvalid}
+                  text='Your password must contain a combination of lowercase letters and at least one capital letter, symbol and number'
+                />
+              </InputSection>
+            )}
+            
             {id === 'signup' && (
               <InputSection>
                 <label htmlFor='userPasswordConfirm'>
@@ -399,14 +521,21 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
                     );
                   }}
                 />
-
                 <ErrorText
                   marginTop={8}
                   stateToCheck={!doPasswordsMatch}
-                  text='Confirmed password does not match'
+                  text='passwords do not match'
                 />
               </InputSection>
             )}
+
+            {id === 'login' &&
+              <InputDesc>
+                {modalData.detailTwoDesc}
+                <Link href={modalData.detailTwoDescLink} paddingLeft='0.3rem'>
+                  {modalData.detailTwoDescLinkText}
+                </Link>
+              </InputDesc>}
           </SignUp>
         ) : (
           <div />
@@ -460,7 +589,16 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
             <Description>Having Trouble?</Description>
           </FlexContainer>
         )}
-        {id === 'confirmation' && (
+        {id === 'findpassword' && (
+          <TomatoButton
+            text='Send Reset'
+            wire
+            margin='0.65rem 0 0 0'
+            type='button'
+            onClick={onSendReset}
+            />
+        )}
+        {(id === 'confirmation' || id === 'confirmpwdreset') && (
           <Confirmation>
             <Icon>
               <Flap>
@@ -470,7 +608,27 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
             {modalData.detail}
             <EmailLink href={detailLink}>{modalData.detailLinkText}</EmailLink>
             {modalData.detailTwo}
+            {id === 'confirmpwdreset' && (
+              <Link href={modalData.detailLinkTwo}>
+                  {modalData.detailLinkTwoText}
+              </Link>
+            )}
           </Confirmation>
+        )}
+        {id === 'confirmpwdreset' && (
+          <FlexContainer marginTop='1.5em'>
+            <TomatoButton text='Explore Clubs' wire onClick={() => {
+              history.push('/')
+            }} />
+            <TomatoButton
+              text='Club Log in'
+              wire
+              margin='0.65rem 0 0 0'
+              type='button'
+              onClick={() => {
+                history.push('/login')
+              }} />
+          </FlexContainer>
         )}
       </Container>
     </Wrapper>
@@ -510,6 +668,7 @@ const FlexContainer = styled.div`
   flex-direction: ${(props) =>
     props.flexDirection ? props.flexDirection : 'column'};
   align-items: center;
+  margin-top: ${props => props.marginTop || 0};
   margin: ${(props) => props.margin};
 `;
 
@@ -560,6 +719,7 @@ const Confirmation = styled.div`
   margin-left: auto;
   margin-right: auto;
   text-align: center;
+  white-space: pre-wrap;
   @media only screen and (max-device-width: 30rem) {
     width: 75%;
   }
