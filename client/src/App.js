@@ -25,7 +25,8 @@ import { rememberMe } from './containers/FirebaseApiSetUpTest/firebase/rememberM
 const App = () => {
   const [userCred, setUserCred] = useState(null);
 
-  const [clubInfo, setClubInfo] = useState(null);
+  const [clubAccountInfo, setclubAccountInfo] = useState(null);
+  // const [authenticationLevel, setAuthenticationLevel] = useState("user");
   
 
   const getAuthenticationLevel = (f_id) => {
@@ -42,7 +43,7 @@ const App = () => {
             console.log("---------------------vvvvvvvvv")
             console.log(res)
             console.log("^^^^^^^^^---------------------")
-            setClubInfo(res)
+            setclubAccountInfo(res)
       })
 
       /* club profile not created, direct to profile creation page */
@@ -84,7 +85,7 @@ const App = () => {
       <Router>
         <Switch>
           <ViewportProvider>
-            <Navbar loggedIn = {userCred !== null}/>
+            <Navbar loggedIn = {userCred !== null} authLevel = {clubAccountInfo ? clubAccountInfo.authorityLevel : "user"} />
             <Route path='/club/:id'>
               <ClubProfileDisplay />
             </Route>

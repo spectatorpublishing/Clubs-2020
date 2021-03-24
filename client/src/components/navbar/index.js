@@ -11,7 +11,7 @@ import Logout from '../logout/index';
 
 // { detailLink, id, userCred }
 
-export const Navbar = ({loggedIn = false}) => {
+export const Navbar = ({loggedIn = false, authLevel = "user"}) => {
   const [showLinks, setShowLinks] = useState(false);
   const [currentPath, setCurrentPath] = useState('/');
   const { width } = useViewport();
@@ -45,6 +45,9 @@ export const Navbar = ({loggedIn = false}) => {
         {currentPath === '/' && (
           <LinksContainer className={`${showLinks ? 'show-container' : null}`}>
             <MenuLinks>
+              <StyledListItem hideItem = {!loggedIn || authLevel !== "admin"}>
+                <a href='/portal'><h3>Admin Portal</h3></a>
+              </StyledListItem>
               <StyledListItem hideItem = {false}>
                 <a href='/faq'><h3>FAQs</h3></a>
               </StyledListItem>
