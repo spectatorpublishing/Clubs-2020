@@ -258,14 +258,10 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
       setIsEmailInvalid(false);
     }
 
-    if (type == 'signup') {
-      //errors specific to signup
-    } else if (type == 'login') {
-      //errors specific to login
-
     if (type === "signup") {
       //errors specific to signup
-    } else if (type === "login") {
+    } 
+    else if (type === "login") {
       //errors specific to login
 
       if (errorCode === "auth/user-not-found") {
@@ -279,7 +275,8 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
       } else {
         setIsPasswordIncorrect(false);
       }
-    } else if (type === 'findpassword') {
+    } 
+    else if (type === 'findpassword') {
       switch(errorCode) {
         case 'auth/user-not-found':
           setIsEmailNotFound(true)
@@ -461,6 +458,12 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
                           e.target.value.match(emailEx) !== null
                         );*/
 
+                      id === 'signup' && setIsPasswordInvalid(false)
+
+                      isPasswordEmpty != e.target.value.length <= 0 &&
+                      setIsPasswordEmpty(false);
+                      
+
                       id === 'signup' &&
                         isPasswordShort &&
                         confirmPassword &&
@@ -634,6 +637,8 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
     </Wrapper>
   );
 };
+
+
 
 const Wrapper = styled.div`
   position: absolute;
