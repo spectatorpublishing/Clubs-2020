@@ -12,8 +12,8 @@ import {
 
 function ClubTags({ tags }) {
   if(tags !== undefined) {
-    return tags.map((tag) => (
-      <Tag>
+    return tags.map((tag, idx) => (
+      <Tag key= {`t${idx}`}>
         <SearchTag text={tag} />
       </Tag>
     ));
@@ -38,7 +38,7 @@ function ApplicationRequired({ isApplicationRequired }) {
   }
 }
 
-const Info = styled.p`
+const Info = styled.div`
   color: ${(props) => props.theme.colors.gray};
   font-weight: 500;
   font-size: 1.125rem;

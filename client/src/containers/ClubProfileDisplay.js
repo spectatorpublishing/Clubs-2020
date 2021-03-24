@@ -13,19 +13,23 @@ import AccountTag from "../components/accountTag/index";
 import YourClubProfile from "../components/yourClubProfile/index";
 import CompleteProfile from "../components/completeProfile";
 
-const ClubProfileDisplay = () => {
+const ClubProfileDisplay = (profileId = 111) => {
     const { id } = useParams();
+    const [pid, setPid] = useState(null);
     const [club, setClub] = useState();
     const [width, setWidth] = useState(window.innerWidth);
     const [isLoading, setLoading] = useState(true);
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     
     /* temporary for conditional components */
-    const [isLoggedin, setLoggedIn] = useState(false);
-    const [firstLogIn, setFirstLog] = useState(false);
-    const [completeProfile, setComplete] = useState(false);
+    const [isLoggedin, setLoggedIn] = useState(true);
+    const [firstLogIn, setFirstLog] = useState(true); //not sure how to track this as of now so I'm going to leave this as deafult true
+    const [completeProfile, setComplete] = useState(true);
 
     useEffect(() => {
+        // id && console.log("pid = ", profileId, pid === id, pid, id)
+        // setPid(profileId)
+        // setLoggedIn(pid === id )
         window.addEventListener("resize", () => setWidth(window.innerWidth));
         fetch(`${window.origin}/api/clubProfiles/${id}`, {
             method: 'GET',
@@ -35,13 +39,16 @@ const ClubProfileDisplay = () => {
             setClub(response);
             setLoading(false);
             console.log(`api/clubProfiles/${id}`);
+            console.log(profileId.profileId === id , profileId.profileId ,id)
+            setLoggedIn(profileId.profileId === id )
           })
         //.catch((error) => console.log(error));
     }, [id]);
 
     const SimilarClubs = () => { return (club.similarClubs === undefined) ? (<h1>Loading</h1>) : 
-        (club.similarClubs.map(profile => (
+        (club.similarClubs.map((profile, idx) => (
             <ExploreBox 
+                key= {`p${idx}`}
                 name = {profile.name}
                 description = {profile.shortDescription}
                 imageURL = {profile.imageUrl}
@@ -55,12 +62,12 @@ const ClubProfileDisplay = () => {
 
     const ProfileNav = () => { 
         return (
-        <>
-            <NavbarType/>
+        <div>
+            {/* <NavbarType/> */}
             <ConditionalAccountTag/>
             <ConditionalCompleteProfile/>
             <ConditionalClubProfile/>
-        </>
+        </div>
         );
     }
 
@@ -96,7 +103,7 @@ const ClubProfileDisplay = () => {
             <>
                 {!isLoading && (
                     <Wrapper>
-                        {/* <ProfileNav/> */}
+                        <ProfileNav/>
                         <PageWrapper>
                             <Content>
                                 <h1>{club.name}</h1>
@@ -162,7 +169,7 @@ const ClubProfileDisplay = () => {
             <>
                 {!isLoading && (
                     <Wrapper>
-                        {/* <ProfileNav/> */}
+                        <ProfileNav/>
                         <PageWrapper>
                             <Content>                            
                                 <h1>{club.name}</h1>
@@ -232,7 +239,7 @@ const ClubProfileDisplay = () => {
             <>
                 {!isLoading && (
                     <Wrapper>
-                        {/* <ProfileNav/> */}
+                        <ProfileNav/>
                         <PageWrapper>
                             <Content>
                                 <h1>{club.name}</h1>

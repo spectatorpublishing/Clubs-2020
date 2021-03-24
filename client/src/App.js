@@ -1,6 +1,6 @@
 import ViewportProvider from './components/viewportProvider/index';
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, useParams } from 'react-router-dom';
 import Explore from './containers/Explore';
 import { FAQ } from './containers/FAQ';
 import { Portal } from './containers/Portal';
@@ -29,7 +29,7 @@ const App = () => {
   // const [authenticationLevel, setAuthenticationLevel] = useState("user");
   
 
-  const getAuthenticationLevel = (f_id) => {
+  const getClubAccountInfo = (f_id) => {
 
     console.log("----------------vvv")
 
@@ -43,6 +43,9 @@ const App = () => {
             console.log("---------------------vvvvvvvvv")
             console.log(res)
             console.log("^^^^^^^^^---------------------")
+
+            console.log( (res.verificationStatus !== "incomplete" && res.verificationStatus !== "denied"))
+            console.log('++++++++++++++');
             setclubAccountInfo(res)
       })
 
@@ -54,16 +57,29 @@ const App = () => {
       })
   }
 
+  // const isOwnAccount = (prof_id) =>{
+  //   if (clubAccountInfo && clubAccountInfo.clubProfileId == ) {
+
+  //   } ? clubAccountInfo.clubProfileId : "user"
+  // }
+
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         console.log(user.email);
         console.log("userId: ", user.uid);
-        getAuthenticationLevel(user.uid)
+        //get the club account info by firebaseId and save in state
+        getClubAccountInfo(user.uid)
 
+        //save the user firebase credential info in state
         setUserCred(user);
         console.log('Signed in.');
+
+
+        
+
+
 
 
 
@@ -76,6 +92,8 @@ const App = () => {
   }, []);
 
   
+  console.log(clubAccountInfo && (clubAccountInfo.verificationStatus !== "incomplete" && clubAccountInfo.verificationStatus !== "denied"))
+  console.log('---=-=---=--');
 
   return (
     <ThemeProvider theme={theme}>
@@ -85,9 +103,11 @@ const App = () => {
       <Router>
         <Switch>
           <ViewportProvider>
-            <Navbar loggedIn = {userCred !== null} authLevel = {clubAccountInfo ? clubAccountInfo.authorityLevel : "user"} />
+            <Navbar loggedIn = {userCred !== null} authLevel = {clubAccountInfo ? clubAccountInfo.authorityLevel : "user"} profileId = {clubAccountInfo ? clubAccountInfo.clubProfileId : null} />
             <Route path='/club/:id'>
-              <ClubProfileDisplay />
+              {/* <ClubProfileDisplay personal = {()=>isOwnAccount()} /> */}
+              {clubAccountInfo && <ClubProfileDisplay profileId = {clubAccountInfo.clubProfileId} />}
+              {/* {clubAccountInfo ? clubAccountInfo.clubProfileId : "user"} */}
             </Route>
             <Route path='/profile-creation'>
               <ProfileCreationMaster userCred={userCred} />
@@ -107,7 +127,7 @@ const App = () => {
             <Route path='/confirm' component={Confirmation} />
             <Route path='/clubprofile' component={ClubAccountManagement} />
             <Route path='/login'>
-              <Login userCred={userCred} />
+              <Login userCred={userCred} isProfileComplete = {clubAccountInfo && (clubAccountInfo.verificationStatus !== "incomplete" && clubAccountInfo.verificationStatus !== "denied") } />
             </Route>
             <Route exact path='/findpassword/confirm' component={ConfirmPasswordReset} />
             <Route exact path='/findpassword'>

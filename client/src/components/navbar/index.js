@@ -11,12 +11,12 @@ import Logout from '../logout/index';
 
 // { detailLink, id, userCred }
 
-export const Navbar = ({loggedIn = false, authLevel = "user"}) => {
+export const Navbar = ({loggedIn = null, authLevel = "user", profileId}) => {
   const [showLinks, setShowLinks] = useState(false);
   const [currentPath, setCurrentPath] = useState('/');
   const { width } = useViewport();
 
-  return (
+  return ( 
     <NavWrapper>
       <NavCenter>
         <NavHeader>
@@ -47,6 +47,9 @@ export const Navbar = ({loggedIn = false, authLevel = "user"}) => {
             <MenuLinks>
               <StyledListItem hideItem = {!loggedIn || authLevel !== "admin"}>
                 <a href='/portal'><h3>Admin Portal</h3></a>
+              </StyledListItem>
+              <StyledListItem hideItem = {!loggedIn || authLevel !== "user"}>
+                <a href={`/club/${profileId}`}><h3>ClubProfile</h3></a>
               </StyledListItem>
               <StyledListItem hideItem = {false}>
                 <a href='/faq'><h3>FAQs</h3></a>
