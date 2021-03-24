@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import ProfileCreation1 from './ProfileCreation1/index';
 import ProfileCreation2 from './ProfileCreation2/index';
+import { Confirmation } from '../Confirmation';
 import Navbar from '../../components/navbar/index';
 
 const ProfileCreationMaster = ({ userCred }) => {
@@ -31,40 +32,42 @@ const ProfileCreationMaster = ({ userCred }) => {
     console.log(clubProfile);
   }, [clubProfile]);
 
-  const parseState = (() => {
+  const parseState = ((newClubProfile) => {
     const toSubmit = {
-      name: clubProfile.clubName,
-      longDescription: clubProfile.longDesc,
-      shortDescription: clubProfile.shortDesc,
+      name: newClubProfile.clubName,
+      longDescription: newClubProfile.longDesc,
+      shortDescription: newClubProfile.shortDesc,
       // NEED TO UPDATE THIS-- MAKE THEM CHOOSE FROM PRECONFIGURED IMAGES OR THEIR OWN LOGO
       // ASK PRODUCT DESIGN???
       imageUrl: "https://www.nomadfoods.com/wp-content/uploads/2018/08/placeholder-1-e1533569576673.png",
-      memberRange: clubProfile.size,
+      memberRange: newClubProfile.size,
       // this is not used rn, but we should update it to take advantage of their preferences
-      acceptingMembers: !clubProfile.memberPeriod.includes('Not taking members'),
-      springRecruiting: clubProfile.memberPeriod.includes('Spring'),
-      fallRecruiting: clubProfile.memberPeriod.includes('Fall'),
-      applicationRequired: clubProfile.requireApplication === 'Yes',
-      meetingFrequency: clubProfile.meetTime,
+      acceptingMembers: !newClubProfile.memberPeriod.includes('Not taking members'),
+      springRecruiting: newClubProfile.memberPeriod.includes('Spring'),
+      fallRecruiting: newClubProfile.memberPeriod.includes('Fall'),
+      applicationRequired: newClubProfile.requireApplication === 'Yes',
+      meetingFrequency: newClubProfile.meetTime,
       socialLinks: {
-          facebook: clubProfile.facebook,
-          email: clubProfile.clubEmail,
-          website: clubProfile.website,
-          instagram: clubProfile.instagram,
-          twitter: clubProfile.twitter
+          facebook: newClubProfile.facebook,
+          email: newClubProfile.clubEmail,
+          website: newClubProfile.website,
+          instagram: newClubProfile.instagram,
+          twitter: newClubProfile.twitter
       },
-      tags: clubProfile.tags,
-      highlights: clubProfile.highlights,
-      howToJoin: clubProfile.howToJoin,
-      applicationLink: clubProfile.appLink,
-      mailingListLink: clubProfile.mailingListLink,
+      tags: newClubProfile.tags,
+      highlights: newClubProfile.highlights,
+      howToJoin: newClubProfile.howToJoin,
+      applicationLink: newClubProfile.appLink,
+      mailingListLink: newClubProfile.mailingListLink,
       showInstagramFeed: false,
     };
 
     return toSubmit;
   });
 
-  const submitProfile = () => {  
+  const submitProfile = (newClubProfile, submitting) => {  
+    console.log(parseState(newClubProfile));
+    
     fetch(`/api/clubAccounts/getByFirebaseId/${userCred.uid}`, {
       headers: {
         'Content-Type': 'application/json'
@@ -77,12 +80,12 @@ const ProfileCreationMaster = ({ userCred }) => {
 
         console.log(`/api/clubProfiles/create/${data._id}`);
 
-        fetch(`/api/clubProfiles/submit/${data._id}`, {
-          method: 'POST',
+        fetch(`/api/clubProfiles/update/${data._id}${submitting ? '?submit=true' : ''}`, {
+          method: 'PUT',
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify(parseState())
+          body: JSON.stringify(parseState(newClubProfile))
         })
           .then(response => response.json())
           .then(data => {
@@ -101,20 +104,9 @@ const ProfileCreationMaster = ({ userCred }) => {
         <SetUpClubProfile />
         <Router>
           <Switch>
-            <Route
-              path='/profile-creation'
-              exact
-              render={(props) => (
-                <ProfileCreation1
-                  {...props}
-                  clubProfile={clubProfile}
-                  setClubProfile={setClubProfile}
-                  userCred={userCred}
-                />
-              )}
-            />
-            <Route
+          <Route
               path='/profile-creation/1'
+              exact
               render={(props) => (
                 <ProfileCreation2
                   {...props}
@@ -125,6 +117,20 @@ const ProfileCreationMaster = ({ userCred }) => {
                 />
               )}
             />
+            <Route
+              path='/profile-creation'
+              exact
+              render={(props) => (
+                <ProfileCreation1
+                  {...props}
+                  clubProfile={clubProfile}
+                  setClubProfile={setClubProfile}
+                  userCred={userCred}
+                  saveHandler={submitProfile}
+                />
+              )}
+            />
+            <Route path='/confirm' component={Confirmation} />
           </Switch>
         </Router>
       </PageContainer>

@@ -134,6 +134,7 @@ module.exports = {
     },
     
     update: function(req, res) {
+      console.log("Updated body ", req.body);
       // check if the associated account exists
       clubAccount.findById(req.params.accountId)
         .then(account => {

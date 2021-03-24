@@ -37,7 +37,7 @@ const ProfileCreation2 = ({ clubProfile, setClubProfile, history, userCred, subm
     clubEmail,
     mailingListLink,
   ];
-  const handleClick = (to) => {
+  const handleClick = (to, submitting) => {
     let everythingDefined = true;
     for (let i = 0; i < refsToCheck.length; i++)
       if (!refsToCheck[i].current) everythingDefined = false;
@@ -60,7 +60,7 @@ const ProfileCreation2 = ({ clubProfile, setClubProfile, history, userCred, subm
       console.log(userCred);
 
       setClubProfile(tempProfile);
-      submitProfile();
+      submitProfile(tempProfile, submitting);
       if (to) history.push(to);
     } else console.error('ONE OF THE REFS IS NOT DEFINED!');
   };
@@ -125,15 +125,25 @@ const ProfileCreation2 = ({ clubProfile, setClubProfile, history, userCred, subm
           wire
           text='Back'
           onClick={() => {
-            handleClick('/profile-creation/');
+            handleClick('/profile-creation/', false);
           }}
         />
-        <TomatoButton
-          text='Submit'
-          onClick={() => {
-            handleClick('/confirm');
-          }}
-        />
+        <div>
+          <TomatoButton
+            text='Save'
+            margin="0 1rem"
+            onClick={() => {
+              handleClick('/confirm', false);
+            }}
+          />
+          <TomatoButton
+            text='Submit'
+            margin="0 1rem"
+            onClick={() => {
+              handleClick('/confirm', true);
+            }}
+          />
+        </div>
       </ButtonContainer>
     </ProfileContainer>
   );
