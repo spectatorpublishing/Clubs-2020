@@ -20,7 +20,7 @@ const Button = styled.button`
         box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.25);
     }
     
-    margin: 1rem;
+    margin-left:1rem;
 `;
 
 const TextWrapper = styled.div`
@@ -38,8 +38,8 @@ const Word = styled.div`
     font-size:18px;
 `;
 
-export const ImageUploadButton = ({clubProfileId, errHandler}) => {
-
+class ImageUploadButton extends React.Component {
+    
     state = {
         selectedFile: null
     }
@@ -49,13 +49,15 @@ export const ImageUploadButton = ({clubProfileId, errHandler}) => {
             selectedFile: event.target.files[0]
         })
         console.log(this.state.selectedFile);
+        console.log(this.props.clubProfileId)
     }
 
     //Brainstorm error handler for this
 
-    filUploadHandler = () => {
+    fileUploadHandler = () => {
         const fd = new FormData();
         fd.append('image', this.state.selectedFile, this.state.selectedFile.name);
+        console.log(fd);
 
         /*
         fetch('')
@@ -65,27 +67,29 @@ export const ImageUploadButton = ({clubProfileId, errHandler}) => {
 
     }
 
-    return (
-        <>
-            <input 
-            style={{display:'none'}} 
-            type="file" 
-            onChange={this.fileSelectedHandler}
-            ref = {fileInput => this.fileInput = fileInput}/>
+    render() {
+        return (
+            <>
+                <input 
+                style={{display:'none'}} 
+                type="file" 
+                onChange={this.fileSelectedHandler}
+                ref = {fileInput => this.fileInput = fileInput}/>
 
-            <ButtonWrapper>
+                <ButtonWrapper>
 
-                <Button onClick={() => this.fileInput.click()}>
-                    <TextWrapper><Word>Select Image</Word></TextWrapper>
-                </Button>
+                    <Button onClick={() => this.fileInput.click()}>
+                        <TextWrapper><Word>Select Image</Word></TextWrapper>
+                    </Button>
 
-                <Button onClick={this.fileUploadHandler}>
-                    <TextWrapper><Word>Upload Image</Word></TextWrapper>
-                </Button>
+                    <Button onClick={this.fileUploadHandler}>
+                        <TextWrapper><Word>Upload Image</Word></TextWrapper>
+                    </Button>
 
-            </ButtonWrapper>
-        </>
-    )
-};
+                </ButtonWrapper>
+            </>
+        )
+    }
+}
 
 export default ImageUploadButton;

@@ -8,6 +8,7 @@ import Type from '../components/filters/type';
 import AdCarrier from '../components/adCarrier';
 import SearchBar from '../components/searchBar';
 //import FilterMobile from '../components/filters/filterMobile';
+import ImageUploadButton from '../components/ImageUpload/ImageUploadButton'
 import Icon from '../components/filters/shuffle.png';
 
 const Wrapper = styled.div`
@@ -323,6 +324,7 @@ const Explore = () => {
                     <p>Find your Columbia community</p>
                 </TextWrapper>
                 <FiltersBox>
+                    <ImageUploadButton clubProfileId='11111'></ImageUploadButton>
                     <FiltersLeft>
                         <SearchBox><SearchBar 
                             barText={searchBarText}
