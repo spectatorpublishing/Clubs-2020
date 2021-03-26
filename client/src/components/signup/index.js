@@ -378,6 +378,7 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
     <Wrapper>
       <Container initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }}>
         <FullPageModal
+          header="Terms Of Use"
           isTermsOfUseShowing={isTermsOfUseShowing}
           setIsTermsOfUseShowing={setIsTermsOfUseShowing}
         />

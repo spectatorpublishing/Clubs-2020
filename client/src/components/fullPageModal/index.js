@@ -7,6 +7,7 @@ const FullPageModal = ({
   isTermsOfUseShowing,
   setIsTermsOfUseShowing,
   text,
+  header
 }) => {
   const grayVariants = {
     init: { opacity: 0 },
@@ -39,7 +40,7 @@ const FullPageModal = ({
             exit='exit'
             transition={{ delay: 0.25 }}
           >
-            <TermsOfUseHeader>Terms Of Use</TermsOfUseHeader>
+            <TermsOfUseHeader>{header ? header : "NO HEADER VALUE"}</TermsOfUseHeader>
             {text ? (
               text
             ) : (
