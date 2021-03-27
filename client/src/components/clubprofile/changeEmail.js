@@ -1,6 +1,74 @@
 import React, { createRef } from 'react';
 import styled from 'styled-components';
 import CustomInput from './input.js';
+import {
+    getCurrUserEmail,
+    signInWithEmailPwd,
+} from '../../UserAuthUtilities/user';
+
+export default function ChangeEmail(props) {
+    function postEmailRequest(e) {
+        /* POST update account email request here */
+        let data = new FormData(form.current);
+        /* TODO: check email validity and password, then make API call to update account */
+
+        let email = getCurrUserEmail();
+        let newEmail = data.get('Email');
+        let currPwd = data.get('Confirm with Password');
+
+        signInWithEmailPwd(email, currPwd)
+            .then((userCredential) => {
+                var user = userCredential.user;
+                return user.updateEmail(newEmail);
+            })
+            .then(res => {
+                props.setPage('confirmation')
+            })
+            .catch((error) => {
+                var errorCode = error.code;
+                var errorMessage = error.message;
+            });
+
+        e.preventDefault();
+    }
+
+    return (
+        <div>
+            <Header>Change Account Email</Header>
+            <Description>{DESCRIPTION}</Description>
+            <Form noValidate ref={form} onSubmit={postEmailRequest}>
+                <Inputs>
+                    <CustomInput
+                        label='Email'
+                        type='email'
+                        to='email'
+                        button={false}
+                    />
+                    <CustomInput
+                        label='Confirm with Password'
+                        type='password'
+                        to='password'
+                        button={false}
+                    />
+                </Inputs>
+
+                <Operations>
+                    <Change type='submit' value='Request Change' />
+                    <Cancel onClick={() => props.setPage('dashboard')}>Cancel</Cancel>
+                </Operations>
+            </Form>
+
+        </div>
+    );
+}
+
+
+const DESCRIPTION = 'To change email of account, the new user ' +
+    'will receive an email with a link to approve the change. The ' +
+    'new user must approve this change within 30 minutes of the request ' +
+    'made here. For security purposes, only .edu addresses allowed.'
+
+const form = createRef();
 
 export const Header = styled.div`
     font-family: Manrope, sans-serif;
@@ -8,7 +76,7 @@ export const Header = styled.div`
     font-weight: 1000;
     font-size: 1.5rem;
     line-height: 1.3em;
-    color: ${props=>props.theme.colors.black};
+    color: ${props => props.theme.colors.black};
 `
 
 export const Inputs = styled.div`
@@ -26,7 +94,7 @@ const Description = styled.div`
     font-size: 1rem;
     line-height: 1.4em;
     white-space: pre-wrap;
-    color: ${props=>props.theme.colors.red};
+    color: ${props => props.theme.colors.red};
     margin: 0.5em 0 2em;
 `
 
@@ -71,53 +139,3 @@ export const Change = styled.input`
     color: white;
     background-color: ${props => props.theme.colors.red};
 `
-
-const DESCRIPTION = 'To change email of account, the new user ' +
-'will receive an email with a link to approve the change. The ' +
-'new user must approve this change within 30 minutes of the request ' +
-'made here. For security purposes, only .edu addresses allowed.'
-
-const form = createRef();
-
-export default function ChangeEmail(props) {
-    function postEmailRequest(e) {
-        /* POST update account email request here */
-        let data = new FormData(form.current);
-        // key/value pairs of the form can be obtained as follows:
-        console.log('Email:', data.get('Email'));
-        console.log('Confirm with Password:', data.get('Confirm with Password') );
-        /* Todo: check email validity and password, then make API call to update account */
-
-        props.setPage('confirmation');
-        e.preventDefault();
-    }
-
-    return (
-        <div>
-            <Header>Change Account Email</Header>
-            <Description>{DESCRIPTION}</Description>
-            <Form noValidate ref={form} onSubmit={postEmailRequest}>
-                <Inputs>
-                    <CustomInput
-                        label='Email'
-                        type='email'
-                        to='email'
-                        button={false}
-                    />
-                    <CustomInput
-                        label='Confirm with Password'
-                        type='password'
-                        to='password'
-                        button={false}
-                    />
-                </Inputs>
-                
-                <Operations>
-                    <Change type='submit' value='Request Change'/>
-                    <Cancel onClick={()=>props.setPage('dashboard')}>Cancel</Cancel>
-                </Operations>
-            </Form>
-            
-        </div>
-    );
-}
