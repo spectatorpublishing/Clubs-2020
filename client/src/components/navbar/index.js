@@ -11,7 +11,7 @@ import Logout from '../logout/index';
 
 // { detailLink, id, userCred }
 
-export const Navbar = ({loggedIn = false}) => {
+export const Navbar = ({ loggedIn = false }) => {
   const [showLinks, setShowLinks] = useState(false);
   const [currentPath, setCurrentPath] = useState('/');
   const { width } = useViewport();
@@ -45,19 +45,19 @@ export const Navbar = ({loggedIn = false}) => {
         {currentPath === '/' && (
           <LinksContainer className={`${showLinks ? 'show-container' : null}`}>
             <MenuLinks>
-              <StyledListItem hideItem = {false}>
+              <StyledListItem hideItem={false}>
                 <a href='/faq'><h3>FAQs</h3></a>
               </StyledListItem>
-              <StyledListItem hideItem = {loggedIn}>
+              <StyledListItem hideItem={loggedIn}>
                 <a href='/login'><h3>Club Login</h3></a>
               </StyledListItem>
-              <StyledListItem hideItem = {!loggedIn}>
-                <a href="/manage"> <Manage/> </a>
+              <StyledListItem hideItem={!loggedIn}>
+                <Manage />
               </StyledListItem>
-              <StyledListItem hideItem = {!loggedIn}>
-                <a href="/"> <Logout/> </a>
+              <StyledListItem hideItem={!loggedIn}>
+                <a href="/"> <Logout /> </a>
               </StyledListItem>
-              <StyledListItem hideItem = {loggedIn}>
+              <StyledListItem hideItem={loggedIn}>
                 <NavLink
                   style={{ textDecoration: 'none' }}
                   to='/signup'
@@ -89,7 +89,7 @@ const NavWrapper = styled.nav`
 `;
 
 const StyledListItem = styled.li`
-  display: ${props =>  props.hideItem ? `none` : `flex` };
+  display: ${props => props.hideItem ? `none` : `flex`};
   align-items: center;
   & > * > h3 {
     font-size: 1.25rem;

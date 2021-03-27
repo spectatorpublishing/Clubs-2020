@@ -4,8 +4,6 @@ import { FaBars } from 'react-icons/fa';
 import Logout from '../logout/index';
 import Manage from '../manageAccount/index';
 import { useViewport } from '../customHooks';
-import FilledButton from '../tomatoButton/index';
-import { NavLink } from 'react-router-dom';
 
 export const NavbarProfile = () => {
   const [showLinks, setShowLinks] = useState(false);
@@ -21,7 +19,7 @@ export const NavbarProfile = () => {
               setCurrentPath('/');
             }}
           >
-            <a href="/">Clubs@CU</a>
+            <p>Clubs@CU</p>
           </Logo>
           {currentPath === '/' && (
             <NavToggle
@@ -40,28 +38,12 @@ export const NavbarProfile = () => {
         )}
         {currentPath === '/' && (
           <LinksContainer className={`${showLinks ? 'show-container' : null}`}>
-            <MenuLinks>              
+            <MenuLinks>
               <StyledListItem>
-                <a href='/faq'><h3>FAQs</h3></a>
+                <Manage />
               </StyledListItem>
               <StyledListItem>
-                <a href="/logout"> <Logout/> </a>
-              </StyledListItem>
-              <StyledListItem>
-                <a href="/manage"> <Manage/> </a>
-              </StyledListItem>
-              <StyledListItem>
-                <NavLink
-                  style={{ textDecoration: 'none' }}
-                  to='/'
-                  isActive={(match) => {
-                    if (match) {
-                      setCurrentPath('/');
-                    }
-                  }}
-                >
-                  <FilledButton text='My Profile' />
-                </NavLink>
+                <a href="/logout"> <Logout /> </a>
               </StyledListItem>
             </MenuLinks>
           </LinksContainer>
@@ -89,13 +71,11 @@ const StyledListItem = styled.li`
 `;
 
 const NavCenter = styled.div`
-  @media screen and (min-width: 900px) {
+  @media screen and (min-width: 769px) {
+    padding: 0.5rem 3rem 0 4rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
-  }
-  @media screen and (min-width: 769px) {
-    padding: 0.5rem 3rem 0 4rem;
   }
 `;
 
@@ -105,7 +85,7 @@ const NavHeader = styled.div`
   justify-content: space-between;
   padding: 1rem;
 
-  @media screen and (min-width: 900px) {
+  @media screen and (min-width: 769px) {
     padding: 0;
   }
 `;
@@ -114,7 +94,7 @@ const Logo = styled.div`
   height: 100%;
   font-size: 1.5rem;
   font-weight: 700;
-  a {
+  p {
     text-decoration: none;
     color: ${(props) => props.theme.colors.black};
   }
@@ -136,7 +116,7 @@ const NavToggle = styled.div`
     transform: rotate(90deg);
   }
 
-  @media screen and (min-width: 900px) {
+  @media screen and (min-width: 769px) {
     display: none;
   }
 `;
@@ -150,7 +130,7 @@ const LinksContainer = styled.div`
     height: fit-content;
   }
 
-  @media screen and (min-width: 900px) {
+  @media screen and (min-width: 769px) {
     height: auto !important;
     background-color: transparent;
   }
@@ -178,7 +158,7 @@ const MenuLinks = styled.ul`
     }
   }
 
-  @media (min-width: 900px) {
+  @media (min-width: 769px) {
     display: flex;
     margin: 0;
     padding: 0;
