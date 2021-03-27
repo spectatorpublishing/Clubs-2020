@@ -4,6 +4,10 @@ import CustomInput from './input.js';
 import { Header as EmailHeader, Form, Inputs, Operations, Change, Cancel } from './changeEmail.js';
 import { Warning } from './manageAccount';
 import checkPassword from '../../containers/FirebaseApiSetUpTest/signup/checkPassword';
+import {
+    getCurrUserEmail,
+    signInWithEmailPwd
+} from '../../UserAuthUtilities/user.js';
 
 
 
@@ -39,8 +43,24 @@ export default function ChangePassword(props) {
             return;
         }
 
-        /* POST update account email request here */
-        props.setPage('confirmation');
+        let email = getCurrUserEmail()
+        let currPwd = data.get('Current Password')
+        let newPwd = data.get('New Password')
+
+        console.log(email, newPwd)
+
+        signInWithEmailPwd(email, currPwd)
+            .then((userCredential) => {
+                var user = userCredential.user;
+                return user.updatePassword(newPwd);
+            })
+            .then(res => {
+                props.setPage('confirmation')
+            })
+            .catch((error) => {
+                var errorCode = error.code;
+                var errorMessage = error.message;
+            });
     }
 
     return (

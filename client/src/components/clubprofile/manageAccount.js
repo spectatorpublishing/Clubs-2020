@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import {
+    getCurrUserEmail
+} from '../../UserAuthUtilities/user.js';
 import CustomInput from './input.js';
 
 const Header = styled.div`
@@ -56,7 +59,7 @@ export default function ManageAccount(props) {
                     label='Email'
                     type='email'
                     to='email'
-                    initVal='uni1234@columbia.edu'
+                    initVal={getCurrUserEmail}
                     button={true}
                     callback={props.setPage}
                 />

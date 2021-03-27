@@ -1,16 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faUser,
 } from "@fortawesome/free-regular-svg-icons";
+import UpdateAccount from '../clubprofile/updateAccountInfo';
 
 const Manage = () => {
+  const [display, setDisplay] = useState(false);
+
   return (
-    <ManageButton>
-      <Icon><FontAwesomeIcon icon={faUser} />{' '}</Icon>
-      <Text> Manage Account </Text>
-    </ManageButton>
+    <>
+      <UpdateAccount
+        nodeId='root'
+        display={display}
+        toggle={setDisplay}
+      />
+      
+      <ManageButton onClick={() => setDisplay(true)}>
+        <Icon><FontAwesomeIcon icon={faUser} />{' '}</Icon>
+        <Text> Manage Account </Text>
+      </ManageButton>
+    </>
   );
 };
 
