@@ -1,12 +1,18 @@
 import React from 'react';
 import { Navbar } from '../components/navbar';
+import NavbarProfile from '../components/navbarProfile';
 import { FaqBox } from '../components/faqbox';
 import styled from 'styled-components';
 
-export const FAQ = () => {
+export const FAQ = ({ isLoggedin }) => {
+  const NavbarType = () => { return (isLoggedin === true) ? 
+    ( <NavbarProfile/> ) : 
+    ( <Navbar/> ) 
+  };
+
   return (
     <Wrapper>
-      <Navbar />
+      <NavbarType />
       <PageWrapper>
         <Title>Frequently Asked Questions</Title>
         <FaqBox

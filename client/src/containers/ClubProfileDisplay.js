@@ -13,7 +13,7 @@ import AccountTag from "../components/accountTag/index";
 import YourClubProfile from "../components/yourClubProfile/index";
 import CompleteProfile from "../components/completeProfile";
 
-const ClubProfileDisplay = () => {
+const ClubProfileDisplay = ({ isLoggedin }) => {    
     const { id } = useParams();
     const [club, setClub] = useState();
     const [width, setWidth] = useState(window.innerWidth);
@@ -21,7 +21,7 @@ const ClubProfileDisplay = () => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     
     /* temporary for conditional components */
-    const [isLoggedin, setLoggedIn] = useState(false);
+    // const [isLoggedin, setLoggedIn] = useState(false);
     const [firstLogIn, setFirstLog] = useState(false);
     const [completeProfile, setComplete] = useState(false);
 
@@ -36,7 +36,7 @@ const ClubProfileDisplay = () => {
             setLoading(false);
             console.log(`api/clubProfiles/${id}`);
           })
-        //.catch((error) => console.log(error));
+        .catch((error) => console.log(error));
     }, [id]);
 
     const SimilarClubs = () => { return (club.similarClubs === undefined) ? (<h1>Loading</h1>) : 
@@ -85,11 +85,11 @@ const ClubProfileDisplay = () => {
     };
 
     /* temporary for conditional components */
-    function setAdmin(){
-        setLoggedIn(!isLoggedin);
-        setFirstLog(!firstLogIn);
-        setComplete(!completeProfile);
-    }
+    // function setAdmin(){
+    //     // setLoggedIn(!isLoggedin);
+    //     setFirstLog(!firstLogIn);
+    //     setComplete(!completeProfile);
+    // }
 
     if (width < 541){ // mobile view
         return (
@@ -101,7 +101,7 @@ const ClubProfileDisplay = () => {
                             <Content>
                                 <h1>{club.name}</h1>
                                 <p>Last updated: {new Date(club.lastUpdated.toString()).toLocaleDateString("en-US", options)}</p>
-                                <div><Button onClick={setAdmin}><p>Show/Hide Club Admin View</p></Button></div>
+                                {/* <div><Button onClick={setAdmin}><p>Show/Hide Club Admin View</p></Button></div> */}
                                 <ProfilePageBox 
                                     memberRange= {club.memberRange}
                                     acceptingMembers={club.acceptingMembers}
@@ -175,7 +175,7 @@ const ClubProfileDisplay = () => {
                                         tags={club.tags}
                                     />
                                     <Column>
-                                        <div><Button onClick={setAdmin}><p>Show/Hide Club Admin View</p></Button></div>
+                                        {/* <div><Button onClick={setAdmin}><p>Show/Hide Club Admin View</p></Button></div> */}
                                             <FrequencyTag
                                                 frequency={club.meetingFrequency}
                                                 weekly= {club.weekly}
@@ -247,7 +247,7 @@ const ClubProfileDisplay = () => {
                                 <SimilarClubs/> 
                             </Content>
                             <Cards>
-                                <div><Button onClick={setAdmin}><p>Show/Hide Club Admin View</p></Button></div>
+                                {/* <div><Button onClick={setAdmin}><p>Show/Hide Club Admin View</p></Button></div> */}
                                 <ProfilePageBox 
                                     memberRange= {club.memberRange}
                                     acceptingMembers={club.acceptingMembers}

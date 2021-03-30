@@ -8,7 +8,7 @@ const YourClubProfile = () => {
             <TheHeader>
                 <h1> Your Club Profile </h1>
             </TheHeader>
-            <TheButton>
+            <TheButton href='/profile-creation'>
                 <FilledButton text='Edit'/>
             </TheButton>
          </BoxWrapper>
@@ -34,12 +34,12 @@ const TheHeader = styled.div`
 ;
 `;
 
-const TheButton = styled.div`
+const TheButton = styled.a`
     display: flex;
     flex-direction: row-reverse;
     width: 8rem; //8em
     height: 2.5rem;
-;
+    text-decoration: none;
 `;
 
 export default YourClubProfile;

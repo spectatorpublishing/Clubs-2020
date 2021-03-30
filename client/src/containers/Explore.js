@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Navbar } from '../components/navbar';
+import NavbarProfile from '../components/navbarProfile';
 import ExploreBox from '../components/explorebox';
 import styled from 'styled-components';
 import Join from '../components/filters/join';
@@ -213,7 +214,7 @@ const ShuffleImage = styled.div`
 
 
 
-const Explore = () => {
+const Explore = ({ isLoggedin }) => {
     const [clubProfiles, setClubProfiles] = useState([]);
     const [loadText, setLoadText] = useState("Loading...");
 
@@ -316,6 +317,11 @@ const Explore = () => {
         fetchData('');
     },[]);
 
+    const NavbarType = () => { return (isLoggedin === true) ? 
+        ( <NavbarProfile/> ) : 
+        ( <Navbar/> ) 
+    };
+
     const ExploreContents =  (
         <div>
                 <TextWrapper>
@@ -385,7 +391,7 @@ const Explore = () => {
         console.log(width);
         return(
             <Wrapper>
-            <Navbar />
+            <NavbarType />
             <main>
                 <PageWrapper>
                     <AdContainer>
@@ -404,7 +410,7 @@ const Explore = () => {
         console.log(width);
         return(
             <Wrapper>
-            <Navbar />
+            <NavbarType />
             <main>
                 <PageWrapper>
                     <AdContainer>

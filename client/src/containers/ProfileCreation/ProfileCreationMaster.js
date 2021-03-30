@@ -14,7 +14,7 @@ const ProfileCreationMaster = ({ userCred }) => {
     shortDesc: '',
     longDesc: '',
     size: '',
-    memberPeriod: [],
+    memberPeriod: ['Fall'],
     requireApplication: '',
     meetTime: ['', ''],
     highlights: ['', '', '', '', ''],
@@ -30,7 +30,28 @@ const ProfileCreationMaster = ({ userCred }) => {
 
   useEffect(() => {
     console.log(clubProfile);
-  }, [clubProfile]);
+    if(userCred !== null) {
+      fetch(`/api/clubAccounts/getByFirebaseId/${userCred.uid}`, {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+          fetch(`${window.origin}/api/clubProfiles/${data.clubProfileId}`, {
+            method: 'GET',
+            })
+          .then((res) => res.json())
+          .then((response) => {
+            console.log(response);
+            console.log(parseFromDB(response));
+            setClubProfile(parseFromDB(response));
+          })
+          .catch((error) => console.log(error));
+        });
+    }
+  }, []);
 
   const parseState = ((newClubProfile) => {
     const toSubmit = {
@@ -65,6 +86,34 @@ const ProfileCreationMaster = ({ userCred }) => {
     return toSubmit;
   });
 
+  const parseFromDB = (profile => {
+    const memberPeriod = [];
+
+    if(profile.fallRecruiting) memberPeriod.push("Fall");
+    if(profile.springRecruiting) memberPeriod.push("Spring");
+    if(profile.acceptingMembers) memberPeriod.push('Not taking members');
+
+    return {
+      tags: profile.tags,
+      clubName: profile.name,
+      shortDesc: profile.shortDescription,
+      longDesc: profile.longDescription,
+      size: profile.memberRange,
+      memberPeriod: memberPeriod,
+      requireApplication: profile.applicationRequired ? 'Yes' : 'No',
+      meetTime: profile.meetingFrequency,
+      highlights: profile.highlights,
+      howToJoin: profile.howToJoin,
+      appLink: profile.applicationLink,
+      website: profile.socialLinks.website,
+      facebook: profile.socialLinks.facebook,
+      instagram: profile.socialLinks.instagram,
+      twitter: profile.socialLinks.twitter,
+      clubEmail: profile.socialLinks.email,
+      mailingListLink: profile.mailingListLink,
+    };
+  });
+
   const submitProfile = (newClubProfile, submitting) => {  
     console.log(parseState(newClubProfile));
     
@@ -75,11 +124,6 @@ const ProfileCreationMaster = ({ userCred }) => {
     })
       .then(response => response.json())
       .then(data => {
-        console.log("-------------inside first fetch-------------");
-        console.log(data);
-
-        console.log(`/api/clubProfiles/create/${data._id}`);
-
         fetch(`/api/clubProfiles/update/${data._id}${submitting ? '?submit=true' : ''}`, {
           method: 'PUT',
           headers: {
@@ -89,7 +133,6 @@ const ProfileCreationMaster = ({ userCred }) => {
         })
           .then(response => response.json())
           .then(data => {
-            console.log("-------------inside second fetch-------------");
             console.log(data);
           })
           .catch(error => console.error(error));

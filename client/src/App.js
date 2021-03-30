@@ -23,15 +23,19 @@ import { rememberMe } from './containers/FirebaseApiSetUpTest/firebase/rememberM
 
 const App = () => {
   const [userCred, setUserCred] = useState(null);
+  const [loggedIn, setLoggedIn] = useState(false);
+
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         console.log(user.email);
         setUserCred(user);
+        setLoggedIn(true);
         console.log('Signed in.');
       } else {
         //make sure firebase auth login persistence is set to session only
-        rememberMe(false)
+        rememberMe(false);
+        setLoggedIn(false);
         console.log('Not signed in.');
       }
     });
@@ -44,16 +48,16 @@ const App = () => {
         <Switch>
           <ViewportProvider>
             <Route path='/club/:id'>
-              <ClubProfileDisplay />
+              <ClubProfileDisplay isLoggedin={loggedIn} />
             </Route>
             <Route path='/profile-creation'>
-              <ProfileCreationMaster userCred={userCred} />
+              <ProfileCreationMaster userCred={userCred} isLoggedin={loggedIn} />
             </Route>
             <Route path='/faq'>
-              <FAQ />
+              <FAQ isLoggedin={loggedIn} />
             </Route>
             <Route path='/' exact>
-              <Explore />
+              <Explore isLoggedin={loggedIn} />
             </Route>
             {/* change to proper formatting */}
             <Route path='/portal/login' component={PortalLogin} />

@@ -45,7 +45,7 @@ export const NavbarProfile = () => {
                 <a href='/faq'><h3>FAQs</h3></a>
               </StyledListItem>
               <StyledListItem>
-                <a href="/logout"> <Logout/> </a>
+                <a href="/"> <Logout/> </a>
               </StyledListItem>
               <StyledListItem>
                 <a href="/manage"> <Manage/> </a>
@@ -53,7 +53,7 @@ export const NavbarProfile = () => {
               <StyledListItem>
                 <NavLink
                   style={{ textDecoration: 'none' }}
-                  to='/'
+                  to='/profile-creation'
                   isActive={(match) => {
                     if (match) {
                       setCurrentPath('/');
