@@ -48,8 +48,6 @@ class ImageUploadButton extends React.Component {
         this.setState({
             selectedFile: event.target.files[0]
         })
-        console.log(this.state.selectedFile);
-        console.log(this.props.clubProfileId)
     }
 
     //Brainstorm error handler for this
@@ -57,13 +55,18 @@ class ImageUploadButton extends React.Component {
     fileUploadHandler = () => {
         const fd = new FormData();
         fd.append('image', this.state.selectedFile, this.state.selectedFile.name);
-        console.log(fd);
+        
+        console.log(this.state.selectedFile)
+        console.log(typeof(fd))
+        console.log(fd.getAll('image'));
 
-        /*
-        fetch('')
-        .then(res => {pass})
-        .catch(err => console.log(err, res));
-        */
+        fetch(`${window.origin}/api/clubProfiles/imgUpload/${this.props.clubProfileId}`, {
+            method: 'POST',
+            body: fd
+        })
+        .then(res => res.json())
+        .then(data => {console.log(data)})
+        .catch(err => {console.error(err)})
 
     }
 

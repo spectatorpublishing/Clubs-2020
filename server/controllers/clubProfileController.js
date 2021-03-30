@@ -132,8 +132,6 @@ module.exports = {
 
 
     search: function(req, res) {
-        // TODO; req.query contains search query
-        // support pagination with req.query 
 
         let searchInput = req.query.search;
         let resultingData = [];
@@ -185,5 +183,10 @@ module.exports = {
         .catch(err => res.status(422).json(err));
         
         
-    }
+    },
+    
+    imgUpload: function(req,res) {
+      console.log(req.body)
+      res.json('success')
+    } 
 }
