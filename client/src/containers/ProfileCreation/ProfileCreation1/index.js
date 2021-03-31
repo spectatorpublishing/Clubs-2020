@@ -104,7 +104,7 @@ const ProfileCreation1 = ({ clubProfile, setClubProfile, history, saveHandler })
         </Column>
       </StyledBody>
       <ButtonContainer>
-        <TomatoButton text='Save' margin="0 1rem" onClick={() => saveProfile(false)} />
+        {/* <TomatoButton text='Save' margin="0 1rem" onClick={() => saveProfile(false)} /> */}
         <TomatoButton text='Next' margin="0 1rem" onClick={() => saveProfile(true)} />
       </ButtonContainer>
       <ErrorMessage

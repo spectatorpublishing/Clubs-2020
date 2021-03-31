@@ -29,11 +29,11 @@ export function ClubAccountManagement(props){
             />
             <Trigger onClick={()=>setDisplay(true)}>Manage Your Account</Trigger>
             <SignUpBox
-                title = "Club Profile Request Recieved!"
+                title = "Club Profile Request Received!"
                 desc = "Already have an account?"
                 descLink = "https://media2.giphy.com/media/lSbTmUmQwxUmiExV4h/giphy.gif"
                 descLinkText = "Login here"
-                detail = "Your request is being processed. You will recieve an email with further instrcutions in 24 hours. If you have any questions, please contact "
+                detail = "Your request is being processed. You will receive an email with further instrcutions in 24 hours. If you have any questions, please contact "
                 detailLink = "mailto:publisher@columbiaspectator.com"
                 detailLinkText = "publisher@columbiaspectator.com"
                 detailTwo = "."

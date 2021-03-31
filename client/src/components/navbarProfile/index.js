@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { FaBars } from 'react-icons/fa';
 import Logout from '../logout/index';
@@ -7,10 +7,27 @@ import { useViewport } from '../customHooks';
 import FilledButton from '../tomatoButton/index';
 import { NavLink } from 'react-router-dom';
 
-export const NavbarProfile = () => {
+export const NavbarProfile = ({ userCred }) => {
   const [showLinks, setShowLinks] = useState(false);
   const [currentPath, setCurrentPath] = useState('/');
+  const [profileId, setProfileId] = useState('');
   const { width } = useViewport();
+
+  useEffect(() => {
+    console.log(userCred);
+    if(userCred) {
+      fetch(`/api/clubAccounts/getByFirebaseId/${userCred.uid}`, {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      })
+        .then(response => response.json())
+        .then(data => {
+          console.log(data);
+          setProfileId(data.clubProfileId);
+        });
+    }
+  }, []);
 
   return (
     <NavWrapper>
@@ -47,16 +64,16 @@ export const NavbarProfile = () => {
               <StyledListItem>
                 <a href="/"> <Logout/> </a>
               </StyledListItem>
-              <StyledListItem>
-                <a href="/manage"> <Manage/> </a>
-              </StyledListItem>
+              {/* <StyledListItem>
+                <a href="/profile-creation"> <Manage/> </a>
+              </StyledListItem> */}
               <StyledListItem>
                 <NavLink
                   style={{ textDecoration: 'none' }}
-                  to='/profile-creation'
+                  to={`/club/${profileId}`}
                   isActive={(match) => {
                     if (match) {
-                      setCurrentPath('/');
+                      setCurrentPath(`/`);
                     }
                   }}
                 >

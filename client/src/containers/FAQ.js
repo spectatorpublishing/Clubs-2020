@@ -4,9 +4,9 @@ import NavbarProfile from '../components/navbarProfile';
 import { FaqBox } from '../components/faqbox';
 import styled from 'styled-components';
 
-export const FAQ = ({ isLoggedin }) => {
+export const FAQ = ({ isLoggedin, userCred }) => {
   const NavbarType = () => { return (isLoggedin === true) ? 
-    ( <NavbarProfile/> ) : 
+    ( <NavbarProfile userCred={userCred} /> ) : 
     ( <Navbar/> ) 
   };
 

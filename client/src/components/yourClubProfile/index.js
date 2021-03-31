@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import FilledButton from '../tomatoButton/index';
+import { NavLink } from 'react-router-dom';
+
 
 const YourClubProfile = () => {
     return(
@@ -8,9 +10,14 @@ const YourClubProfile = () => {
             <TheHeader>
                 <h1> Your Club Profile </h1>
             </TheHeader>
-            <TheButton href='/profile-creation'>
+            {/* <TheButton href='/profile-creation'> */}
+            <NavLink
+                  style={{ textDecoration: 'none' }}
+                  to={`/profile-creation`}
+                >
                 <FilledButton text='Edit'/>
-            </TheButton>
+            </NavLink>
+            {/* </TheButton> */}
          </BoxWrapper>
     );
 };

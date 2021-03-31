@@ -14,7 +14,7 @@ const ProfileCreationMaster = ({ userCred }) => {
     shortDesc: '',
     longDesc: '',
     size: '',
-    memberPeriod: ['Fall'],
+    memberPeriod: [],
     requireApplication: '',
     meetTime: ['', ''],
     highlights: ['', '', '', '', ''],
@@ -29,7 +29,6 @@ const ProfileCreationMaster = ({ userCred }) => {
   });
 
   useEffect(() => {
-    console.log(clubProfile);
     if(userCred !== null) {
       fetch(`/api/clubAccounts/getByFirebaseId/${userCred.uid}`, {
         headers: {
@@ -44,8 +43,11 @@ const ProfileCreationMaster = ({ userCred }) => {
             })
           .then((res) => res.json())
           .then((response) => {
+            console.log("initial profile (backend):");
             console.log(response);
+            console.log("initial profile (frontend):");
             console.log(parseFromDB(response));
+
             setClubProfile(parseFromDB(response));
           })
           .catch((error) => console.log(error));

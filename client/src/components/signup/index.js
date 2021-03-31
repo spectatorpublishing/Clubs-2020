@@ -300,12 +300,12 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
     };
   } else if (id === 'confirmation') {
     modalData = {
-      title: 'Club Profile Request Recieved!',
+      title: 'Club Profile Request Received!',
       desc: 'Already have an account?',
       descLink: './login',
       descLinkText: 'Login Here',
       detail:
-        'Your request is being processed. You will recieve an email with further instructions in 24 hours. If you have any questions, please contact: ',
+        'Your request is being processed. You will receive an email with further instructions in 24 hours. If you have any questions, please contact: ',
       detailLink: 'mailto:publisher@columbiaspectator.com',
       detailLinkText: 'publisher@columbiaspectator.com',
       detailTwo: '.',

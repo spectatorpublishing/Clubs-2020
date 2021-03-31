@@ -214,7 +214,7 @@ const ShuffleImage = styled.div`
 
 
 
-const Explore = ({ isLoggedin }) => {
+const Explore = ({ isLoggedin, userCred }) => {
     const [clubProfiles, setClubProfiles] = useState([]);
     const [loadText, setLoadText] = useState("Loading...");
 
@@ -318,7 +318,7 @@ const Explore = ({ isLoggedin }) => {
     },[]);
 
     const NavbarType = () => { return (isLoggedin === true) ? 
-        ( <NavbarProfile/> ) : 
+        ( <NavbarProfile userCred={userCred} /> ) : 
         ( <Navbar/> ) 
     };
 

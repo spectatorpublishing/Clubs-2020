@@ -53,15 +53,19 @@ export const NewMembers = ({ clubProfile, setClubProfile }) => {
   const checkboxes = checkboxData.map((item, index) => {
     const checkIfIn = () => {
       let isIn = false;
-      for (let i = 0; i < clubProfile.memberPeriod.length; i++)
+      console.log(clubProfile.memberPeriod);
+      for (let i = 0; i < clubProfile.memberPeriod.length; i++) {
+        console.log(clubProfile.memberPeriod[i]);
+        console.log(item[i]);
         if (clubProfile.memberPeriod[i] === item[1]) isIn = true;
+      }
       return isIn;
     };
     
     return (
       <CheckboxContainer key={`checkbox-${index + 1}`}>
         <Checkbox
-          defaultValue={checkIfIn}
+          defaultValue={checkIfIn()}
           order={item[0]}
           labelText={item[1]}
           objId='memberPeriod'

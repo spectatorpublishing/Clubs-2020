@@ -13,7 +13,7 @@ import AccountTag from "../components/accountTag/index";
 import YourClubProfile from "../components/yourClubProfile/index";
 import CompleteProfile from "../components/completeProfile";
 
-const ClubProfileDisplay = ({ isLoggedin }) => {    
+const ClubProfileDisplay = ({ isLoggedin, userCred }) => {    
     const { id } = useParams();
     const [club, setClub] = useState();
     const [width, setWidth] = useState(window.innerWidth);
@@ -80,7 +80,7 @@ const ClubProfileDisplay = ({ isLoggedin }) => {
     };
 
     const NavbarType = () => { return (isLoggedin === true) ? 
-        ( <NavbarProfile/> ) : 
+        ( <NavbarProfile userCred={userCred} /> ) : 
         ( <Navbar/> ) 
     };
 

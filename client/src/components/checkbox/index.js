@@ -40,6 +40,10 @@ const Checkbox = ({
   };
 
   useEffect(() => {
+    setClicked(defaultValue);
+  }, [defaultValue]);
+
+  useEffect(() => {
     if (checkboxFocused) {
       document.addEventListener('keypress', onKeypress);
     }
@@ -83,7 +87,7 @@ const Checkbox = ({
         order={order}
         variants={boxVariants}
         clicked={clicked}
-        initial={'unchecked'}
+        initial='unchecked'
         animate={clicked ? 'checked' : 'unchecked'}
         transition={{ type: 'spring', stiffness: 300, damping: 20 }}
         onClick={handleClick}

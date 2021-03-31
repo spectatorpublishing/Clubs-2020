@@ -16,7 +16,7 @@ import Signin from './containers/FirebaseApiSetUpTest/firebase/signin';
 import Signup from './containers/FirebaseApiSetUpTest/firebase/signup';
 import * as firebase from './UserAuthUtilities/firebase';
 import theme from './theme';
-import { Navbar } from './components/userAuthNavBar';
+import { Navbar } from './components/navbar';
 import { FindPassword } from './containers/FindPassword';
 import { ConfirmPasswordReset } from './containers/ConfirmPasswordReset';
 import { rememberMe } from './containers/FirebaseApiSetUpTest/firebase/rememberMe';
@@ -43,43 +43,44 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      {/* <Navbar/> */}
-      <Router>
-        <Switch>
-          <ViewportProvider>
-            <Route path='/club/:id'>
-              <ClubProfileDisplay isLoggedin={loggedIn} />
-            </Route>
-            <Route path='/profile-creation'>
-              <ProfileCreationMaster userCred={userCred} isLoggedin={loggedIn} />
-            </Route>
-            <Route path='/faq'>
-              <FAQ isLoggedin={loggedIn} />
-            </Route>
-            <Route path='/' exact>
-              <Explore isLoggedin={loggedIn} />
-            </Route>
-            {/* change to proper formatting */}
-            <Route path='/portal/login' component={PortalLogin} />
-            <Route path='/portal' component={Portal} />
-            <Route path='/signup'>
-              <SignUp userCred={userCred} />
-            </Route>
-            <Route path='/confirm' component={Confirmation} />
-            <Route path='/clubprofile' component={ClubAccountManagement} />
-            <Route path='/login'>
-              <Login userCred={userCred} />
-            </Route>
-            <Route exact path='/findpassword/confirm' component={ConfirmPasswordReset} />
-            <Route exact path='/findpassword'>
-              <FindPassword userCred={userCred} />
-            </Route>
-          </ViewportProvider>
-          {/* <Route path='/test' component={Signin} />
-          <Route path='/test_signin' component={Signin} />
-          <Route path='/test_signup' component={Signup} /> */}
-        </Switch>
-      </Router>
+      <ViewportProvider>
+        <Router>
+          {/* <Navbar/> */}
+          <Switch>
+              <Route path='/club/:id'>
+                <ClubProfileDisplay isLoggedin={loggedIn} userCred={userCred} />
+              </Route>
+              <Route path='/profile-creation'>
+                <ProfileCreationMaster userCred={userCred} isLoggedin={loggedIn} />
+              </Route>
+              <Route path='/faq'>
+                <FAQ isLoggedin={loggedIn} userCred={userCred} />
+              </Route>
+              <Route path='/' exact>
+                <Explore isLoggedin={loggedIn} userCred={userCred} />
+              </Route>
+              {/* change to proper formatting */}
+              <Route path='/portal/login' component={PortalLogin} />
+              <Route path='/portal' component={Portal} />
+              <Route path='/signup'>
+                <SignUp userCred={userCred} />
+              </Route>
+              <Route path='/confirm' component={Confirmation} />
+              <Route path='/clubprofile' component={ClubAccountManagement} />
+              <Route path='/login'>
+                <Login userCred={userCred} />
+              </Route>
+              <Route exact path='/findpassword/confirm' component={ConfirmPasswordReset} />
+              <Route exact path='/findpassword'>
+                <FindPassword userCred={userCred} />
+              </Route>
+            
+            {/* <Route path='/test' component={Signin} />
+            <Route path='/test_signin' component={Signin} />
+            <Route path='/test_signup' component={Signup} /> */}
+          </Switch>
+        </Router>
+      </ViewportProvider>
     </ThemeProvider>
   );
 };
