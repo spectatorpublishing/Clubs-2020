@@ -28,7 +28,7 @@ export const Navbar = ({loggedIn = null, authLevel = "user", profileId}) => {
   });
 
   return ( 
-    <NavWrapper className={(scrollY > 5) ? "scrolled" : "normal"}>
+    <NavWrapper className={(scrollY > 5 || showLinks) ? "scrolled" : "normal"}>
       <NavCenter>
         <NavHeader>
           <Logo
