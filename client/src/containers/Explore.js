@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Navbar } from '../components/navbar';
 import ExploreBox from '../components/explorebox';
 import styled from 'styled-components';
 import Join from '../components/filters/join';
@@ -12,13 +11,13 @@ import Icon from '../components/filters/shuffle.png';
 
 const Wrapper = styled.div`
   background-color: ${(props) => props.theme.colors.white};
-  background-image: url(https://clubs-cu.s3.amazonaws.com/columbia-wave.svg);
+  background-image: url("https://clubs-cu.s3.amazonaws.com/columbia-wave.svg");
   background-repeat: no-repeat;
   background-position: top right;
 `;
 
 const PageWrapper = styled.div`
-  padding: 0.5rem 3rem 3rem 3rem;
+  padding: 7rem 3rem 3rem 3rem;
 
     @media only screen and (max-width : 768px) {
         padding: 1rem 0.5rem;
@@ -382,10 +381,8 @@ const Explore = () => {
         );
 
     if (width < 840){
-        console.log(width);
         return(
             <Wrapper>
-            <Navbar />
             <main>
                 <PageWrapper>
                     <AdContainer>
@@ -401,10 +398,8 @@ const Explore = () => {
             </Wrapper>
         )
     } else {
-        console.log(width);
         return(
             <Wrapper>
-            <Navbar />
             <main>
                 <PageWrapper>
                     <AdContainer>

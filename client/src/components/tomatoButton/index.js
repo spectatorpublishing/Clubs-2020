@@ -12,6 +12,7 @@ const TomatoButton = ({
   history,
   wire,
   to,
+  margin
 }) => {
   const handleClick = () => {
     if (!onClick) {
@@ -30,6 +31,7 @@ const TomatoButton = ({
   if (!wire) hoverEffect = { backgroundColor: theme.colors.darkRed };
   return (
     <StyledButton
+      margin={margin}
       wire={wire}
       whileHover={hoverEffect}
       whileTap={{ scale: 0.95 }}
@@ -44,6 +46,7 @@ const StyledButton = styled(motion.button)`
   min-width: 6.4375rem;
   max-width: 13rem;
   min-height: 2.225rem;
+  margin: ${props=>props.margin};
   width: auto;
   ${(props) =>
     props.wire &&
@@ -62,8 +65,10 @@ const StyledButton = styled(motion.button)`
   border-radius: 0.4375rem;
   font-weight: 600;
   padding: 0.5rem 1rem;
-  // font-family is necessary here
-  font-family: 'Manrope', 'Roboto', 'Arial', 'Helvetica';  font-size: 1.25rem;
+
+  /* // font-family is necessary here */
+  font-family: 'Manrope', 'Roboto', 'Arial', 'Helvetica';  
+  font-size: 1rem;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;

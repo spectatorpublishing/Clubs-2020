@@ -13,7 +13,7 @@ import {
   Tags,
 } from './helpers';
 
-const ProfileCreation1 = ({ clubProfile, setClubProfile, history }) => {
+const ProfileCreation1 = ({ clubProfile, setClubProfile, history, saveHandler }) => {
   const [errorMessage, setErrorMesssage] = useState('');
   const clubNameRef = useRef(null);
   const shortDescRef = useRef(null);
@@ -46,7 +46,7 @@ const ProfileCreation1 = ({ clubProfile, setClubProfile, history }) => {
     );
   });
 
-  const errorHandler = () => {
+  const saveProfile = (next) => {
     let tempProfile = { ...clubProfile };
     tempProfile.clubName = clubNameRef.current.value;
     tempProfile.shortDesc = shortDescRef.current.value;
@@ -71,8 +71,11 @@ const ProfileCreation1 = ({ clubProfile, setClubProfile, history }) => {
       setErrorMesssage('Character Limit Exceeded!');
       return;
     }
-    history.push('/profile-creation/1');
+    
+    if(next) history.push('/profile-creation/1');
+    
     setClubProfile(tempProfile);
+    saveHandler(tempProfile, false);
     setErrorMesssage('');
   };
 
@@ -101,14 +104,15 @@ const ProfileCreation1 = ({ clubProfile, setClubProfile, history }) => {
         </Column>
       </StyledBody>
       <ButtonContainer>
-        <TomatoButton text='Next' onClick={errorHandler} />
-        <ErrorMessage
+        {/* <TomatoButton text='Save' margin="0 1rem" onClick={() => saveProfile(false)} /> */}
+        <TomatoButton text='Next' margin="0 1rem" onClick={() => saveProfile(true)} />
+      </ButtonContainer>
+      <ErrorMessage
           initial={{ opacity: 0 }}
           animate={errorMessage === '' ? { opacity: 0 } : { opacity: 1 }}
         >
           {errorMessage}
         </ErrorMessage>
-      </ButtonContainer>
     </>
   );
 };
@@ -143,7 +147,6 @@ const InputContainer = styled.div`
 const ButtonContainer = styled.div`
   width: 100%;
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+  justify-content: flex-end;
   margin: 0.5rem 0;
 `;

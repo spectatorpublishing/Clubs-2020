@@ -2,10 +2,20 @@ import React, { useState, useRef, useEffect } from 'react';
 import styled, { css } from 'styled-components';
 import { motion } from 'framer-motion';
 import { useFocused, useViewport } from '../customHooks/index';
+import { rememberMe } from '../../containers/FirebaseApiSetUpTest/firebase/rememberMe';
 
 // order is for when you want border radius on sides of mobile version
 
-const Checkbox = ({ labelText, order, data, setData, objId, defaultValue }) => {
+const Checkbox = ({
+  labelText,
+  order,
+  data,
+  setData,
+  objId,
+  defaultValue,
+  onClick,
+  firebase
+}) => {
   const [clicked, setClicked] = useState(defaultValue);
   const checkbox = useRef(null);
   const checkboxFocused = useFocused(checkbox);
@@ -30,6 +40,10 @@ const Checkbox = ({ labelText, order, data, setData, objId, defaultValue }) => {
   };
 
   useEffect(() => {
+    setClicked(defaultValue);
+  }, [defaultValue]);
+
+  useEffect(() => {
     if (checkboxFocused) {
       document.addEventListener('keypress', onKeypress);
     }
@@ -39,21 +53,30 @@ const Checkbox = ({ labelText, order, data, setData, objId, defaultValue }) => {
   }, [checkboxFocused]);
 
   const handleClick = () => {
-    setClicked(!clicked);
-    if (data && setData) {
-      let tempData = { ...data };
-      if (objId in tempData) {
-        if (clicked) {
-          // Removes Element
-          const index = tempData[objId].indexOf(labelText);
-          if (index >= -1) tempData[objId].splice(index, 1);
-          // Adds Element
-        } else tempData[objId].push(labelText);
-        setData(tempData);
-      } else {
-        console.error('objId not in the obj');
-      }
+    // For remember me checkbox
+    if(firebase){
+      rememberMe(!clicked) //pass the opposite because at the end of this function: setClicked(!clicked)
     }
+    else if (!onClick) {
+      if (data && setData) {
+        let tempData = { ...data };
+        if (objId in tempData) {
+          if (clicked) {
+            // Removes Element
+            const index = tempData[objId].indexOf(labelText);
+            if (index >= -1) tempData[objId].splice(index, 1);
+            // Adds Element
+          } else tempData[objId].push(labelText);
+          setData(tempData);
+        } else {
+          console.error('objId not in the obj');
+        }
+      }
+    } else {
+      onClick();
+    }
+    setClicked(!clicked);
+   
   };
 
   return (
@@ -64,7 +87,7 @@ const Checkbox = ({ labelText, order, data, setData, objId, defaultValue }) => {
         order={order}
         variants={boxVariants}
         clicked={clicked}
-        initial={'unchecked'}
+        initial='unchecked'
         animate={clicked ? 'checked' : 'unchecked'}
         transition={{ type: 'spring', stiffness: 300, damping: 20 }}
         onClick={handleClick}

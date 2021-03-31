@@ -28,6 +28,11 @@ const SearchTagActive = ({
       searchTag.current.click();
     }
   };
+  
+  useEffect(() => {
+    setClicked(defaultValue);
+  }, [defaultValue]);
+
   useEffect(() => {
     if (searchTagFocused) {
       document.addEventListener('keypress', onKeypress);

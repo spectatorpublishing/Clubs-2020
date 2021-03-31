@@ -4,8 +4,6 @@ import styled from 'styled-components';
 import ExploreBox from '../components/explorebox/index';
 import MainContent from '../components/profileMainContent/index';
 import { ProfilePageBox } from "../components/profilePageBox";
-import { Navbar } from "../components/navbar";
-import { NavbarProfile } from "../components/navbarProfile";
 import { FrequencyTag } from "../components/frequencyTag/index";
 import { SocialTagsBox } from "../components/socialTagsBox";
 import AdCarrier from '../components/adCarrier';
@@ -13,7 +11,7 @@ import AccountTag from "../components/accountTag/index";
 import YourClubProfile from "../components/yourClubProfile/index";
 import CompleteProfile from "../components/completeProfile";
 
-export const ClubProfile = () => {
+const ClubProfileDisplay = ({ isLoggedin, profileId}) => {    
     const { id } = useParams();
     const [club, setClub] = useState();
     const [width, setWidth] = useState(window.innerWidth);
@@ -21,9 +19,13 @@ export const ClubProfile = () => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     
     /* temporary for conditional components */
-    const [isLoggedin, setLoggedIn] = useState(false);
+    const [isCorrectAccount, setIsCorrectAccount] = useState(profileId === window.location.href.split('/')[4]);
     const [firstLogIn, setFirstLog] = useState(false);
     const [completeProfile, setComplete] = useState(false);
+
+    useEffect(() => {
+        setIsCorrectAccount(profileId === window.location.href.split('/')[4]);
+    }, [profileId]);
 
     useEffect(() => {
         window.addEventListener("resize", () => setWidth(window.innerWidth));
@@ -34,14 +36,14 @@ export const ClubProfile = () => {
           .then((response) => {
             setClub(response);
             setLoading(false);
-            console.log(`api/clubProfiles/${id}`);
           })
-        //.catch((error) => console.log(error));
+        .catch((error) => console.log(error));
     }, [id]);
 
     const SimilarClubs = () => { return (club.similarClubs === undefined) ? (<h1>Loading</h1>) : 
-        (club.similarClubs.map(profile => (
+        (club.similarClubs.map((profile, idx) => (
             <ExploreBox 
+                key= {`p${idx}`}
                 name = {profile.name}
                 description = {profile.shortDescription}
                 imageURL = {profile.imageUrl}
@@ -53,14 +55,13 @@ export const ClubProfile = () => {
             />
     )))};
 
-    const ProfileNav = () => { 
+    const AdminComponent = () => { 
         return (
-        <>
-            <NavbarType/>
+        <div>
             <ConditionalAccountTag/>
             <ConditionalCompleteProfile/>
             <ConditionalClubProfile/>
-        </>
+        </div>
         );
     }
 
@@ -74,34 +75,22 @@ export const ClubProfile = () => {
         (null) 
     };
 
-    const ConditionalClubProfile = () => { return (isLoggedin === true) ? 
+    const ConditionalClubProfile = () => { return (isCorrectAccount === true) ? 
         ( <YourClubProfile/> ) : 
         (null) 
     };
-
-    const NavbarType = () => { return (isLoggedin === true) ? 
-        ( <NavbarProfile/> ) : 
-        ( <Navbar/> ) 
-    };
-
-    /* temporary for conditional components */
-    function setAdmin(){
-        setLoggedIn(!isLoggedin);
-        setFirstLog(!firstLogIn);
-        setComplete(!completeProfile);
-    }
 
     if (width < 541){ // mobile view
         return (
             <>
                 {!isLoading && (
                     <Wrapper>
-                        <ProfileNav/>
+                        <AdminComponent/>
                         <PageWrapper>
                             <Content>
                                 <h1>{club.name}</h1>
                                 <p>Last updated: {new Date(club.lastUpdated.toString()).toLocaleDateString("en-US", options)}</p>
-                                <div><Button onClick={setAdmin}><p>Show/Hide Club Admin View</p></Button></div>
+                                {/* <div><Button onClick={setAdmin}><p>Show/Hide Club Admin View</p></Button></div> */}
                                 <ProfilePageBox 
                                     memberRange= {club.memberRange}
                                     acceptingMembers={club.acceptingMembers}
@@ -109,8 +98,8 @@ export const ClubProfile = () => {
                                     tags={club.tags}
                                 />
                                 <FrequencyTag
-                                    frequency={club.meetingFrequency}
-                                    weekly= {club.weekly}
+                                        frequency={club.meetingFrequency[0]}
+                                        weekly= {club.meetingFrequency[1]}
                                 />
                                 {(club.socialLinks.facebook === "" && club.socialLinks.instagram === "" && club.socialLinks.email === "" && club.socialLinks.website === "" ) ? null :
                                 <SocialTagsBox
@@ -162,7 +151,7 @@ export const ClubProfile = () => {
             <>
                 {!isLoading && (
                     <Wrapper>
-                        <ProfileNav/>
+                        <AdminComponent/>
                         <PageWrapper>
                             <Content>                            
                                 <h1>{club.name}</h1>
@@ -175,7 +164,7 @@ export const ClubProfile = () => {
                                         tags={club.tags}
                                     />
                                     <Column>
-                                        <div><Button onClick={setAdmin}><p>Show/Hide Club Admin View</p></Button></div>
+                                        {/* <div><Button onClick={setAdmin}><p>Show/Hide Club Admin View</p></Button></div> */}
                                             <FrequencyTag
                                                 frequency={club.meetingFrequency}
                                                 weekly= {club.weekly}
@@ -232,7 +221,7 @@ export const ClubProfile = () => {
             <>
                 {!isLoading && (
                     <Wrapper>
-                        <ProfileNav/>
+                        <AdminComponent/>
                         <PageWrapper>
                             <Content>
                                 <h1>{club.name}</h1>
@@ -247,7 +236,7 @@ export const ClubProfile = () => {
                                 <SimilarClubs/> 
                             </Content>
                             <Cards>
-                                <div><Button onClick={setAdmin}><p>Show/Hide Club Admin View</p></Button></div>
+                                {/* <div><Button onClick={setAdmin}><p>Show/Hide Club Admin View</p></Button></div> */}
                                 <ProfilePageBox 
                                     memberRange= {club.memberRange}
                                     acceptingMembers={club.acceptingMembers}
@@ -255,8 +244,8 @@ export const ClubProfile = () => {
                                     tags={club.tags}
                                 />
                                 <FrequencyTag
-                                    frequency={club.meetingFrequency}
-                                    weekly= {club.weekly}
+                                            frequency={club.meetingFrequency[0]}
+                                            weekly= {club.meetingFrequency[1]}
                                 />
                                 {(club.socialLinks.facebook === "" && club.socialLinks.instagram === "" && club.socialLinks.email === "" && club.socialLinks.website === "" ) ? null :
                                 <SocialTagsBox
@@ -306,12 +295,13 @@ const Wrapper = styled.main`
     background-repeat: no-repeat;
     background-position: top right;
     background-size: contain;  
+    padding-top: 5rem;
 `;
 
 const PageWrapper = styled.div`
     display: flex;
     flex-direction: row;
-    padding: 2rem 5rem 0rem 5rem;
+    padding: 3rem 5rem 0rem 5rem;
 
     h2{
         font-size: 1.25rem;
@@ -393,3 +383,5 @@ const Column = styled.div`
     width: 100%;
     margin-left: 1rem;
 `;
+
+export default ClubProfileDisplay;

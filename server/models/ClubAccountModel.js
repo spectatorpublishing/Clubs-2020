@@ -7,12 +7,13 @@ const clubAccountSchema = new Schema({
     clubProfileId: { type: String, default: null },
     verificationStatus: {
         type: String,
-        enum: ['pending', 'accepted', 'denied'],
+        enum: ['incomplete', 'pending', 'accepted', 'denied'],
         default: 'pending'
     },
     creationDate: { type: Date, default: Date.now },
     lastUpdateDate: { type: Date, default: null },
     deniedReason: { type: String, default: '' },
+    authorityLevel: { type: String, default: 'user' }
 });
 
 const clubAccount = mongoose.model('ClubAccount', clubAccountSchema);
