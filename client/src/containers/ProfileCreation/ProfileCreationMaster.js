@@ -203,7 +203,7 @@ const ClubProfileTitle = styled.h1`
 const PageContainer = styled.div`
   display: grid;
   grid-template-rows: auto auto auto;
-  padding: 0 3rem 0 4rem;
+  padding: 8rem 3rem 0 4rem;
   @media only screen and (max-width: 768px) {
     padding: 0 1.375rem !important;
   }

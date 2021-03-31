@@ -55,7 +55,7 @@ const Wrapper = styled.div`
   background-repeat: no-repeat;
   background-position: top;
   background-attachment: fixed;
-  background-size: cover;  
+  background-size: contain;  
 `;
 
 const PageWrapper = styled.main`
@@ -65,7 +65,7 @@ const PageWrapper = styled.main`
 `;
 
 const Title = styled.h1`
-  margin-top: 6rem;
+  margin-top: 14rem;
   font-size: 2rem;
   text-align: center;
   width: 100vw;
