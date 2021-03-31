@@ -3,10 +3,15 @@ import styled from 'styled-components';
 import { FaBars } from 'react-icons/fa';
 import FilledButton from '../tomatoButton/index';
 import { NavLink } from 'react-router-dom';
-import Logout from '../logout/index';
 import { useViewport } from '../customHooks';
+import Manage from '../manageAccount/index';
+import Logout from '../logout/index';
 
-export const Navbar = () => {
+// import { useViewport } from '../customHooks/index.js';
+
+// { detailLink, id, userCred }
+
+export const Navbar = ({loggedIn = false}) => {
   const [showLinks, setShowLinks] = useState(false);
   const [currentPath, setCurrentPath] = useState('/');
   const { width } = useViewport();
@@ -40,13 +45,19 @@ export const Navbar = () => {
         {currentPath === '/' && (
           <LinksContainer className={`${showLinks ? 'show-container' : null}`}>
             <MenuLinks>
-              <StyledListItem>
+              <StyledListItem hideItem = {false}>
                 <a href='/faq'><h3>FAQs</h3></a>
               </StyledListItem>
-              <StyledListItem>
+              <StyledListItem hideItem = {loggedIn}>
                 <a href='/login'><h3>Club Login</h3></a>
               </StyledListItem>
-              <StyledListItem>
+              <StyledListItem hideItem = {!loggedIn}>
+                <a href="/manage"> <Manage/> </a>
+              </StyledListItem>
+              <StyledListItem hideItem = {!loggedIn}>
+                <a href="/"> <Logout/> </a>
+              </StyledListItem>
+              <StyledListItem hideItem = {loggedIn}>
                 <NavLink
                   style={{ textDecoration: 'none' }}
                   to='/signup'
@@ -71,12 +82,16 @@ const NavWrapper = styled.nav`
   color: ${(props) => props.theme.colors.white};
   font-weight: 600;
   height: 100%;
+  /* position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw; */
 `;
 
 const StyledListItem = styled.li`
-  display: flex;
+  display: ${props =>  props.hideItem ? `none` : `flex` };
   align-items: center;
-  h3 {
+  & > * > h3 {
     font-size: 1.25rem;
     font-weight: 600;
     margin: 0rem;

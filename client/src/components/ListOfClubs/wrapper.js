@@ -1,5 +1,7 @@
-const dev_api_account = 'http://localhost:8080/api/clubAccounts'
-const dev_api_profile = 'http://localhost:8080/api/clubProfiles'
+// const dev_api_account = 'http://localhost:8080/api/clubAccounts'
+// const dev_api_profile = 'http://localhost:8080/api/clubProfiles'
+const dev_api_account = '/api/clubAccounts'
+const dev_api_profile = '/api/clubProfiles'
 
 /* encodes an object into application/x-www-form-urlencoded form */
 function encodeFormData(details) {
@@ -48,9 +50,9 @@ function addProfileInfo(base, profile) {
     base.moreInfo.description = profile.longDescription;
 
     let highlights = [];
-    console.log("========================1")
-    console.log(profile.highlights)
-    console.log("========================2")
+    // console.log("========================1")
+    // console.log(profile.highlights)
+    // console.log("========================2")
 
     if (profile && profile.highlights){
         profile.highlights.forEach((hl, idx) => highlights[idx] = `${idx + 1}. ${hl}`);
@@ -60,9 +62,14 @@ function addProfileInfo(base, profile) {
 
 function fetchAccounts(type) {
     /* fetch all accounts */
+    
+    // return fetch(`http://localhost:8080/api/clubAccounts/getAll`)
     return fetch(`${dev_api_account}/getAll`)
         .then(res => res.json())
         .then(res => {
+            console.log("---------------------vvvvvvvvv")
+            console.log(res)
+            console.log("^^^^^^^^^---------------------")
             /*
              * filters out all account of type that doesn't have a profile,
              * then extract useful info and rename the attributes
@@ -100,6 +107,9 @@ export function joinAccountProfile(type) {
         .then(res => {
             let id_list = [];
             res.forEach((account) => id_list.push(account.id));
+            console.log("accounts list:")
+            console.log(res)
+            console.log(list)
 
             return fetchProfiles(id_list)
         })

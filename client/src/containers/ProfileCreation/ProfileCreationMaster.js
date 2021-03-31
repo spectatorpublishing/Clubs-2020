@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import ProfileCreation1 from './ProfileCreation1/index';
 import ProfileCreation2 from './ProfileCreation2/index';
 import { Confirmation } from '../Confirmation';
-import Navbar from '../../components/navbar/index';
+// import Navbar from '../../components/navbar/index';
 
 const ProfileCreationMaster = ({ userCred }) => {
   const [clubProfile, setClubProfile] = useState({
@@ -144,7 +144,7 @@ const ProfileCreationMaster = ({ userCred }) => {
   // Updates state based on input text
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <PageContainer>
         <SetUpClubProfile />
         <Router>

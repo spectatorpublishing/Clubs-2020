@@ -112,7 +112,18 @@ module.exports = {
                             }).sort( {lastUpdateDate: -1} ).then(
                                 q3 => {
                                     rdata.denied = JSON.parse(JSON.stringify(q3))
-                                    res.json(rdata)
+
+                                    clubAccount.find({
+                                        verificationStatus: 'incomplete',
+                                        lastUpdateDate:  {
+                                            $gte: date
+                                        }
+                                    }).sort( {lastUpdateDate: -1} ).then(
+                                        q4 => {
+                                            rdata.incomplete = JSON.parse(JSON.stringify(q4))
+                                            res.json(rdata)
+                                        }
+                                    ).catch(err => errHandling(err, res));
                                 }
                             ).catch(err => errHandling(err, res));
 
