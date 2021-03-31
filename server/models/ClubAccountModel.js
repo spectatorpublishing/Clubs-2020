@@ -8,7 +8,7 @@ const clubAccountSchema = new Schema({
     verificationStatus: {
         type: String,
         enum: ['incomplete', 'pending', 'accepted', 'denied'],
-        default: 'incomplete'
+        default: 'pending'
     },
     creationDate: { type: Date, default: Date.now },
     lastUpdateDate: { type: Date, default: null },
