@@ -1,5 +1,5 @@
 import ViewportProvider from './components/viewportProvider/index';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState} from 'react';
 import { BrowserRouter as Router, Switch, Route, useParams } from 'react-router-dom';
 import Explore from './containers/Explore';
 import { FAQ } from './containers/FAQ';
@@ -26,18 +26,13 @@ const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
 
   const [clubAccountInfo, setclubAccountInfo] = useState(null);
-  // const [authenticationLevel, setAuthenticationLevel] = useState("user");
-  
 
   const getClubAccountInfo = (f_id) => {
 
     console.log("----------------vvv")
 
-
-
     // This function grabs the user account info to be passed down
     fetch(`/api/clubAccounts/getByFirebaseId/${f_id}`)
-    // fetch(`http://localhost:8080/api/clubAccounts/getAll`)
     .then(res => res.json())
         .then(res => {
             console.log("---------------------vvvvvvvvv")
@@ -93,21 +88,16 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <ViewportProvider>
         <Router>
-        <Navbar loggedIn = {userCred !== null} authLevel = {clubAccountInfo ? clubAccountInfo.authorityLevel : "user"} profileId = {clubAccountInfo ? clubAccountInfo.clubProfileId : null} />
+        <Navbar loggedIn = {userCred !== null} authLevel = {clubAccountInfo ? clubAccountInfo.authorityLevel : "user"} profileId = {clubAccountInfo ? clubAccountInfo.clubProfileId : null}/>
           <Switch>
               <Route path='/club/:id'>
-                <ClubProfileDisplay isLoggedin={loggedIn} userCred={userCred} />
+                <ClubProfileDisplay isLoggedin={loggedIn}/>
               </Route>
               <Route path='/profile-creation'>
-                <ProfileCreationMaster userCred={userCred} isLoggedin={loggedIn} />
+                <ProfileCreationMaster userCred={userCred}/>
               </Route>
-              <Route path='/faq'>
-                <FAQ isLoggedin={loggedIn} userCred={userCred} />
-              </Route>
-              <Route path='/' exact>
-                <Explore isLoggedin={loggedIn} userCred={userCred} />
-              </Route>
-              {/* change to proper formatting */}
+              <Route path='/faq' component={FAQ}/>
+              <Route path='/' exact component={Explore}/>
               <Route path='/portal/login' component={PortalLogin} />
               <Route path='/portal' component={Portal} />
               <Route path='/signup'>

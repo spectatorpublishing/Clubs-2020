@@ -1,18 +1,11 @@
 import React from 'react';
-import { Navbar } from '../components/navbar';
-import NavbarProfile from '../components/navbarProfile';
 import { FaqBox } from '../components/faqbox';
 import styled from 'styled-components';
 
-export const FAQ = ({ isLoggedin, userCred }) => {
-  const NavbarType = () => { return (isLoggedin === true) ? 
-    ( <NavbarProfile userCred={userCred} /> ) : 
-    ( <Navbar/> ) 
-  };
+export const FAQ = () => {
 
   return (
     <Wrapper>
-      <NavbarType />
       <PageWrapper>
         <Title>Frequently Asked Questions</Title>
         <FaqBox
@@ -62,7 +55,7 @@ const Wrapper = styled.div`
   background-repeat: no-repeat;
   background-position: top;
   background-attachment: fixed;
-  background-size: contain;  
+  background-size: cover;  
 `;
 
 const PageWrapper = styled.main`

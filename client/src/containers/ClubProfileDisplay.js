@@ -4,8 +4,6 @@ import styled from 'styled-components';
 import ExploreBox from '../components/explorebox/index';
 import MainContent from '../components/profileMainContent/index';
 import { ProfilePageBox } from "../components/profilePageBox";
-import { Navbar } from "../components/navbar";
-import { NavbarProfile } from "../components/navbarProfile";
 import { FrequencyTag } from "../components/frequencyTag/index";
 import { SocialTagsBox } from "../components/socialTagsBox";
 import AdCarrier from '../components/adCarrier';
@@ -13,9 +11,8 @@ import AccountTag from "../components/accountTag/index";
 import YourClubProfile from "../components/yourClubProfile/index";
 import CompleteProfile from "../components/completeProfile";
 
-const ClubProfileDisplay = ({ isLoggedin, userCred, profileId = 111, authLevel }) => {    
+const ClubProfileDisplay = ({ isLoggedin, profileId = 111}) => {    
     const { id } = useParams();
-    const [pid, setPid] = useState(null);
     const [club, setClub] = useState();
     const [width, setWidth] = useState(window.innerWidth);
     const [isLoading, setLoading] = useState(true);
@@ -26,9 +23,6 @@ const ClubProfileDisplay = ({ isLoggedin, userCred, profileId = 111, authLevel }
     const [completeProfile, setComplete] = useState(false);
 
     useEffect(() => {
-        // id && console.log("pid = ", profileId, pid === id, pid, id)
-        // setPid(profileId)
-        // setLoggedIn(pid === id )
         window.addEventListener("resize", () => setWidth(window.innerWidth));
         fetch(`${window.origin}/api/clubProfiles/${id}`, {
             method: 'GET',
@@ -39,7 +33,6 @@ const ClubProfileDisplay = ({ isLoggedin, userCred, profileId = 111, authLevel }
             setLoading(false);
             console.log(`api/clubProfiles/${id}`);
             console.log(profileId.profileId === id , profileId.profileId ,id)
-            // setLoggedIn(profileId.profileId === id )
           })
         .catch((error) => console.log(error));
     }, [id]);
@@ -59,10 +52,9 @@ const ClubProfileDisplay = ({ isLoggedin, userCred, profileId = 111, authLevel }
             />
     )))};
 
-    const ProfileNav = () => { 
+    const AdminComponent = () => { 
         return (
         <div>
-            {/* <NavbarType/> */}
             <ConditionalAccountTag/>
             <ConditionalCompleteProfile/>
             <ConditionalClubProfile/>
@@ -85,23 +77,12 @@ const ClubProfileDisplay = ({ isLoggedin, userCred, profileId = 111, authLevel }
         (null) 
     };
 
-    const NavbarType = isLoggedin === true ? 
-        ( <NavbarProfile userCred={userCred} authLevel={authLevel} /> ) : 
-        ( <Navbar/> );
-
-    /* temporary for conditional components */
-    // function setAdmin(){
-    //     // setLoggedIn(!isLoggedin);
-    //     setFirstLog(!firstLogIn);
-    //     setComplete(!completeProfile);
-    // }
-
     if (width < 541){ // mobile view
         return (
             <>
                 {!isLoading && (
                     <Wrapper>
-                        {NavbarType}
+                        <AdminComponent/>
                         <PageWrapper>
                             <Content>
                                 <h1>{club.name}</h1>
@@ -167,7 +148,7 @@ const ClubProfileDisplay = ({ isLoggedin, userCred, profileId = 111, authLevel }
             <>
                 {!isLoading && (
                     <Wrapper>
-                        {NavbarType}
+                        <AdminComponent/>
                         <PageWrapper>
                             <Content>                            
                                 <h1>{club.name}</h1>
@@ -237,7 +218,7 @@ const ClubProfileDisplay = ({ isLoggedin, userCred, profileId = 111, authLevel }
             <>
                 {!isLoading && (
                     <Wrapper>
-                        {NavbarType}
+                        <AdminComponent/>
                         <PageWrapper>
                             <Content>
                                 <h1>{club.name}</h1>
@@ -316,7 +297,7 @@ const Wrapper = styled.main`
 const PageWrapper = styled.div`
     display: flex;
     flex-direction: row;
-    padding: 2rem 5rem 0rem 5rem;
+    padding: 10rem 5rem 0rem 5rem;
 
     h2{
         font-size: 1.25rem;
