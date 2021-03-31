@@ -13,19 +13,22 @@ import AccountTag from "../components/accountTag/index";
 import YourClubProfile from "../components/yourClubProfile/index";
 import CompleteProfile from "../components/completeProfile";
 
-const ClubProfileDisplay = ({ isLoggedin, userCred }) => {    
+const ClubProfileDisplay = ({ isLoggedin, userCred, profileId = 111, authLevel }) => {    
     const { id } = useParams();
+    const [pid, setPid] = useState(null);
     const [club, setClub] = useState();
     const [width, setWidth] = useState(window.innerWidth);
     const [isLoading, setLoading] = useState(true);
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     
     /* temporary for conditional components */
-    // const [isLoggedin, setLoggedIn] = useState(false);
     const [firstLogIn, setFirstLog] = useState(false);
     const [completeProfile, setComplete] = useState(false);
 
     useEffect(() => {
+        // id && console.log("pid = ", profileId, pid === id, pid, id)
+        // setPid(profileId)
+        // setLoggedIn(pid === id )
         window.addEventListener("resize", () => setWidth(window.innerWidth));
         fetch(`${window.origin}/api/clubProfiles/${id}`, {
             method: 'GET',
@@ -35,13 +38,16 @@ const ClubProfileDisplay = ({ isLoggedin, userCred }) => {
             setClub(response);
             setLoading(false);
             console.log(`api/clubProfiles/${id}`);
+            console.log(profileId.profileId === id , profileId.profileId ,id)
+            // setLoggedIn(profileId.profileId === id )
           })
         .catch((error) => console.log(error));
     }, [id]);
 
     const SimilarClubs = () => { return (club.similarClubs === undefined) ? (<h1>Loading</h1>) : 
-        (club.similarClubs.map(profile => (
+        (club.similarClubs.map((profile, idx) => (
             <ExploreBox 
+                key= {`p${idx}`}
                 name = {profile.name}
                 description = {profile.shortDescription}
                 imageURL = {profile.imageUrl}
@@ -55,12 +61,12 @@ const ClubProfileDisplay = ({ isLoggedin, userCred }) => {
 
     const ProfileNav = () => { 
         return (
-        <>
-            <NavbarType/>
+        <div>
+            {/* <NavbarType/> */}
             <ConditionalAccountTag/>
             <ConditionalCompleteProfile/>
             <ConditionalClubProfile/>
-        </>
+        </div>
         );
     }
 
@@ -79,10 +85,9 @@ const ClubProfileDisplay = ({ isLoggedin, userCred }) => {
         (null) 
     };
 
-    const NavbarType = () => { return (isLoggedin === true) ? 
-        ( <NavbarProfile userCred={userCred} /> ) : 
-        ( <Navbar/> ) 
-    };
+    const NavbarType = isLoggedin === true ? 
+        ( <NavbarProfile userCred={userCred} authLevel={authLevel} /> ) : 
+        ( <Navbar/> );
 
     /* temporary for conditional components */
     // function setAdmin(){
@@ -96,7 +101,7 @@ const ClubProfileDisplay = ({ isLoggedin, userCred }) => {
             <>
                 {!isLoading && (
                     <Wrapper>
-                        {/* <ProfileNav/> */}
+                        {NavbarType}
                         <PageWrapper>
                             <Content>
                                 <h1>{club.name}</h1>
@@ -162,7 +167,7 @@ const ClubProfileDisplay = ({ isLoggedin, userCred }) => {
             <>
                 {!isLoading && (
                     <Wrapper>
-                        {/* <ProfileNav/> */}
+                        {NavbarType}
                         <PageWrapper>
                             <Content>                            
                                 <h1>{club.name}</h1>
@@ -232,7 +237,7 @@ const ClubProfileDisplay = ({ isLoggedin, userCred }) => {
             <>
                 {!isLoading && (
                     <Wrapper>
-                        {/* <ProfileNav/> */}
+                        {NavbarType}
                         <PageWrapper>
                             <Content>
                                 <h1>{club.name}</h1>

@@ -71,11 +71,6 @@ export const NavbarProfile = ({ userCred }) => {
                 <NavLink
                   style={{ textDecoration: 'none' }}
                   to={`/club/${profileId}`}
-                  isActive={(match) => {
-                    if (match) {
-                      setCurrentPath(`/`);
-                    }
-                  }}
                 >
                   <FilledButton text='My Profile' />
                 </NavLink>

@@ -12,7 +12,7 @@ export const ProfileMain = ({description, highlights, howToJoin}) => {
                 {(highlights.length === 0) ? null :
                 <div>
                     <h2>Highlights</h2>
-                    <p>{highlights.map(highlight => <Highlight text={highlight}/>)}</p>
+                    <div>{highlights.map((highlight, idx) => <Highlight key= {`h${idx}`} text={highlight}/>)}</div>
                 </div> }
                 {(howToJoin) ?
                 <div>

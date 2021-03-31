@@ -1,6 +1,6 @@
 import ViewportProvider from './components/viewportProvider/index';
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, useParams } from 'react-router-dom';
 import Explore from './containers/Explore';
 import { FAQ } from './containers/FAQ';
 import { Portal } from './containers/Portal';
@@ -25,10 +25,11 @@ const App = () => {
   const [userCred, setUserCred] = useState(null);
   const [loggedIn, setLoggedIn] = useState(false);
 
-  const [clubInfo, setClubInfo] = useState(null);
+  const [clubAccountInfo, setclubAccountInfo] = useState(null);
+  // const [authenticationLevel, setAuthenticationLevel] = useState("user");
   
 
-  const getAuthenticationLevel = (f_id) => {
+  const getClubAccountInfo = (f_id) => {
 
     console.log("----------------vvv")
 
@@ -42,7 +43,10 @@ const App = () => {
             console.log("---------------------vvvvvvvvv")
             console.log(res)
             console.log("^^^^^^^^^---------------------")
-            setClubInfo(res)
+
+            console.log( (res.verificationStatus !== "incomplete" && res.verificationStatus !== "denied"))
+            console.log('++++++++++++++');
+            setclubAccountInfo(res)
       })
 
       /* club profile not created, direct to profile creation page */
@@ -53,20 +57,25 @@ const App = () => {
       })
   }
 
+  // const isOwnAccount = (prof_id) =>{
+  //   if (clubAccountInfo && clubAccountInfo.clubProfileId == ) {
+
+  //   } ? clubAccountInfo.clubProfileId : "user"
+  // }
+
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         console.log(user.email);
         console.log("userId: ", user.uid);
-        getAuthenticationLevel(user.uid)
+        //get the club account info by firebaseId and save in state
+        getClubAccountInfo(user.uid)
 
+        //save the user firebase credential info in state
         setUserCred(user);
         setLoggedIn(true);
         console.log('Signed in.');
-
-
-
       } else {
         //make sure firebase auth login persistence is set to session only
         rememberMe(false);
@@ -77,12 +86,14 @@ const App = () => {
   }, []);
 
   
+  console.log(clubAccountInfo && (clubAccountInfo.verificationStatus !== "incomplete" && clubAccountInfo.verificationStatus !== "denied"))
+  console.log('---=-=---=--');
 
   return (
     <ThemeProvider theme={theme}>
       <ViewportProvider>
         <Router>
-          {/* <Navbar/> */}
+        <Navbar loggedIn = {userCred !== null} authLevel = {clubAccountInfo ? clubAccountInfo.authorityLevel : "user"} profileId = {clubAccountInfo ? clubAccountInfo.clubProfileId : null} />
           <Switch>
               <Route path='/club/:id'>
                 <ClubProfileDisplay isLoggedin={loggedIn} userCred={userCred} />
@@ -120,40 +131,6 @@ const App = () => {
       </ViewportProvider>
       
       {/* <Navbar/> */}
-{/*       
-      <Router>
-        <Switch>
-          <ViewportProvider>
-            <Navbar loggedIn = {userCred !== null}/>
-            <Route path='/club/:id'>
-              <ClubProfileDisplay />
-            </Route>
-            <Route path='/profile-creation'>
-              <ProfileCreationMaster userCred={userCred} />
-            </Route>
-            <Route path='/faq'>
-              <FAQ />
-            </Route>
-            <Route path='/' exact>
-              <Explore />
-            </Route>
-            <Route path='/portal/login' component={PortalLogin} />
-            <Route path='/portal' component={Portal} />
-            <Route path='/signup'>
-              <SignUp userCred={userCred} />
-            </Route>
-            <Route path='/confirm' component={Confirmation} />
-            <Route path='/clubprofile' component={ClubAccountManagement} />
-            <Route path='/login'>
-              <Login userCred={userCred} />
-            </Route>
-            <Route exact path='/findpassword/confirm' component={ConfirmPasswordReset} />
-            <Route exact path='/findpassword'>
-              <FindPassword userCred={userCred} />
-            </Route>
-          </ViewportProvider>
-        </Switch>
-      </Router> */}
     </ThemeProvider>
   );
 };

@@ -10,7 +10,7 @@ import { createUser } from './helper';
 import Checkbox from '../checkbox';
 //this is the version of the sign-up/login (depends on id value given to components) form to be used
 
-export const SignUpBox = ({ detailLink, id, userCred }) => {
+export const SignUpBox = ({ detailLink, id, userCred , isProfileComplete = true}) => {
   const email = useRef(null);
   const password = useRef(null);
   const confirmPassword = useRef(null);
@@ -115,7 +115,20 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
       //e.preventDefault();
     }
   }
+  function LoginRedirect(){
 
+    console.log("determining redirect", isProfileComplete)
+    if (!isProfileComplete){
+      console.log("redirecting")
+
+      history.push('/profile-creation');
+    }
+    else{
+      console.log("not redirecting")
+
+      history.push('/');
+    }
+  }
   function onLoginSubmit(e, withGoogle = false) {
     if (withGoogle) {
       var google = new firebase.auth.GoogleAuthProvider();
@@ -130,7 +143,12 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
           var token = credential.accessToken; // The signed-in user info.
           var user = result.user;
           console.log('signin successful');
-          history.push('/'); // ...
+
+
+
+          //logic to redirect depending on if you are done with the form or not
+          LoginRedirect()
+           // ...
         })
         .catch((error) => {
           // Handle Errors here.
@@ -190,7 +208,7 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
             setIsPasswordIncorrect(false);
             setIsEmailInvalid(false);
 
-            history.push('/');
+            LoginRedirect()
 
             // ...
           })
