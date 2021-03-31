@@ -28,20 +28,11 @@ const App = () => {
   const [clubAccountInfo, setclubAccountInfo] = useState(null);
 
   const getClubAccountInfo = (f_id) => {
-
-    console.log("----------------vvv")
-
     // This function grabs the user account info to be passed down
     fetch(`/api/clubAccounts/getByFirebaseId/${f_id}`)
     .then(res => res.json())
         .then(res => {
-            console.log("---------------------vvvvvvvvv")
-            console.log(res)
-            console.log("^^^^^^^^^---------------------")
-
-            console.log( (res.verificationStatus !== "incomplete" && res.verificationStatus !== "denied"))
-            console.log('++++++++++++++');
-            setclubAccountInfo(res)
+            setclubAccountInfo(res);
       })
 
       /* club profile not created, direct to profile creation page */
@@ -49,8 +40,8 @@ const App = () => {
       .catch(function (err) {
         console.error(err);
         console.error("err");
-      })
-  }
+      });
+  };
 
   // const isOwnAccount = (prof_id) =>{
   //   if (clubAccountInfo && clubAccountInfo.clubProfileId == ) {
@@ -62,10 +53,8 @@ const App = () => {
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        console.log(user.email);
-        console.log("userId: ", user.uid);
         //get the club account info by firebaseId and save in state
-        getClubAccountInfo(user.uid)
+        getClubAccountInfo(user.uid);
 
         //save the user firebase credential info in state
         setUserCred(user);
@@ -80,10 +69,6 @@ const App = () => {
     });
   }, []);
 
-  
-  console.log(clubAccountInfo && (clubAccountInfo.verificationStatus !== "incomplete" && clubAccountInfo.verificationStatus !== "denied"))
-  console.log('---=-=---=--');
-
   return (
     <ThemeProvider theme={theme}>
       <ViewportProvider>
@@ -91,7 +76,7 @@ const App = () => {
         <Navbar loggedIn = {userCred !== null} authLevel = {clubAccountInfo ? clubAccountInfo.authorityLevel : "user"} profileId = {clubAccountInfo ? clubAccountInfo.clubProfileId : null}/>
           <Switch>
               <Route path='/club/:id'>
-                <ClubProfileDisplay isLoggedin={loggedIn}/>
+                <ClubProfileDisplay isLoggedin={loggedIn} profileId={clubAccountInfo?.clubProfileId}/>
               </Route>
               <Route path='/profile-creation'>
                 <ProfileCreationMaster userCred={userCred}/>
@@ -112,15 +97,9 @@ const App = () => {
               <Route exact path='/findpassword'>
                 <FindPassword userCred={userCred} />
               </Route>
-            
-            {/* <Route path='/test' component={Signin} />
-            <Route path='/test_signin' component={Signin} />
-            <Route path='/test_signup' component={Signup} /> */}
           </Switch>
         </Router>
       </ViewportProvider>
-      
-      {/* <Navbar/> */}
     </ThemeProvider>
   );
 };

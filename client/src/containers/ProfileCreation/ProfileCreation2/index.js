@@ -57,8 +57,6 @@ const ProfileCreation2 = ({ clubProfile, setClubProfile, history, userCred, subm
 
       tempProfile.firebaseId = userCred;
 
-      console.log(userCred);
-
       setClubProfile(tempProfile);
       submitProfile(tempProfile, submitting);
       if (to) history.push(to);

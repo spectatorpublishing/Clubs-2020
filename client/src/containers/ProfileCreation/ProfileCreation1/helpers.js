@@ -48,15 +48,10 @@ export const NewMembers = ({ clubProfile, setClubProfile }) => {
     ['right', 'Not taking members'],
   ];
 
-  console.log("NEW MEMBERs")
-
   const checkboxes = checkboxData.map((item, index) => {
     const checkIfIn = () => {
       let isIn = false;
-      console.log(clubProfile.memberPeriod);
       for (let i = 0; i < clubProfile.memberPeriod.length; i++) {
-        console.log(clubProfile.memberPeriod[i]);
-        console.log(item[i]);
         if (clubProfile.memberPeriod[i] === item[1]) isIn = true;
       }
       return isIn;

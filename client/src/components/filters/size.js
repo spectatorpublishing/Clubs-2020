@@ -105,9 +105,6 @@ const Size = ({
             return element != item 
           })
       }
-
-      // console.log("selected: ", newSelected)
-      // setData(newSelected)
       setSelected("size", newSelected);
     };
 

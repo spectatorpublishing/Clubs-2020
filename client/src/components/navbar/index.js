@@ -15,7 +15,6 @@ export const Navbar = ({loggedIn = null, authLevel = "user", profileId}) => {
 
   function handleScroll() {
     setScrollY(window.pageYOffset);
-    console.log(new Date().getTime());
   }
 
   useEffect(() => {
@@ -37,7 +36,7 @@ export const Navbar = ({loggedIn = null, authLevel = "user", profileId}) => {
               setCurrentPath('/');
             }}
           >
-            <a href="/">Clubs@CU</a>
+            <a href="/">LionClubs</a>
           </Logo>
           {currentPath === '/' && (
             <NavToggle

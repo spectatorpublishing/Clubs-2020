@@ -17,7 +17,7 @@ const Wrapper = styled.div`
 `;
 
 const PageWrapper = styled.div`
-  padding: 10rem 3rem 3rem 3rem;
+  padding: 7rem 3rem 3rem 3rem;
 
     @media only screen and (max-width : 768px) {
         padding: 1rem 0.5rem;
@@ -381,7 +381,6 @@ const Explore = () => {
         );
 
     if (width < 840){
-        console.log(width);
         return(
             <Wrapper>
             <main>
@@ -399,7 +398,6 @@ const Explore = () => {
             </Wrapper>
         )
     } else {
-        console.log(width);
         return(
             <Wrapper>
             <main>

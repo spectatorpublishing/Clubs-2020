@@ -36,17 +36,11 @@ const ProfileCreationMaster = ({ userCred }) => {
       })
         .then(response => response.json())
         .then(data => {
-          console.log(data);
           fetch(`${window.origin}/api/clubProfiles/${data.clubProfileId}`, {
             method: 'GET',
             })
           .then((res) => res.json())
           .then((response) => {
-            console.log("initial profile (backend):");
-            console.log(response);
-            console.log("initial profile (frontend):");
-            console.log(parseFromDB(response));
-
             setClubProfile(parseFromDB(response));
           })
           .catch((error) => console.log(error));
@@ -115,9 +109,7 @@ const ProfileCreationMaster = ({ userCred }) => {
     };
   });
 
-  const submitProfile = (newClubProfile, submitting) => {  
-    console.log(parseState(newClubProfile));
-    
+  const submitProfile = (newClubProfile, submitting) => {      
     fetch(`/api/clubAccounts/getByFirebaseId/${userCred.uid}`, {
       headers: {
         'Content-Type': 'application/json'
@@ -195,6 +187,7 @@ const ClubProfileTitle = styled.h1`
   font-size: 2.25rem;
   font-weight: 700;
   margin-bottom: 0;
+  padding-top: 5rem;
   @media only screen and (max-width: 600px) {
     font-size: 1.5rem !important;
   }

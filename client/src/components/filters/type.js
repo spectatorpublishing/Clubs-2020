@@ -106,9 +106,6 @@ const Type = ({
             return element != item 
           })
       }
-
-      // console.log("selected: ", newSelected)
-      // setData(newSelected)
       setSelected("type", newSelected);
     };
 

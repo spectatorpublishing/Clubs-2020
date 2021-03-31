@@ -27,8 +27,7 @@ export default function SendEmail(props) {
             var username = user.displayName;
             var email = user.email;
 
-            setMessage(`Welcome to Clubs@CU, ${username}!`);
-            console.log(token, user);
+            setMessage(`Welcome to LionClubs, ${username}!`);
 
             // send welcome/verification Email
             // TODO: since the same API is used to log in and sign up Gmail

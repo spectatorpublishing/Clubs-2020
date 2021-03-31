@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const WebsiteTitle = () => {
-  return <Title>Clubs@CU</Title>;
+  return <Title>LionClubs</Title>;
 };
 
 const Title = styled.h2`

@@ -11,7 +11,7 @@ import AccountTag from "../components/accountTag/index";
 import YourClubProfile from "../components/yourClubProfile/index";
 import CompleteProfile from "../components/completeProfile";
 
-const ClubProfileDisplay = ({ isLoggedin, profileId = 111}) => {    
+const ClubProfileDisplay = ({ isLoggedin, profileId}) => {    
     const { id } = useParams();
     const [club, setClub] = useState();
     const [width, setWidth] = useState(window.innerWidth);
@@ -19,8 +19,13 @@ const ClubProfileDisplay = ({ isLoggedin, profileId = 111}) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
     
     /* temporary for conditional components */
+    const [isCorrectAccount, setIsCorrectAccount] = useState(profileId === window.location.href.split('/')[4]);
     const [firstLogIn, setFirstLog] = useState(false);
     const [completeProfile, setComplete] = useState(false);
+
+    useEffect(() => {
+        setIsCorrectAccount(profileId === window.location.href.split('/')[4]);
+    }, [profileId]);
 
     useEffect(() => {
         window.addEventListener("resize", () => setWidth(window.innerWidth));
@@ -31,8 +36,6 @@ const ClubProfileDisplay = ({ isLoggedin, profileId = 111}) => {
           .then((response) => {
             setClub(response);
             setLoading(false);
-            console.log(`api/clubProfiles/${id}`);
-            console.log(profileId.profileId === id , profileId.profileId ,id)
           })
         .catch((error) => console.log(error));
     }, [id]);
@@ -72,7 +75,7 @@ const ClubProfileDisplay = ({ isLoggedin, profileId = 111}) => {
         (null) 
     };
 
-    const ConditionalClubProfile = () => { return (isLoggedin === true) ? 
+    const ConditionalClubProfile = () => { return (isCorrectAccount === true) ? 
         ( <YourClubProfile/> ) : 
         (null) 
     };
@@ -292,12 +295,13 @@ const Wrapper = styled.main`
     background-repeat: no-repeat;
     background-position: top right;
     background-size: contain;  
+    padding-top: 5rem;
 `;
 
 const PageWrapper = styled.div`
     display: flex;
     flex-direction: row;
-    padding: 10rem 5rem 0rem 5rem;
+    padding: 3rem 5rem 0rem 5rem;
 
     h2{
         font-size: 1.25rem;

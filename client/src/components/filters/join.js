@@ -100,16 +100,13 @@ const Join = ({
     const optionHandleClick = (item) => {
       var newSelected;
       if (!selected.includes(item)) {
-          newSelected = [...selected, item]
+          newSelected = [...selected, item];
       } else {
           newSelected = selected.filter((element) => {
             return element != item; 
-          })
+          });
       }
-
-      // console.log("selected: ", newSelected)
-      // setData(newSelected)
-      setSelected("join", newSelected)
+      setSelected("join", newSelected);
     };
 
     items= ['No Application Required', 'Accepting Members']
