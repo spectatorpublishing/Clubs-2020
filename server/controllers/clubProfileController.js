@@ -135,7 +135,6 @@ module.exports = {
     },
     
     update: function(req, res) {
-      console.log("Updated body ", req.body);
       // check if the associated account exists
       clubAccount.findById(req.params.accountId)
         .then(account => {
@@ -197,7 +196,6 @@ module.exports = {
     },
     filterAndSortBy: function(req, res) {
         // TODO; req.query contains filter and/or sort information
-        // console.log(getAll(req, res))
 
         var specs = {}
         // {verificationStatus: 'accepted' }

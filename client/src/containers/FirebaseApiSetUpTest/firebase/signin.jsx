@@ -38,7 +38,6 @@ export function login(user) {
   /* unverified email address, send user to verify your email page */
   if (user.emailVerified === false) {
     return new Promise(function (resolve, reject) {
-      console.log('waited 500 millis');
       resolve('verify!');
     })
       .then(function (someNumber) {

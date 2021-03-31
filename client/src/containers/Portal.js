@@ -6,6 +6,7 @@ import { joinAccountProfile as fetchApplications } from '../components/ListOfClu
 export const PageWrapper = styled.div`
     margin: 0 5%;
     font-family: 'Manrope', sans-serif;
+    padding-top: 7rem;
 `;
 
 const HeadingDiv = styled.div`
@@ -101,7 +102,7 @@ export const Portal = () => {
     return (
         <PageWrapper>
             <HeadingDiv>
-                {page === 'pending' ? <h1>Clubs@CU Admin Portal</h1> : <p onClick={() => switchPage('pending')}>Back</p>}
+                {page === 'pending' ? <h1>LionClubs Admin Portal</h1> : <p onClick={() => switchPage('pending')}>Back</p>}
                 <p>Log out</p>
             </HeadingDiv>
             <ActiveSection page={page}>

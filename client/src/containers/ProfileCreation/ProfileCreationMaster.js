@@ -5,7 +5,6 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import ProfileCreation1 from './ProfileCreation1/index';
 import ProfileCreation2 from './ProfileCreation2/index';
 import { Confirmation } from '../Confirmation';
-// import Navbar from '../../components/navbar/index';
 
 const ProfileCreationMaster = ({ userCred }) => {
   const [clubProfile, setClubProfile] = useState({
@@ -37,17 +36,11 @@ const ProfileCreationMaster = ({ userCred }) => {
       })
         .then(response => response.json())
         .then(data => {
-          console.log(data);
           fetch(`${window.origin}/api/clubProfiles/${data.clubProfileId}`, {
             method: 'GET',
             })
           .then((res) => res.json())
           .then((response) => {
-            console.log("initial profile (backend):");
-            console.log(response);
-            console.log("initial profile (frontend):");
-            console.log(parseFromDB(response));
-
             setClubProfile(parseFromDB(response));
           })
           .catch((error) => console.log(error));
@@ -116,9 +109,7 @@ const ProfileCreationMaster = ({ userCred }) => {
     };
   });
 
-  const submitProfile = (newClubProfile, submitting) => {  
-    console.log(parseState(newClubProfile));
-    
+  const submitProfile = (newClubProfile, submitting) => {      
     fetch(`/api/clubAccounts/getByFirebaseId/${userCred.uid}`, {
       headers: {
         'Content-Type': 'application/json'
@@ -144,7 +135,6 @@ const ProfileCreationMaster = ({ userCred }) => {
   // Updates state based on input text
   return (
     <>
-      {/* <Navbar /> */}
       <PageContainer>
         <SetUpClubProfile />
         <Router>
@@ -197,6 +187,7 @@ const ClubProfileTitle = styled.h1`
   font-size: 2.25rem;
   font-weight: 700;
   margin-bottom: 0;
+  padding-top: 5rem;
   @media only screen and (max-width: 600px) {
     font-size: 1.5rem !important;
   }
@@ -205,7 +196,7 @@ const ClubProfileTitle = styled.h1`
 const PageContainer = styled.div`
   display: grid;
   grid-template-rows: auto auto auto;
-  padding: 0 3rem 0 4rem;
+  padding: 8rem 3rem 0 4rem;
   @media only screen and (max-width: 768px) {
     padding: 0 1.375rem !important;
   }

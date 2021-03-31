@@ -47,13 +47,7 @@ export const SignUpBox = ({ detailLink, id, userCred , isProfileComplete = true}
       setIsEmailEmpty(false);
     }
 
-    console.log("arrived here2")
-    console.log(password.current.value.length <= 0)
-
-
     if (!password || !password.current || password.current.value.length <= 0) {
-      console.log("arrived here3")
-
       shouldSubmit = false;
       setIsPasswordEmpty(true)
     }
@@ -73,11 +67,9 @@ export const SignUpBox = ({ detailLink, id, userCred , isProfileComplete = true}
 
 
       if (password.current.value.match(passEx)) {
-        console.log("matched")
         setIsPasswordInvalid(false)
       } 
       else {
-        console.log("pass not matching reqs")
         setIsPasswordInvalid(true)
       }
       setIsPasswordEmpty(false)
@@ -307,7 +299,7 @@ export const SignUpBox = ({ detailLink, id, userCred , isProfileComplete = true}
 
   if (id === 'signup') {
     modalData = {
-      title: 'Welcome to Clubs@CU',
+      title: 'Welcome to LionClubs',
       desc: 'Already have an account?',
       descLink: '/login',
       descLinkText: 'Login Here',

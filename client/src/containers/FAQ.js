@@ -1,30 +1,23 @@
 import React from 'react';
-import { Navbar } from '../components/navbar';
-import NavbarProfile from '../components/navbarProfile';
 import { FaqBox } from '../components/faqbox';
 import styled from 'styled-components';
 
-export const FAQ = ({ isLoggedin, userCred }) => {
-  const NavbarType = () => { return (isLoggedin === true) ? 
-    ( <NavbarProfile userCred={userCred} /> ) : 
-    ( <Navbar/> ) 
-  };
+export const FAQ = () => {
 
   return (
     <Wrapper>
-      <NavbarType />
       <PageWrapper>
         <Title>Frequently Asked Questions</Title>
         <FaqBox
-          title='What is Clubs@CU?'
-          text='Clubs@CU is your central source of information about student organizations at Barnard and Columbia. 
+          title='What is LionClubs?'
+          text='LionClubs is your central source of information about student organizations at Barnard and Columbia. 
                 Keep discovering new clubs throughout the year, not just at the Club Fair.'
           buttonText='Explore Clubs'
           buttonLink='/'
         />
         <FaqBox
-          title='How do I use Clubs@CU? (Student)'
-          text='Want to browse clubs at Barnard and Columbia? Clubs@CU is your best resource!
+          title='How do I use LionClubs? (Student)'
+          text='Want to browse clubs at Barnard and Columbia? LionClubs is your best resource!
 
                 > Do an organized search with our many search tools
                 > Do a random search with our shuffle functionality
@@ -34,7 +27,7 @@ export const FAQ = ({ isLoggedin, userCred }) => {
           buttonLink='/'
         />
         <FaqBox
-          title='How do I use Clubs@CU? (Clubs)'
+          title='How do I use LionClubs? (Clubs)'
           text='Run an official or unrecognized club? Both are welcome to create profiles on our platform and be represented here.'
           buttonText='Register Club'
           buttonLink='/profile-creation'
@@ -47,7 +40,7 @@ export const FAQ = ({ isLoggedin, userCred }) => {
         />
         <FaqBox
           title='How can I provide feedback?'
-          text='Designed for club seekers and club leaders, Clubs@CU values your feedback! To report a bug, ask a question, or suggest a modification, please fill out our feedback form.'
+          text='Designed for club seekers and club leaders, LionClubs values your feedback! To report a bug, ask a question, or suggest a modification, please fill out our feedback form.'
           buttonText='Feedback Form'
           buttonLink='/'
         />
@@ -72,7 +65,7 @@ const PageWrapper = styled.main`
 `;
 
 const Title = styled.h1`
-  margin-top: 6rem;
+  margin-top: 14rem;
   font-size: 2rem;
   text-align: center;
   width: 100vw;

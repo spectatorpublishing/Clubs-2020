@@ -6,13 +6,11 @@ import Dropdown from '../../components/dropdown/index';
 import FilledButton from '../components/filledButton/index';
 import { motion } from 'framer-motion';
 import TextInput from '../../components/textInput/index';
-import Navbar from '../../components/navbar';
 
 const ProfileCreation = ({ theme }) => {
   const [buttonState, setButtonState] = useState(false);
   return (
     <>
-      <Navbar />
       <Container>
         <TempContainer>
           <TempItem>

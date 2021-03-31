@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Navbar } from '../components/navbar';
-import NavbarProfile from '../components/navbarProfile';
 import ExploreBox from '../components/explorebox';
 import styled from 'styled-components';
 import Join from '../components/filters/join';
@@ -19,7 +17,7 @@ const Wrapper = styled.div`
 `;
 
 const PageWrapper = styled.div`
-  padding: 0.5rem 3rem 3rem 3rem;
+  padding: 7rem 3rem 3rem 3rem;
 
     @media only screen and (max-width : 768px) {
         padding: 1rem 0.5rem;
@@ -214,7 +212,7 @@ const ShuffleImage = styled.div`
 
 
 
-const Explore = ({ isLoggedin, userCred }) => {
+const Explore = () => {
     const [clubProfiles, setClubProfiles] = useState([]);
     const [loadText, setLoadText] = useState("Loading...");
 
@@ -317,11 +315,6 @@ const Explore = ({ isLoggedin, userCred }) => {
         fetchData('');
     },[]);
 
-    const NavbarType = () => { return (isLoggedin === true) ? 
-        ( <NavbarProfile userCred={userCred} /> ) : 
-        ( <Navbar/> ) 
-    };
-
     const ExploreContents =  (
         <div>
                 <TextWrapper>
@@ -388,10 +381,8 @@ const Explore = ({ isLoggedin, userCred }) => {
         );
 
     if (width < 840){
-        console.log(width);
         return(
             <Wrapper>
-            <NavbarType />
             <main>
                 <PageWrapper>
                     <AdContainer>
@@ -407,10 +398,8 @@ const Explore = ({ isLoggedin, userCred }) => {
             </Wrapper>
         )
     } else {
-        console.log(width);
         return(
             <Wrapper>
-            <NavbarType />
             <main>
                 <PageWrapper>
                     <AdContainer>

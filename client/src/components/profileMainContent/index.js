@@ -9,7 +9,7 @@ export const ProfileMain = ({description, highlights, howToJoin}) => {
             <Container>
                 <h2>Description</h2>
                 <p className='one'>{description}</p>
-                {(highlights.length === 0) ? null :
+                {(highlights.length === 0 || highlights[0] === "") ? null :
                 <div>
                     <h2>Highlights</h2>
                     <div>{highlights.map((highlight, idx) => <Highlight key= {`h${idx}`} text={highlight}/>)}</div>

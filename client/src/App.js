@@ -1,5 +1,5 @@
 import ViewportProvider from './components/viewportProvider/index';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState} from 'react';
 import { BrowserRouter as Router, Switch, Route, useParams } from 'react-router-dom';
 import Explore from './containers/Explore';
 import { FAQ } from './containers/FAQ';
@@ -26,27 +26,13 @@ const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
 
   const [clubAccountInfo, setclubAccountInfo] = useState(null);
-  // const [authenticationLevel, setAuthenticationLevel] = useState("user");
-  
 
   const getClubAccountInfo = (f_id) => {
-
-    console.log("----------------vvv")
-
-
-
     // This function grabs the user account info to be passed down
     fetch(`/api/clubAccounts/getByFirebaseId/${f_id}`)
-    // fetch(`http://localhost:8080/api/clubAccounts/getAll`)
     .then(res => res.json())
         .then(res => {
-            console.log("---------------------vvvvvvvvv")
-            console.log(res)
-            console.log("^^^^^^^^^---------------------")
-
-            console.log( (res.verificationStatus !== "incomplete" && res.verificationStatus !== "denied"))
-            console.log('++++++++++++++');
-            setclubAccountInfo(res)
+            setclubAccountInfo(res);
       })
 
       /* club profile not created, direct to profile creation page */
@@ -54,8 +40,8 @@ const App = () => {
       .catch(function (err) {
         console.error(err);
         console.error("err");
-      })
-  }
+      });
+  };
 
   // const isOwnAccount = (prof_id) =>{
   //   if (clubAccountInfo && clubAccountInfo.clubProfileId == ) {
@@ -67,10 +53,8 @@ const App = () => {
   useEffect(() => {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        console.log(user.email);
-        console.log("userId: ", user.uid);
         //get the club account info by firebaseId and save in state
-        getClubAccountInfo(user.uid)
+        getClubAccountInfo(user.uid);
 
         //save the user firebase credential info in state
         setUserCred(user);
@@ -85,29 +69,20 @@ const App = () => {
     });
   }, []);
 
-  
-  console.log(clubAccountInfo && (clubAccountInfo.verificationStatus !== "incomplete" && clubAccountInfo.verificationStatus !== "denied"))
-  console.log('---=-=---=--');
-
   return (
     <ThemeProvider theme={theme}>
       <ViewportProvider>
         <Router>
-        <Navbar loggedIn = {userCred !== null} authLevel = {clubAccountInfo ? clubAccountInfo.authorityLevel : "user"} profileId = {clubAccountInfo ? clubAccountInfo.clubProfileId : null} />
+        <Navbar loggedIn = {userCred !== null} authLevel = {clubAccountInfo ? clubAccountInfo.authorityLevel : "user"} profileId = {clubAccountInfo ? clubAccountInfo.clubProfileId : null}/>
           <Switch>
               <Route path='/club/:id'>
-                <ClubProfileDisplay isLoggedin={loggedIn} userCred={userCred} />
+                <ClubProfileDisplay isLoggedin={loggedIn} profileId={clubAccountInfo?.clubProfileId}/>
               </Route>
               <Route path='/profile-creation'>
-                <ProfileCreationMaster userCred={userCred} isLoggedin={loggedIn} />
+                <ProfileCreationMaster userCred={userCred}/>
               </Route>
-              <Route path='/faq'>
-                <FAQ isLoggedin={loggedIn} userCred={userCred} />
-              </Route>
-              <Route path='/' exact>
-                <Explore isLoggedin={loggedIn} userCred={userCred} />
-              </Route>
-              {/* change to proper formatting */}
+              <Route path='/faq' component={FAQ}/>
+              <Route path='/' exact component={Explore}/>
               <Route path='/portal/login' component={PortalLogin} />
               <Route path='/portal' component={Portal} />
               <Route path='/signup'>
@@ -122,15 +97,9 @@ const App = () => {
               <Route exact path='/findpassword'>
                 <FindPassword userCred={userCred} />
               </Route>
-            
-            {/* <Route path='/test' component={Signin} />
-            <Route path='/test_signin' component={Signin} />
-            <Route path='/test_signup' component={Signup} /> */}
           </Switch>
         </Router>
       </ViewportProvider>
-      
-      {/* <Navbar/> */}
     </ThemeProvider>
   );
 };
