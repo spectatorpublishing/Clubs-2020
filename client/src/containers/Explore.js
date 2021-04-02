@@ -324,7 +324,6 @@ const Explore = () => {
                     <p>Find your Columbia community</p>
                 </TextWrapper>
                 <FiltersBox>
-                    <ImageUploadButton clubProfileId='11111'></ImageUploadButton>
                     <FiltersLeft>
                         <SearchBox><SearchBar 
                             barText={searchBarText}
