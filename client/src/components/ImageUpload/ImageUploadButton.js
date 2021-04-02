@@ -1,6 +1,43 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
+import multer from 'multer';
+import multerS3 from 'multer-s3';
+import awsSDK from 'aws-sdk';
 
+const FullWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    margin-right:1rem;
+
+`
+
+const ImageBox = styled.div`
+    background-color: white;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-style: solid;
+    border-radius: 10px;
+    border-color: ${(props) => props.theme.colors.red};
+    border-width: 3px;
+
+    height: 275px;
+    width: 275px;
+    margin-left:1rem;
+`
+
+const Preview = styled.img`
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+    border-color: 
+
+    height: 100%;
+    width: 100%;
+
+    max-height: 100%;
+    max-width: 100%;
+`
 
 const ButtonWrapper = styled.div`
     display: flex;
@@ -8,7 +45,7 @@ const ButtonWrapper = styled.div`
     margin-right: auto;
 `
 const Button = styled.button`
-    background-color: ${(props) => props.theme.colors.turquoise};
+    background-color: ${(props) => props.theme.colors.red};
     box-shadow: 2px 5px 20px rgba(0, 0, 0, 0.10);
     border-radius: 25px;
     width: 130px;
@@ -21,6 +58,7 @@ const Button = styled.button`
     }
     
     margin-left:1rem;
+    margin-top: 1rem;
 `;
 
 const TextWrapper = styled.div`
@@ -41,13 +79,17 @@ const Word = styled.div`
 class ImageUploadButton extends React.Component {
     
     state = {
-        selectedFile: null
+        selectedFile: null,
+        fileURL: ''
+        
     }
 
     fileSelectedHandler = event => {
         this.setState({
-            selectedFile: event.target.files[0]
-        })
+            selectedFile: event.target.files[0],
+            fileURL: URL.createObjectURL(event.target.files[0])
+        });
+        
     }
 
     //Brainstorm error handler for this
@@ -55,12 +97,8 @@ class ImageUploadButton extends React.Component {
     fileUploadHandler = () => {
         const fd = new FormData();
         fd.append('image', this.state.selectedFile, this.state.selectedFile.name);
-        
-        console.log(this.state.selectedFile)
-        console.log(typeof(fd))
-        console.log(fd.getAll('image'));
 
-        fetch(`${window.origin}/api/clubProfiles/imgUpload/${this.props.clubProfileId}`, {
+        fetch(`${window.origin}/api/image-upload//imgUpload/${this.props.clubProfileId}`, {
             method: 'POST',
             body: fd
         })
@@ -78,18 +116,26 @@ class ImageUploadButton extends React.Component {
                 type="file" 
                 onChange={this.fileSelectedHandler}
                 ref = {fileInput => this.fileInput = fileInput}/>
+                <FullWrapper>
 
-                <ButtonWrapper>
+                    <ImageBox>
+                        <Preview src = {this.state.fileURL}></Preview>
+                    </ImageBox>
 
-                    <Button onClick={() => this.fileInput.click()}>
-                        <TextWrapper><Word>Select Image</Word></TextWrapper>
-                    </Button>
+                    <ButtonWrapper>
 
-                    <Button onClick={this.fileUploadHandler}>
-                        <TextWrapper><Word>Upload Image</Word></TextWrapper>
-                    </Button>
+                        <Button onClick={() => this.fileInput.click()}>
+                            <TextWrapper><Word>Select Image</Word></TextWrapper>
+                        </Button>
 
-                </ButtonWrapper>
+                        <Button onClick={this.fileUploadHandler}>
+                            <TextWrapper><Word>Upload Image</Word></TextWrapper>
+                        </Button>
+
+                    </ButtonWrapper>
+
+                    
+                </FullWrapper>
             </>
         )
     }

@@ -1,7 +1,11 @@
 const clubAccount = require("../models/ClubAccountModel");
-const clubProfile = require("../models/ClubProfileModel")
+const clubProfile = require("../models/ClubProfileModel");
 
 const errHandling = require("../common").errHandling
+
+const aws = require('aws-sdk');
+const multer = require('multer');
+const multerS3 = require('multer-s3');
 
 const shuffle = (sourceArray) => {
     for (var i = 0; i < sourceArray.length - 1; i++) {
@@ -184,9 +188,10 @@ module.exports = {
         
         
     },
-    
+    /*
     imgUpload: function(req,res) {
-      console.log(req.body)
-      res.json('success')
-    } 
+      
+      clubProfile.findOneAndUpdate({ _id: req.params.id},{imageUrl: req.file.location}, {useFindAndModify: false}).then(clubprofile => res.json(clubprofile)).catch(err => errHandling(err, res))
+    }
+    */ 
 }

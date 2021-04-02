@@ -9,6 +9,5 @@ router.route("/").get(clubProfileControllers.getAll)
 router.route("/submit").post(clubProfileControllers.create)
 router.route("/update/:id").put(clubProfileControllers.update)
 router.route("/delete/:id").delete(clubProfileControllers.delete)
-router.route("/imgUpload/:id").post(clubProfileControllers.imgUpload)
 
 module.exports = router
