@@ -52,7 +52,7 @@ export const Navbar = ({ loggedIn = false }) => {
                 <a href='/login'><h3>Club Login</h3></a>
               </StyledListItem>
               <StyledListItem hideItem={!loggedIn}>
-                <Manage />
+                <a href='/manageAccount'> <Manage /> </a>
               </StyledListItem>
               <StyledListItem hideItem={!loggedIn}>
                 <a href="/"> <Logout /> </a>

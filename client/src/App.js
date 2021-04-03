@@ -21,6 +21,7 @@ import { Navbar } from './components/navbar';
 import { FindPassword } from './containers/FindPassword';
 import { ConfirmPasswordReset } from './containers/ConfirmPasswordReset';
 import { rememberMe } from './containers/FirebaseApiSetUpTest/firebase/rememberMe';
+import { ManageAccount } from './containers/ManageAccount/LandingPage';
 
 const App = () => {
   const [userCred, setUserCred] = useState(null);
@@ -112,7 +113,11 @@ const App = () => {
             <Route exact path='/findpassword'>
               <FindPassword userCred={userCred} />
             </Route>
+            <Route exact path='/manageAccount'>
+              <ManageAccount userCred={userCred} />
+            </Route>
           </ViewportProvider>
+
           {/* <Route path='/test' component={Signin} />
           <Route path='/test_signin' component={Signin} />
           <Route path='/test_signup' component={Signup} /> */}
