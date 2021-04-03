@@ -259,25 +259,31 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
    * `/login` for re-authentication, passing along the `newEmail` as a prop. 
    */
   function initEmailReset() {
-    /* try re-authentication first */
-    history.push('/login', {
-      newEmail: email.current.value,
-      onSuccess: '/manageAccount/email/success',
-      onFailure: '/manageAccount/email',
-      pageTitle: 'Log in to confirm change',
-      hideDesc: true
-    })
+    var shouldSubmit = checkEmail();
+
+    if (shouldSubmit)
+      /* try re-authentication first */
+      history.push('/login', {
+        newEmail: email.current.value,
+        onSuccess: '/manageAccount/email/success',
+        onFailure: '/manageAccount/email',
+        pageTitle: 'Log in to confirm change',
+        hideDesc: true
+      })
   }
 
   function initPwdReset() {
-    /* try re-authentication first */
-    history.push('/login', {
-      newPassword: password.current.value,
-      onSuccess: '/',
-      onFailure: '/manageAccount/email',
-      pageTitle: 'Log in to confirm change',
-      hideDesc: true
-    })
+    var shouldSubmit = checkPassword();
+
+    if (shouldSubmit)
+      /* try re-authentication first */
+      history.push('/login', {
+        newPassword: password.current.value,
+        onSuccess: '/',
+        onFailure: '/manageAccount/email',
+        pageTitle: 'Log in to confirm change',
+        hideDesc: true
+      })
   }
 
   function handleErrors(type, error) {
