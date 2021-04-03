@@ -36,6 +36,12 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
 
   const pwReqLength = 8;
 
+  var {
+    onSuccess: next = '/',
+    onFailure: fallback, 
+    ...prevState
+  } = history.location.state || {};
+
   function onSignupSubmit(e) {
     let shouldSubmit = true;
 
@@ -117,6 +123,12 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
   }
 
   function onLoginSubmit(e, withGoogle = false) {
+    // let {
+    //   onSuccess: next = '/',
+    //   onFailure: fallback, 
+    //   ...prevState
+    // } = history.location.state || {};
+
     if (withGoogle) {
       var google = new firebase.auth.GoogleAuthProvider();
 
@@ -130,15 +142,26 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
           var token = credential.accessToken; // The signed-in user info.
           var user = result.user;
           console.log('signin successful');
-          history.push('/'); // ...
+
+          if (next === '/manageAccount/email/success')
+            return user.updateEmail(prevState.newEmail)
+          else
+            history.push(next) /* redirect to homepage */
+        }, (error) => {
+          handleErrors('login', error);
         })
-        .catch((error) => {
-          // Handle Errors here.
-          var errorCode = error.code;
-          var errorMessage = error.message; // The email of the user's account used.
-          var email = error.email; // The firebase.auth.AuthCredential type that was used.
-          var credential = error.credential; // ...
-        });
+        .then(() => {
+          /* update account info success */
+          history.push(next, prevState)
+        }, (error) => {
+          /*
+           * update account info failed, let user try again
+           * by redirecting back to the update { email | password } page,
+           * passing along the error code.
+           */
+          Object.assign(prevState, { error: error })
+          history.push(fallback, prevState)
+        })
     } else {
       let shouldSubmit = true;
       // console.log(email.current.value.length)
@@ -158,21 +181,7 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
       else {
         setIsPasswordEmpty(false)
       }
-      //if email is of invalid format, display invailidity and the reasons
 
-
-          // if (password && password.current.value.length <= pwReqLength) {
-          //   setIsPasswordShort(true);
-          //   shouldSubmit = false;
-          // } else if (password && password.current.value.length > pwReqLength)
-          //   setIsPasswordShort(false);
-
-      /*if (email && email.current.value.match(emailEx)) {
-        setEmailContainsIllegalCharacters(true);
-        shouldSubmit = false;
-      } else if (email && !email.current.value.match(emailEx)) {
-        setEmailContainsIllegalCharacters(false);
-      }*/
       if (shouldSubmit) {
         firebase
           .auth()
@@ -184,25 +193,28 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
           .then((userCredential) => {
             // Signed in
             var user = userCredential.user;
-            console.log(user);
-            console.log('user logged in');
             setIsEmailNotFound(false);
             setIsPasswordIncorrect(false);
             setIsEmailInvalid(false);
 
-            history.push('/');
-
-            // ...
-          })
-          .catch((error) => {
+            if (next === '/manageAccount/email/success')
+              return user.updateEmail(prevState.newEmail)
+            else
+              history.push(next)
+          }, (error) => {
             handleErrors('login', error);
-          });
+          })
+          .then(() => {
+            history.push(next, prevState)
+          }, (error) => {
+            Object.assign(prevState, { error: error })
+            history.push(fallback, prevState)
+          })
       } else {
         setIsEmailNotFound(false);
         setIsPasswordIncorrect(false);
         setIsEmailInvalid(false);
       }
-      //e.preventDefault();
     }
   }
 
@@ -242,6 +254,26 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
         .catch(function(error) {
           handleErrors('findpassword', error)
         });
+  }
+
+  /*
+   * Initiates email reset process:
+   * For security reasons, firebase recommends having user to re-authenticated
+   * before making requests to update account info.
+   * Here, we first try re-authenticate user, if not success, redirect user to
+   * `/login` for re-authentication, passing along the `newEmail` as a prop. 
+   */
+  function initEmailReset() {
+    let newEmail = email.current.value;
+    
+    history.push('/login', {
+      newEmail: email.current.value,
+      onSuccess: '/manageAccount/email/success',
+      onFailure: '/manageAccount/email',
+      pageTitle: 'Log in to confirm change',
+      hideDesc: true
+    })
+    // history.push('/manageAccount/email/success')
   }
 
   function handleErrors(type, error) {
@@ -314,16 +346,22 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
     };
   } else if (id === 'login') {
     modalData = {
-      title: 'Hello, welcome back',
-      desc: "Don't have an account for your club? ",
-      descLink: '/signup',
-      descLinkText: 'Register Here',
       detail: 'Email',
       detailTwo: 'Password',
       detailTwoDesc: 'Forgot Your Password?',
       detailTwoDescLink: './findpassword',
       detailTwoDescLinkText: 'Reset Here',
     };
+
+    if (!prevState.hideDesc)
+      Object.assign(modalData, {
+        desc: "Don't have an account for your club? ",
+        descLink: '/signup',
+        descLinkText: 'Register Here',
+      })
+
+    let title = prevState.pageTitle || 'Hello, welcome back';
+    Object.assign(modalData, { title: title });
   } else if (id === 'findpassword') {
     modalData = {
       title: 'Password Reset',
@@ -371,6 +409,25 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
       descWarn: true,
       detail: 'New Email',
     };
+  } else if (id === 'emailResetSuccess') {
+    modalData = {
+      title: 'Next, verify your new Email',
+      desc: 'Verified your email?',
+      descLink: '/login',
+      descLinkText: 'Login Here',
+      detail: (newEmail) => 
+        (
+          `Request made to change account email to ${newEmail}! Check your email to confirm change. ` +
+          `If you have any questions, please contact\n`
+        ),
+      detailLink: 'mailto:publisher@columbiaspectator.com',
+      detailLinkText: 'publisher@columbiaspectator.com',
+      detailTwo: '.\n\nSomething went wrong?\n',
+      detailLinkTwo: '/findpassword',
+      detailLinkTwoText: 'Resend Email',
+      signUp: 'none',
+      confirmation: true,
+    }
   };
 
   function openEye() {
@@ -649,36 +706,40 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
             onClick={onSendReset}
             />
         )}
-        {(id === 'confirmation' || id === 'confirmpwdreset') && (
+        {(id === 'confirmation' || id === 'confirmpwdreset' || id === 'emailResetSuccess') && (
           <Confirmation>
             <Icon>
               <Flap>
                 <Dot></Dot>
               </Flap>
             </Icon>
-            {modalData.detail}
+            {/* TODO: pass in email from previous page via react router dom */}
+            {id === 'emailResetSuccess' ? modalData.detail('yl4387@columbia.edu') : modalData.detail}
             <EmailLink href={detailLink}>{modalData.detailLinkText}</EmailLink>
             {modalData.detailTwo}
-            {id === 'confirmpwdreset' && (
+            {id === 'confirmpwdreset' || id === 'emailResetSuccess' && (
               <Link href={modalData.detailLinkTwo}>
                   {modalData.detailLinkTwoText}
               </Link>
             )}
           </Confirmation>
         )}
-        {id === 'confirmpwdreset' && (
+        {id === 'confirmpwdreset' || id === 'emailResetSuccess' && (
           <FlexContainer marginTop='1.5em'>
             <TomatoButton text='Explore Clubs' wire onClick={() => {
               history.push('/')
             }} />
-            <TomatoButton
-              text='Club Log in'
-              wire
-              margin='0.65rem 0 0 0'
-              type='button'
-              onClick={() => {
-                history.push('/login')
-              }} />
+
+            { id === 'confirmpwdreset' && (
+              <TomatoButton
+                text='Club Log in'
+                wire
+                margin='0.65rem 0 0 0'
+                type='button'
+                onClick={() => {
+                  history.push('/login')
+                }} />
+            )}
           </FlexContainer>
         )}
         {/* Change Account Email */}
@@ -687,14 +748,13 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
             <TomatoButton text='Cancel' wire onClick={() => {
               history.push('/')
             }} />
+            {/* TODO: add change email logic */}
             <TomatoButton
               text='Request Change'
               wire
               margin='0 0 0 2em'
               type='button'
-              onClick={() => {
-                history.push('/login')
-              }} />
+              onClick={initEmailReset} />
           </FlexRow>
         )}
       </Container>

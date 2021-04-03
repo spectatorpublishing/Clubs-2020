@@ -24,6 +24,7 @@ import { rememberMe } from './containers/FirebaseApiSetUpTest/firebase/rememberM
 import { ManageAccount } from './containers/ManageAccount/LandingPage';
 import { ResetEmail } from './containers/ManageAccount/ResetEmail';
 import { ResetPassword } from './containers/ManageAccount/ResetPassword';
+import { ResetSuccess as EmailResetConfirmation } from './containers/ManageAccount/Confirmation';
 
 const App = () => {
   const [userCred, setUserCred] = useState(null);
@@ -123,6 +124,9 @@ const App = () => {
             </Route>
             <Route exact path='/manageAccount/password'>
               <ResetPassword userCred={userCred} />
+            </Route>
+            <Route exact path='/manageAccount/email/success'>
+              <EmailResetConfirmation userCred={userCred} />
             </Route>
           </ViewportProvider>
 

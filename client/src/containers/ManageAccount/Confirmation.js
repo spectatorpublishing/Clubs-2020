@@ -4,7 +4,7 @@ import { SignUpBox } from '../../components/signup';
 export const ResetSuccess = ({userCred}) => {
     return(
         <SignUpBox
-            id="resetSuccess"
+            id="emailResetSuccess"
             userCred={userCred}
         />
     )
