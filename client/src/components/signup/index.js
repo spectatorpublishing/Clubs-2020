@@ -42,8 +42,8 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
     ...prevState
   } = history.location.state || {};
 
-  function onSignupSubmit(e) {
-    let shouldSubmit = true;
+  function checkEmail() {
+    var shouldSubmit = true;
 
     if (!email || email.current.value.length <= 0) {
       shouldSubmit = false;
@@ -53,21 +53,17 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
       setIsEmailEmpty(false);
     }
 
-    console.log("arrived here2")
-    console.log(password.current.value.length <= 0)
+    return shouldSubmit;
+  }
 
+  function checkPassword() {
+    var shouldSubmit = true;
 
     if (!password || !password.current || password.current.value.length <= 0) {
-      console.log("arrived here3")
-
       shouldSubmit = false;
       setIsPasswordEmpty(true)
-    }
-
-    else{
-
-      //if email is of invalid format, display invailidity and the reasons
-
+    } else {
+      /* if email is of invalid format, display invailidity and the reasons */
       if (password && password.current.value !== confirmPassword.current.value) {
         shouldSubmit = false;
       }
@@ -81,19 +77,20 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
       if (password.current.value.match(passEx)) {
         console.log("matched")
         setIsPasswordInvalid(false)
-      } 
+      }
       else {
         console.log("pass not matching reqs")
         setIsPasswordInvalid(true)
       }
       setIsPasswordEmpty(false)
     }
-    // if (email && email.current.value.match(emailEx)) {
-    //   setEmailContainsIllegalCharacters(true);
-    //   shouldSubmit = false;
-    // } else if (email && !email.current.value.match(emailEx)) {
-    //   setEmailContainsIllegalCharacters(false);
-    // }
+
+    return shouldSubmit;
+  }
+
+  function onSignupSubmit(e) {
+    let shouldSubmit = checkEmail() && checkPassword();
+
     if (shouldSubmit) {
       firebase
         .auth()
@@ -117,8 +114,6 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
             handleErrors('signup', error);
           }
         );
-
-      //e.preventDefault();
     }
   }
 
@@ -264,8 +259,7 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
    * `/login` for re-authentication, passing along the `newEmail` as a prop. 
    */
   function initEmailReset() {
-    let newEmail = email.current.value;
-    
+    /* try re-authentication first */
     history.push('/login', {
       newEmail: email.current.value,
       onSuccess: '/manageAccount/email/success',
@@ -273,7 +267,17 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
       pageTitle: 'Log in to confirm change',
       hideDesc: true
     })
-    // history.push('/manageAccount/email/success')
+  }
+
+  function initPwdReset() {
+    /* try re-authentication first */
+    history.push('/login', {
+      newPassword: password.current.value,
+      onSuccess: '/',
+      onFailure: '/manageAccount/email',
+      pageTitle: 'Log in to confirm change',
+      hideDesc: true
+    })
   }
 
   function handleErrors(type, error) {
@@ -409,6 +413,20 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
       descWarn: true,
       detail: 'New Email',
     };
+  } else if (id === 'resetPassword') {
+    modalData = {
+      title: 'Change Account Password',
+      desc: 'To change email of account, the new user ' +
+            'will receive an email with a link to approve the change. The ' +
+            'new user must approve this change within 30 minutes of the request ' +
+            'made here. For security purposes, only .edu addresses allowed.',
+      detail: 'New Email',
+    };
+    modalData = {
+      title: 'Change Account Password',
+      detailTwo: 'New Password',
+      detailThree: 'Confirm New Password',
+    };
   } else if (id === 'emailResetSuccess') {
     modalData = {
       title: 'Next, verify your new Email',
@@ -475,66 +493,68 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
         </Description>
 
         {/* Email Input Field */}
-        {id === 'signup' || id === 'login' || id === 'findpassword' || id === 'manageAccount' || id === 'resetEmail' ? (
+        {id === 'signup' || id === 'login' || id === 'findpassword' || id === 'manageAccount' || id === 'resetEmail' || id === 'resetPassword' ? (
           <SignUp>
-            <InputSection marginBottom={id !== 'findpassword'}>
-              <label htmlFor='userEmail'>{modalData.detail}</label>
-              <FlexRow>
-                <Input
-                  type='email'
-                  id='userEmail'
-                  required
-                  ref={email}
-                  onChange={(e) => {
-                    emailContainsIllegalCharacters &&
-                      setEmailContainsIllegalCharacters(
-                        e.target.value.match(emailEx) === null
-                      );
+            { id !== 'resetPassword' &&
+              <InputSection marginBottom={id !== 'findpassword'}>
+                <label htmlFor='userEmail'>{modalData.detail}</label>
+                <FlexRow>
+                  <Input
+                    type='email'
+                    id='userEmail'
+                    required
+                    ref={email}
+                    onChange={(e) => {
+                      emailContainsIllegalCharacters &&
+                        setEmailContainsIllegalCharacters(
+                          e.target.value.match(emailEx) === null
+                        );
 
-                    isEmailEmpty != e.target.value.length <= 0 &&
-                      setIsEmailEmpty(false);
+                      isEmailEmpty != e.target.value.length <= 0 &&
+                        setIsEmailEmpty(false);
 
 
-                    setIsEmailInvalid && setIsEmailInvalid(false);
-                    setIsEmailNotFound && setIsEmailNotFound(false);
-                  }}
+                      setIsEmailInvalid && setIsEmailInvalid(false);
+                      setIsEmailNotFound && setIsEmailNotFound(false);
+                    }}
+                  />
+                  {id == 'manageAccount' && (
+                    <Description>
+                      <Link
+                        href={modalData.detailLink}
+                        color='inherit'
+                        paddingLeft='0.3rem'>Change</Link>
+                    </Description>
+                  )}
+                </FlexRow>
+
+                {id === 'signup' && <InputDesc>{modalData.detailDesc}</InputDesc>}
+                <ErrorText
+                  marginTop={8}
+                  stateToCheck={isEmailEmpty}
+                  text='Enter your email'
                 />
-                {id == 'manageAccount' && (
-                  <Description>
-                    <Link
-                      href={modalData.detailLink}
-                      color='inherit'
-                      paddingLeft='0.3rem'>Change</Link>
-                  </Description>
-                )}
-              </FlexRow>
-              
-              {id === 'signup' && <InputDesc>{modalData.detailDesc}</InputDesc>}
-              <ErrorText
-                marginTop={8}
-                stateToCheck={isEmailEmpty}
-                text='Enter your email'
-              />
-              <ErrorText
-                marginTop={8}
-                stateToCheck={isEmailInvalid}
-                text='Email invalid'
-              />
-              <ErrorText
-                marginTop={8}
-                stateToCheck={emailContainsIllegalCharacters}
-                text='Your email contains illegal characters'
-              />
-              <ErrorText
-                marginTop={8}
-                stateToCheck={isEmailNotFound}
-                text='no account found for this email'
-              />
-            </InputSection>
+                <ErrorText
+                  marginTop={8}
+                  stateToCheck={isEmailInvalid}
+                  text='Email invalid'
+                />
+                <ErrorText
+                  marginTop={8}
+                  stateToCheck={emailContainsIllegalCharacters}
+                  text='Your email contains illegal characters'
+                />
+                <ErrorText
+                  marginTop={8}
+                  stateToCheck={isEmailNotFound}
+                  text='no account found for this email'
+                />
+              </InputSection>
+            }
                 
             {/* Password Input Field */}
-            {(id === 'signup' || id === 'login' || id === 'manageAccount') && (
-              <InputSection marginBottom={id === 'signup'}>
+            {(id === 'signup' || id === 'login' || id === 'manageAccount' || id === 'resetPassword') && (
+              <InputSection marginBottom={id === 'signup' || id === 'resetPassword'}>
                 <label htmlFor='userPassword'>{modalData.detailTwo}</label>
                 <FlexRow>
                   <Input
@@ -543,30 +563,25 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
                     ref={password}
                     required
                     onChange={(e) => {
-                      id === 'signup' &&
+                      ( id === 'signup' || id === 'resetPassword' ) &&
                         confirmPassword !== null &&
                         setDoPasswordsMatch(
                           e.target.value === confirmPassword.current.value
                         );
-                      /*id === 'signup' &&
-                        containsIllegalCharacters &&
-                        setContainsIllegalCharacters(
-                          e.target.value.match(emailEx) !== null
-                        );*/
 
-                      id === 'signup' && setIsPasswordInvalid(false)
+                      ( id === 'signup' || id === 'resetPassword' ) && setIsPasswordInvalid(false)
 
                       isPasswordEmpty != e.target.value.length <= 0 &&
                       setIsPasswordEmpty(false);
                       
 
-                      id === 'signup' &&
+                      ( id === 'signup' || id === 'resetPassword' ) &&
                         isPasswordShort &&
                         confirmPassword &&
                         setIsPasswordShort(e.target.value.length <= pwReqLength);
 
 
-                      id === 'signup' && setIsPasswordInvalid(false)
+                      ( id === 'signup' || id === 'resetPassword' ) && setIsPasswordInvalid(false)
 
                     }}
                   />
@@ -579,8 +594,8 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
                   >
                     {showPassword ? openEye() : closeEye()}
                   </ShowPasswordButton>
-                  {/* TODO: add change button */}
-                  { id == 'manageAccount' && (
+
+                  { id === 'manageAccount' && (
                     <Description>
                       <Link
                         href={modalData.detailLinkTwo}
@@ -612,12 +627,11 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
               </InputSection>
             )}
             
-            {id === 'signup' && (
+            {( id === 'signup' || id === 'resetPassword' ) && (
               <InputSection>
                 <label htmlFor='userPasswordConfirm'>
                   {modalData.detailThree}
                 </label>
-
                 <Input
                   type={showPassword ? 'text' : 'password'}
                   required
@@ -713,7 +727,6 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
                 <Dot></Dot>
               </Flap>
             </Icon>
-            {/* TODO: pass in email from previous page via react router dom */}
             {id === 'emailResetSuccess' ? modalData.detail('yl4387@columbia.edu') : modalData.detail}
             <EmailLink href={detailLink}>{modalData.detailLinkText}</EmailLink>
             {modalData.detailTwo}
@@ -743,18 +756,19 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
           </FlexContainer>
         )}
         {/* Change Account Email */}
-        {id === 'resetEmail' && (
+        { ( id === 'resetEmail' || id === 'resetPassword' ) && (
           <FlexRow marginTop='1.5em'>
             <TomatoButton text='Cancel' wire onClick={() => {
               history.push('/')
             }} />
-            {/* TODO: add change email logic */}
             <TomatoButton
-              text='Request Change'
+              text={ id === 'resetEmail' ? 'Request Change' :
+                     id === 'resetPassword' ? 'Save' : null }
               wire
               margin='0 0 0 2em'
               type='button'
-              onClick={initEmailReset} />
+              onClick={ id === 'resetEmail' ? initEmailReset :
+                        id === 'resetPassword' ? initPwdReset : null } />
           </FlexRow>
         )}
       </Container>
