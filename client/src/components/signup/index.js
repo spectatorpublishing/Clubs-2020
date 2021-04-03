@@ -361,7 +361,17 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
         detailLinkTwo: '/manageAccount/password',
         detailLinkTwoText: 'Change',
       };
+  } else if (id === 'resetEmail') {
+    modalData = {
+      title: 'Change Account Email',
+      desc: 'To change email of account, the new user ' +
+            'will receive an email with a link to approve the change. The ' +
+            'new user must approve this change within 30 minutes of the request ' +
+            'made here. For security purposes, only .edu addresses allowed.',
+      descWarn: true,
+      detail: 'New Email',
     };
+  };
 
   function openEye() {
     return (
@@ -398,15 +408,17 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
     <Wrapper>
       <Container initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }}>
         <Title>{modalData.title}</Title>
-        <Description>
+        <Description warn={modalData.descWarn}>
           {modalData.desc}
-          <Link href={modalData.descLink} paddingLeft='0.3rem'>
-            {modalData.descLinkText}
-          </Link>
+          { !modalData.descLink ? null : (
+            <Link href={modalData.descLink} paddingLeft='0.3rem'>
+              {modalData.descLinkText}
+            </Link>
+          )}
         </Description>
 
         {/* Email Input Field */}
-        {id === 'signup' || id === 'login' || id === 'findpassword' || id === 'manageAccount' ? (
+        {id === 'signup' || id === 'login' || id === 'findpassword' || id === 'manageAccount' || id === 'resetEmail' ? (
           <SignUp>
             <InputSection marginBottom={id !== 'findpassword'}>
               <label htmlFor='userEmail'>{modalData.detail}</label>
@@ -669,6 +681,22 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
               }} />
           </FlexContainer>
         )}
+        {/* Change Account Email */}
+        {id === 'resetEmail' && (
+          <FlexRow marginTop='1.5em'>
+            <TomatoButton text='Cancel' wire onClick={() => {
+              history.push('/')
+            }} />
+            <TomatoButton
+              text='Request Change'
+              wire
+              margin='0 0 0 2em'
+              type='button'
+              onClick={() => {
+                history.push('/login')
+              }} />
+          </FlexRow>
+        )}
       </Container>
     </Wrapper>
   );
@@ -723,7 +751,7 @@ const Description = styled.div`
   font-size: 1rem;
   line-height: 1.2rem;
   text-align: center;
-  color: ${(props) => props.theme.colors.gray};
+  color: ${(props) => props.warn ? props.theme.colors.red : props.theme.colors.gray};
   padding: 0.75rem;
 `;
 
