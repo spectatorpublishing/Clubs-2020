@@ -347,8 +347,21 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
       detailLinkTwoText: 'Resend Email',
       signUp: 'none',
       confirmation: true,
+    }
+  } else if (id === 'manageAccount') {
+      modalData = {
+        title: 'Update Account Information',
+        desc: "Forgot Your Password?",
+        descLink: '/findpassword',
+        descLinkText: 'Reset Here',
+        detail: 'Email',
+        detailLink: '/manageAccount/email',
+        detailLinkText: 'Change',
+        detailTwo: 'Password',
+        detailLinkTwo: '/manageAccount/password',
+        detailLinkTwoText: 'Change',
+      };
     };
-  }
 
   function openEye() {
     return (
@@ -391,29 +404,42 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
             {modalData.descLinkText}
           </Link>
         </Description>
-        {id === 'signup' || id === 'login' || id === 'findpassword' ? (
+
+        {/* Email Input Field */}
+        {id === 'signup' || id === 'login' || id === 'findpassword' || id === 'manageAccount' ? (
           <SignUp>
-            <InputSection marginBottom = {id !== 'findpassword'}>
+            <InputSection marginBottom={id !== 'findpassword'}>
               <label htmlFor='userEmail'>{modalData.detail}</label>
-              <Input
-                type='email'
-                id='userEmail'
-                required
-                ref={email}
-                onChange={(e) => {
-                  emailContainsIllegalCharacters &&
-                    setEmailContainsIllegalCharacters(
-                      e.target.value.match(emailEx) === null
-                    );
+              <FlexRow>
+                <Input
+                  type='email'
+                  id='userEmail'
+                  required
+                  ref={email}
+                  onChange={(e) => {
+                    emailContainsIllegalCharacters &&
+                      setEmailContainsIllegalCharacters(
+                        e.target.value.match(emailEx) === null
+                      );
 
-                  isEmailEmpty != e.target.value.length <= 0 &&
-                    setIsEmailEmpty(false);
+                    isEmailEmpty != e.target.value.length <= 0 &&
+                      setIsEmailEmpty(false);
 
 
-                  setIsEmailInvalid && setIsEmailInvalid(false);
-                  setIsEmailNotFound && setIsEmailNotFound(false);
-                }}
-              />
+                    setIsEmailInvalid && setIsEmailInvalid(false);
+                    setIsEmailNotFound && setIsEmailNotFound(false);
+                  }}
+                />
+                {id == 'manageAccount' && (
+                  <Description>
+                    <Link
+                      href={modalData.detailLink}
+                      color='inherit'
+                      paddingLeft='0.3rem'>Change</Link>
+                  </Description>
+                )}
+              </FlexRow>
+              
               {id === 'signup' && <InputDesc>{modalData.detailDesc}</InputDesc>}
               <ErrorText
                 marginTop={8}
@@ -436,8 +462,9 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
                 text='no account found for this email'
               />
             </InputSection>
-               
-            {(id === 'signup' || id === 'login' ) && (
+                
+            {/* Password Input Field */}
+            {(id === 'signup' || id === 'login' || id === 'manageAccount') && (
               <InputSection marginBottom={id === 'signup'}>
                 <label htmlFor='userPassword'>{modalData.detailTwo}</label>
                 <FlexRow>
@@ -483,6 +510,15 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
                   >
                     {showPassword ? openEye() : closeEye()}
                   </ShowPasswordButton>
+                  {/* TODO: add change button */}
+                  { id == 'manageAccount' && (
+                    <Description>
+                      <Link
+                        href={modalData.detailLinkTwo}
+                        color='inherit'
+                        paddingLeft='0.3rem'>Change</Link>
+                    </Description>
+                  )}
                 </FlexRow>
                 <ErrorText
                   marginTop={8}
@@ -773,7 +809,7 @@ const Dot = styled.div`
 
 const Link = styled.a`
   padding-left: ${(props) => props.paddingLeft};
-  color: ${(props) => props.theme.colors.blue};
+  color: ${(props) => props.color || props.theme.colors.blue};
   text-decoration: none;
   cursor: pointer;
 `;

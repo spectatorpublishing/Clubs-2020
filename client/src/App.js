@@ -22,6 +22,8 @@ import { FindPassword } from './containers/FindPassword';
 import { ConfirmPasswordReset } from './containers/ConfirmPasswordReset';
 import { rememberMe } from './containers/FirebaseApiSetUpTest/firebase/rememberMe';
 import { ManageAccount } from './containers/ManageAccount/LandingPage';
+import { ResetEmail } from './containers/ManageAccount/ResetEmail';
+import { ResetPassword } from './containers/ManageAccount/ResetPassword';
 
 const App = () => {
   const [userCred, setUserCred] = useState(null);
@@ -115,6 +117,12 @@ const App = () => {
             </Route>
             <Route exact path='/manageAccount'>
               <ManageAccount userCred={userCred} />
+            </Route>
+            <Route exact path='/manageAccount/email'>
+              <ResetEmail userCred={userCred} />
+            </Route>
+            <Route exact path='/manageAccount/password'>
+              <ResetPassword userCred={userCred} />
             </Route>
           </ViewportProvider>
 
