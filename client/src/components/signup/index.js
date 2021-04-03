@@ -37,6 +37,7 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
   const pwReqLength = 8;
 
   var {
+    from,
     onSuccess: next = '/',
     onFailure: fallback, 
     ...prevState
@@ -118,12 +119,6 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
   }
 
   function onLoginSubmit(e, withGoogle = false) {
-    // let {
-    //   onSuccess: next = '/',
-    //   onFailure: fallback, 
-    //   ...prevState
-    // } = history.location.state || {};
-
     if (withGoogle) {
       var google = new firebase.auth.GoogleAuthProvider();
 
@@ -138,12 +133,15 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
           var user = result.user;
           console.log('signin successful');
 
-          if (next === '/manageAccount/email/success')
-            return user.updateEmail(prevState.newEmail)
+          if (from === '/manageAccount/email')
+            return user.updateEmail(prevState.newEmail);
+          else if (from === '/manageAccount/password')
+            return user.updatePassword(prevState.newPassword);
           else
             history.push(next) /* redirect to homepage */
         }, (error) => {
           handleErrors('login', error);
+          return Promise.reject('login');
         })
         .then(() => {
           /* update account info success */
@@ -154,8 +152,10 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
            * by redirecting back to the update { email | password } page,
            * passing along the error code.
            */
-          Object.assign(prevState, { error: error })
-          history.push(fallback, prevState)
+          if (error !== 'login') {
+            Object.assign(prevState, { error: error })
+            history.push(fallback, prevState)
+          }
         })
     } else {
       let shouldSubmit = true;
@@ -192,18 +192,23 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
             setIsPasswordIncorrect(false);
             setIsEmailInvalid(false);
 
-            if (next === '/manageAccount/email/success')
-              return user.updateEmail(prevState.newEmail)
+            if (from === '/manageAccount/email')
+              return user.updateEmail(prevState.newEmail);
+            else if (from === '/manageAccount/password')
+              return user.updatePassword(prevState.newPassword);
             else
-              history.push(next)
+              history.push(next);
           }, (error) => {
             handleErrors('login', error);
+            return Promise.reject('login');
           })
           .then(() => {
-            history.push(next, prevState)
+            history.push(next, prevState);
           }, (error) => {
-            Object.assign(prevState, { error: error })
-            history.push(fallback, prevState)
+            if (error !== 'login') {
+              Object.assign(prevState, { error: error });
+              history.push(fallback, prevState);
+            }
           })
       } else {
         setIsEmailNotFound(false);
@@ -265,6 +270,7 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
       /* try re-authentication first */
       history.push('/login', {
         newEmail: email.current.value,
+        from: '/manageAccount/email',
         onSuccess: '/manageAccount/email/success',
         onFailure: '/manageAccount/email',
         pageTitle: 'Log in to confirm change',
@@ -279,8 +285,9 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
       /* try re-authentication first */
       history.push('/login', {
         newPassword: password.current.value,
+        from: '/manageAccount/password',
         onSuccess: '/',
-        onFailure: '/manageAccount/email',
+        onFailure: '/manageAccount/password',
         pageTitle: 'Log in to confirm change',
         hideDesc: true
       })
