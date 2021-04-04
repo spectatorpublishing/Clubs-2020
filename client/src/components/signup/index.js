@@ -273,8 +273,9 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
         from: '/manageAccount/email',
         onSuccess: '/manageAccount/email/success',
         onFailure: '/manageAccount/email',
-        pageTitle: 'Log in to confirm change',
-        hideDesc: true
+        pageTitle: 'Authenticate to confirm change',
+        hideDesc: true,
+        hideRememberMe: true,
       })
   }
 
@@ -288,8 +289,9 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
         from: '/manageAccount/password',
         onSuccess: '/',
         onFailure: '/manageAccount/password',
-        pageTitle: 'Log in to confirm change',
-        hideDesc: true
+        pageTitle: 'Authenticate to confirm change',
+        hideDesc: true,
+        hideRememberMe: true,
       })
   }
 
@@ -427,14 +429,6 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
       detail: 'New Email',
     };
   } else if (id === 'resetPassword') {
-    modalData = {
-      title: 'Change Account Password',
-      desc: 'To change email of account, the new user ' +
-            'will receive an email with a link to approve the change. The ' +
-            'new user must approve this change within 30 minutes of the request ' +
-            'made here. For security purposes, only .edu addresses allowed.',
-      detail: 'New Email',
-    };
     modalData = {
       title: 'Change Account Password',
       detailTwo: 'New Password',
@@ -698,10 +692,12 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
         {id === 'login' && (
           <FlexContainer>
             <FlexContainer margin='0 0 .75rem 0' flexDirection='row'>
-              <Checkbox
-                firebase
-                labelText='Remember Me'
-              />
+              {!prevState.hideRememberMe && (
+                <Checkbox
+                  firebase
+                  labelText='Remember Me'
+                />
+              )}
             </FlexContainer>
             <TomatoButton
               text='Log in'
@@ -721,7 +717,6 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
             />
             {/* This is for testing VVVVV: */}
             {/* <Signout /> */}
-            <Description>Having Trouble?</Description>
           </FlexContainer>
         )}
         {id === 'findpassword' && (
@@ -816,7 +811,8 @@ const Title = styled.h1`
   font-size: 2.25rem;
   text-align: center;
   margin: 0;
-  color: ${(props) => props.theme.colors.black}; ;
+  color: ${(props) => props.theme.colors.black};
+  white-space: nowrap;
 `;
 
 const FlexContainer = styled.div`
