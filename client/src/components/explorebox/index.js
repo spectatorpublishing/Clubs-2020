@@ -20,8 +20,9 @@ const Box = styled.div`
     h2 {
       color: ${(props) => props.theme.colors.black};
       font-weight: 600;
+
       @media only screen and (max-width: 768px) {
-        padding-left: 1.5rem;
+        padding-left: 1rem;
       }
 
       @media only screen and (max-width: 320px) {
@@ -46,15 +47,13 @@ const Box = styled.div`
     font-size: 1.125rem;
     font-weight: 600;
     color: ${(props) => props.theme.colors.gray};
-    padding-right: 0.9rem;
+    margin-right: 0rem;
     @media only screen and (max-width: 768px) {
-      padding-left: 1.5rem;
-      width: 100%;
+      margin-left: 1.5rem;
     }
 
     @media only screen and (max-width: 320px) {
-      padding-left: 1rem;
-      width: 105%;
+      margin-left: 1rem;
     }
   }
 
@@ -71,21 +70,23 @@ const Row = styled.div`
   display: flex;
   flex-direction: row;
   margin-left: 1.5rem;
-  margin-right: 1.5rem;
+  margin-right: 1rem;
 
   @media only screen and (max-width: 768px) {
-    margin: 0rem auto 0rem auto;
+    margin: 0rem 0rem 0rem auto;
   }
 `;
 
 const Icon = styled.div`
-  margin: 1.5rem 0.5rem 0.5rem auto;
+  margin: 1rem 0.5rem 0.5rem auto;
   height: 6rem;
+  width: 6rem;
 
   img {
-    display: block;
     object-fit: contain;
-    height: 100%;
+    height: 6rem;
+    width: 6rem;
+    padding-bottom: 0.5rem;
   }
 
   @media only screen and (max-width: 768px) {
@@ -156,7 +157,8 @@ export const ExploreBox = ({name, description, clubSize, tags, imageURL, accepti
                         <h2>{name}</h2>
                         <p>{description}</p>
                     </div>
-                    <Icon><img alt='club logo' src={imageURL}/></Icon>
+                    {(imageURL === "") ? null :
+                    <Icon><img alt='club logo' src={imageURL}/></Icon>}
                 </Row>
                 <Tags>{tags.map((tag, key) => <SearchTag key={key} text={tag}/>)}</Tags>
                 <hr/>
