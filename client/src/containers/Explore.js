@@ -60,15 +60,14 @@ const TextWrapper = styled.div`
 `;
 
 const CardsContainer = styled.div`
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: top;
-    overflow: scroll;
-    height: 65vh;
-
-    @media only screen and (max-width : 768px) {
-        justify-content: center;
+    
+    @media only screen and (min-width : 768px) {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: top;
+        overflow: scroll;
+        height: 65vh;
     }
 `;
 
@@ -76,7 +75,7 @@ const CardWrapper = styled.div`
     width: 50%;
     
     @media only screen and (max-width : 768px) {
-            width: 95%;
+            width: auto;
     }
 
     @media only screen and (min-width : 1880px) {
