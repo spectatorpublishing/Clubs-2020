@@ -17,7 +17,8 @@ const Wrapper = styled.div`
 `;
 
 const PageWrapper = styled.div`
-  padding: 7rem 3rem 3rem 3rem;
+  padding: 7rem 3rem 1rem 3rem;
+  margin-bottom: auto;
 
     @media only screen and (max-width : 768px) {
         padding: 1rem 0.5rem;
@@ -62,7 +63,9 @@ const CardsContainer = styled.div`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    align-items: center;
+    align-items: top;
+    overflow: scroll;
+    height: 65vh;
 
     @media only screen and (max-width : 768px) {
         justify-content: center;
