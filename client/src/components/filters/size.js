@@ -40,8 +40,8 @@ const Word = styled.div`
 
 `;
 
-const TextAdd = 'Size +';
-const TextRemove = 'Size x';
+const TextAdd = 'Size x';
+const TextRemove = 'Size +';
 
 const Size = ({
     items,
