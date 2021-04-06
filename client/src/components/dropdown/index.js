@@ -25,6 +25,11 @@ const Dropdown = ({
     setClicked(false);
   });
 
+
+  useEffect(() => {
+    setTitle(defaultValue);
+  }, [defaultValue]);
+
   useEffect(() => {
     document.addEventListener('keypress', onKeypress);
     document.addEventListener('keydown', onKeydown);

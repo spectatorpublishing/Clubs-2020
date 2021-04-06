@@ -6,7 +6,7 @@ import { Highlights, Socials } from './helpers';
 import TextInput from '../../../components/textInput/index';
 import TomatoButton from '../../../components/tomatoButton/index';
 
-const ProfileCreation2 = ({ clubProfile, setClubProfile, history }) => {
+const ProfileCreation2 = ({ clubProfile, setClubProfile, history, userCred, submitProfile }) => {
   const highlight1 = useRef(null);
   const highlight2 = useRef(null);
   const highlight3 = useRef(null);
@@ -37,14 +37,15 @@ const ProfileCreation2 = ({ clubProfile, setClubProfile, history }) => {
     clubEmail,
     mailingListLink,
   ];
-  const handleClick = (to) => {
+  const handleClick = (to, submitting) => {
     let everythingDefined = true;
     for (let i = 0; i < refsToCheck.length; i++)
       if (!refsToCheck[i].current) everythingDefined = false;
     if (everythingDefined) {
       let tempProfile = { ...clubProfile };
-      for (let i = 0; i < tempProfile.highlights.length; i++)
+      for (let i = 0; i < tempProfile.highlights.length; i++) {
         tempProfile.highlights[i] = refsToCheck[i].current.value;
+      }
       tempProfile.howToJoin = howToJoin.current.value;
       tempProfile.appLink = linkToApplication.current.value;
       tempProfile.website = website.current.value;
@@ -53,7 +54,11 @@ const ProfileCreation2 = ({ clubProfile, setClubProfile, history }) => {
       tempProfile.twitter = twitter.current.value;
       tempProfile.clubEmail = clubEmail.current.value;
       tempProfile.mailingListLink = mailingListLink.current.value;
+
+      tempProfile.firebaseId = userCred;
+
       setClubProfile(tempProfile);
+      submitProfile(tempProfile, submitting);
       if (to) history.push(to);
     } else console.error('ONE OF THE REFS IS NOT DEFINED!');
   };
@@ -118,15 +123,25 @@ const ProfileCreation2 = ({ clubProfile, setClubProfile, history }) => {
           wire
           text='Back'
           onClick={() => {
-            handleClick('/profile-creation/');
+            handleClick('/profile-creation/', false);
           }}
         />
-        <TomatoButton
-          text='Next'
-          onClick={() => {
-            handleClick();
-          }}
-        />
+        <div>
+          {/* <TomatoButton
+            text='Save'
+            margin="0 1rem"
+            onClick={() => {
+              handleClick('/confirm', false);
+            }}
+          /> */}
+          <TomatoButton
+            text='Submit'
+            margin="0 1rem"
+            onClick={() => {
+              handleClick('/confirm', true);
+            }}
+          />
+        </div>
       </ButtonContainer>
     </ProfileContainer>
   );

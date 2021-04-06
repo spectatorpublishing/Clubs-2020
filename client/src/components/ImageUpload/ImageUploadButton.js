@@ -30,9 +30,8 @@ const Preview = styled.img`
     margin-left: auto;
     margin-right: auto;
     border-radius: 10px;
-    border-color: 
 
-    height: 100%;
+    /* height: 100%; */
     width: 100%;
 
     max-height: 100%;
@@ -77,24 +76,31 @@ const Word = styled.div`
 `;
 
 class ImageUploadButton extends React.Component {
-    
-    state = {
-        selectedFile: null,
-        fileURL: ''
-        
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            selectedFile: null,
+            fileURL: this.props.clubProfile.imageUrl
+            
+        };
+
+        console.log(props);
+
+        this.fileSelectedHandler = this.fileSelectedHandler.bind(this);
+        this.fileUploadHandler = this.fileUploadHandler.bind(this);
     }
 
-    fileSelectedHandler = event => {
+    fileSelectedHandler(event){
         this.setState({
             selectedFile: event.target.files[0],
             fileURL: URL.createObjectURL(event.target.files[0])
         });
-        
     }
 
     //Brainstorm error handler for this
 
-    fileUploadHandler = () => {
+    fileUploadHandler() {
         const fd = new FormData();
         fd.append('image', this.state.selectedFile, this.state.selectedFile.name);
 
@@ -103,8 +109,13 @@ class ImageUploadButton extends React.Component {
             body: fd
         })
         .then(res => res.json())
-        .then(data => {console.log(data)})
-        .catch(err => {console.error(err)})
+        .then(data => {
+            console.log(data);
+            this.props.setClubProfile({...this.props.clubProfile, imageUrl: data.imageUrl});
+        })
+        .catch(err => {
+            console.error(err);
+        });
 
     }
 

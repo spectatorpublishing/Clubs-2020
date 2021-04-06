@@ -13,12 +13,19 @@ const imgUploadRoutes = require('./routes/image-upload')
 const db = require('./models')
 
 app.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}.`);
+  console.log(`Server listening on port ${PORT}.`);
 })
 
 // parsing AJAX requests
-app.use(bodyParser.urlencoded({extended: true}))
+app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
+
+// allow CORS:
+app.use(function (req, res, next) {
+  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
+  next();
+});
 
 // routes
 app.use('/api/clubProfiles', clubProfileRoutes)

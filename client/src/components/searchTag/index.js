@@ -1,50 +1,40 @@
-import React, { useRef } from 'react';
-import styled, { withTheme } from 'styled-components';
+import React, { useState } from 'react';
+import styled, {withTheme} from 'styled-components';
 import { motion } from 'framer-motion';
 
-const SearchTag = ({
-  text,
-  theme,
-  margin,
-}) => {
+const SearchTag = ({ text, theme }) => {
   const tagVariants = {
     active: { color: theme.colors.white, backgroundColor: theme.colors.red },
-    inactive: {
-      color: theme.colors.red,
-      backgroundColor: 'rgba(236, 108, 82, 0.08)',
-    },
+    inactive: { color: theme.colors.red, backgroundColor: 'rgba(236, 108, 82, 0.08)' }
   };
-  const searchTag = useRef(null);
-
+  const [clicked, setClicked] = useState(false);
   return (
-    <Tag
-      margin={margin}
-      ref={searchTag}
-      variants={tagVariants}
-      initial='inactive'
-    >
-      {text ? text : 'no text entered'}
-    </Tag>
+      <Tag
+        clicked={clicked}
+        onClick={() => {
+          setClicked(!clicked);
+        }}
+        variants={tagVariants}
+        whileTap={{ scale: 0.95 }}
+        initial='inactive'
+        animate={clicked ? 'active' : 'inactive'}
+      >
+        {text}
+      </Tag>
   );
 };
 
 const Tag = styled(motion.button)`
-  cursor: default;
   display: inline-block;
   padding: 0.4rem 1rem;
-  font-size: 0.9rem;
-  font-weight: 600;
+  font-family: 'Roboto', 'Arial', 'Helvetica';
+  font-size: 1rem;
   border-radius: 1rem;
-  margin: ${(props) => props.margin};
-  border: 0.125rem ${(props) => props.theme.colors.red} solid;
-  outline: none;
+  border: 0.125rem ${props=>props.theme.colors.red} solid;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  @media only screen and (max-width: 600px) {
-    font-size: 0.75rem;
-  }
 `;
 
 export default withTheme(SearchTag);

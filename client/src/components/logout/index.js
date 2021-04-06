@@ -1,9 +1,25 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import * as firebase from '../../UserAuthUtilities/firebase';
+
+function handleClick() {
+  firebase
+    .auth()
+    .signOut()
+    .then(() => {
+      console.log('Sign-out successful.');
+      // make it go to the explore page?
+      // window.location.replace('/');
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
 
 const Logout = () => {
   const [hover, setHover] = useState(false);
+
   return (
     <LogoutButton
       onHoverStart={() => {
@@ -12,6 +28,7 @@ const Logout = () => {
       onHoverEnd={() => {
         setHover(false);
       }}
+      onClick={handleClick}
     >
       <svg
         width='28'
@@ -43,7 +60,7 @@ const LogoutButton = styled(motion.button)`
 `;
 
 const Text = styled.h3`
-// font-family is necessary here
+/* // font-family is necessary here */
   font-family: 'Manrope', 'Roboto', 'Arial', 'Helvetica';
   font-size: 1.25rem;
   margin-left: .35rem;
