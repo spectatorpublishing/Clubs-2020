@@ -599,7 +599,7 @@ export const SignUpBox = ({ detailLink, id, userCred , isProfileComplete = true}
             />
             {/* This is for testing VVVVV: */}
             {/* <Signout /> */}
-            <Description>Having Trouble?</Description>
+            <a href = '\faq'><Description>Having Trouble?</Description></a>
           </FlexContainer>
         )}
         {id === 'findpassword' && (
@@ -655,6 +655,10 @@ const Wrapper = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+
+  a{
+    text-decoration: none;
+  }
 `;
 
 const Container = styled(motion.div)`
