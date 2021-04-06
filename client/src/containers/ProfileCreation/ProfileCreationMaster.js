@@ -59,7 +59,7 @@ const ProfileCreationMaster = ({ userCred }) => {
       shortDescription: newClubProfile.shortDesc,
       // NEED TO UPDATE THIS-- MAKE THEM CHOOSE FROM PRECONFIGURED IMAGES OR THEIR OWN LOGO
       // ASK PRODUCT DESIGN???
-      imageUrl: "https://www.nomadfoods.com/wp-content/uploads/2018/08/placeholder-1-e1533569576673.png",
+      imageUrl: newClubProfile.imageUrl,
       memberRange: newClubProfile.size,
       // this is not used rn, but we should update it to take advantage of their preferences
       acceptingMembers: !newClubProfile.memberPeriod.includes('Not taking members'),
@@ -110,6 +110,7 @@ const ProfileCreationMaster = ({ userCred }) => {
       twitter: profile.socialLinks.twitter,
       clubEmail: profile.socialLinks.email,
       mailingListLink: profile.mailingListLink,
+      imageUrl: profile.imageUrl
     };
   });
 

@@ -1,56 +1,55 @@
-import React, { useState } from 'react';
-import styled, { css } from 'styled-components';
-import multer from 'multer';
-import multerS3 from 'multer-s3';
-import awsSDK from 'aws-sdk';
+import React, { useState, useRef, useEffect } from 'react';
+import styled from 'styled-components';
+import RedAsterisk from '../redAsterisk';
 
-const FullWrapper = styled.div`
+const Wrap = styled.div`
     display: flex;
-    flex-direction: column;
-    margin-right:1rem;
+    margin: 1rem 0;
+`;
 
-`
+const TagHeader = styled.h3`
+  font-weight: 600;
+  margin-left: 0.3rem;
+  font-size: 1.125rem;
+`;
 
 const ImageBox = styled.div`
     background-color: white;
-    background-repeat: no-repeat;
-    background-size: cover;
-    border-style: solid;
+    border: 3px solid ${(props) => props.theme.colors.red};
     border-radius: 10px;
-    border-color: ${(props) => props.theme.colors.red};
-    border-width: 3px;
-
+    white-space: nowrap;
+    text-align: center; 
     height: 275px;
     width: 275px;
     margin-left:1rem;
-`
+    padding: 1rem;
+`;
 
 const Preview = styled.img`
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
     border-radius: 10px;
-
-    /* height: 100%; */
+    vertical-align: middle;
     width: 100%;
 
     max-height: 100%;
     max-width: 100%;
-`
+`;
 
 const ButtonWrapper = styled.div`
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     margin-right: auto;
-`
+`;
+
 const Button = styled.button`
     background-color: ${(props) => props.theme.colors.red};
     box-shadow: 2px 5px 20px rgba(0, 0, 0, 0.10);
     border-radius: 25px;
-    width: 130px;
-    height: 39px;
+    padding: 1rem;
     border: none;
     cursor: pointer;
+    color: white;
+    font-family: 'Manrope';
+
 
     :hover{
         box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.25);
@@ -58,6 +57,44 @@ const Button = styled.button`
     
     margin-left:1rem;
     margin-top: 1rem;
+`;
+
+const Input = styled.input`
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+`;
+
+const Label = styled.label`
+    background-color: ${(props) => props.theme.colors.red};
+    box-shadow: 2px 5px 20px rgba(0, 0, 0, 0.10);
+    border-radius: 25px;
+    padding: 1rem;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    text-align: center;
+    align-items: flex-start;
+    text-indent: 0px;
+
+    :hover{
+        box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.25);
+    }
+    
+    margin-left:1rem;
+    margin-top: 1rem;
+`;
+
+const RowHeader = styled(TagHeader)`
+  margin: 0;
+  width: 15rem;
+  @media screen and (max-width: 801px) {
+    width: auto;
+    max-width: 85%;
+  }
 `;
 
 const TextWrapper = styled.div`
@@ -75,81 +112,58 @@ const Word = styled.div`
     font-size:18px;
 `;
 
-class ImageUploadButton extends React.Component {
-    constructor(props) {
-        super(props);
+const ImageUploadButton = ({clubProfileId, clubProfile, setClubProfile}) => {
+    const [fileURL, setFileURL] = useState(clubProfile.imageUrl);
 
-        this.state = {
-            selectedFile: null,
-            fileURL: this.props.clubProfile.imageUrl
-            
-        };
-
-        console.log(props);
-
-        this.fileSelectedHandler = this.fileSelectedHandler.bind(this);
-        this.fileUploadHandler = this.fileUploadHandler.bind(this);
-    }
-
-    fileSelectedHandler(event){
-        this.setState({
-            selectedFile: event.target.files[0],
-            fileURL: URL.createObjectURL(event.target.files[0])
-        });
-    }
+    useEffect(() => {
+        setFileURL(clubProfile.imageUrl);
+    }, [clubProfile]);
 
     //Brainstorm error handler for this
 
-    fileUploadHandler() {
-        const fd = new FormData();
-        fd.append('image', this.state.selectedFile, this.state.selectedFile.name);
+    const fileUploadHandler = (event) => {
+        setFileURL(URL.createObjectURL(event.target.files[0]));
 
-        fetch(`${window.origin}/api/image-upload//imgUpload/${this.props.clubProfileId}`, {
+        const fd = new FormData();
+        fd.append('image', event.target.files[0], event.target.files[0].name);
+
+        fetch(`/api/image-upload//imgUpload/${clubProfileId}`, {
             method: 'POST',
             body: fd
         })
         .then(res => res.json())
         .then(data => {
             console.log(data);
-            this.props.setClubProfile({...this.props.clubProfile, imageUrl: data.imageUrl});
+            setClubProfile({...clubProfile, imageUrl: data.imageUrl});
         })
         .catch(err => {
             console.error(err);
         });
+    };
 
-    }
-
-    render() {
-        return (
-            <>
-                <input 
-                style={{display:'none'}} 
-                type="file" 
-                onChange={this.fileSelectedHandler}
-                ref = {fileInput => this.fileInput = fileInput}/>
-                <FullWrapper>
-
-                    <ImageBox>
-                        <Preview src = {this.state.fileURL}></Preview>
-                    </ImageBox>
-
-                    <ButtonWrapper>
-
-                        <Button onClick={() => this.fileInput.click()}>
-                            <TextWrapper><Word>Select Image</Word></TextWrapper>
-                        </Button>
-
-                        <Button onClick={this.fileUploadHandler}>
-                            <TextWrapper><Word>Upload Image</Word></TextWrapper>
-                        </Button>
-
-                    </ButtonWrapper>
-
-                    
-                </FullWrapper>
-            </>
-        )
-    }
+    return (
+        <Wrap>
+            <RowHeader>
+                <RedAsterisk>*</RedAsterisk>
+                Upload a Logo for Your Club:
+            </RowHeader>
+            <ImageBox>
+                <Preview src = {fileURL}></Preview>
+            </ImageBox>
+            <ButtonWrapper>
+                <Input 
+                    type="file" 
+                    name="file" 
+                    onChange={fileUploadHandler}
+                    id="file" 
+                    class="inputfile" 
+                />
+                <Label for="file">
+                    <TextWrapper><Word>Select Image</Word></TextWrapper>
+                </Label>
+            </ButtonWrapper>
+        </Wrap>
+    )
 }
 
 export default ImageUploadButton;
