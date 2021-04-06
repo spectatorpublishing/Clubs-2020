@@ -36,27 +36,12 @@ const Preview = styled.img`
 
 const ButtonWrapper = styled.div`
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     margin-right: auto;
-`;
 
-const Button = styled.button`
-    background-color: ${(props) => props.theme.colors.red};
-    box-shadow: 2px 5px 20px rgba(0, 0, 0, 0.10);
-    border-radius: 25px;
-    padding: 1rem;
-    border: none;
-    cursor: pointer;
-    color: white;
-    font-family: 'Manrope';
-
-
-    :hover{
-        box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.25);
+    @media screen and ( max-width: 500px) {
+        flex-direction: column;
     }
-    
-    margin-left:1rem;
-    margin-top: 1rem;
 `;
 
 const Input = styled.input`
@@ -79,6 +64,7 @@ const Label = styled.label`
     text-align: center;
     align-items: flex-start;
     text-indent: 0px;
+    height: fit-content;
 
     :hover{
         box-shadow: 2px 2px 20px rgba(0, 0, 0, 0.25);
@@ -147,10 +133,10 @@ const ImageUploadButton = ({clubProfileId, clubProfile, setClubProfile}) => {
                 <RedAsterisk>*</RedAsterisk>
                 Upload a Logo for Your Club:
             </RowHeader>
-            <ImageBox>
-                <Preview src = {fileURL}></Preview>
-            </ImageBox>
             <ButtonWrapper>
+                <ImageBox>
+                    <Preview src = {fileURL}></Preview>
+                </ImageBox>
                 <Input 
                     type="file" 
                     name="file" 
