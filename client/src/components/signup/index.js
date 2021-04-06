@@ -588,7 +588,7 @@ export const SignUpBox = ({ detailLink, id, userCred , isProfileComplete = true}
                 onLoginSubmit(e);
               }}
             />
-            <TomatoButton
+            {/* <TomatoButton
               text='Log in with Google'
               wire
               margin='0.65rem 0 0 0'
@@ -596,7 +596,7 @@ export const SignUpBox = ({ detailLink, id, userCred , isProfileComplete = true}
               onClick={(e) => {
                 onLoginSubmit(e, true);
               }}
-            />
+            /> */}
             {/* This is for testing VVVVV: */}
             {/* <Signout /> */}
             <a href = '\faq'><Description>Having Trouble?</Description></a>
