@@ -20,6 +20,7 @@ import { Navbar } from './components/navbar';
 import { FindPassword } from './containers/FindPassword';
 import { ConfirmPasswordReset } from './containers/ConfirmPasswordReset';
 import { rememberMe } from './containers/FirebaseApiSetUpTest/firebase/rememberMe';
+import ScrollToTop from "./components/ScrollToTop";
 
 const App = () => {
   const [userCred, setUserCred] = useState(null);
@@ -74,6 +75,7 @@ const App = () => {
       <ViewportProvider>
         <Router>
         <Navbar loggedIn = {userCred !== null} authLevel = {clubAccountInfo ? clubAccountInfo.authorityLevel : "user"} profileId = {clubAccountInfo ? clubAccountInfo.clubProfileId : null}/>
+        <ScrollToTop>
           <Switch>
               <Route path='/club/:id'>
                 <ClubProfileDisplay isLoggedin={loggedIn} profileId={clubAccountInfo?.clubProfileId}/>
@@ -98,6 +100,7 @@ const App = () => {
                 <FindPassword userCred={userCred} />
               </Route>
           </Switch>
+          </ScrollToTop>
         </Router>
       </ViewportProvider>
     </ThemeProvider>

@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import ProfileCreation1 from './ProfileCreation1/index';
 import ProfileCreation2 from './ProfileCreation2/index';
 import { Confirmation } from '../Confirmation';
+import ScrollToTop from '../../components/ScrollToTop';
 
 const ProfileCreationMaster = ({ userCred }) => {
   const [clubProfile, setClubProfile] = useState({
@@ -139,6 +140,7 @@ const ProfileCreationMaster = ({ userCred }) => {
     <>
       <PageContainer>
         <Router>
+          <ScrollToTop>
           <Switch>
           <Route
               path='/profile-creation/1'
@@ -169,6 +171,7 @@ const ProfileCreationMaster = ({ userCred }) => {
             />
             <Route path='/confirm' component={Confirmation} />
           </Switch>
+          </ScrollToTop>
         </Router>
       </PageContainer>
     </>
