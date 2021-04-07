@@ -5,6 +5,7 @@ import { inputData } from './data';
 import { withRouter } from 'react-router-dom';
 import { ErrorMessage, PageDesc } from '../ProfileCreationMaster';
 import TomatoButton from '../../../components/tomatoButton/index';
+import ImageUploadButton from '../../../components/ImageUpload/ImageUploadButton';
 import {
   ClubSize,
   NewMembers,
@@ -13,7 +14,7 @@ import {
   Tags,
 } from './helpers';
 
-const ProfileCreation1 = ({ clubProfile, setClubProfile, history, saveHandler }) => {
+const ProfileCreation1 = ({ clubProfile, setClubProfile, history, saveHandler, clubProfileId }) => {
   const [errorMessage, setErrorMesssage] = useState('');
   const clubNameRef = useRef(null);
   const shortDescRef = useRef(null);
@@ -88,6 +89,11 @@ const ProfileCreation1 = ({ clubProfile, setClubProfile, history, saveHandler })
         </Column>
         <Column right>
           {inputs}
+          <ImageUploadButton 
+            clubProfileId={clubProfileId} 
+            clubProfile={clubProfile}
+            setClubProfile={setClubProfile}
+          />
           <ClubSize clubProfile={clubProfile} setClubProfile={setClubProfile} />
           <NewMembers
             clubProfile={clubProfile}
@@ -104,7 +110,7 @@ const ProfileCreation1 = ({ clubProfile, setClubProfile, history, saveHandler })
         </Column>
       </StyledBody>
       <ButtonContainer>
-        <TomatoButton text='Save' margin="0 1rem" onClick={() => saveProfile(false)} />
+        {/* <TomatoButton text='Save' margin="0 1rem" onClick={() => saveProfile(false)} /> */}
         <TomatoButton text='Next' margin="0 1rem" onClick={() => saveProfile(true)} />
       </ButtonContainer>
       <ErrorMessage

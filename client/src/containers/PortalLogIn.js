@@ -58,7 +58,7 @@ export function PortalLogin() {
 
     return (
         <PageWrapper>
-            <h1>Clubs@CU Admin Portal</h1>
+            <h1>LionClubs Admin Portal</h1>
             <Form noValidate ref={formRef} onSubmit={handleSubmit}>
                 <Label>Email</Label>
                 <InputField type='email' name='email' />

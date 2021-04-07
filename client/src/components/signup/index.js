@@ -11,7 +11,7 @@ import Checkbox from '../checkbox';
 import FullPageModal from '../fullPageModal';
 //this is the version of the sign-up/login (depends on id value given to components) form to be used
 
-export const SignUpBox = ({ detailLink, id, userCred }) => {
+export const SignUpBox = ({ detailLink, id, userCred , isProfileComplete = true}) => {
   const email = useRef(null);
   const password = useRef(null);
   const confirmPassword = useRef(null);
@@ -49,12 +49,7 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
       setIsEmailEmpty(false);
     }
 
-    console.log('arrived here2');
-    console.log(password.current.value.length <= 0);
-
     if (!password || !password.current || password.current.value.length <= 0) {
-      console.log('arrived here3');
-
       shouldSubmit = false;
       setIsPasswordEmpty(true);
     } else {
@@ -73,11 +68,10 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
         setIsPasswordShort(false);
 
       if (password.current.value.match(passEx)) {
-        console.log('matched');
-        setIsPasswordInvalid(false);
-      } else {
-        console.log('pass not matching reqs');
-        setIsPasswordInvalid(true);
+        setIsPasswordInvalid(false)
+      } 
+      else {
+        setIsPasswordInvalid(true)
       }
       setIsPasswordEmpty(false);
     }
@@ -114,7 +108,20 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
       //e.preventDefault();
     }
   }
+  function LoginRedirect(){
 
+    console.log("determining redirect", isProfileComplete)
+    if (!isProfileComplete){
+      console.log("redirecting")
+
+      history.push('/profile-creation');
+    }
+    else{
+      console.log("not redirecting")
+
+      history.push('/');
+    }
+  }
   function onLoginSubmit(e, withGoogle = false) {
     if (withGoogle) {
       var google = new firebase.auth.GoogleAuthProvider();
@@ -129,7 +136,12 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
           var token = credential.accessToken; // The signed-in user info.
           var user = result.user;
           console.log('signin successful');
-          history.push('/'); // ...
+
+
+
+          //logic to redirect depending on if you are done with the form or not
+          LoginRedirect()
+           // ...
         })
         .catch((error) => {
           // Handle Errors here.
@@ -187,7 +199,7 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
             setIsPasswordIncorrect(false);
             setIsEmailInvalid(false);
 
-            history.push('/');
+            LoginRedirect()
 
             // ...
           })
@@ -282,7 +294,7 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
 
   if (id === 'signup') {
     modalData = {
-      title: 'Welcome to Clubs@CU',
+      title: 'Welcome to LionClubs',
       desc: 'Already have an account?',
       descLink: '/login',
       descLinkText: 'Login Here',
@@ -293,12 +305,12 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
     };
   } else if (id === 'confirmation') {
     modalData = {
-      title: 'Club Profile Request Recieved!',
+      title: 'Club Profile Request Received!',
       desc: 'Already have an account?',
       descLink: './login',
       descLinkText: 'Login Here',
       detail:
-        'Your request is being processed. You will recieve an email with further instructions in 24 hours. If you have any questions, please contact: ',
+        'Your request is being processed. You will receive an email with further instructions in 24 hours. If you have any questions, please contact: ',
       detailLink: 'mailto:publisher@columbiaspectator.com',
       detailLinkText: 'publisher@columbiaspectator.com',
       detailTwo: '.',
@@ -582,7 +594,7 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
                 onLoginSubmit(e);
               }}
             />
-            <TomatoButton
+            {/* <TomatoButton
               text='Log in with Google'
               wire
               margin='0.65rem 0 0 0'
@@ -590,10 +602,10 @@ export const SignUpBox = ({ detailLink, id, userCred }) => {
               onClick={(e) => {
                 onLoginSubmit(e, true);
               }}
-            />
+            /> */}
             {/* This is for testing VVVVV: */}
             {/* <Signout /> */}
-            <Description>Having Trouble?</Description>
+            <a href = '\faq'><Description>Having Trouble?</Description></a>
           </FlexContainer>
         )}
         {id === 'findpassword' && (
@@ -652,6 +664,10 @@ const Wrapper = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+
+  a{
+    text-decoration: none;
+  }
 `;
 
 const Container = styled(motion.div)`

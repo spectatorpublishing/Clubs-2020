@@ -50,9 +50,6 @@ function addProfileInfo(base, profile) {
     base.moreInfo.description = profile.longDescription;
 
     let highlights = [];
-    // console.log("========================1")
-    // console.log(profile.highlights)
-    // console.log("========================2")
 
     if (profile && profile.highlights){
         profile.highlights.forEach((hl, idx) => highlights[idx] = `${idx + 1}. ${hl}`);
@@ -67,9 +64,6 @@ function fetchAccounts(type) {
     return fetch(`${dev_api_account}/getAll`)
         .then(res => res.json())
         .then(res => {
-            console.log("---------------------vvvvvvvvv")
-            console.log(res)
-            console.log("^^^^^^^^^---------------------")
             /*
              * filters out all account of type that doesn't have a profile,
              * then extract useful info and rename the attributes
@@ -111,11 +105,7 @@ export function joinAccountProfile(type) {
             return fetchProfiles(id_list)
         })
         .then(profile_list => {
-            console.log(profile_list)
-            console.log(profile_list != null, profile_list != undefined)
             profile_list.forEach((prof, idx) => {
-                console.log(prof)
-
                 addProfileInfo(list[idx], prof)
             });
             return list;

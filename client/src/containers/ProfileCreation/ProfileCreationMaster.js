@@ -5,7 +5,6 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import ProfileCreation1 from './ProfileCreation1/index';
 import ProfileCreation2 from './ProfileCreation2/index';
 import { Confirmation } from '../Confirmation';
-// import Navbar from '../../components/navbar/index';
 
 const ProfileCreationMaster = ({ userCred }) => {
   const [clubProfile, setClubProfile] = useState({
@@ -27,10 +26,30 @@ const ProfileCreationMaster = ({ userCred }) => {
     clubEmail: '',
     mailingListLink: '',
   });
+  const [clubProfileId, setClubProfileId] = useState('');
 
   useEffect(() => {
-    console.log(clubProfile);
-  }, [clubProfile]);
+    if(userCred !== null) {
+      fetch(`/api/clubAccounts/getByFirebaseId/${userCred.uid}`, {
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      })
+        .then(response => response.json())
+        .then(data => {
+          setClubProfileId(data.clubProfileId);
+
+          fetch(`${window.origin}/api/clubProfiles/${data.clubProfileId}`, {
+            method: 'GET',
+            })
+          .then((res) => res.json())
+          .then((response) => {
+            setClubProfile(parseFromDB(response));
+          })
+          .catch((error) => console.log(error));
+        });
+    }
+  }, []);
 
   const parseState = ((newClubProfile) => {
     const toSubmit = {
@@ -39,7 +58,6 @@ const ProfileCreationMaster = ({ userCred }) => {
       shortDescription: newClubProfile.shortDesc,
       // NEED TO UPDATE THIS-- MAKE THEM CHOOSE FROM PRECONFIGURED IMAGES OR THEIR OWN LOGO
       // ASK PRODUCT DESIGN???
-      imageUrl: "https://www.nomadfoods.com/wp-content/uploads/2018/08/placeholder-1-e1533569576673.png",
       memberRange: newClubProfile.size,
       // this is not used rn, but we should update it to take advantage of their preferences
       acceptingMembers: !newClubProfile.memberPeriod.includes('Not taking members'),
@@ -65,9 +83,35 @@ const ProfileCreationMaster = ({ userCred }) => {
     return toSubmit;
   });
 
-  const submitProfile = (newClubProfile, submitting) => {  
-    console.log(parseState(newClubProfile));
-    
+  const parseFromDB = (profile => {
+    const memberPeriod = [];
+
+    if(profile.fallRecruiting) memberPeriod.push("Fall");
+    if(profile.springRecruiting) memberPeriod.push("Spring");
+    if(profile.acceptingMembers) memberPeriod.push('Not taking members');
+
+    return {
+      tags: profile.tags,
+      clubName: profile.name,
+      shortDesc: profile.shortDescription,
+      longDesc: profile.longDescription,
+      size: profile.memberRange,
+      memberPeriod: memberPeriod,
+      requireApplication: profile.applicationRequired ? 'Yes' : 'No',
+      meetTime: profile.meetingFrequency,
+      highlights: profile.highlights,
+      howToJoin: profile.howToJoin,
+      appLink: profile.applicationLink,
+      website: profile.socialLinks.website,
+      facebook: profile.socialLinks.facebook,
+      instagram: profile.socialLinks.instagram,
+      twitter: profile.socialLinks.twitter,
+      clubEmail: profile.socialLinks.email,
+      mailingListLink: profile.mailingListLink,
+    };
+  });
+
+  const submitProfile = (newClubProfile, submitting) => {      
     fetch(`/api/clubAccounts/getByFirebaseId/${userCred.uid}`, {
       headers: {
         'Content-Type': 'application/json'
@@ -75,11 +119,6 @@ const ProfileCreationMaster = ({ userCred }) => {
     })
       .then(response => response.json())
       .then(data => {
-        console.log("-------------inside first fetch-------------");
-        console.log(data);
-
-        console.log(`/api/clubProfiles/create/${data._id}`);
-
         fetch(`/api/clubProfiles/update/${data._id}${submitting ? '?submit=true' : ''}`, {
           method: 'PUT',
           headers: {
@@ -89,7 +128,6 @@ const ProfileCreationMaster = ({ userCred }) => {
         })
           .then(response => response.json())
           .then(data => {
-            console.log("-------------inside second fetch-------------");
             console.log(data);
           })
           .catch(error => console.error(error));
@@ -99,7 +137,6 @@ const ProfileCreationMaster = ({ userCred }) => {
   // Updates state based on input text
   return (
     <>
-      {/* <Navbar /> */}
       <PageContainer>
         <SetUpClubProfile />
         <Router>
@@ -127,6 +164,7 @@ const ProfileCreationMaster = ({ userCred }) => {
                   setClubProfile={setClubProfile}
                   userCred={userCred}
                   saveHandler={submitProfile}
+                  clubProfileId={clubProfileId}
                 />
               )}
             />
@@ -152,6 +190,7 @@ const ClubProfileTitle = styled.h1`
   font-size: 2.25rem;
   font-weight: 700;
   margin-bottom: 0;
+  padding-top: 5rem;
   @media only screen and (max-width: 600px) {
     font-size: 1.5rem !important;
   }
@@ -160,7 +199,7 @@ const ClubProfileTitle = styled.h1`
 const PageContainer = styled.div`
   display: grid;
   grid-template-rows: auto auto auto;
-  padding: 0 3rem 0 4rem;
+  padding: 8rem 3rem 0 4rem;
   @media only screen and (max-width: 768px) {
     padding: 0 1.375rem !important;
   }

@@ -40,8 +40,8 @@ const Word = styled.div`
 
 `;
 
-const TextAdd = 'Size +';
-const TextRemove = 'Size x';
+const TextAdd = 'Size x';
+const TextRemove = 'Size +';
 
 const Size = ({
     items,
@@ -105,9 +105,6 @@ const Size = ({
             return element != item 
           })
       }
-
-      // console.log("selected: ", newSelected)
-      // setData(newSelected)
       setSelected("size", newSelected);
     };
 

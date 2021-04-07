@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { Navbar } from '../components/navbar';
 import ExploreBox from '../components/explorebox';
 import styled from 'styled-components';
 import Join from '../components/filters/join';
@@ -8,6 +7,7 @@ import Type from '../components/filters/type';
 import AdCarrier from '../components/adCarrier';
 import SearchBar from '../components/searchBar';
 //import FilterMobile from '../components/filters/filterMobile';
+import ImageUploadButton from '../components/ImageUpload/ImageUploadButton'
 import Icon from '../components/filters/shuffle.png';
 
 const Wrapper = styled.div`
@@ -18,7 +18,8 @@ const Wrapper = styled.div`
 `;
 
 const PageWrapper = styled.div`
-  padding: 0.5rem 3rem 3rem 3rem;
+  padding: 7rem 3rem 1rem 3rem;
+  margin-bottom: auto;
 
     @media only screen and (max-width : 768px) {
         padding: 1rem 0.5rem;
@@ -60,13 +61,14 @@ const TextWrapper = styled.div`
 `;
 
 const CardsContainer = styled.div`
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-
-    @media only screen and (max-width : 768px) {
-        justify-content: center;
+    
+    @media only screen and (min-width : 768px) {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: top;
+        overflow: scroll;
+        height: 65vh;
     }
 `;
 
@@ -74,7 +76,7 @@ const CardWrapper = styled.div`
     width: 50%;
     
     @media only screen and (max-width : 768px) {
-            width: 95%;
+            width: auto;
     }
 
     @media only screen and (min-width : 1880px) {
@@ -382,10 +384,8 @@ const Explore = () => {
         );
 
     if (width < 840){
-        console.log(width);
         return(
             <Wrapper>
-            {/* <Navbar /> */}
             <main>
                 <PageWrapper>
                     <AdContainer>
@@ -401,10 +401,8 @@ const Explore = () => {
             </Wrapper>
         )
     } else {
-        console.log(width);
         return(
             <Wrapper>
-            {/* <Navbar /> */}
             <main>
                 <PageWrapper>
                     <AdContainer>

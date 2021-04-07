@@ -40,6 +40,10 @@ const Checkbox = ({
   };
 
   useEffect(() => {
+    setClicked(defaultValue);
+  }, [defaultValue]);
+
+  useEffect(() => {
     if (checkboxFocused) {
       document.addEventListener('keypress', onKeypress);
     }
@@ -83,7 +87,7 @@ const Checkbox = ({
         order={order}
         variants={boxVariants}
         clicked={clicked}
-        initial={'unchecked'}
+        initial='unchecked'
         animate={clicked ? 'checked' : 'unchecked'}
         transition={{ type: 'spring', stiffness: 300, damping: 20 }}
         onClick={handleClick}
@@ -127,9 +131,10 @@ const LabelContainer = styled.div`
 `;
 
 const MobileLabel = styled.h3`
-  font-size: 0.8125rem;
-  font-weight: 600;
+  font-size: 1rem;
+  font-weight: 700;
   text-align: center;
+  padding: 0rem 0.2rem 0rem 0.2rem;
 `;
 
 const StyledCheckbox = styled(motion.div)`

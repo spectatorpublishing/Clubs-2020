@@ -39,9 +39,6 @@ const ErrorContainer = styled(motion.div)`
 export function handleLogin(userCred, history) {
   let userId = userCred.userId;
   let userEmail = userCred.userEmail;
-  console.log(userCred);
-  //login(userCred)
-  //history.push('/');
 }
 function encodeFormData(details) {
   var formBody = [];
