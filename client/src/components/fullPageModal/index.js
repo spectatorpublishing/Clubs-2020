@@ -242,6 +242,7 @@ const GrayBackground = styled(motion.div)`
   background: rgba(82, 82, 82, 0.5);
   height: 100vh;
   width: 100vw;
+  margin-top: -8rem;
   z-index: 4;
 `;
 
