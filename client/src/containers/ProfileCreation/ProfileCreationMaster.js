@@ -25,7 +25,6 @@ const ProfileCreationMaster = ({ userCred }) => {
     twitter: '',
     clubEmail: '',
     mailingListLink: '',
-    imageUrl: ''
   });
   const [clubProfileId, setClubProfileId] = useState('');
 
@@ -59,7 +58,6 @@ const ProfileCreationMaster = ({ userCred }) => {
       shortDescription: newClubProfile.shortDesc,
       // NEED TO UPDATE THIS-- MAKE THEM CHOOSE FROM PRECONFIGURED IMAGES OR THEIR OWN LOGO
       // ASK PRODUCT DESIGN???
-      imageUrl: newClubProfile.imageUrl,
       memberRange: newClubProfile.size,
       // this is not used rn, but we should update it to take advantage of their preferences
       acceptingMembers: !newClubProfile.memberPeriod.includes('Not taking members'),
@@ -110,7 +108,6 @@ const ProfileCreationMaster = ({ userCred }) => {
       twitter: profile.socialLinks.twitter,
       clubEmail: profile.socialLinks.email,
       mailingListLink: profile.mailingListLink,
-      imageUrl: profile.imageUrl
     };
   });
 
