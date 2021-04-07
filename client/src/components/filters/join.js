@@ -40,8 +40,8 @@ const Word = styled.div`
 
 `;
 
-const TextAdd = 'Joining +';
-const TextRemove = 'Joining x';
+const TextAdd = 'Joining x';
+const TextRemove = 'Joining +';
 
 const Join = ({
     items,

@@ -18,7 +18,8 @@ const Wrapper = styled.div`
 `;
 
 const PageWrapper = styled.div`
-  padding: 7rem 3rem 3rem 3rem;
+  padding: 7rem 3rem 1rem 3rem;
+  margin-bottom: auto;
 
     @media only screen and (max-width : 768px) {
         padding: 1rem 0.5rem;
@@ -60,13 +61,14 @@ const TextWrapper = styled.div`
 `;
 
 const CardsContainer = styled.div`
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-
-    @media only screen and (max-width : 768px) {
-        justify-content: center;
+    
+    @media only screen and (min-width : 768px) {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: top;
+        overflow: scroll;
+        height: 65vh;
     }
 `;
 
@@ -74,7 +76,7 @@ const CardWrapper = styled.div`
     width: 50%;
     
     @media only screen and (max-width : 768px) {
-            width: 95%;
+            width: auto;
     }
 
     @media only screen and (min-width : 1880px) {
