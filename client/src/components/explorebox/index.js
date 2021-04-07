@@ -17,12 +17,16 @@ const Box = styled.div`
     border: none;
     font-weight: 500;
 
+    @media only screen and (max-width : 768px) {
+      margin: 1rem 0.5rem 1rem 0.5rem;
+    }
+
     h2 {
       color: ${(props) => props.theme.colors.black};
       font-weight: 600;
 
       @media only screen and (max-width: 768px) {
-        padding-left: 1rem;
+        padding-left: 1.5rem;
       }
 
       @media only screen and (max-width: 320px) {
@@ -39,7 +43,7 @@ const Box = styled.div`
     }
 
     @media only screen and (max-width: 320px) {
-      padding-left: 1rem;
+      padding: 0rem 0.5rem 0rem 0.5rem;
     }
   }
 
@@ -106,7 +110,7 @@ const Tags = styled.div`
   }
 
   @media only screen and (max-width: 320px) {
-    margin: 0.2rem 1rem 0.2rem 1rem;
+    margin: 0.2rem 0.5rem 0.2rem 0.5rem;
   }
 `;
 
