@@ -101,10 +101,6 @@ const Word = styled.div`
 const ImageUploadButton = ({clubProfileId, clubProfile, setClubProfile}) => {
     const [fileURL, setFileURL] = useState(clubProfile.imageUrl);
 
-    useEffect(() => {
-        setFileURL(clubProfile.imageUrl);
-    }, [clubProfile]);
-
     //Brainstorm error handler for this
 
     const fileUploadHandler = (event) => {
@@ -118,14 +114,11 @@ const ImageUploadButton = ({clubProfileId, clubProfile, setClubProfile}) => {
             body: fd
         })
         .then(res => res.json())
-        .then(data => {
-            console.log(data);
-            setClubProfile({...clubProfile, imageUrl: data.imageUrl});
-        })
         .catch(err => {
             console.error(err);
         });
     };
+
 
     return (
         <Wrap>
