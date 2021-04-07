@@ -15,14 +15,19 @@ const Wrapper = styled.div`
   background-image: url("https://clubs-cu.s3.amazonaws.com/columbia-wave.svg");
   background-repeat: no-repeat;
   background-position: top right;
+  @media only screen and (max-width : 768px) {
+    background-size: 30rem auto; 
+    background-position: right top;
+  }
 `;
 
 const PageWrapper = styled.div`
   padding: 7rem 3rem 1rem 3rem;
-  margin-bottom: auto;
+  margin: 0rem 0rem auto 0rem;
 
     @media only screen and (max-width : 768px) {
-        padding: 1rem 0.5rem;
+        padding: 4rem 0.5rem;
+        display: inline-block;
     }
 `;
 

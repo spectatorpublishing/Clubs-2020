@@ -56,6 +56,10 @@ const Wrapper = styled.div`
   background-position: top;
   background-attachment: fixed;
   background-size: contain;  
+  @media only screen and (max-width : 768px) {
+    background-size: auto 30rem; 
+    background-position: right top;
+  }
 `;
 
 const PageWrapper = styled.main`
@@ -69,4 +73,7 @@ const Title = styled.h1`
   font-size: 2rem;
   text-align: center;
   width: 100vw;
+  @media only screen and (max-width : 768px) {
+    margin-top: 8rem;
+  }
 `;
