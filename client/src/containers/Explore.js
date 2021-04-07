@@ -7,6 +7,7 @@ import Type from '../components/filters/type';
 import AdCarrier from '../components/adCarrier';
 import SearchBar from '../components/searchBar';
 //import FilterMobile from '../components/filters/filterMobile';
+import ImageUploadButton from '../components/ImageUpload/ImageUploadButton'
 import Icon from '../components/filters/shuffle.png';
 
 const Wrapper = styled.div`

@@ -1,7 +1,11 @@
 const clubAccount = require("../models/ClubAccountModel");
-const clubProfile = require("../models/ClubProfileModel")
+const clubProfile = require("../models/ClubProfileModel");
 
 const { errHandling, emptyProfile } = require("../common")
+
+const aws = require('aws-sdk');
+const multer = require('multer');
+const multerS3 = require('multer-s3');
 
 const shuffle = (sourceArray) => {
     for (var i = 0; i < sourceArray.length - 1; i++) {
@@ -233,8 +237,6 @@ module.exports = {
 
 
     search: function(req, res) {
-        // TODO; req.query contains search query
-        // support pagination with req.query 
 
         let searchInput = req.query.search;
         let resultingData = [];
@@ -304,5 +306,11 @@ module.exports = {
         
         
         
+    },
+    /*
+    imgUpload: function(req,res) {
+      
+      clubProfile.findOneAndUpdate({ _id: req.params.id},{imageUrl: req.file.location}, {useFindAndModify: false}).then(clubprofile => res.json(clubprofile)).catch(err => errHandling(err, res))
     }
+    */ 
 }
