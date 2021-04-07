@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { Highlights, Socials } from './helpers';
 import TextInput from '../../../components/textInput/index';
 import TomatoButton from '../../../components/tomatoButton/index';
+import SetUpYourClubProfile from '../ProfileCreationTitle';
 
 const ProfileCreation2 = ({ clubProfile, setClubProfile, history, userCred, submitProfile }) => {
   const highlight1 = useRef(null);
@@ -65,6 +66,7 @@ const ProfileCreation2 = ({ clubProfile, setClubProfile, history, userCred, subm
 
   return (
     <ProfileContainer>
+      <SetUpYourClubProfile/>
       <section>
         <PageDesc>Get-to-Know-You's: Why Students Should Join</PageDesc>
         <TextInputContainer>

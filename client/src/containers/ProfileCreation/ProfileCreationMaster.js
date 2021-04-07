@@ -138,7 +138,6 @@ const ProfileCreationMaster = ({ userCred }) => {
   return (
     <>
       <PageContainer>
-        <SetUpClubProfile />
         <Router>
           <Switch>
           <Route
@@ -178,28 +177,10 @@ const ProfileCreationMaster = ({ userCred }) => {
 
 export default ProfileCreationMaster;
 
-const SetUpClubProfile = () => {
-  return (
-    <section>
-      <ClubProfileTitle>Set Up Your Club Profile</ClubProfileTitle>
-      <Subtext>Complete your profile for maximum outreach</Subtext>
-    </section>
-  );
-};
-const ClubProfileTitle = styled.h1`
-  font-size: 2.25rem;
-  font-weight: 700;
-  margin-bottom: 0;
-  padding-top: 5rem;
-  @media only screen and (max-width: 600px) {
-    font-size: 1.5rem !important;
-  }
-`;
-
 const PageContainer = styled.div`
   display: grid;
   grid-template-rows: auto auto auto;
-  padding: 8rem 3rem 0 4rem;
+  padding: 6rem 3rem 0 4rem;
   @media only screen and (max-width: 768px) {
     padding: 0 1.375rem !important;
   }
@@ -210,15 +191,6 @@ export const PageDesc = styled.h2`
   padding-left: 0rem;
   @media only screen and (max-width: 600px) {
     font-size: 1rem !important;
-  }
-`;
-
-const Subtext = styled.h3`
-  color: ${(props) => props.theme.colors.gray};
-  margin-top: 0.5rem;
-  font-weight: 500;
-  @media only screen and (max-width: 600px) {
-    font-size: 0.875rem !important;
   }
 `;
 
