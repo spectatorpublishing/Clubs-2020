@@ -6,6 +6,7 @@ import { withRouter } from 'react-router-dom';
 import { ErrorMessage, PageDesc } from '../ProfileCreationMaster';
 import TomatoButton from '../../../components/tomatoButton/index';
 import ImageUploadButton from '../../../components/ImageUpload/ImageUploadButton';
+import SetUpYourClubProfile from '../ProfileCreationTitle';
 import {
   ClubSize,
   NewMembers,
@@ -82,6 +83,7 @@ const ProfileCreation1 = ({ clubProfile, setClubProfile, history, saveHandler, c
 
   return (
     <>
+    <SetUpYourClubProfile/>
       <PageDesc>Opening Statement: Provide Basic Info</PageDesc>
       <StyledBody>
         <Column left>

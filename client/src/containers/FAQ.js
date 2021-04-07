@@ -30,11 +30,11 @@ export const FAQ = () => {
           title='How do I use LionClubs? (Clubs)'
           text='Run an official or unrecognized club? Both are welcome to create profiles on our platform and be represented here.'
           buttonText='Register Club'
-          buttonLink='/profile-creation'
+          buttonLink='/signup'
         />
         <FaqBox
           title='I have a specific inquiry.'
-          text='Lost access to club profile? Club profile hacked or no longer secure? If you have a sensitive or pressinng request, please let us know.'
+          text='Lost access to club profile? Club profile hacked or no longer secure? If you have a sensitive or pressing request, please let us know.'
           buttonText='Contact Us'
           buttonLink='/'
         />
@@ -66,10 +66,11 @@ const PageWrapper = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-bottom: 2rem;
 `;
 
 const Title = styled.h1`
-  margin-top: 14rem;
+  margin-top: 12rem;
   font-size: 2rem;
   text-align: center;
   width: 100vw;

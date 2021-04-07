@@ -80,7 +80,7 @@ const CardsContainer = styled.div`
 const CardWrapper = styled.div`
     width: 50%;
     
-    @media only screen and (max-width : 768px) {
+    @media only screen and (max-width : 767px) {
             width: auto;
     }
 

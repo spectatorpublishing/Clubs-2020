@@ -660,10 +660,16 @@ export const SignUpBox = ({ detailLink, id, userCred , isProfileComplete = true}
 };
 
 const Wrapper = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  padding: 1rem;
+  margin: 10rem 0rem auto 0rem;
+
+  @media only screen and (max-width : 768px) {
+    margin: 8rem 0rem auto 0rem;
+  }
+
+  @media only screen and (max-width : 375px) {
+    margin: 6rem 0rem auto 0rem;
+  }
 
   a{
     text-decoration: none;
@@ -671,7 +677,6 @@ const Wrapper = styled.div`
 `;
 
 const Container = styled(motion.div)`
-  width: 34.7rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -688,7 +693,13 @@ const Title = styled.h1`
   font-size: 2.25rem;
   text-align: center;
   margin: 0;
-  color: ${(props) => props.theme.colors.black}; ;
+  color: ${(props) => props.theme.colors.black};
+  @media only screen and (max-width : 768px) {
+    font-size: 2rem;
+  }
+  @media only screen and (max-width : 375px) {
+    font-size: 1.5rem;
+  }
 `;
 
 const FlexContainer = styled.div`
@@ -737,19 +748,20 @@ const InputSection = styled.section`
 const Confirmation = styled.div`
   display: ${(props) => props.hidden};
   background-color: #ffffff;
-  width: 24.4rem;
+  width: 20rem;
   border-radius: 0.4rem;
   box-shadow: 0.125rem 0.625rem 1.875rem rgba(0, 0, 0, 0.1);
-  padding: 8%;
+  padding: 4rem;
   font-size: 1rem;
   line-height: 1.2rem;
   color: ${(props) => props.theme.colors.checkboxGray};
-  margin-left: auto;
-  margin-right: auto;
+  margin: 1rem auto 0rem auto;
   text-align: center;
   white-space: pre-wrap;
-  @media only screen and (max-device-width: 30rem) {
+  @media only screen and (max-width: 425px) {
     width: 75%;
+    padding: 2rem;
+    word-break: break-word;
   }
 `;
 
@@ -816,6 +828,10 @@ const Input = styled.input`
   font-size: 1.15em;
   margin: 0.75rem 0 0;
   padding-bottom: 0.25rem;
+  
+  @media only screen and (max-width : 375px) {
+    font-size: 1rem;
+  }
 `;
 
 const InputDesc = styled.div`

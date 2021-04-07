@@ -75,11 +75,6 @@ export const Navbar = ({loggedIn = null, authLevel = "user", profileId}) => {
                 <NavLink
                   style={{ textDecoration: 'none' }}
                   to='/signup'
-                  isActive={(match) => {
-                    if (match) {
-                      setCurrentPath('/signup');
-                    }
-                  }}
                 >
                   <FilledButton text='Register Club' />
                 </NavLink>
