@@ -40,6 +40,15 @@ const Loading = styled.div`
     transform: translate(-50%, -50%);
 `;
 
+const PageButton = styled.button`
+    border-radius: 0.4375rem;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    color: ${(props) => props.theme.colors.red};
+    background-color: transparent;
+    border: 1px solid ${(props) => props.theme.colors.red};
+`;
+
 
 const page2columns = {
     pending: ["Club name:", "Email:", "Date applied:"],
@@ -102,8 +111,8 @@ export const Portal = () => {
     return (
         <PageWrapper>
             <HeadingDiv>
-                {page === 'pending' ? <h1>LionClubs Admin Portal</h1> : <p onClick={() => switchPage('pending')}>Back</p>}
-                <p>Log out</p>
+                {page === 'pending' ? <h1>LionClubs Admin Portal</h1> : <PageButton onClick={() => switchPage('pending')}>Back</PageButton>}
+                <PageButton>Log out</PageButton>
             </HeadingDiv>
             <ActiveSection page={page}>
                 <h3>{page2heading[page]}</h3>
@@ -113,10 +122,10 @@ export const Portal = () => {
             { page === 'pending' ? (
                 <>
                     <ApprovedSection>
-                        <h3 onClick={() => switchPage('approved')}>List of Approved Clubs</h3>
+                        <PageButton onClick={() => switchPage('approved')}>List of Approved Clubs</PageButton>
                     </ApprovedSection>
                     <TrashSection>
-                        <h3 onClick={() => switchPage('trash')}>Trash</h3>
+                        <PageButton onClick={() => switchPage('trash')}>Trash</PageButton>
                     </TrashSection>
                 </>
             ) : null
