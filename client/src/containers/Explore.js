@@ -88,17 +88,6 @@ const CardWrapper = styled.div`
         width: 100%;
     }    
     
-    @media only screen and (max-width : 767px) {
-            width: auto;
-    }
-
-    @media only screen and (min-width : 1880px) {
-        width: 33%;
-    }
-
-    @media only screen and (min-width : 2800px) {
-        width: 25%;
-    }
 `;
 
 const FiltersBox = styled.div`
