@@ -68,18 +68,17 @@ const TextWrapper = styled.div`
 const CardsContainer = styled.div`
     
     @media only screen and (min-width : 768px) {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        align-items: flex-start;
-        align-content: flex-start;
-        overflow: scroll;
-        height: 65vh;
+        column-count: 2;
+        column-gap: 0;
     }
 `;
 
 const CardWrapper = styled.div`
-    width: 50%;
+    @media only screen and (min-width : 768px) {
+        display: inline-block;
+        margin: 0;
+        width: 100%;
+    }    
     
     @media only screen and (max-width : 767px) {
             width: auto;
