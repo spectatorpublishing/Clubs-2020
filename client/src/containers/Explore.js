@@ -73,6 +73,14 @@ const CardsContainer = styled.div`
     }
 `;
 
+const CardsScroll = styled.div`
+    
+    @media only screen and (min-width : 768px) {
+        overflow: scroll;
+        height: 65vh;
+    }
+`;
+
 const CardWrapper = styled.div`
     @media only screen and (min-width : 768px) {
         display: inline-block;
@@ -375,22 +383,24 @@ const Explore = () => {
                             setSelected={updateFilters}
                         /></MobileFilter>
                 </FiltersBelow>
-                <CardsContainer>
-                    {(clubProfiles.length === 0) ? (<h1>{loadText}</h1>) : (clubProfiles.map(profile => (
-                        <CardWrapper key={profile._id}>
-                            <ExploreBox 
-                                name = {profile.name}
-                                description = {profile.shortDescription}
-                                imageURL = {profile.imageUrl}
-                                tags = {profile.tags}
-                                clubSize = {profile.memberRange}
-                                acceptingMembers = {profile.acceptingMembers}
-                                applicationRequired = {profile.applicationRequired}
-                                cardLink={`/club/${profile._id}`}
-                            />
-                        </CardWrapper>
-                    )))} 
-                </CardsContainer>  
+                <CardsScroll>
+                    <CardsContainer>
+                        {(clubProfiles.length === 0) ? (<h1>{loadText}</h1>) : (clubProfiles.map(profile => (
+                            <CardWrapper key={profile._id}>
+                                <ExploreBox 
+                                    name = {profile.name}
+                                    description = {profile.shortDescription}
+                                    imageURL = {profile.imageUrl}
+                                    tags = {profile.tags}
+                                    clubSize = {profile.memberRange}
+                                    acceptingMembers = {profile.acceptingMembers}
+                                    applicationRequired = {profile.applicationRequired}
+                                    cardLink={`/club/${profile._id}`}
+                                />
+                            </CardWrapper>
+                        )))} 
+                    </CardsContainer>  
+                </CardsScroll>
         </div>
         );
 
