@@ -185,7 +185,7 @@ const Type = ({
     width: 7.4rem;
     flex-direction: column;
     border-radius: 0.8125rem;
-    justify-content: center;
+    justify-content: top;
     overflow: hidden;
     padding: 0;
     margin: 0 0 0.8rem 0;

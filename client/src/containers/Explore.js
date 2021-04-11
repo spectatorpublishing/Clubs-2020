@@ -71,7 +71,8 @@ const CardsContainer = styled.div`
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-        align-items: top;
+        align-items: flex-start;
+        align-content: flex-start;
         overflow: scroll;
         height: 65vh;
     }
@@ -127,7 +128,8 @@ const FiltersBelow = styled.div`
     margin: 1rem 2rem 1rem;
     
     @media only screen and (max-width : 430px) {
-        flex-direction: column;
+        flex-flow: row wrap;
+        justify-content: center;
     }
 
     @media only screen and (min-width : 1024px) {
@@ -187,6 +189,11 @@ const ShuffleButton = styled.button`
     @media only screen and (max-width : 768px) {
             width: 39px;
         }
+    
+    @media only screen and (max-width : 430px) {
+        width: 39px;
+        margin-left: 20px;
+    }
 `;
 
 const ShuffleWord = styled.div`

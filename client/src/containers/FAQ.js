@@ -36,7 +36,7 @@ export const FAQ = () => {
           title='I have a specific inquiry.'
           text='Lost access to club profile? Club profile hacked or no longer secure? If you have a sensitive or pressing request, please let us know.'
           buttonText='Contact Us'
-          buttonLink='/'
+          buttonLink='mailto:online@columbiaspectator.com'
         />
         <FaqBox
           title='How can I provide feedback?'
