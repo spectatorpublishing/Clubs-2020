@@ -24,12 +24,12 @@ const ActiveSection = styled.div`
 `;
 const ApprovedSection = styled.div`
     margin: 3% 0;
-    text-decoration: underline;
+    text-decoration: none;
     cursor: pointer;
 `;
 const TrashSection = styled.div`
     margin: 3% 0;
-    text-decoration: underline;
+    text-decoration: none;
     cursor: pointer;
 `;
 
@@ -38,6 +38,17 @@ const Loading = styled.div`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+`;
+
+const PageButton = styled.button`
+    border-radius: 0.4375rem;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    margin: auto 0rem auto 0rem;
+    color: ${(props) => props.theme.colors.red};
+    background-color: transparent;
+    border: 1px solid ${(props) => props.theme.colors.red};
 `;
 
 
@@ -102,21 +113,21 @@ export const Portal = () => {
     return (
         <PageWrapper>
             <HeadingDiv>
-                {page === 'pending' ? <h1>LionClubs Admin Portal</h1> : <p onClick={() => switchPage('pending')}>Back</p>}
-                <p>Log out</p>
+                {page === 'pending' ? <h1>LionClubs Admin Portal</h1> : <PageButton onClick={() => switchPage('pending')}>Back</PageButton>}
+                <PageButton>Log out</PageButton>
             </HeadingDiv>
             <ActiveSection page={page}>
-                <h3>{page2heading[page]}</h3>
+                <h2>{page2heading[page]}</h2>
                 <ListOfClubs columnTitles={page2columns[page]} clubs={data} actions={page2actions[page]} page={page} />
             </ActiveSection>
 
             { page === 'pending' ? (
                 <>
                     <ApprovedSection>
-                        <h3 onClick={() => switchPage('approved')}>List of Approved Clubs</h3>
+                        <PageButton onClick={() => switchPage('approved')}>List of Approved Clubs</PageButton>
                     </ApprovedSection>
                     <TrashSection>
-                        <h3 onClick={() => switchPage('trash')}>Trash</h3>
+                        <PageButton onClick={() => switchPage('trash')}>Trash</PageButton>
                     </TrashSection>
                 </>
             ) : null
