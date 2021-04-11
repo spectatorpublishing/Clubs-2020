@@ -24,12 +24,12 @@ const ActiveSection = styled.div`
 `;
 const ApprovedSection = styled.div`
     margin: 3% 0;
-    text-decoration: underline;
+    text-decoration: none;
     cursor: pointer;
 `;
 const TrashSection = styled.div`
     margin: 3% 0;
-    text-decoration: underline;
+    text-decoration: none;
     cursor: pointer;
 `;
 
@@ -43,7 +43,9 @@ const Loading = styled.div`
 const PageButton = styled.button`
     border-radius: 0.4375rem;
     font-weight: 600;
+    font-size: 1rem;
     padding: 0.5rem 1rem;
+    margin: auto 0rem auto 0rem;
     color: ${(props) => props.theme.colors.red};
     background-color: transparent;
     border: 1px solid ${(props) => props.theme.colors.red};
@@ -115,7 +117,7 @@ export const Portal = () => {
                 <PageButton>Log out</PageButton>
             </HeadingDiv>
             <ActiveSection page={page}>
-                <h3>{page2heading[page]}</h3>
+                <h2>{page2heading[page]}</h2>
                 <ListOfClubs columnTitles={page2columns[page]} clubs={data} actions={page2actions[page]} page={page} />
             </ActiveSection>
 

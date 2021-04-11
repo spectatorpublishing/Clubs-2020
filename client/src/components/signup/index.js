@@ -311,8 +311,8 @@ export const SignUpBox = ({ detailLink, id, userCred , isProfileComplete = true}
       descLinkText: 'Login Here',
       detail:
         'Your request is being processed. You will receive an email with further instructions in 24 hours. If you have any questions, please contact: ',
-      detailLink: 'mailto:publisher@columbiaspectator.com',
-      detailLinkText: 'publisher@columbiaspectator.com',
+      detailLink: 'mailto:online@columbiaspectator.com',
+      detailLinkText: 'online@columbiaspectator.com',
       detailTwo: '.',
       signUp: 'none',
       confirmation: true,
@@ -345,8 +345,8 @@ export const SignUpBox = ({ detailLink, id, userCred , isProfileComplete = true}
       descLinkText: 'Login Here',
       detail:
         'Password reset instructions have been sent to specified email. If you have any questions, please contact\n',
-      detailLink: 'mailto:publisher@columbiaspectator.com',
-      detailLinkText: 'publisher@columbiaspectator.com',
+      detailLink: 'mailto:online@columbiaspectator.com',
+      detailLinkText: 'online@columbiaspectator.com',
       detailTwo: '.\n\nSomething went wrong?\n',
       detailLinkTwo: '/findpassword',
       detailLinkTwoText: 'Resend Email',

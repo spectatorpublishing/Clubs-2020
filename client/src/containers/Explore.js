@@ -71,7 +71,8 @@ const CardsContainer = styled.div`
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
-        align-items: top;
+        align-items: flex-start;
+        align-content: flex-start;
         overflow: scroll;
         height: 65vh;
     }
