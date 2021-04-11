@@ -126,13 +126,13 @@ const ClubProfileDisplay = ({ isLoggedin, profileId}) => {
                                 <div><Button href={club.mailingList}><p>Join our mailing list</p></Button></div> : null}
                                 {(club.applicationLink) ?
                                 <div><Button className= "second" href={club.applicationLink}><p>Apply</p></Button></div> : null}
-                                <AdContainer>
+                                {/* <AdContainer>
                                 <AdCarrier
                                     width={300} 
                                     height={250}
                                     path="cds_horizontal_box_mobile"
                                 />
-                                </AdContainer>
+                                </AdContainer> */}
                                 <MainContent 
                                     description= {club.longDescription}
                                     highlights= {club.highlights}
@@ -194,13 +194,13 @@ const ClubProfileDisplay = ({ isLoggedin, profileId}) => {
                                         <div><Button href={club.mailingList}><p>Join our mailing list</p></Button></div> : null}
                                         {(club.applicationLink) ?
                                         <div><Button className= "second" href={club.applicationLink}><p>Apply</p></Button></div> : null}
-                                        <AdContainer>
+                                        {/* <AdContainer>
                                             <AdCarrier
                                                 width={300} 
                                                 height={250}
                                                 path="cds_horizontal_box_mobile"
                                             />
-                                        </AdContainer>
+                                        </AdContainer> */}
                                     </Column>
                                 </Row>
                                 <MainContent 
@@ -272,13 +272,13 @@ const ClubProfileDisplay = ({ isLoggedin, profileId}) => {
                                 <div><Button href={club.mailingList}><p>Join our mailing list</p></Button></div> : null}
                                 {(club.applicationLink) ?
                                 <div><Button className= "second" href={club.applicationLink}><p>Apply</p></Button></div> : null}
-                                <AdContainer>
+                                {/* <AdContainer>
                                     <AdCarrier
                                         width={300} 
                                         height={250}
                                         path="cds_horizontal_box_mobile"
                                     />
-                                </AdContainer>
+                                </AdContainer> */}
                             </Cards>
                         </PageWrapper>
                     </Wrapper>
