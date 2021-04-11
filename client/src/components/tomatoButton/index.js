@@ -68,7 +68,7 @@ const StyledButton = styled(motion.button)`
 
   /* // font-family is necessary here */
   font-family: 'Manrope', 'Roboto', 'Arial', 'Helvetica';  
-  font-size: 1rem;
+  font-size: 1.25rem;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;

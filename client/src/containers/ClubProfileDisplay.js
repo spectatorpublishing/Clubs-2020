@@ -301,7 +301,7 @@ const Wrapper = styled.main`
 const PageWrapper = styled.div`
     display: flex;
     flex-direction: row;
-    padding: 3rem 5rem 0rem 5rem;
+    padding: 3rem 4rem 3rem 4rem;
 
     h2{
         font-size: 1.25rem;
