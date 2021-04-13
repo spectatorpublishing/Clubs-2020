@@ -39,6 +39,10 @@ const StyledLink = styled.a`
     font-weight: 500;
     text-decoration: none;
     font-size: 1.125rem;
+
+    :hover{
+      color: ${(props) => props.theme.colors.gray};
+    }
   }
   a:visited {
     color: ${(props) => props.theme.colors.checkboxGray};
@@ -71,8 +75,8 @@ const SocialLinkElement = ({ linkType, link }) => {
             <FontAwesomeIcon icon={[icon.type, icon.img]}></FontAwesomeIcon>
           </Icon>
           <StyledLink>
-            <a href="mailto:" {...link}>
-              {link}
+            <a href={"mailto:" + link}>
+              {linkType}
             </a>
           </StyledLink>
         </SocialLinkStyledElement>
