@@ -42,7 +42,7 @@ export const FAQ = () => {
           title='How can I provide feedback?'
           text='Designed for club seekers and club leaders, LionClubs values your feedback! To report a bug, ask a question, or suggest a modification, please fill out our feedback form.'
           buttonText='Feedback Form'
-          buttonLink='/'
+          buttonLink='https://forms.gle/8rx6FYVf98K2N5Kd6'
         />
       </PageWrapper>
     </Wrapper>
