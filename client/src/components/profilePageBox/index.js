@@ -6,6 +6,7 @@ import {
   faEdit,
   faUser,
   faCheckCircle,
+  faTimesCircle
 } from "@fortawesome/free-solid-svg-icons";
 
 
@@ -64,7 +65,7 @@ export const ProfilePageBox = ({
         <FontAwesomeIcon icon={faUser} /> <Label>Club Size: {memberRange}</Label>
       </Info>
       <Info>
-        <FontAwesomeIcon icon={faCheckCircle} />{' '}
+        <FontAwesomeIcon icon={(acceptingMembers) ? faCheckCircle : faTimesCircle} />{' '}
         <Label><AcceptingMembers
           isAcceptingMembers={acceptingMembers}
         ></AcceptingMembers>

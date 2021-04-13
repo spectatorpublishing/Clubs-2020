@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled from 'styled-components/macro';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUser } from '@fortawesome/free-solid-svg-icons';
 import { faTimesCircle } from '@fortawesome/free-regular-svg-icons';
@@ -51,7 +51,7 @@ const Box = styled.div`
     font-size: 1.125rem;
     font-weight: 600;
     color: ${(props) => props.theme.colors.gray};
-    margin-right: 0rem;
+    padding-right: 0.5rem;
     @media only screen and (max-width: 768px) {
       margin-left: 1.5rem;
     }
@@ -81,21 +81,55 @@ const Row = styled.div`
   }
 `;
 
+const SimpleRow = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
+const ImgDesktop = styled.div`
+  padding-right: 0.5rem;
+  margin: 1rem 0rem 0.5rem auto;
+
+  @media only screen and (max-width: 768px) {
+    display: none;
+  }
+`;
+
+const ImgMobile = styled.div`
+
+  display: none;
+  margin-left: auto;
+  margin: auto 0rem auto auto;
+
+  @media only screen and (max-width: 768px) {
+    display: block;
+  }
+`;
+
 const Icon = styled.div`
-  margin: 1rem 0.5rem 0.5rem auto;
+  margin: 0.5rem auto 0rem 0.5rem;
   height: 6rem;
   width: 6rem;
 
   img {
-    object-fit: contain;
+    object-fit: cover;
     height: 6rem;
     width: 6rem;
-    padding-bottom: 0.5rem;
+    margin-bottom: 0rem;
+    -webkit-border-radius: 3rem;
+    display: block;
   }
 
   @media only screen and (max-width: 768px) {
     margin-right: 1rem;
     height: 5rem;
+    width: 5rem;
+
+    img {
+      height: 5rem;
+      width: 5rem;
+      -webkit-border-radius: 5rem;
+    }
   }
 `;
 
@@ -158,11 +192,19 @@ export const ExploreBox = ({name, description, clubSize, tags, imageURL, accepti
             <a href={cardLink}>
                 <Row>
                     <div>
+                      <SimpleRow>
                         <h2>{name}</h2>
+                        <ImgMobile>
+                          {((imageURL === "") || (imageURL === " ")) ? null :
+                          <Icon><img alt='club logo' src={imageURL}/></Icon>}
+                        </ImgMobile>
+                      </SimpleRow>
                         <p>{description}</p>
                     </div>
-                    {((imageURL === "") || (imageURL === " ")) ? null :
-                    <Icon><img alt='club logo' src={imageURL}/></Icon>}
+                    <ImgDesktop>
+                      {((imageURL === "") || (imageURL === " ")) ? null :
+                      <Icon><img alt='club logo' src={imageURL}/></Icon>}
+                    </ImgDesktop>
                 </Row>
                 <Tags>{tags.map((tag, key) => <SearchTag key={key} text={tag}/>)}</Tags>
                 <hr/>
