@@ -122,8 +122,8 @@ const ClubProfileDisplay = ({ isLoggedin, profileId}) => {
                                     },
                                     ]}
                                 />}
-                                {(club.mailingList) ?
-                                <div><Button href={club.mailingList}><p>Join our mailing list</p></Button></div> : null}
+                                {(club.mailingListLink !== "" && club.mailingListLink !== " ") ?
+                                <div><Button href={club.mailingListLink}><p>Join our mailing list</p></Button></div> : null}
                                 {(club.applicationLink) ?
                                 <div><Button className= "second" href={club.applicationLink}><p>Apply</p></Button></div> : null}
                                 {/* <AdContainer>
@@ -190,8 +190,8 @@ const ClubProfileDisplay = ({ isLoggedin, profileId}) => {
                                             },
                                             ]}
                                         />}
-                                        {(club.mailingList) ?
-                                        <div><Button href={club.mailingList}><p>Join our mailing list</p></Button></div> : null}
+                                        {(club.mailingListLink !== "" && club.mailingListLink !== " ") ?
+                                        <div><Button href={club.mailingListLink}><p>Join our mailing list</p></Button></div> : null}
                                         {(club.applicationLink) ?
                                         <div><Button className= "second" href={club.applicationLink}><p>Apply</p></Button></div> : null}
                                         {/* <AdContainer>
@@ -268,8 +268,8 @@ const ClubProfileDisplay = ({ isLoggedin, profileId}) => {
                                     },
                                     ]}
                                 />}
-                                {(club.mailingList) ?
-                                <div><Button href={club.mailingList}><p>Join our mailing list</p></Button></div> : null}
+                                {(club.mailingListLink !== "" && club.mailingListLink !== " ") ?
+                                <div><Button href={club.mailingListLink}><p>Join our mailing list</p></Button></div> : null}
                                 {(club.applicationLink) ?
                                 <div><Button className= "second" href={club.applicationLink}><p>Apply</p></Button></div> : null}
                                 {/* <AdContainer>
