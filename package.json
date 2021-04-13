@@ -1,22 +1,25 @@
 {
-    "name": "lionclubs",
-    "version": "1.0.0",
-    "description": "Find and promote clubs at Columbia",
-    "main": "server/server.js",
-    "scripts": {
-      "start": "node server/server.js",
-      "build": "cd server && npm i",
-      "test": "echo \"Error: no test specified\" && exit 1",
-      "deploy": "git push heroku master"
-    },
-    "repository": {
-      "type": "git",
-      "url": "git+https://github.com/spectatorpublishing/Clubs-2020.git"
-    },
-    "author": "",
-    "license": "ISC",
-    "bugs": {
-      "url": "https://github.com/spectatorpublishing/Clubs-2020/issues"
-    },
-    "homepage": "https://github.com/spectatorpublishing/Clubs-2020#readme"
+  "name": "lionclubs",
+  "version": "1.0.0",
+  "description": "Find and promote clubs at Columbia",
+  "main": "server/server.js",
+  "scripts": {
+    "start": "node server/server.js",
+    "build": "cd server && npm i",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "git push heroku master"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spectatorpublishing/Clubs-2020.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/spectatorpublishing/Clubs-2020/issues"
+  },
+  "homepage": "https://github.com/spectatorpublishing/Clubs-2020#readme",
+  "dependencies": {
+    "heroku": "^7.52.0"
   }
+}
