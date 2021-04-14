@@ -6,6 +6,10 @@ import { NavLink } from 'react-router-dom';
 import { useViewport } from '../customHooks';
 import Manage from '../manageAccount/index';
 import Logout from '../logout/index';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faPaw
+} from "@fortawesome/free-solid-svg-icons";
 
 export const Navbar = ({loggedIn = null, authLevel = "user", profileId}) => {
   const [showLinks, setShowLinks] = useState(false);
@@ -36,7 +40,7 @@ export const Navbar = ({loggedIn = null, authLevel = "user", profileId}) => {
               setCurrentPath('/');
             }}
           >
-            <a href="/">Lion<b>Clubs</b></a>
+            <a href="/">Lion<b>Clubs <FontAwesomeIcon icon={faPaw}/></b></a>
           </Logo>
           {currentPath === '/' && (
             <NavToggle
@@ -160,7 +164,12 @@ const NavHeader = styled.div`
 const Logo = styled.div`
   height: 100%;
   font-size: 2rem;
-  font-weight: 400;
+  font-weight: 500;
+
+  svg {
+    color: ${(props) => props.theme.colors.red};
+    transform: rotate(15deg);
+  }
 
   b {
     font-weight: 900;
