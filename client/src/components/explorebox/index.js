@@ -24,9 +24,11 @@ const Box = styled.div`
     h2 {
       color: ${(props) => props.theme.colors.black};
       font-weight: 600;
+      margin-right: auto;
 
       @media only screen and (max-width: 768px) {
         padding-left: 1.5rem;
+        padding-top: 0.5rem;
       }
 
       @media only screen and (max-width: 320px) {
@@ -52,12 +54,15 @@ const Box = styled.div`
     font-weight: 600;
     color: ${(props) => props.theme.colors.gray};
     padding-right: 0.5rem;
+    margin-top: 0rem;
     @media only screen and (max-width: 768px) {
       margin-left: 1.5rem;
+      margin-top: 0.5rem;
     }
 
     @media only screen and (max-width: 320px) {
       margin-left: 1rem;
+      margin-top: 0.5rem;
     }
   }
 
@@ -88,7 +93,7 @@ const SimpleRow = styled.div`
 
 const ImgDesktop = styled.div`
   padding-right: 0.5rem;
-  margin: 1rem 0rem 0.5rem auto;
+  margin: 0.5rem 0rem 0.5rem auto;
 
   @media only screen and (max-width: 768px) {
     display: none;
@@ -96,25 +101,23 @@ const ImgDesktop = styled.div`
 `;
 
 const ImgMobile = styled.div`
-
   display: none;
-  margin-left: auto;
-  margin: auto 0rem auto auto;
 
   @media only screen and (max-width: 768px) {
     display: block;
+    margin: auto 0rem auto auto;
   }
 `;
 
 const Icon = styled.div`
   margin: 0.5rem auto 0rem 0.5rem;
-  height: 6rem;
-  width: 6rem;
+  height: 5rem;
+  width: 5rem;
 
   img {
     object-fit: cover;
-    height: 6rem;
-    width: 6rem;
+    height: 5rem;
+    width: 5rem;
     margin-bottom: 0rem;
     -webkit-border-radius: 3rem;
     display: block;
@@ -122,14 +125,6 @@ const Icon = styled.div`
 
   @media only screen and (max-width: 768px) {
     margin-right: 1rem;
-    height: 5rem;
-    width: 5rem;
-
-    img {
-      height: 5rem;
-      width: 5rem;
-      -webkit-border-radius: 5rem;
-    }
   }
 `;
 

@@ -22,11 +22,11 @@ const Wrapper = styled.div`
 `;
 
 const PageWrapper = styled.div`
-  padding: 7rem 3rem 1rem 3rem;
+  padding: 3rem 3rem 0rem 3rem;
   margin: 0rem 0rem auto 0rem;
 
     @media only screen and (max-width : 768px) {
-        padding: 4rem 0.5rem;
+        padding: 4.5rem 0.5rem;
         display: inline-block;
     }
 `;
@@ -77,7 +77,7 @@ const CardsScroll = styled.div`
     
     @media only screen and (min-width : 768px) {
         overflow: scroll;
-        height: 65vh;
+        height: 69vh;
     }
 `;
 
@@ -93,7 +93,7 @@ const CardWrapper = styled.div`
 const FiltersBox = styled.div`
     display: flex;
     flex-direction: row;
-    margin: 0 1rem 2rem 1rem;
+    margin: 0 1rem 1rem 1rem;
 
     @media only screen and (max-width : 768px) {
         margin: .5rem 1.5rem;
@@ -398,13 +398,13 @@ const Explore = () => {
             <Wrapper>
             <main>
                 <PageWrapper>
-                    <AdContainer>
+                    {/* <AdContainer>
                     <AdCarrier
                         width={320} 
                         height={50}
                         path="cds_leaderboard_mobile"
                     />
-                    </AdContainer>
+                    </AdContainer> */}
                     {ExploreContents}
                 </PageWrapper>
             </main>
@@ -415,13 +415,13 @@ const Explore = () => {
             <Wrapper>
             <main>
                 <PageWrapper>
-                    <AdContainer>
+                    {/* <AdContainer>
                     <AdCarrier
                         width={728} 
                         height={90}
                         path="cds_leaderboard"
                     />
-                    </AdContainer>
+                    </AdContainer> */}
                     {ExploreContents}
                 </PageWrapper>
             </main>
