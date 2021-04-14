@@ -307,7 +307,7 @@ const Wrapper = styled.main`
     background-repeat: no-repeat;
     background-position: top right;
     background-size: contain;  
-    padding-top: 5rem;
+    padding-top: 4rem;
 `;
 
 const PageWrapper = styled.div`

@@ -34,6 +34,10 @@ const Box = styled.div`
 const Title = styled.h2`
   margin-bottom: 0.5rem;
   align-self: flex-start;
+
+  @media screen and (max-width: 767px) {
+    font-size: 1.3rem;
+  }
 `;
 
 const BoxWrapper = styled.div`

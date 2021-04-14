@@ -53,7 +53,7 @@ const Wrapper = styled.div`
   background-color: #f4f6f8;
   background-image: url(https://clubs-cu.s3.amazonaws.com/FAQ+Waves.svg);
   background-repeat: no-repeat;
-  background-position: top;
+  background-position: left;
   background-attachment: fixed;
   background-size: cover; 
   @media only screen and (max-width : 768px) {
@@ -75,6 +75,7 @@ const Title = styled.h1`
   text-align: center;
   width: 100vw;
   @media only screen and (max-width : 768px) {
-    margin-top: 8rem;
+    margin-top: 7rem;
+    font-size: 1.6rem;
   }
 `;
