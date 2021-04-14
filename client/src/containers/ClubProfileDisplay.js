@@ -122,9 +122,9 @@ const ClubProfileDisplay = ({ isLoggedin, profileId}) => {
                                     },
                                     ]}
                                 />}
-                                {(club.mailingListLink !== "" && club.mailingListLink !== " ") ?
+                                {(club.mailingListLink !== "" && club.mailingListLink !== " " && club.mailingListLink[0] === "h") ?
                                 <div><Button href={club.mailingListLink}><p>Join our mailing list</p></Button></div> : null}
-                                {(club.applicationLink) ?
+                                {(club.applicationLink !== "" && club.applicationLink !== " " && club.applicationLink[0] === "h") ?
                                 <div><Button className= "second" href={club.applicationLink}><p>Apply</p></Button></div> : null}
                                 {/* <AdContainer>
                                 <AdCarrier
@@ -190,9 +190,9 @@ const ClubProfileDisplay = ({ isLoggedin, profileId}) => {
                                             },
                                             ]}
                                         />}
-                                        {(club.mailingListLink !== "" && club.mailingListLink !== " ") ?
+                                        {(club.mailingListLink !== "" && club.mailingListLink !== " " && club.mailingListLink[0] === "h") ?
                                         <div><Button href={club.mailingListLink}><p>Join our mailing list</p></Button></div> : null}
-                                        {(club.applicationLink) ?
+                                        {(club.applicationLink !== "" && club.applicationLink !== " " && club.applicationLink[0] === "h") ?
                                         <div><Button className= "second" href={club.applicationLink}><p>Apply</p></Button></div> : null}
                                         {/* <AdContainer>
                                             <AdCarrier
@@ -268,9 +268,9 @@ const ClubProfileDisplay = ({ isLoggedin, profileId}) => {
                                     },
                                     ]}
                                 />}
-                                {(club.mailingListLink !== "" && club.mailingListLink !== " ") ?
+                                {(club.mailingListLink !== "" && club.mailingListLink !== " " && club.mailingListLink[0] === "h") ?
                                 <div><Button href={club.mailingListLink}><p>Join our mailing list</p></Button></div> : null}
-                                {(club.applicationLink) ?
+                                {(club.applicationLink !== "" && club.applicationLink !== " " && club.applicationLink[0] === "h") ?
                                 <div><Button className= "second" href={club.applicationLink}><p>Apply</p></Button></div> : null}
                                 {/* <AdContainer>
                                     <AdCarrier

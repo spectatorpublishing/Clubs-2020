@@ -36,7 +36,7 @@ export const Navbar = ({loggedIn = null, authLevel = "user", profileId}) => {
               setCurrentPath('/');
             }}
           >
-            <a href="/">LionClubs</a>
+            <a href="/"><img src="https://clubs-cu.s3.amazonaws.com/LionClubs+logo.png"></img></a>
           </Logo>
           {currentPath === '/' && (
             <NavToggle
@@ -123,7 +123,6 @@ const StyledListItem = styled.li`
     font-weight: 600;
     margin: 0rem;
   }
-
 `;
 
 const NavCenter = styled.div`
@@ -147,7 +146,10 @@ const NavHeader = styled.div`
 `;
 
 const Logo = styled.div`
-  height: 100%;
+  img{
+    height: 2.5rem;
+    weight: 5rem;
+  }
   font-size: 1.5rem;
   font-weight: 700;
   a {
