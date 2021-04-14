@@ -113,6 +113,10 @@ const ClubProfileDisplay = ({ isLoggedin, profileId}) => {
                                         link: club.socialLinks.instagram,
                                     },
                                     {
+                                        key: "Twitter",
+                                        link: club.socialLinks.twitter,
+                                    },
+                                    {
                                         key: "Email",
                                         link: club.socialLinks.email,
                                     },
@@ -123,7 +127,7 @@ const ClubProfileDisplay = ({ isLoggedin, profileId}) => {
                                     ]}
                                 />}
                                 {(club.mailingListLink !== "" && club.mailingListLink !== " " && club.mailingListLink[0] === "h") ?
-                                        <div><Button href={club.mailingListLink}><p>Join our mailing list</p></Button></div> : null}
+                                        <div><Button href={club.mailingListLink}><p>Join Mailing List</p></Button></div> : null}
                                         {(club.applicationLink !== "" && club.applicationLink !== " " && club.applicationLink[0] === "h") ?
                                         <div><Button className= "second" href={club.applicationLink}><p>Apply</p></Button></div> : null}
                                 {/* <AdContainer>
@@ -181,6 +185,10 @@ const ClubProfileDisplay = ({ isLoggedin, profileId}) => {
                                                 link: club.socialLinks.instagram,
                                             },
                                             {
+                                                key: "Twitter",
+                                                link: club.socialLinks.twitter,
+                                            },
+                                            {
                                                 key: "Email",
                                                 link: club.socialLinks.email,
                                             },
@@ -191,7 +199,7 @@ const ClubProfileDisplay = ({ isLoggedin, profileId}) => {
                                             ]}
                                         />}
                                         {(club.mailingListLink !== "" && club.mailingListLink !== " " && club.mailingListLink[0] === "h") ?
-                                        <div><Button href={club.mailingListLink}><p>Join our mailing list</p></Button></div> : null}
+                                        <div><Button href={club.mailingListLink}><p>Join Mailing List</p></Button></div> : null}
                                         {(club.applicationLink !== "" && club.applicationLink !== " " && club.applicationLink[0] === "h") ?
                                         <div><Button className= "second" href={club.applicationLink}><p>Apply</p></Button></div> : null}
                                         {/* <AdContainer>
@@ -247,7 +255,7 @@ const ClubProfileDisplay = ({ isLoggedin, profileId}) => {
                                             frequency={club.meetingFrequency[0]}
                                             weekly= {club.meetingFrequency[1]}
                                 />
-                                {(club.socialLinks.facebook === "" && club.socialLinks.instagram === "" && club.socialLinks.email === "" && club.socialLinks.website === "" ) ? null :
+                                {(club.socialLinks.facebook === "" && club.socialLinks.instagram === "" && club.socialLinks.twitter === "" && club.socialLinks.email === "" && club.socialLinks.website === "" ) ? null :
                                 <SocialTagsBox
                                     socialLinks={[
                                     {
@@ -257,6 +265,10 @@ const ClubProfileDisplay = ({ isLoggedin, profileId}) => {
                                     {
                                         key: "Instagram",
                                         link: club.socialLinks.instagram,
+                                    },
+                                    {
+                                        key: "Twitter",
+                                        link: club.socialLinks.twitter,
                                     },
                                     {
                                         key: "Email",
@@ -269,7 +281,7 @@ const ClubProfileDisplay = ({ isLoggedin, profileId}) => {
                                     ]}
                                 />}
                                 {(club.mailingListLink !== "" && club.mailingListLink !== " " && club.mailingListLink[0] === "h") ?
-                                        <div><Button href={club.mailingListLink}><p>Join our mailing list</p></Button></div> : null}
+                                        <div><Button href={club.mailingListLink}><p>Join Mailing List</p></Button></div> : null}
                                         {(club.applicationLink !== "" && club.applicationLink !== " " && club.applicationLink[0] === "h") ?
                                         <div><Button className= "second" href={club.applicationLink}><p>Apply</p></Button></div> : null}
                                 {/* <AdContainer>

@@ -310,10 +310,12 @@ export const SignUpBox = ({ detailLink, id, userCred , isProfileComplete = true}
       descLink: './login',
       descLinkText: 'Login Here',
       detail:
-        'Your request is being processed. You will receive an email with further instructions in 24 hours. If you have any questions, please contact: ',
+        'Your request is being processed. You will receive an email with further instructions in 24 hours. \n\nIf you have any questions, please contact: ',
       detailLink: 'mailto:online@columbiaspectator.com',
       detailLinkText: 'online@columbiaspectator.com',
-      detailTwo: '.',
+      detailTwo: '.\n\nHave any feedback? Let us know\n',
+      detailLinkTwo: 'https://forms.gle/8rx6FYVf98K2N5Kd6',
+      detailLinkTwoText: 'Feedback Form',
       signUp: 'none',
       confirmation: true,
     };
@@ -627,7 +629,7 @@ export const SignUpBox = ({ detailLink, id, userCred , isProfileComplete = true}
             {modalData.detail}
             <EmailLink href={detailLink}>{modalData.detailLinkText}</EmailLink>
             {modalData.detailTwo}
-            {id === 'confirmpwdreset' && (
+            {(id === 'confirmation' || id === 'confirmpwdreset') && (
               <Link href={modalData.detailLinkTwo}>
                 {modalData.detailLinkTwoText}
               </Link>
