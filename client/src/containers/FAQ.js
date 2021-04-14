@@ -55,7 +55,7 @@ const Wrapper = styled.div`
   background-repeat: no-repeat;
   background-position: top;
   background-attachment: fixed;
-  background-size: contain;  
+  background-size: auto 45rem;  
   @media only screen and (max-width : 768px) {
     background-size: auto 30rem; 
     background-position: right top;

@@ -36,7 +36,7 @@ export const Navbar = ({loggedIn = null, authLevel = "user", profileId}) => {
               setCurrentPath('/');
             }}
           >
-            <a href="/">LionClubs</a>
+            <a href="/">Lion<b>Clubs</b></a>
           </Logo>
           {currentPath === '/' && (
             <NavToggle
@@ -87,6 +87,12 @@ export const Navbar = ({loggedIn = null, authLevel = "user", profileId}) => {
                   <FilledButton text='My Profile' />
                 </NavLink>
               </StyledListItem>
+              {/* Spectator Publishing Logo */}
+              {/* <StyledListItem hideItem = {false}>
+                <a href="http://www.specpublishing.com/">
+                  <img src="https://clubs-cu.s3.amazonaws.com/Spectator+Publishing+Logo.png"/>
+                </a>
+              </StyledListItem> */}
             </MenuLinks>
           </LinksContainer>
         )}
@@ -124,6 +130,11 @@ const StyledListItem = styled.li`
     margin: 0rem;
   }
 
+  img {
+    height: 2rem;
+    margin-left: 2rem;
+  }
+
 `;
 
 const NavCenter = styled.div`
@@ -148,13 +159,19 @@ const NavHeader = styled.div`
 
 const Logo = styled.div`
   height: 100%;
-  font-size: 1.5rem;
-  font-weight: 700;
+  font-size: 2rem;
+  font-weight: 400;
+
+  b {
+    font-weight: 900;
+    color: ${(props) => props.theme.colors.red};
+  }
   a {
     text-decoration: none;
     color: ${(props) => props.theme.colors.black};
   }
   @media (max-width: 768px) {
+    font-size: 1.5rem;
     padding-left: 0.5rem;
   }
 `;

@@ -22,7 +22,7 @@ const Wrapper = styled.div`
 `;
 
 const PageWrapper = styled.div`
-  padding: 3rem 3rem 0rem 3rem;
+  padding: 4rem 3rem 0rem 3rem;
   margin: 0rem 0rem auto 0rem;
 
     @media only screen and (max-width : 768px) {
@@ -77,7 +77,7 @@ const CardsScroll = styled.div`
     
     @media only screen and (min-width : 768px) {
         overflow: scroll;
-        height: 69vh;
+        height: 71vh;
     }
 `;
 
