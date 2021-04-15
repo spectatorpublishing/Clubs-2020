@@ -67,7 +67,7 @@ const TextWrapper = styled.div`
 
 const CardsContainer = styled.div`
 
-    h2{
+    h1{
         padding-left: 1rem;
     }
     
@@ -378,7 +378,7 @@ const Explore = () => {
                 </FiltersBelow>
                 <CardsScroll>
                     <CardsContainer>
-                        {(clubProfiles.length === 0) ? (<h2>{loadText}</h2>) : (clubProfiles.map(profile => (
+                        {(clubProfiles.length === 0) ? (<h1>{loadText}</h1>) : (clubProfiles.map(profile => (
                             <CardWrapper key={profile._id}>
                                 <ExploreBox 
                                     name = {profile.name}
