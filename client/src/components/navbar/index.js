@@ -92,11 +92,11 @@ export const Navbar = ({loggedIn = null, authLevel = "user", profileId}) => {
                 </NavLink>
               </StyledListItem>
               {/* Spectator Publishing Logo */}
-              {/* <StyledListItem hideItem = {false}>
+              <StyledListItem hideItem = {false}>
                 <a href="http://www.specpublishing.com/">
                   <img src="https://clubs-cu.s3.amazonaws.com/Spectator+Publishing+Logo.png"/>
                 </a>
-              </StyledListItem> */}
+              </StyledListItem>
             </MenuLinks>
           </LinksContainer>
         )}
@@ -133,12 +133,14 @@ const StyledListItem = styled.li`
     font-weight: 600;
     margin: 0rem;
   }
-
   img {
     height: 2rem;
-    margin-left: 2rem;
-  }
+    margin-left: 0rem;
 
+    @media screen and (max-width: 910px) {
+      height: 1.8rem;
+    }
+  }
 `;
 
 const NavCenter = styled.div`
@@ -179,7 +181,8 @@ const Logo = styled.div`
     text-decoration: none;
     color: ${(props) => props.theme.colors.black};
   }
-  @media (max-width: 768px) {
+  
+  @media screen and (max-width: 910px) {
     font-size: 1.5rem;
     padding-left: 0.5rem;
   }
@@ -224,6 +227,12 @@ const MenuLinks = styled.ul`
   li {
     padding: 1rem;
     text-align: center;
+    @media screen and (max-width: 910px) {
+      padding: 0.5rem;
+    }
+    @media screen and (max-width: 768px) {
+      padding: 1rem;
+    }
   }
 
   a {
@@ -237,6 +246,18 @@ const MenuLinks = styled.ul`
 
     &:hover {
       color: ${(props) => props.theme.colors.gray};
+    }
+
+    @media screen and (max-width: 910px) {
+      h3{
+        font-size: 1rem;
+      }
+    }
+
+    @media screen and (max-width: 768px) {
+      h3{
+        font-size: 1.25rem;
+      }
     }
   }
 

@@ -49,6 +49,8 @@ const Row = styled.div`
 `;
 
 const Container = styled.div`
+    display: inline-block;
+    word-break: break-word;
     
     p{
         color: #696969;
