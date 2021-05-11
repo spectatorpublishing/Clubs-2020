@@ -48,6 +48,10 @@ const Tag = styled.p`
 export const FrequencyTag = ({ frequency, weekly }) => {
     const Rate = (weekly === "week") ? <><Text>per week</Text></> : <><Text>per month</Text></>;
     
+    if (frequency==="") {
+      return null;
+    }
+
     return (
         <Box>
             <Text>Meets</Text>
@@ -58,9 +62,9 @@ export const FrequencyTag = ({ frequency, weekly }) => {
                     return <Tag className="twice">2x</Tag>
                 } else if (frequency==="3x") {
                     return <Tag className="three-times">3x</Tag>
-                } else {
+                } else if (frequency==="4x or more") {
                     return <Tag className="greater-three">{'>'}3x</Tag>
-                }
+                } 
             })()}
             {Rate}
         </Box>
