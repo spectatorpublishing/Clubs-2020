@@ -76,7 +76,7 @@ const page2dbAttr = {
     trash: 'denied'
 }
 
-export const Portal = () => {
+export const Portal = ({authLevel}) => {
     /* 
      * @page:   current page: Pending / Approved / Trash
      * @data:   array of club applications to render
@@ -85,6 +85,9 @@ export const Portal = () => {
     const [page, setPage] = useState('pending')
     const [data, setData] = useState([])
     const [ready, setReady] = useState(false)
+
+    console.log("authLevel from portal")
+    console.log(authLevel)
 
     useEffect(() => {
         fetchApplications(page2dbAttr[page])
@@ -102,36 +105,44 @@ export const Portal = () => {
         setReady(false);
         setPage(toPage);
     }
-
+    //console.log("authLevel")
+    //console.log(authLevel)
     if (!ready)
         return (
             <PageWrapper>
                 <Loading>Loading...</Loading>
             </PageWrapper>
         )
+    else
+        if(authLevel == "admin") 
+            return (
+                <PageWrapper>
+                    <HeadingDiv>
+                        {page === 'pending' ? <h1>LionClubs Admin Portal</h1> : <PageButton onClick={() => switchPage('pending')}>Back</PageButton>}
+                        <PageButton>Log out</PageButton>
+                    </HeadingDiv>
+                    <ActiveSection page={page}>
+                        <h2>{page2heading[page]}</h2>
+                        <ListOfClubs columnTitles={page2columns[page]} clubs={data} actions={page2actions[page]} page={page} />
+                    </ActiveSection>
 
-    return (
-        <PageWrapper>
-            <HeadingDiv>
-                {page === 'pending' ? <h1>LionClubs Admin Portal</h1> : <PageButton onClick={() => switchPage('pending')}>Back</PageButton>}
-                <PageButton>Log out</PageButton>
-            </HeadingDiv>
-            <ActiveSection page={page}>
-                <h2>{page2heading[page]}</h2>
-                <ListOfClubs columnTitles={page2columns[page]} clubs={data} actions={page2actions[page]} page={page} />
-            </ActiveSection>
-
-            { page === 'pending' ? (
-                <>
-                    <ApprovedSection>
-                        <PageButton onClick={() => switchPage('approved')}>List of Approved Clubs</PageButton>
-                    </ApprovedSection>
-                    <TrashSection>
-                        <PageButton onClick={() => switchPage('trash')}>Trash</PageButton>
-                    </TrashSection>
-                </>
-            ) : null
-            }
-        </PageWrapper>
-    )
+                    { page === 'pending' ? (
+                        <>
+                            <ApprovedSection>
+                                <PageButton onClick={() => switchPage('approved')}>List of Approved Clubs</PageButton>
+                            </ApprovedSection>
+                            <TrashSection>
+                                <PageButton onClick={() => switchPage('trash')}>Trash</PageButton>
+                            </TrashSection>
+                        </>
+                    ) : null
+                    }
+                </PageWrapper>
+            )
+        else 
+            return (
+                <PageWrapper>
+                    <Loading>Not Authenticated to Access Admin Portal</Loading>
+                </PageWrapper>
+            )
 }
