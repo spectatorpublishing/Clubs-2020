@@ -19,54 +19,68 @@ const shuffle = (sourceArray) => {
 }
 
 const findSimilarClubs = (res, clubResult) => {
-    clubProfile.aggregate([
-      {
-        '$match': { '$and': [
-          {
-            'tags': {
-              '$in': clubResult.tags
+  //create array of club account ids that are verified
+    clubAccount.find({verificationStatus: 'accepted' }).select({_id: 1}).then( acceptedClubs => {
+        
+      clubs = []
+      acceptedClubs.map(obj => (clubs.push(obj._id)))
+      var clubs = JSON.parse(JSON.stringify(clubs));
+
+    //aggregate up to 6 verified clubs with same tags 
+      clubProfile.aggregate([
+        {
+          '$match': { '$and': [
+            {
+              'tags': {
+                '$in': clubResult.tags
+              }
+            },
+            {
+              'clubAccountId': { 
+                '$in': clubs
+              }
+            },
+            {
+              '_id': { '$ne': clubResult._id }
             }
-          },
-          {
-            '_id': { '$ne': clubResult._id }
+          ]
           }
-        ]
-        }
-      }, {
-        '$addFields': {
-          'intersection': {
-            '$setIntersection': [
-              '$tags', clubResult.tags
-            ]
+        }, {
+          '$addFields': {
+            'intersection': {
+              '$setIntersection': [
+                '$tags', clubResult.tags
+              ]
+            }
+          }
+        }, {
+          '$addFields': {
+            'length': {
+              '$size': '$intersection'
+            }
+          }
+        }, {
+          '$sort': {
+            'length': -1
+          }
+        }, {
+          '$limit': 6
+        }, {
+          '$project': {
+            '_id': 1,
+            'name': 1,
+            'tags': 1,
+            'imageUrl': 1,
+            'shortDescription': 1
           }
         }
-      }, {
-        '$addFields': {
-          'length': {
-            '$size': '$intersection'
-          }
-        }
-      }, {
-        '$sort': {
-          'length': -1
-        }
-      }, {
-        '$limit': 6
-      }, {
-        '$project': {
-          '_id': 1,
-          'name': 1,
-          'tags': 1,
-          'imageUrl': 1,
-          'shortDescription': 1
-        }
-      }
-    ]).exec()
-      .then(similarClubs => {
-        clubResult.set('similarClubs', similarClubs)
-        res.json(clubResult)
-      })
-      .catch(err => res.status(422).json(err));
+      ]).exec()
+        .then(similarClubs => {
+          clubResult.set('similarClubs', similarClubs)
+          res.json(clubResult)
+        })
+        .catch(err => res.status(422).json(err));
+  })
 }
 //, status: 'complete'
 module.exports = {
