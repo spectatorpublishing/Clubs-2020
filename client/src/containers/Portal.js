@@ -86,9 +86,6 @@ export const Portal = ({authLevel}) => {
     const [data, setData] = useState([])
     const [ready, setReady] = useState(false)
 
-    console.log("authLevel from portal")
-    console.log(authLevel)
-
     useEffect(() => {
         fetchApplications(page2dbAttr[page])
             .then(data => {
@@ -105,8 +102,7 @@ export const Portal = ({authLevel}) => {
         setReady(false);
         setPage(toPage);
     }
-    //console.log("authLevel")
-    //console.log(authLevel)
+
     if (!ready)
         return (
             <PageWrapper>
