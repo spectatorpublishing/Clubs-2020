@@ -44,7 +44,7 @@ const TomatoButton = ({
 
 const StyledButton = styled(motion.button)`
   min-width: 6.4375rem;
-  max-width: 13rem;
+  max-width: 14rem;
   min-height: 2.225rem;
   margin: ${props=>props.margin};
   width: auto;
