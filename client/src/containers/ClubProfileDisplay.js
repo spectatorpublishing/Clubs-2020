@@ -88,8 +88,13 @@ const ClubProfileDisplay = ({ isLoggedin, profileId}) => {
                         <AdminComponent/>
                         <PageWrapper>
                             <Content>
-                                <h1>{club.name}</h1>
-                                <p>Last updated: {new Date(club.lastUpdated.toString()).toLocaleDateString("en-US", options)}</p>
+                            <Row>
+                                <div>
+                                    <h1>{club.name}</h1>
+                                    <p>Last updated: {new Date(club.lastUpdated.toString()).toLocaleDateString("en-US", options)}</p>
+                                </div>
+                                <Icon>{club.imageUrl && club.imageUrl !== "" && club.imageUrl !== " " ? <img alt='club logo' src={club.imageUrl}/> : null}</Icon>
+                            </Row>
                                 {/* <div><Button onClick={setAdmin}><p>Show/Hide Club Admin View</p></Button></div> */}
                                 <ProfilePageBox 
                                     memberRange= {club.memberRange}
@@ -158,8 +163,12 @@ const ClubProfileDisplay = ({ isLoggedin, profileId}) => {
                         <AdminComponent/>
                         <PageWrapper>
                             <Content>                            
-                                <h1>{club.name}</h1>
-                                <p>Last updated: {new Date(club.lastUpdated.toString()).toLocaleDateString("en-US", options)}</p>
+                                <Row>
+                                    <div>
+                                        <h1>{club.name}</h1>
+                                        <p>Last updated: {new Date(club.lastUpdated.toString()).toLocaleDateString("en-US", options)}</p>
+                                    </div>
+                                    <Icon>{club.imageUrl && club.imageUrl !== "" && club.imageUrl !== " " ? <img alt='club logo' src={club.imageUrl}/> : null}</Icon></Row>
                                 <Row>
                                     <ProfilePageBox 
                                         memberRange= {club.memberRange}
@@ -244,6 +253,7 @@ const ClubProfileDisplay = ({ isLoggedin, profileId}) => {
                                 <SimilarClubs/> 
                             </Content>
                             <Cards>
+                                <Icon>{club.imageUrl && club.imageUrl !== "" && club.imageUrl !== " " ? <img alt='club logo' src={club.imageUrl}/> : null}</Icon>
                                 {/* <div><Button onClick={setAdmin}><p>Show/Hide Club Admin View</p></Button></div> */}
                                 <ProfilePageBox 
                                     memberRange= {club.memberRange}
@@ -328,7 +338,7 @@ const PageWrapper = styled.div`
 
 const Cards = styled.div`
     width: 30%;
-    margin-top: 8rem;
+    margin-top: 1rem;
 `;
 
 const Content = styled.div`
@@ -342,7 +352,10 @@ const Content = styled.div`
     
     h1{
         margin-bottom: 0rem;
-    }
+        @media only screen and (max-width: 768px) {
+            margin-top: auto;
+            margin-bottom: auto;
+        }
 `;
 
 const AdContainer = styled.div`
@@ -394,6 +407,44 @@ const Row = styled.div`
 const Column = styled.div`
     width: 100%;
     margin-left: 1rem;
+`;
+
+const Icon = styled.div`
+  margin: 0.5rem auto 2rem auto;
+  height: 8rem;
+  width: 8rem;
+
+  img {
+    object-fit: cover;
+    height: 8rem;
+    width: 8rem;
+    margin-bottom: 0rem;
+    -webkit-border-radius: 8rem;
+    display: block;
+  }
+
+  @media only screen and (max-width: 768px) {
+    margin: auto 1rem auto auto;
+    height: 6rem;
+    width: 6rem;
+
+    img {
+        height: 5rem;
+        width: 5rem;
+    }
+  }
+
+  @media only screen and (max-width: 425px) {
+    margin: auto 0rem auto auto;
+    height: 5rem;
+    width: 5rem;
+
+    img {
+        height: 4rem;
+        width: 4rem;
+    }
+  }
+
 `;
 
 export default ClubProfileDisplay;
