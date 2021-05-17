@@ -169,10 +169,10 @@ const ClubProfileDisplay = ({ isLoggedin, profileId}) => {
                                     />
                                     <Column>
                                         {/* <div><Button onClick={setAdmin}><p>Show/Hide Club Admin View</p></Button></div> */}
-                                            <FrequencyTag
-                                                frequency={club.meetingFrequency}
-                                                weekly= {club.weekly}
-                                            />
+                                        <FrequencyTag
+                                            frequency={club.meetingFrequency[0]}
+                                            weekly= {club.meetingFrequency[1]}
+                                        />
                                         {(club.socialLinks.facebook === "" && club.socialLinks.instagram === "" && club.socialLinks.email === "" && club.socialLinks.website === "" ) ? null :
                                         <SocialTagsBox
                                             socialLinks={[
