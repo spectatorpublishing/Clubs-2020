@@ -444,7 +444,6 @@ const Icon = styled.div`
         width: 4rem;
     }
   }
-
 `;
 
 export default ClubProfileDisplay;
