@@ -663,7 +663,7 @@ export const SignUpBox = ({ detailLink, id, userCred , isProfileComplete = true}
 
 const Wrapper = styled.div`
   padding: 1rem;
-  margin: 10rem 0.5rem auto 0.5rem;
+  margin: 8rem 0.5rem auto 0.5rem;
 
   @media only screen and (max-width : 768px) {
     margin: 8rem 0rem auto 0rem;
