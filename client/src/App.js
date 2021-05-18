@@ -86,7 +86,9 @@ const App = () => {
               <Route path='/faq' component={FAQ}/>
               <Route path='/' exact component={Explore}/>
               <Route path='/portal/login' component={PortalLogin} />
-              <Route path='/portal' component={Portal} />
+              <Route path='/portal'>
+                <Portal authLevel = {clubAccountInfo ? clubAccountInfo.authorityLevel : "user"}/>
+              </Route>
               <Route path='/signup'>
                 <SignUp userCred={userCred} />
               </Route>
