@@ -21,6 +21,7 @@ import { FindPassword } from './containers/FindPassword';
 import { ConfirmPasswordReset } from './containers/ConfirmPasswordReset';
 import { rememberMe } from './containers/FirebaseApiSetUpTest/firebase/rememberMe';
 import ScrollToTop from "./components/ScrollToTop";
+import ReactGa from "react-ga";
 
 const App = () => {
   const [userCred, setUserCred] = useState(null);
@@ -68,6 +69,12 @@ const App = () => {
         console.log('Not signed in.');
       }
     });
+    //Google Analytics setup
+    ReactGa.initialize(``);
+
+    //reports page view
+    ReactGa.pageview(window.location.pathname+window.location.search);
+
   }, []);
 
   return (
