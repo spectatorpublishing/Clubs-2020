@@ -334,8 +334,15 @@ const Cards = styled.div`
 const Content = styled.div`
     display: flex;
     flex-direction: column;
+
     @media only screen 
-    and (min-width : 940px) {
+    and (min-width : 840px) {
+        width: 63%;
+        padding-right: 4rem;
+    }
+
+    @media only screen 
+    and (min-width : 1000px) {
         width: 63%;
         padding-right: 6rem;
     }
