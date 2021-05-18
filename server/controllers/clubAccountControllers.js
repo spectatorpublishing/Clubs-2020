@@ -97,27 +97,21 @@ module.exports = {
                     rdata.pending = JSON.parse(JSON.stringify(q1))
                     clubAccount.find({
                         verificationStatus: 'accepted',
-                        lastUpdateDate:  {
-                            $gte: date
-                        }
+                       
                     }).sort( {lastUpdateDate: -1} ).then(
                         q2 => {
                             rdata.accepted = JSON.parse(JSON.stringify(q2))
 
                             clubAccount.find({
                                 verificationStatus: 'denied',
-                                lastUpdateDate:  {
-                                    $gte: date
-                                }
+                               
                             }).sort( {lastUpdateDate: -1} ).then(
                                 q3 => {
                                     rdata.denied = JSON.parse(JSON.stringify(q3))
 
                                     clubAccount.find({
                                         verificationStatus: 'incomplete',
-                                        lastUpdateDate:  {
-                                            $gte: date
-                                        }
+                                       
                                     }).sort( {lastUpdateDate: -1} ).then(
                                         q4 => {
                                             rdata.incomplete = JSON.parse(JSON.stringify(q4))
