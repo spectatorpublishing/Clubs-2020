@@ -214,7 +214,6 @@ module.exports = {
     },
     filterAndSortBy: function(req, res) {
         // TODO; req.query contains filter and/or sort information
-
         var specs = {}
         // {verificationStatus: 'accepted' }
         // specs["verificationStatus"] = 'accepted'
@@ -225,12 +224,11 @@ module.exports = {
           specs['tags'] = {$in: req.query.tags}
         }
         if (req.query.acceptingMembers) {
-          specs['acceptingMembers'] = Boolean(req.query.acceptingMembers)
+          specs['acceptingMembers'] = req.query.acceptingMembers
         }
         if (req.query.applicationRequired) {
-          specs['applicationRequired'] = Boolean(req.query.applicationRequired)
+          specs['applicationRequired'] = req.query.applicationRequired
         }
-        
         clubAccount.find({verificationStatus: 'accepted' }).select({clubProfileId: 1})
         .then( acceptedClubs => {
       

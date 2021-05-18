@@ -76,7 +76,7 @@ const SocialLinkElement = ({ linkType, link }) => {
           </Icon>
           <StyledLink>
             <a href={"mailto:" + link}>
-              {(link.length > 30) ? linkType : link}
+              {(link.length > 20) ? linkType : link}
             </a>
           </StyledLink>
         </SocialLinkStyledElement>
