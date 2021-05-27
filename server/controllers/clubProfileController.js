@@ -218,7 +218,7 @@ module.exports = {
         // {verificationStatus: 'accepted' }
         // specs["verificationStatus"] = 'accepted'
         if (req.query.memberRange) {
-          specs['memberRange'] = {$in: req.query.memberRange}
+          specs['memberRange'] = req.query.memberRange
         }
         if (req.query.tags) {
           specs['tags'] = {$in: req.query.tags}
