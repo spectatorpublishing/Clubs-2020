@@ -81,7 +81,7 @@ const App = () => {
                 <ClubProfileDisplay isLoggedin={loggedIn} profileId={clubAccountInfo?.clubProfileId}/>
               </Route>
               <Route path='/profile-creation'>
-                <ProfileCreationMaster userCred={userCred}/>
+                <ProfileCreationMastercon userCred={userCred}/>
               </Route>
               <Route path='/faq' component={FAQ}/>
               <Route path='/' exact component={Explore}/>

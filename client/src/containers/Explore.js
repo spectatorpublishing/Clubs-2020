@@ -91,7 +91,6 @@ const CardWrapper = styled.div`
         margin: 0;
         width: 100%;
     }    
-    
 `;
 
 const FiltersBox = styled.div`
@@ -203,7 +202,7 @@ const ShuffleWord = styled.div`
     font-weight:600;
     font-size:18px;
     line-height:21px;
-    text-align:center;
+    text-align:centxer;
     color: ${(props) => props.theme.colors.gray};
     float:right;
     padding-right:15px;
