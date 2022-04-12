@@ -1,0 +1,1523 @@
+[
+    {
+        "imageUrl": " ",
+        "tags": [
+            "Technology",
+            "Instructional",
+            "Community Service",
+            "Academic",
+            "Medicine"
+        ],
+        "_id": "60c3a3922ff57f0004c19d96",
+        "name": "Columbia Space Initiative (CSI)",
+        "shortDescription": "The Columbia Space Initiative is a group of students and professors dedicated to the pursuit of knowledge in near-space, space, and beyond.",
+        "memberRange": "100+",
+        "acceptingMembers": true,
+        "applicationRequired": false
+    },
+    {
+        "imageUrl": "https://clubs-cu.s3.amazonaws.com/1631151074137.jpg",
+        "tags": [
+            "Cultural",
+            "Youth",
+            "Social"
+        ],
+        "_id": "60b9c82dc16d650004672253",
+        "name": "Taiwanese American Students Association (TASA)",
+        "shortDescription": "We are a community that aims to celebrate and spread the presence of Taiwanese culture on campus. People of all cultural backgrounds are welcome!",
+        "memberRange": "20-50",
+        "acceptingMembers": false,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": "https://clubs-cu.s3.amazonaws.com/1623809656769.jpg",
+        "tags": [
+            "Community Service",
+            "Global Affairs",
+            "Advocacy",
+            "Charity"
+        ],
+        "_id": "60c81a5a30a1d30004532b66",
+        "name": "Columbia University UNICEF Club",
+        "shortDescription": "The Columbia University chapter of UNICEF USA.",
+        "memberRange": "20-50",
+        "acceptingMembers": true,
+        "applicationRequired": false
+    },
+    {
+        "imageUrl": " ",
+        "tags": [
+            "Performing Arts",
+            "Music",
+            "Media",
+            "Social"
+        ],
+        "_id": "60b7e2441c95c2000472f213",
+        "name": "Columbia Pops",
+        "shortDescription": "Entirely student-run, Pops' goal is to engage a diverse group of talented students as performance artists, conductors, arrangers, and much more!",
+        "memberRange": "20-50",
+        "acceptingMembers": true,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": "https://clubs-cu.s3.amazonaws.com/1643642180463.jpg",
+        "tags": [
+            "Advocacy",
+            "Law",
+            "Politics",
+            "Publication",
+            "Writing"
+        ],
+        "_id": "60b15e62b3705f0004e0bffd",
+        "name": "Roosevelt @ Columbia",
+        "shortDescription": "Roosevelt @ Columbia is a progressive, nonpartisan, student-run think tank associated with the broader Roosevelt National Network.",
+        "memberRange": "100+",
+        "acceptingMembers": false,
+        "applicationRequired": false
+    },
+    {
+        "imageUrl": " ",
+        "tags": [],
+        "_id": "610abeb7508bd8000406cbbc",
+        "name": "Columbia Classical Performers",
+        "shortDescription": "We are the premier independent classical music performance group on campus! Come by to show off your music, hear others', and make new friends!",
+        "memberRange": "10-20",
+        "acceptingMembers": true,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": " ",
+        "tags": [
+            "Performing Arts",
+            "Dance",
+            "Cultural"
+        ],
+        "_id": "6099e3e13ba1e30004f17200",
+        "name": "Columbia China Dance",
+        "shortDescription": "Columbia China Dance spreads Chinese culture through traditional and contemporary Chinese dance performances on and off-campus.",
+        "memberRange": "20-50",
+        "acceptingMembers": true,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": " ",
+        "tags": [
+            "Performing Arts",
+            "Athletics",
+            "Dance"
+        ],
+        "_id": "6126a4e8e4ef4b000410e117",
+        "name": "Columbia University Dance Team",
+        "shortDescription": "The Columbia University Dance Team performs various types of dance including pom, jazz, and hip-hop at Football and Men and Women's Basketball. ",
+        "memberRange": "10-20",
+        "acceptingMembers": true,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": "",
+        "tags": [
+            "Community Service",
+            "Advocacy",
+            "Mentorship",
+            "Peer Education",
+            "Youth"
+        ],
+        "_id": "60665421df2eea00044171dc",
+        "name": " Matriculate",
+        "shortDescription": "Advise students who need your support applying to college ",
+        "memberRange": "100+",
+        "acceptingMembers": false,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": " ",
+        "tags": [
+            "Social",
+            "Writing",
+            "Media",
+            "Technology"
+        ],
+        "_id": "611f2b5da0eb6100048af17d",
+        "name": "Columbia University Science Fiction Society (CUSFS)",
+        "shortDescription": "Sci-fi (+ fantasy!) club: a home for all nerds, geeks, and aficionados to chat about books, tv, movies, + cool science. Games, movies, fun, friends!",
+        "memberRange": "0-10",
+        "acceptingMembers": true,
+        "applicationRequired": false
+    },
+    {
+        "imageUrl": "https://clubs-cu.s3.amazonaws.com/1627609324307.jpg",
+        "tags": [
+            "Pre-Professional",
+            "Entrepreneurship",
+            "Global Affairs",
+            "Mentorship"
+        ],
+        "_id": "6075ec4dabfb2b0004311c3c",
+        "name": " Columbia Global Research and Consulting (GRC)",
+        "shortDescription": "Columbia GRC is the largest undergraduate management consulting club on Columbia campus. We provide strategic advisory to social impact clients.\n",
+        "memberRange": "100+",
+        "acceptingMembers": false,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": "https://clubs-cu.s3.amazonaws.com/1623222797968.jpg",
+        "tags": [],
+        "_id": "60b26e17b1b2b80004a655b7",
+        "name": "Columbia Financial Investment Group (CFIG)",
+        "shortDescription": "We are Columbia’s largest undergraduate finance club. We aim to create future leaders and equip members with an understanding of the markets.\n",
+        "memberRange": "10-20",
+        "acceptingMembers": true,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": "https://clubs-cu.s3.amazonaws.com/1630372188938.jpg",
+        "tags": [
+            "Cultural",
+            "Advocacy",
+            "Social"
+        ],
+        "_id": "612c352f29a3240004bb1abe",
+        "name": " Columbia Queer Alliance",
+        "shortDescription": "Columbia Queer Alliance (CQA) is the oldest queer collegiate student organization in the nation.",
+        "memberRange": "50-100",
+        "acceptingMembers": false,
+        "applicationRequired": false
+    },
+    {
+        "imageUrl": "",
+        "tags": [
+            "Academic",
+            "Engineering",
+            "Medicine",
+            "Mentorship"
+        ],
+        "_id": "6074fc0a3a85100004937c0d",
+        "name": " Biomedical Engineering Society",
+        "shortDescription": " We aim to provide undergraduates with a supportive and enriching academic experience in BME! ",
+        "memberRange": "20-50",
+        "acceptingMembers": true,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": " ",
+        "tags": [
+            "Performing Arts",
+            "Music",
+            "A Capella",
+            "Media"
+        ],
+        "_id": "60f4926a2d88980004439e27",
+        "name": "Columbia SHARP",
+        "shortDescription": "Columbia University's smoothest all-male a cappella group. Focused on R&B, pop, and more!",
+        "memberRange": "10-20",
+        "acceptingMembers": true,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": "https://clubs-cu.s3.amazonaws.com/1623380024315.jpg",
+        "tags": [
+            "Performing Arts",
+            "Writing",
+            "Theatre",
+            "Design",
+            "Social"
+        ],
+        "_id": "60c2c90d59e1ca00044cee75",
+        "name": "NOMADS (New and Original Material Authored and Directed by Students)",
+        "shortDescription": "NOMADS is a theater group dedicated to workshopping and producing original plays and musicals written by current Barnard and Columbia students.",
+        "memberRange": "20-50",
+        "acceptingMembers": true,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": "https://static.wixstatic.com/media/9b5268_0af6d2698cf24f378109401749d313df~mv2_d_4129_4129_s_4_2.png/v1/fill/w_160,h_160,al_c,q_85,usm_0.66_1.00_0.01/9b5268_0af6d2698cf24f378109401749d313df~mv2_d_4129_4129_s_4_2.webp",
+        "tags": [
+            "Technology",
+            "Engineering"
+        ],
+        "_id": "60770a074514ec0004ad8dbc",
+        "name": "Athena Digital Design Agency",
+        "shortDescription": "The Athena Digital Design Agency offers free web development courses and entrepreneurship opportunities to the Barnard community. ",
+        "memberRange": "20-50",
+        "acceptingMembers": false,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": " ",
+        "tags": [
+            "Religious/Spiritual",
+            "Cultural",
+            "Community Service",
+            "Social",
+            "Advocacy"
+        ],
+        "_id": "60b92a8328aef60004a85363",
+        "name": "Columbia/Barnard Hillel",
+        "shortDescription": "Creating welcoming Jewish communities on campus and beyond. Visit at the Kraft Center on 115th, and follow us on instagram @cbhillel. ",
+        "memberRange": "100+",
+        "acceptingMembers": true,
+        "applicationRequired": false
+    },
+    {
+        "imageUrl": " ",
+        "tags": [
+            "Comedy",
+            "Theatre",
+            "Social",
+            "Performing Arts"
+        ],
+        "_id": "60b01532875aba0004131e50",
+        "name": "The Varsity Show ",
+        "shortDescription": "Columbia’s Oldest Performing Arts Tradition",
+        "memberRange": "50-100",
+        "acceptingMembers": true,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": " ",
+        "tags": [
+            "Academic",
+            "Advocacy",
+            "Cultural",
+            "Instructional",
+            "Social"
+        ],
+        "_id": "61365b83a32c600004cf445e",
+        "name": "CU Sign",
+        "shortDescription": "CU Sign is Columbia's American Sign Language (ASL) club. We offer free ASL classes every week.",
+        "memberRange": "20-50",
+        "acceptingMembers": true,
+        "applicationRequired": false
+    },
+    {
+        "imageUrl": " ",
+        "tags": [
+            "Global Affairs",
+            "Politics",
+            "Community Service",
+            "Advocacy",
+            "Law"
+        ],
+        "_id": "60b1a4b32da3500004d9ba97",
+        "name": "Columbia University Amnesty International(CUAI)",
+        "shortDescription": "CUAI seeks to keep our community informed about human rights violations around the world and to promote student actions to end and prevent them",
+        "memberRange": "20-50",
+        "acceptingMembers": true,
+        "applicationRequired": false
+    },
+    {
+        "imageUrl": " ",
+        "tags": [
+            "Advocacy",
+            "Health",
+            "Mentorship",
+            "Politics",
+            "Peer Education"
+        ],
+        "_id": "60c0f70f040bd40004790eca",
+        "name": "Coalition Against Sexual Violence (CASV) ",
+        "shortDescription": "We develop programming serving the needs of sexual violence survivors and their support networks. We also establish club partnerships & host events.",
+        "memberRange": "10-20",
+        "acceptingMembers": true,
+        "applicationRequired": false
+    },
+    {
+        "imageUrl": "https://clubs-cu.s3.amazonaws.com/1629754329430.jpg",
+        "tags": [
+            "Academic",
+            "Publication",
+            "Law",
+            "Pre-Professional",
+            "Writing"
+        ],
+        "_id": "60c0f0bc040bd40004790ec8",
+        "name": "Columbia Undergraduate Law Review",
+        "shortDescription": "The Columbia Undergraduate Law Review (CULR) is Columbia University's premier undergraduate legal publication.",
+        "memberRange": "100+",
+        "acceptingMembers": true,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": "https://clubs-cu.s3.amazonaws.com/1630352047682.jpg",
+        "tags": [
+            "Cultural",
+            "Religious/Spiritual",
+            "Social"
+        ],
+        "_id": "611dbcbbbed7220004687548",
+        "name": "SOON Movement",
+        "shortDescription": "SOON Movement (formerly known as KCCC) is a Christian fellowship committed to sharing the Gospel by doing life and faith with students on our campus.\n",
+        "memberRange": "20-50",
+        "acceptingMembers": false,
+        "applicationRequired": false
+    },
+    {
+        "imageUrl": "https://clubs-cu.s3.amazonaws.com/1628474118113.jpg",
+        "tags": [
+            "Performing Arts",
+            "Music",
+            "A Capella",
+            "Media",
+            "Athletics"
+        ],
+        "_id": "6074de00ebc9c60004269244",
+        "name": "Columbia Kingsmen",
+        "shortDescription": "Columbia University's Finest All-Male A Cappella Group",
+        "memberRange": "10-20",
+        "acceptingMembers": false,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": " ",
+        "tags": [
+            "Comedy",
+            "Theatre",
+            "Writing",
+            "Performing Arts",
+            "Youth"
+        ],
+        "_id": "610765f48817d200047485e4",
+        "name": "Latenite Theatre",
+        "shortDescription": "Latenite happens.",
+        "memberRange": "50-100",
+        "acceptingMembers": true,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": " ",
+        "tags": [
+            "Global Affairs",
+            "Engineering",
+            "Environmental",
+            "Travel"
+        ],
+        "_id": "611095390caadb00049dad27",
+        "name": "Engineers Without Borders (EWB)",
+        "shortDescription": "EWB supports international community-driven development by collaborating with local partners to design and implement sustainable engineering projects.",
+        "memberRange": "50-100",
+        "acceptingMembers": true,
+        "applicationRequired": false
+    },
+    {
+        "imageUrl": " ",
+        "tags": [
+            "Performing Arts",
+            "Dance",
+            "Cultural",
+            "Social"
+        ],
+        "_id": "60ae9cabb30845000454d23b",
+        "name": "Columbia University Bhangra",
+        "shortDescription": "Columbia University Bhangra is a competitive collegiate dance team that combines traditional and contemporary styles of Bhangra.",
+        "memberRange": "20-50",
+        "acceptingMembers": true,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": "https://clubs-cu.s3.amazonaws.com/1635813641996.jpg",
+        "tags": [
+            "Community Service",
+            "Mentorship",
+            "Social",
+            "Health",
+            "Academic"
+        ],
+        "_id": "60d63418da5d6e0004c9d3f5",
+        "name": "Columbia Neuroscience Society",
+        "shortDescription": "We aim to provide a community for those interested in neuroscience, mentorship, and community service.",
+        "memberRange": "10-20",
+        "acceptingMembers": true,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": " ",
+        "tags": [
+            "Academic",
+            "Publication",
+            "Technology",
+            "Health",
+            "Medicine"
+        ],
+        "_id": "61116873bfb7610004992489",
+        "name": "Columbia Science Review",
+        "shortDescription": "The Columbia Science Review (CSR) is an undergraduate student organization dedicated to promoting scientific engagement and inquiry.",
+        "memberRange": "50-100",
+        "acceptingMembers": true,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": " ",
+        "tags": [],
+        "_id": "60c135a9040bd40004790ed4",
+        "name": "United Nations Columbia",
+        "shortDescription": "We are the official Columbia University-Wide Campus Chapter of the United Nations Association of the United States of America (UNA-USA CUWC). ",
+        "memberRange": "100+",
+        "acceptingMembers": true,
+        "applicationRequired": false
+    },
+    {
+        "imageUrl": " ",
+        "tags": [
+            "Student Governance",
+            "Community Service",
+            "Advocacy"
+        ],
+        "_id": "60b9063c10a1d00004fd9107",
+        "name": "Student Government Association (SGA)",
+        "shortDescription": "SGA works to better the Barnard community by advocating for students and facilitating communication between students, administration, and faculty! ",
+        "memberRange": "100+",
+        "acceptingMembers": true,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": "https://clubs-cu.s3.amazonaws.com/1630015686160.jpg",
+        "tags": [
+            "Design",
+            "Media",
+            "Social",
+            "Performing Arts"
+        ],
+        "_id": "612807ddb036710004b76e34",
+        "name": " Useless Art Society",
+        "shortDescription": "The Useless Art Society is a student artist collective focused on accessibility and experimentation in visual art practice.",
+        "memberRange": "20-50",
+        "acceptingMembers": false,
+        "applicationRequired": false
+    },
+    {
+        "imageUrl": " ",
+        "tags": [
+            "Pre-Professional",
+            "Entrepreneurship",
+            "Advocacy",
+            "Environmental",
+            "Instructional"
+        ],
+        "_id": "61305e9cba72800004c89818",
+        "name": "Columbia University's Impact Investing Network (CUIIN) ",
+        "shortDescription": "Columbia University’s Impact Investing Network is a student group on campus committed to informing the Columbia community about impact investing.",
+        "memberRange": "20-50",
+        "acceptingMembers": true,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": " ",
+        "tags": [
+            "Programming",
+            "Pre-Professional"
+        ],
+        "_id": "60b918fa28aef60004a85361",
+        "name": "Columbia Marketing Club",
+        "shortDescription": "Columbia Marketing Club is the premier group that serves members of the Columbia’s undergraduate community who are interested in marketing and brand. ",
+        "memberRange": "50-100",
+        "acceptingMembers": true,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": "https://clubs-cu.s3.amazonaws.com/1623522366502.jpg",
+        "tags": [
+            "Performing Arts",
+            "Dance",
+            "Cultural",
+            "Music"
+        ],
+        "_id": "60ba5f9b585a8a0004361622",
+        "name": "CU Lion Dance",
+        "shortDescription": "CULD is the official collegiate Lion Dance team at Columbia University. Our lions are proud to have served the NYC community for over a decade. ",
+        "memberRange": "20-50",
+        "acceptingMembers": true,
+        "applicationRequired": false
+    },
+    {
+        "imageUrl": " ",
+        "tags": [
+            "Greek Life",
+            "Pre-Professional",
+            "Technology",
+            "Entrepreneurship",
+            "Mentorship"
+        ],
+        "_id": "60c0f007040bd40004790ec6",
+        "name": "Alpha Kappa Psi",
+        "shortDescription": "AKPsi is Columbia's only co-ed business fraternity. We are open to all schools/majors and help our brothers grow personally and professionally at CU.",
+        "memberRange": "50-100",
+        "acceptingMembers": true,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": " ",
+        "tags": [
+            "Youth",
+            "Mentorship",
+            "Community Service",
+            "Instructional",
+            "Advocacy"
+        ],
+        "_id": "60c229a4a113e40004227939",
+        "name": "Project Access Columbia",
+        "shortDescription": "Columbia students helping disadvantaged high school students around the world apply to top US, UK, and EU universities for free.",
+        "memberRange": "50-100",
+        "acceptingMembers": true,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": " ",
+        "tags": [
+            "Community Service",
+            "Youth",
+            "Instructional"
+        ],
+        "_id": "6099e1443ba1e30004f171fe",
+        "name": "Peace by PEACE (CI)",
+        "shortDescription": "Peace by PEACE is a community service club and is a conflict resolution skill development program for elementary school students. ",
+        "memberRange": "20-50",
+        "acceptingMembers": true,
+        "applicationRequired": false
+    },
+    {
+        "imageUrl": "https://clubs-cu.s3.amazonaws.com/1623267685037.jpg",
+        "tags": [
+            "Cultural",
+            "Mentorship",
+            "Social",
+            "Dance",
+            "Music"
+        ],
+        "_id": "60c11814040bd40004790ed2",
+        "name": " Columbia Iranian Students Association",
+        "shortDescription": "CISA brings people together to engage with Iranian/Persian culture and community through art, music, dance, food, workshops, and social events.",
+        "memberRange": "20-50",
+        "acceptingMembers": true,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": " ",
+        "tags": [
+            "Social"
+        ],
+        "_id": "6126ca287c586b0004fef88f",
+        "name": "Gosh Yarn It!",
+        "shortDescription": "Gosh Yarn It is Columbia University's premier crochet and knitting club! We provide the yarn, needles, and hooks, you bring the hands!",
+        "memberRange": "10-20",
+        "acceptingMembers": true,
+        "applicationRequired": false
+    },
+    {
+        "imageUrl": "https://clubs-cu.s3.amazonaws.com/1637254807667.jpg",
+        "tags": [
+            "Global Affairs",
+            "Cultural",
+            "Politics",
+            "Social",
+            "Food"
+        ],
+        "_id": "61718926a6c5590004dc1fec",
+        "name": "Columbia European Society",
+        "shortDescription": "CES is the only university-wide society at Columbia bringing together all students interested in Europe and European affairs.",
+        "memberRange": "20-50",
+        "acceptingMembers": true,
+        "applicationRequired": false
+    },
+    {
+        "imageUrl": "https://clubs-cu.s3.amazonaws.com/1623815886743.jpg",
+        "tags": [
+            "Politics",
+            "Advocacy"
+        ],
+        "_id": "60c8f1ab2dec3f000481f787",
+        "name": "Columbia Students for Justice in Palestine ",
+        "shortDescription": "Organized on democratic principles to promote justice, human rights, liberation, and self-determination for the Palestinian people.",
+        "memberRange": "20-50",
+        "acceptingMembers": false,
+        "applicationRequired": false
+    },
+    {
+        "imageUrl": "https://clubs-cu.s3.amazonaws.com/1628015840730.jpg",
+        "tags": [
+            "Performing Arts",
+            "Music",
+            "A Capella",
+            "Social",
+            "Travel"
+        ],
+        "_id": "61097ac9157c3a0004847db4",
+        "name": "Uptown Vocal",
+        "shortDescription": "Columbia's Premier Jazz A Cappella Group",
+        "memberRange": "10-20",
+        "acceptingMembers": true,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": "https://clubs-cu.s3.amazonaws.com/1622156471547.jpg",
+        "tags": [
+            "Global Affairs",
+            "Advocacy",
+            "Social",
+            "Cultural",
+            "Politics"
+        ],
+        "_id": "60b014b7875aba0004131e4e",
+        "name": "Columbia Model United Nations Conference and Exposition (CMUNCE)",
+        "shortDescription": "CMUNCE is the premier high school Model UN conference in the US, hosted annually by Columbia undergraduates! No prior experience needed to join! ",
+        "memberRange": "100+",
+        "acceptingMembers": true,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": " ",
+        "tags": [
+            "Academic",
+            "Engineering",
+            "Medicine"
+        ],
+        "_id": "61df70539ae9e800042b02c7",
+        "name": "Neurotech X Columbia",
+        "shortDescription": "Columbia's undergraduate neuroengineering club",
+        "memberRange": "0-10",
+        "acceptingMembers": true,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": " ",
+        "tags": [
+            "Social",
+            "Cultural",
+            "Food",
+            "Mentorship",
+            "Travel"
+        ],
+        "_id": "61269afbe4ef4b000410e115",
+        "name": "Columbia Bartending Agency",
+        "shortDescription": "The Columbia Bartending Agency is a student-run organization providing bartenders to service NYC's top parties and private events since 1965.",
+        "memberRange": "50-100",
+        "acceptingMembers": true,
+        "applicationRequired": false
+    },
+    {
+        "imageUrl": " ",
+        "tags": [
+            "Community Service",
+            "Mentorship",
+            "Youth",
+            "Social"
+        ],
+        "_id": "6116bbb09216210004b6953f",
+        "name": "Big Sibs Columbia (CI)",
+        "shortDescription": "Big Sibs is dedicated to building relationships with the local youth through one-on-one mentorship. Get to know the city AND make a new friend!",
+        "memberRange": "0-10",
+        "acceptingMembers": true,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": " ",
+        "tags": [
+            "Pre-Professional",
+            "Medicine",
+            "Mentorship",
+            "Academic",
+            "Community Service"
+        ],
+        "_id": "6149297ee0bc2d000474c4c9",
+        "name": "CU Pre-Vet Society",
+        "shortDescription": "All animal lovers welcome!",
+        "memberRange": "10-20",
+        "acceptingMembers": true,
+        "applicationRequired": false
+    },
+    {
+        "imageUrl": "https://clubs-cu.s3.amazonaws.com/1618336449186.jpg",
+        "tags": [
+            "Performing Arts",
+            "Athletics",
+            "Travel",
+            "Social",
+            "Cultural"
+        ],
+        "_id": "6075d535abfb2b0004311c38",
+        "name": "Columbia Wushu",
+        "shortDescription": "The largest collegiate Chinese martial arts club in the NYC area. We welcome newcomers and experienced practitioners alike!",
+        "memberRange": "20-50",
+        "acceptingMembers": true,
+        "applicationRequired": false
+    },
+    {
+        "imageUrl": " ",
+        "tags": [
+            "Politics",
+            "Advocacy"
+        ],
+        "_id": "60b65d94120dbb0004934f85",
+        "name": "J Street U",
+        "shortDescription": "J Street U is Pro Israel, Pro Palestine, Pro Peace, Pro Democracy, Pro Justice, Pro Human Rights.",
+        "memberRange": "10-20",
+        "acceptingMembers": true,
+        "applicationRequired": false
+    },
+    {
+        "imageUrl": " ",
+        "tags": [
+            "Community Service",
+            "Politics",
+            "Social",
+            "Advocacy"
+        ],
+        "_id": "60d61636da5d6e0004c9d3f1",
+        "name": "Columbia Right to Life",
+        "shortDescription": "Columbia Right to Life is a secular student advocacy club that creates constructive dialogue around human life issues on campus and in our community.",
+        "memberRange": "20-50",
+        "acceptingMembers": true,
+        "applicationRequired": false
+    },
+    {
+        "imageUrl": "https://clubs-cu.s3.amazonaws.com/1630362146799.jpg",
+        "tags": [
+            "Health",
+            "Peer Education",
+            "Social"
+        ],
+        "_id": "612ce687e0ad5e0004f5680c",
+        "name": " Active Minds at CU",
+        "shortDescription": "Active Minds at CU is a chapter of Active Minds Inc., a national nonprofit organization that empowers students to speak openly about mental health.",
+        "memberRange": " ",
+        "acceptingMembers": true,
+        "applicationRequired": false
+    },
+    {
+        "imageUrl": "https://clubs-cu.s3.amazonaws.com/1645481074618.jpg",
+        "tags": [
+            "Dance",
+            "Social",
+            "Cultural"
+        ],
+        "_id": "6203111522c8f300049efb11",
+        "name": " Sabor: Columbia's First Latin Dance Troupe",
+        "shortDescription": "Sabor is Columbia University's first Latino dance troupe. Established in 2003, Sabor performs all your favorite Latin dances and more.",
+        "memberRange": "20-50",
+        "acceptingMembers": false,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": "https://clubs-cu.s3.amazonaws.com/1623268071138.jpg",
+        "tags": [
+            "Community Service",
+            "Social"
+        ],
+        "_id": "60c117cd040bd40004790ed0",
+        "name": "Student Health Outreach (CI)",
+        "shortDescription": "SHOUT is a volunteer organization that serves to enroll low-income populations surrounding our community in much-needed assistance programs.",
+        "memberRange": "20-50",
+        "acceptingMembers": true,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": " ",
+        "tags": [
+            "Community Service",
+            "Advocacy"
+        ],
+        "_id": "609ae9dc81393f00043a225a",
+        "name": "Housing Equity Project",
+        "shortDescription": "Housing Equity Project is dedicated to serving folks experiencing homelessness and mitigating the harmful impacts of Columbia's gentrification.",
+        "memberRange": "20-50",
+        "acceptingMembers": true,
+        "applicationRequired": false
+    },
+    {
+        "imageUrl": " ",
+        "tags": [
+            "Performing Arts",
+            "Dance",
+            "Mentorship"
+        ],
+        "_id": "6075efa9abfb2b0004311c40",
+        "name": "Columbia University Ballet Ensemble",
+        "shortDescription": "As Columbia's largest ballet cast, CUBE provides dancers with the unique opportunity to dance dream roles in full-length classical story ballets.",
+        "memberRange": "50-100",
+        "acceptingMembers": true,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": " ",
+        "tags": [
+            "Advocacy",
+            "Social",
+            "Mentorship"
+        ],
+        "_id": "614785398105340004e8d3e1",
+        "name": "Columbia University Family Support Network (CUFSN)",
+        "shortDescription": "A university-wide organization focused on members of the Columbia community with families through peer connection and advocacy. ",
+        "memberRange": "20-50",
+        "acceptingMembers": true,
+        "applicationRequired": false
+    },
+    {
+        "imageUrl": " ",
+        "tags": [
+            "Academic",
+            "Media",
+            "Politics",
+            "Pre-Professional",
+            "Global Affairs"
+        ],
+        "_id": "60785605aa641700044468d3",
+        "name": "Columbia Political Union",
+        "shortDescription": "The CPU is Columbia's multipartisan umbrella political organization. We are a home for political dialogue, civic engagement, and healthy discourse.",
+        "memberRange": "20-50",
+        "acceptingMembers": true,
+        "applicationRequired": false
+    },
+    {
+        "imageUrl": "https://clubs-cu.s3.amazonaws.com/1618362204042.jpg",
+        "tags": [
+            "Academic",
+            "Advising",
+            "Mentorship",
+            "Social"
+        ],
+        "_id": "6075ec52abfb2b0004311c3e",
+        "name": "BlueShift",
+        "shortDescription": "Columbia's Undergraduate Astronomy Club",
+        "memberRange": "20-50",
+        "acceptingMembers": true,
+        "applicationRequired": false
+    },
+    {
+        "imageUrl": "",
+        "tags": [
+            "Community Service",
+            "Cultural",
+            "Religious/Spiritual",
+            "Advocacy"
+        ],
+        "_id": "6066550edf2eea00044171e2",
+        "name": " Columbia Sewa",
+        "shortDescription": "An organization based upon the universal values of peace, equality, social justice, and the Sikh principle of sewa (selfless service).\n\n",
+        "memberRange": "20-50",
+        "acceptingMembers": true,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": "https://clubs-cu.s3.amazonaws.com/1628784748218.jpg",
+        "tags": [
+            "Community Service",
+            "Youth",
+            "Cultural"
+        ],
+        "_id": "610dbd3c9d98020004da1a3d",
+        "name": "Artist's Reaching Out (CI)",
+        "shortDescription": "ARO is a volunteering program that brings arts education to kids who have limited opportunities for enrichment in the arts.",
+        "memberRange": "20-50",
+        "acceptingMembers": true,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": " ",
+        "tags": [
+            "Mentorship",
+            "Pre-Professional"
+        ],
+        "_id": "612c207429a3240004bb1abc",
+        "name": "Columbia Women's Business Society (CWBS)",
+        "shortDescription": "CWBS is the largest preprofessional organization on campus, dedicated to inspiring and promoting women in business.",
+        "memberRange": "100+",
+        "acceptingMembers": true,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": " ",
+        "tags": [
+            "Community Service",
+            "Global Affairs",
+            "Advocacy"
+        ],
+        "_id": "6104129e4c6f3c0004bc9381",
+        "name": "Students for Sanctuary",
+        "shortDescription": "Students for Sanctuary is an initiative that takes direct action in the fight for immigration justice and reform.",
+        "memberRange": "20-50",
+        "acceptingMembers": true,
+        "applicationRequired": false
+    },
+    {
+        "imageUrl": "https://clubs-cu.s3.amazonaws.com/1620938460117.jpg",
+        "tags": [
+            "Dance",
+            "Cultural"
+        ],
+        "_id": "609d868c524dec000413fc7c",
+        "name": "Columbia Taal",
+        "shortDescription": "Columbia University's South Asian Classical Fusion Dance Team",
+        "memberRange": "10-20",
+        "acceptingMembers": true,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": " ",
+        "tags": [],
+        "_id": "6127c35cb036710004b76e32",
+        "name": "CU Games Club ",
+        "shortDescription": "We play games on Thursdays! Mostly card games, but board games as well. ",
+        "memberRange": "0-10",
+        "acceptingMembers": true,
+        "applicationRequired": false
+    },
+    {
+        "imageUrl": "https://clubs-cu.s3.amazonaws.com/1618329428700.jpg",
+        "tags": [
+            "Athletics",
+            "Outdoors",
+            "Social"
+        ],
+        "_id": "60725466f5f59a0004516737",
+        "name": "Women's and Gender Diverse Ultimate Frisbee",
+        "shortDescription": "Columbia Women’s Ultimate is a D-1 club sport that welcomes students with all levels of Ultimate experience.",
+        "memberRange": "20-50",
+        "acceptingMembers": false,
+        "applicationRequired": false
+    },
+    {
+        "imageUrl": " ",
+        "tags": [
+            "Community Service",
+            "Youth"
+        ],
+        "_id": "61118fe46500e50004e908e5",
+        "name": "Project Tutors (CI)",
+        "shortDescription": "Students volunteer at an elementary school once per week to work with and tutor students, and also assist teachers (part of Community Impact)",
+        "memberRange": "10-20",
+        "acceptingMembers": true,
+        "applicationRequired": false
+    },
+    {
+        "imageUrl": " ",
+        "tags": [
+            "Academic",
+            "Advocacy",
+            "Pre-Professional",
+            "Law"
+        ],
+        "_id": "60c2107ba113e40004227935",
+        "name": "Mock Trial",
+        "shortDescription": "Mock Trial is a competitive activity in which teams simulate real trials, both as attorneys and witnesses.",
+        "memberRange": "10-20",
+        "acceptingMembers": true,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": "https://clubs-cu.s3.amazonaws.com/1646854667010.jpg",
+        "tags": [
+            "Performing Arts",
+            "Dance",
+            "Music",
+            "Cultural",
+            "Social"
+        ],
+        "_id": "6228fa62b4d42f0004935093",
+        "name": "CoLab Performing Arts Collective",
+        "shortDescription": "interdisciplinary performing arts group",
+        "memberRange": "20-50",
+        "acceptingMembers": true,
+        "applicationRequired": false
+    },
+    {
+        "imageUrl": " ",
+        "tags": [],
+        "_id": "60b1103f8605e40004745bd2",
+        "name": "Columbia Ballet Collaborative ",
+        "shortDescription": "CBC brings together professional-level dancers with NYC based choreographers in semesterly shows, composed of original choreographic work. ",
+        "memberRange": "20-50",
+        "acceptingMembers": true,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": "https://clubs-cu.s3.amazonaws.com/1625151874235.jpg",
+        "tags": [
+            "Dance",
+            "Performing Arts"
+        ],
+        "_id": "60b33a630ccd1d000466cbab",
+        "name": " CU Generation",
+        "shortDescription": "Columbia University (CU) Generation is an urban collegiate dance team/family founded in 2010.",
+        "memberRange": "20-50",
+        "acceptingMembers": false,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": "https://clubs-cu.s3.amazonaws.com/1626576183505.jpg",
+        "tags": [
+            "Outdoors",
+            "Cultural",
+            "Writing",
+            "Music",
+            "Travel"
+        ],
+        "_id": "60c0e6a2040bd40004790ec2",
+        "name": "New Aesthetes of Columbia University",
+        "shortDescription": "We aim to bring together people who like all forms of beauty. We read, hike, write, bike, make music, ski, etc. Host of The Orations!",
+        "memberRange": "50-100",
+        "acceptingMembers": true,
+        "applicationRequired": false
+    },
+    {
+        "imageUrl": "https://clubs-cu.s3.amazonaws.com/1644814254377.jpg",
+        "tags": [
+            "Food",
+            "Environmental",
+            "Writing",
+            "Youth",
+            "Social"
+        ],
+        "_id": "61edf6e81d555c00047eb774",
+        "name": " Columbia EcoReps",
+        "shortDescription": "Largest student-run sustainability club on campus ",
+        "memberRange": "20-50",
+        "acceptingMembers": true,
+        "applicationRequired": false
+    },
+    {
+        "imageUrl": " ",
+        "tags": [],
+        "_id": "609ad80981393f00043a2258",
+        "name": "One-to-One Tutoring (CI)",
+        "shortDescription": "Providing free academic support to elementary and middle school students live or attend school in Morningside Heights, Washington Heights, and Harlem.",
+        "memberRange": "50-100",
+        "acceptingMembers": true,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": "https://clubs-cu.s3.amazonaws.com/1618362059881.jpg",
+        "tags": [
+            "Cultural",
+            "Advocacy",
+            "Community Service",
+            "Social"
+        ],
+        "_id": "60763d2e26300000044e1fe8",
+        "name": "Chinese Students Club",
+        "shortDescription": "We aim to promote awareness of Chinese culture at Columbia. Our events and activities are Chinese in theme, but are open to everyone!",
+        "memberRange": "20-50",
+        "acceptingMembers": true,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": "https://clubs-cu.s3.amazonaws.com/1625149001430.jpg",
+        "tags": [
+            "Religious/Spiritual",
+            "Social",
+            "Mentorship",
+            "Instructional",
+            "Cultural"
+        ],
+        "_id": "60ddbcb86b5aec00046d09e3",
+        "name": "Reformed University Fellowship (RUF)",
+        "shortDescription": "Regardless of your beliefs or background, we are a diverse community where you can explore Christianity and the hope found in knowing Jesus Christ.",
+        "memberRange": "50-100",
+        "acceptingMembers": true,
+        "applicationRequired": false
+    },
+    {
+        "imageUrl": "https://clubs-cu.s3.amazonaws.com/1622058412108.jpg",
+        "tags": [
+            "Pre-Professional",
+            "Entrepreneurship",
+            "Mentorship"
+        ],
+        "_id": "60aea308b30845000454d23d",
+        "name": "Lion Fund LLC",
+        "shortDescription": "Lion Fund Capital Management, LLC is Columbia University's premier undergraduate student-run investment fund managing $50,000+ in assets.",
+        "memberRange": "20-50",
+        "acceptingMembers": true,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": " ",
+        "tags": [
+            "Music",
+            "A Capella",
+            "Performing Arts",
+            "Academic"
+        ],
+        "_id": "613b9233f4889d0004b1c9c9",
+        "name": "Collegium Musicum",
+        "shortDescription": "Vocal ensemble specializing in music of the Middle Ages and Renaissance.",
+        "memberRange": "20-50",
+        "acceptingMembers": true,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": "https://clubs-cu.s3.amazonaws.com/1618499650310.jpg",
+        "tags": [
+            "Publication",
+            "Writing",
+            "Design",
+            "Media",
+            "Social"
+        ],
+        "_id": "607780fbc5c0eb000447af4b",
+        "name": "Quarto",
+        "shortDescription": "Quarto is the official undergrad literary magazine of CU’s Creative Writing Dept. It is student-run and publishes the best of CU’s undergrad writers.",
+        "memberRange": "20-50",
+        "acceptingMembers": true,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": "https://clubs-cu.s3.amazonaws.com/1630955806669.jpg",
+        "tags": [],
+        "_id": "612cff5ce0ad5e0004f5680e",
+        "name": "Food Recovery Network (FRN)",
+        "shortDescription": "We deliver leftover food from dining halls and local food businesses to community partners such as food shelters and pantries. \n",
+        "memberRange": "10-20",
+        "acceptingMembers": true,
+        "applicationRequired": false
+    },
+    {
+        "imageUrl": "https://clubs-cu.s3.amazonaws.com/1618335208794.jpg",
+        "tags": [
+            "Journalism",
+            "Media",
+            "Engineering",
+            "Writing",
+            "Technology"
+        ],
+        "_id": "6075b2a1a5766a0004bc1515",
+        "name": "Columbia Daily Spectator",
+        "shortDescription": "Spec is Columbia's largest student-run media group, comprised of our journalism sections and our business and innovations team. ",
+        "memberRange": "100+",
+        "acceptingMembers": false,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": "https://clubs-cu.s3.amazonaws.com/1623812724027.jpg",
+        "tags": [
+            "Athletics",
+            "Outdoors",
+            "Social",
+            "Travel"
+        ],
+        "_id": "60c13e19040bd40004790ed6",
+        "name": "Columbia University Rock Climbing",
+        "shortDescription": "We are an indoor and outdoor climbing club climbing at the local gym and organizing trips around the New York area!",
+        "memberRange": "50-100",
+        "acceptingMembers": true,
+        "applicationRequired": false
+    },
+    {
+        "imageUrl": "https://clubs-cu.s3.amazonaws.com/1628649854315.jpg",
+        "tags": [
+            "Pre-Professional",
+            "Mentorship",
+            "Academic",
+            "Engineering"
+        ],
+        "_id": "6113357d2080ee000493787e",
+        "name": "American Society of Civil Engineers",
+        "shortDescription": "The American Society of Civil Engineers aims to build a community for individuals interested in Civil Engineering and the built environment.",
+        "memberRange": "20-50",
+        "acceptingMembers": true,
+        "applicationRequired": false
+    },
+    {
+        "imageUrl": " ",
+        "tags": [
+            "Community Service",
+            "Advocacy",
+            "Mentorship",
+            "Peer Education",
+            "Youth"
+        ],
+        "_id": "6075eafcabfb2b0004311c3a",
+        "name": "Columbia Youth for Debate",
+        "shortDescription": "YFD is a selected team of debate coaches supporting youth in developing argumentative speaking skills, culminating in an on-campus tournament. ",
+        "memberRange": "20-50",
+        "acceptingMembers": true,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": " ",
+        "tags": [
+            "Entrepreneurship",
+            "Media",
+            "Technology",
+            "Mentorship",
+            "Pre-Professional"
+        ],
+        "_id": "60b02279875aba0004131e52",
+        "name": "Columbia Organization of Rising Entrepreneurs (CORE)",
+        "shortDescription": "Columbia's premier entrepreneurship organization with initiatives including the Almaworks Startup Accelerator, Founderschool, and more! ",
+        "memberRange": "50-100",
+        "acceptingMembers": true,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": "https://clubs-cu.s3.amazonaws.com/1626718315821.jpg",
+        "tags": [
+            "Academic",
+            "Advocacy",
+            "Community Service",
+            "Mentorship",
+            "Health"
+        ],
+        "_id": "60e873adf833bc0004023b69",
+        "name": " Columbia Synapse",
+        "shortDescription": "We're a neuroscience based club focused on building community and awareness around ABI/TBI and other invisible disabilities in NYC and beyond.",
+        "memberRange": "50-100",
+        "acceptingMembers": false,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": " ",
+        "tags": [
+            "Cultural",
+            "Programming"
+        ],
+        "_id": "60c94b86e3f00a000448e1a5",
+        "name": "Korean Students Association",
+        "shortDescription": "Our primary mission is to promote cultural and social events both on and off-campus to celebrate Korea's rich culture and heritage. Established 1989. ",
+        "memberRange": "20-50",
+        "acceptingMembers": true,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": "https://clubs-cu.s3.amazonaws.com/1631160393822.jpg",
+        "tags": [
+            "Entrepreneurship",
+            "Pre-Professional",
+            "Instructional",
+            "Mentorship"
+        ],
+        "_id": "612c095829a3240004bb1aba",
+        "name": " 116th & Partners, LLC",
+        "shortDescription": "116th & Partners is a student-run investment fund managing over $20,000 with a focus on growth and value investments across public equities.",
+        "memberRange": "10-20",
+        "acceptingMembers": true,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": " ",
+        "tags": [
+            "Religious/Spiritual"
+        ],
+        "_id": "60c114ef040bd40004790ece",
+        "name": "Christian Union Lumine",
+        "shortDescription": "Christian Union Lumine is a space for the students of Columbia University to build real connections, encounter God, and discover truth.",
+        "memberRange": "50-100",
+        "acceptingMembers": true,
+        "applicationRequired": false
+    },
+    {
+        "imageUrl": " ",
+        "tags": [],
+        "_id": "6119c8dd8044d400041a5bed",
+        "name": "Asian Youth Program (AYP) (CI)",
+        "shortDescription": "Asian Youth Program (AYP), in partnership with Womankind and Community Impact, offers mentoring to children (ages 6-12) impacted by domestic violence.",
+        "memberRange": "20-50",
+        "acceptingMembers": true,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": " ",
+        "tags": [
+            "Pre-Professional",
+            "Academic",
+            "Global Affairs",
+            "Law",
+            "Politics"
+        ],
+        "_id": "60c21e36a113e40004227937",
+        "name": "Pi Sigma Alpha Honor Society",
+        "shortDescription": "Pi Sigma Alpha honor society welcomes Political Science majors, concentrators, and minors of high quality committed to intellectual exploration.",
+        "memberRange": "100+",
+        "acceptingMembers": true,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": " ",
+        "tags": [
+            "Academic",
+            "Advocacy",
+            "Environmental",
+            "Media",
+            "Outdoors"
+        ],
+        "_id": "60d61c33da5d6e0004c9d3f3",
+        "name": "Consilience: The Journal of Sustainable Development",
+        "shortDescription": "A semesterly publication focused on sharing interdisciplinary research in and articles on sustainable development. ",
+        "memberRange": "20-50",
+        "acceptingMembers": true,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": " ",
+        "tags": [],
+        "_id": "60e392279300d90004fb0619",
+        "name": "Columbia Debate Society",
+        "shortDescription": "The Columbia Debate Society is an institution dedicated to helping individuals express themselves, improve discourse, and enact positive change.",
+        "memberRange": "50-100",
+        "acceptingMembers": false,
+        "applicationRequired": false
+    },
+    {
+        "imageUrl": " ",
+        "tags": [
+            "Music",
+            "Journalism",
+            "Media"
+        ],
+        "_id": "607770dac5c0eb000447af49",
+        "name": "WKCR FM",
+        "shortDescription": "Columbia's student-led, educational, and noncommercial radio station, broadcasting an eclectic mix of music and journalism.",
+        "memberRange": "100+",
+        "acceptingMembers": true,
+        "applicationRequired": false
+    },
+    {
+        "imageUrl": "https://clubs-cu.s3.amazonaws.com/1618346246777.jpg",
+        "tags": [
+            "Politics",
+            "Cultural",
+            "Social"
+        ],
+        "_id": "6075b209a5766a0004bc1513",
+        "name": "Asian American Alliance",
+        "shortDescription": "pan-Asian political group: strives to promote understanding, develop consciousness, foster dialogue, and champion solidarity within the AAPI community",
+        "memberRange": "20-50",
+        "acceptingMembers": false,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": " ",
+        "tags": [
+            "Politics"
+        ],
+        "_id": "60c3ac8f2ff57f0004c19d98",
+        "name": "Columbia-Barnard YDSA (Young Democratic Socialists of America)",
+        "shortDescription": "We're the largest left-wing political organization on campus, dedicated to fighting for student and worker power on campus and beyond.",
+        "memberRange": "50-100",
+        "acceptingMembers": true,
+        "applicationRequired": false
+    },
+    {
+        "imageUrl": "https://clubs-cu.s3.amazonaws.com/1626640951542.jpg",
+        "tags": [],
+        "_id": "60f48d4c2d88980004439e25",
+        "name": " Columbia Research and Diversity",
+        "shortDescription": "CUR&D is an organization dedicated to supporting and creating community for Black, Latinx, Native, and FGLI students in STEM research.",
+        "memberRange": "0-10",
+        "acceptingMembers": true,
+        "applicationRequired": false
+    },
+    {
+        "imageUrl": "https://clubs-cu.s3.amazonaws.com/1622735298632.jpg",
+        "tags": [
+            "Performing Arts",
+            "Dance"
+        ],
+        "_id": "609a9ffd0178690004824fbc",
+        "name": "Columbia UnTapped",
+        "shortDescription": "UnTapped is Columbia's tap-dancing club and the self-proclaimed “most fun group on campus.” Tappers of all levels practice, learn, and perform!",
+        "memberRange": "20-50",
+        "acceptingMembers": true,
+        "applicationRequired": false
+    },
+    {
+        "imageUrl": "https://clubs-cu.s3.amazonaws.com/1624415284082.jpg",
+        "tags": [
+            "Journalism",
+            "Religious/Spiritual",
+            "Publication",
+            "Writing",
+            "Design"
+        ],
+        "_id": "60d282c4478c2e0004d90334",
+        "name": " The Columbia Witness",
+        "shortDescription": "A publication proclaiming the life and power of God’s truth to the Columbia community through diverse Christian voices and ideas.\n",
+        "memberRange": "10-20",
+        "acceptingMembers": true,
+        "applicationRequired": true
+    },
+    {
+        "imageUrl": " ",
+        "tags": [
+            "Cultural",
+            "Social"
+        ],
+        "_id": "611548cfa1da250004391707",
+        "name": "Alianza",
+        "shortDescription": "Columbia's pan-Latinx student organization ",
+        "memberRange": "20-50",
+        "acceptingMembers": true,
+        "applicationRequired": false
+    },
+    {
+        "imageUrl": "https://clubs-cu.s3.amazonaws.com/1623017046204.jpg",
+        "tags": [
+            "Community Service",
+            "Advocacy",
+            "Food",
+            "Health",
+            "Charity"
+        ],
+        "_id": "6099c0a1bfbbc6000480c4c8",
+        "name": "Community Lunch - Soup Kitchen (CI)",
+        "shortDescription": "Community Lunch volunteers work as a team to prepare a four-course meal from scratch for 100+ homeless and low-income guests every Friday!",
+        "memberRange": "20-50",
+        "acceptingMembers": true,
+        "applicationRequired": false
+    },
+    {
+        "imageUrl": "https://clubs-cu.s3.amazonaws.com/1625092445157.jpg",
+        "tags": [
+            "Design",
+            "Media"
+        ],
+        "_id": "60dccbb00744df0004fe2023",
+        "name": " Barnard Zine Club",
+        "shortDescription": " BZC is a club for creating and appreciating zines! ",
+        "memberRange": "50-100",
+        "acceptingMembers": true,
+        "applicationRequired": false
+    },
+    {
+        "imageUrl": " ",
+        "tags": [
+            "Advocacy",
+            "Social",
+            "Politics"
+        ],
+        "_id": "60c0c1e8040bd40004790ec0",
+        "name": "HeForShe Columbia",
+        "shortDescription": "HeForShe is a solidarity campaign for gender equality initiated by UN Women",
+        "memberRange": "10-20",
+        "acceptingMembers": true,
+        "applicationRequired": false
+    },
+    {
+        "imageUrl": "https://clubs-cu.s3.amazonaws.com/1637694576822.jpg",
+        "tags": [
+            "Advocacy",
+            "Community Service",
+            "Law"
+        ],
+        "_id": "611d52d53cb2d30004ac81f4",
+        "name": "The Remedy Project",
+        "shortDescription": "The Remedy Project (formerly known as the Student Justice League) trains students to advocate on behalf of incarcerated people.",
+        "memberRange": "20-50",
+        "acceptingMembers": true,
+        "applicationRequired": false
+    },
+    {
+        "imageUrl": "https://clubs-cu.s3.amazonaws.com/1644428047452.jpg",
+        "tags": [
+            "Pre-Professional",
+            "Entrepreneurship",
+            "Mentorship",
+            "Programming",
+            "Peer Education"
+        ],
+        "_id": "6201f28e7a0ca300042d0d7a",
+        "name": "Scholars of Finance",
+        "shortDescription": "The Columbia Chapter of Scholars of Finance aims to advance the Scholars of Finance mission of instilling character and integrity in its members.",
+        "memberRange": "10-20",
+        "acceptingMembers": true,
+        "applicationRequired": true
+    }
+]
