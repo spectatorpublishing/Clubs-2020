@@ -58,7 +58,7 @@ const EmailLink = styled.a`
 
 const DETAIL = `Request made to change account email to uni5678@barnard.edu! Check your email to confirm change. Request will expire in 30 minutes. 
 If you have any questions, please contact `;
-const EMAIL = `online@columbiaspectator.com`;
+const EMAIL = `lionclubs@columbiaspectator.com`;
 
 export default function Wrapper(props) {
     function resendEmail() {

@@ -311,8 +311,8 @@ export const SignUpBox = ({ detailLink, id, userCred , isProfileComplete = true}
       descLinkText: 'Login Here',
       detail:
         'Your request is being processed. You will receive an email with further instructions in 24 hours. \n\nIf you have any questions, please contact: ',
-      detailLink: 'mailto:online@columbiaspectator.com',
-      detailLinkText: 'online@columbiaspectator.com',
+      detailLink: 'mailto:lionclubs@columbiaspectator.com',
+      detailLinkText: 'lionclubs@columbiaspectator.com',
       detailTwo: '.\n\nHave any feedback? Let us know\n',
       detailLinkTwo: 'https://forms.gle/8rx6FYVf98K2N5Kd6',
       detailLinkTwoText: 'Feedback Form',
@@ -347,8 +347,8 @@ export const SignUpBox = ({ detailLink, id, userCred , isProfileComplete = true}
       descLinkText: 'Login Here',
       detail:
         'Password reset instructions have been sent to specified email. If you have any questions, please contact\n',
-      detailLink: 'mailto:online@columbiaspectator.com',
-      detailLinkText: 'online@columbiaspectator.com',
+      detailLink: 'mailto:lionclubs@columbiaspectator.com',
+      detailLinkText: 'lionclubs@columbiaspectator.com',
       detailTwo: '.\n\nSomething went wrong?\n',
       detailLinkTwo: '/findpassword',
       detailLinkTwoText: 'Resend Email',

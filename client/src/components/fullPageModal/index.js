@@ -184,7 +184,7 @@ const FullPageModal = ({
                 <h2>Contact Information</h2>
 
                 <p>Address: 490 Riverside Drive, Rm 414, New York, NY 10027</p>
-                <p>Email: online@columbiaspectator.com</p>
+                <p>Email: lionclubs@columbiaspectator.com</p>
               </>
             )}
             <SubmitRow>
