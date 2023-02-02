@@ -20,6 +20,6 @@
   },
   "homepage": "https://github.com/spectatorpublishing/Clubs-2020#readme",
   "dependencies": {
-    "heroku": "^7.52.0"
+    "heroku": "^8.0.0"
   }
 }
